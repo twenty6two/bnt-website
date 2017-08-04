@@ -1,0 +1,11 @@
+{
+  "name": "big-noise-theatre",
+  "version": "1.0.0",
+  "description": "2017 Big Noise Theatre website theme",
+  "main": "gruntfile.js",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-compass": "^1.1.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

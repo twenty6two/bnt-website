@@ -1,0 +1,54 @@
+body {
+  font-family: $bn-font-family-default;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+#page {
+  background-color: $bn-color-main-content-background;
+}
+
+
+#page--main-content {
+  color: $bn-color-content-default;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+}
+
+
+#page--main-content {
+  .column-container {
+    &.has-primary-column.has-secondary-column {
+      .secondary {
+        border-bottom-color: #e1e4e7;
+        border-bottom-style: solid;
+        border-bottom-width: 0.2rem;
+        @media (min-width: $bn-breakpoint-layout-desktop) {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  .column {
+    &.primary {
+      .content-block {
+        &:last-of-type {
+          border-bottom: none;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+    &.secondary {
+      .content-block {
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

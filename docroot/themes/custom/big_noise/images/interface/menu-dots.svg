@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="6px" viewBox="0 0 26 6">
+  <defs>
+    <g id="dots">
+      <circle id="dot-1" class="page-color" cx="13" cy="3" r="3"></circle>
+      <circle id="dot-2" class="page-color" cx="3" cy="3" r="3"></circle>
+      <circle id="dot-3" class="page-color" cx="23" cy="3" r="3"></circle>
+    </g>
+  </defs>
+  <use x="0" y="0" href="#dots"/>
+</svg>

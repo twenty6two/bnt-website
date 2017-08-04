@@ -1,0 +1,275 @@
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $bn-layer-site-header;
+  height: $bn-header-height-layout-mobile;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    height: $bn-header-height-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    height: $bn-header-height-layout-desktop;
+  }
+  width: 100%;
+}
+
+
+#site-header-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-top: $bn-header-gutter-top-layout-mobile;
+  padding-bottom: $bn-header-gutter-bottom-layout-mobile;
+  padding-left: $bn-header-gutter-left-layout-mobile;
+  padding-right: $bn-header-gutter-right-layout-mobile;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    padding-top: $bn-header-gutter-top-layout-tablet;
+    padding-bottom: $bn-header-gutter-bottom-layout-tablet;
+    padding-left: $bn-header-gutter-left-layout-tablet;
+    padding-right: $bn-header-gutter-right-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    padding-top: $bn-header-gutter-top-layout-desktop;
+    padding-bottom: $bn-header-gutter-bottom-layout-desktop;
+    padding-left: $bn-header-gutter-left-layout-desktop;
+    padding-right: $bn-header-gutter-right-layout-desktop;
+  }
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+
+#site-header-logo-container {
+  position: absolute;
+  top: 50%;
+  left: $bn-header-gutter-left-layout-mobile;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    left: $bn-header-gutter-left-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    left: $bn-header-gutter-left-layout-desktop;
+  }
+  transform: translate3d(0, -50%, 0);
+}
+
+
+#site-header-home-link {
+  display: block;
+}
+
+
+#site-header-logo {
+  .image {
+    width: 10.0rem;
+    height: 5.4rem;
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      width: 10.2rem;
+      height: 7.5rem;
+    }
+    @media (min-width: $bn-breakpoint-layout-desktop) {
+      width: 16.7rem;
+      height: 12.2rem;
+    }
+
+    &.condensed {
+      display: block;
+      @media (min-width: $bn-breakpoint-layout-tablet) {
+        display: none;
+      }
+    }
+
+    &.standard {
+      display: none;
+      @media (min-width: $bn-breakpoint-layout-tablet) {
+        display: block;
+      }
+    }
+  }
+}
+
+
+#site-header-sidebar-main-navigation-toggle-container {
+  position: absolute;
+  top: 50%;
+  right: $bn-header-gutter-right-layout-mobile;
+  transform: translate3d(0, -50%, 0);
+
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    display: none;
+  }
+}
+
+
+#site-header-main-navigation-container {
+  display: none;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    display: block;
+  }
+  position: absolute;
+  bottom: 0;
+  right: $bn-header-gutter-right-layout-tablet;
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    right: $bn-header-gutter-right-layout-desktop;
+  }
+}
+
+
+#site-header-secondary-navigation-container {
+  position: relative;
+  z-index: $bn-layer-site-header;
+}
+
+
+#site-header-social-media-navigation-container {
+  display: none;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    display: block;
+    order: 4;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    order: 3;
+  }
+
+  margin-left: 1.5rem;
+  padding-left: 1.5rem;
+
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+}
+
+
+#site-header-phone-link-container {
+  display: none;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    display: block;
+    order: 1;
+  }
+  margin-right: 1rem;
+  margin-top: 1.3rem;
+  margin-bottom: 1.3rem;
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .phone-link {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+
+#site-header-locate-link-container {
+  display: none;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    display: block;
+    order: 2;
+  }
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  margin-right: 0.5rem;
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    margin-right: 0;
+  }
+}
+
+
+#site-header-buy-tickets-link-container {
+  display: none;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    display: block;
+    order: 3;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    order: 0;
+    position: absolute;
+    top: 6.4rem; // @CMN TODO Improve
+    right: $bn-header-gutter-right-layout-desktop;
+  }
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  margin-left: 0.5rem;
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
+}
+
+
+#navigation--main-navigation-header {
+  > ul {
+    @include FlexFloat();
+
+    > li {
+      margin-left: 1.3rem;
+      margin-right: 1.3rem;
+    }
+  }
+}
+
+
+#navigation--social-media-navigation-header {
+  > ul {
+    @include FlexFloat();
+
+    > li {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+
+#navigation--secondary-navigation-header {
+  padding-left: $bn-header-gutter-left-layout-mobile;
+  padding-right: $bn-header-gutter-right-layout-mobile;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    padding-left: $bn-header-gutter-left-layout-tablet;
+    padding-right: $bn-header-gutter-right-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    padding-left: $bn-header-gutter-left-layout-desktop;
+    padding-right: $bn-header-gutter-right-layout-desktop;
+  }
+
+  > ul {
+    @include FlexFloat();
+    justify-content: center;
+
+    > li {
+      margin-left: 1.2rem;
+      margin-right: 1.2rem;
+      @media (min-width: $bn-breakpoint-layout-tablet) {
+        margin-left: 2.4rem;
+        margin-right: 2.4rem;
+      }
+
+      > a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 4rem;
+        @media (min-width: $bn-breakpoint-layout-tablet) {
+          min-height: 4.8rem;
+        }
+        @media (min-width: $bn-breakpoint-layout-desktop) {
+          min-height: 6.7rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.page-type--show {
+  #page--main-content {
+    background: rgba(6, 112, 150, 0.3);
+    background: radial-gradient(cicle at center top, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0.75) 100%);
+  }
+}
+
+
+#page--show--performance-date-range {
+  color: #f0f2f4;
+  font-family: 'Oswald';
+  font-size: 1.6rem;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    font-size: 2rem;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    font-size: 2.4rem;
+  }
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+}
+
+
+#page--show--billing-credits {
+  color: #f0f2f4;
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--buy-tickets {
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--ticket-price-details {
+  color: #f0f2f4;
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--performance-details {
+  color: #f0f2f4;
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--venue-details {
+  color: #f0f2f4;
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--synopsis {
+  color: #f0f2f4;
+  font-weight: 300;
+}

@@ -1,0 +1,32 @@
+#page--page-title-ribbon {
+  min-height: 15.4rem;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    min-height: 16.4rem;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    min-height: 28.8rem;
+  }
+  position: relative;
+}
+
+
+#page--page-title-ribbon-content {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate3d(-50%, 0, 0);
+  width: 100%;
+
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  padding-left: $bn-site-gutter-width-layout-mobile;
+  padding-right: $bn-site-gutter-width-layout-mobile;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    padding-left: $bn-site-gutter-width-layout-tablet;
+    padding-right: $bn-site-gutter-width-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    padding-left: $bn-site-gutter-width-layout-desktop;
+    padding-right: $bn-site-gutter-width-layout-desktop;
+  }
+}

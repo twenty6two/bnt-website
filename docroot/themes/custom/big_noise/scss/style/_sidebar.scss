@@ -1,0 +1,23 @@
+.sidebar {
+  background-color: $bn-color-sidebar-background;
+  background-image: radial-gradient(circle at top center,
+    rgba($bn-color-black, 0) 0%,
+    rgba($bn-color-black, 0.4) 100%);
+}
+
+
+.sidebar-close {
+  background-color: $bn-color-sidebar-close-background;
+  border-radius: 100%;
+
+  .label {
+    display: block;
+    font-size: 0;
+  }
+
+  .icon {
+    .close {
+      fill: $bn-color-sidebar-close-icon;
+    }
+  }
+}

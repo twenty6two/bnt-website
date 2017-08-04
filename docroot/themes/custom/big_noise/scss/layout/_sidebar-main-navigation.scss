@@ -1,0 +1,104 @@
+#sidebar--main-navigation {
+  .sidebar-header {
+    height: $bn-header-height-layout-mobile;
+  }
+
+  .sidebar-content {
+    padding-left: $bn-site-gutter-width-layout-mobile;
+    padding-right: $bn-site-gutter-width-layout-mobile;
+  }
+}
+
+
+#sidebar--main-navigation--site-logo-container {
+  position: absolute;
+  top: 50%;
+  left: $bn-site-gutter-width-layout-mobile;
+  transform: translate3d(0, -50%, 0);
+}
+
+
+#sidebar--main-navigation--sidebar-close-container {
+  position: absolute;
+  top: 50%;
+  right: 2.6rem;
+  transform: translate3d(0, -50%, 0);
+}
+
+
+#sidebar--main-navigation--site-logo {
+  width: 10rem;
+  height: 5.4rem;
+}
+
+
+#sidebar--main-navigation--content-block--secondary-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+#navigation--secondary-links-sidebar {
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 2rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+
+  > li {
+    float: left;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+
+#sidebar-navigation-phone-link-container .phone-link,
+#sidebar-navigation-locate-link-container .locate-link,
+#sidebar-navigation-buy-tickets-link-container .buy-tickets-link {
+  width: 3.4rem;
+  height: 3.4rem;
+}
+
+
+#navigation--main-navigation-sidebar {
+  > ul {
+    > li {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+
+#navigation--social-media-navigation-sidebar {
+  margin-left: 2rem;
+
+  > ul {
+    @include FlexFloat();
+
+    > li {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .social-media-link {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+}

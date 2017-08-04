@@ -1,0 +1,5 @@
+# Schema for the configuration files of the Stark theme.
+
+bignoise.settings:
+  type: theme_settings
+  label: 'Big Noise settings'

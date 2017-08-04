@@ -1,0 +1,97 @@
+.site-width-constraint {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $bn-page-content-max-width-layout-desktop;
+  @media (min-width: $bn-breakpoint-layout-desktop-wide) {
+    max-width: $bn-page-content-max-width-layout-desktop-wide;
+  }
+}
+
+
+#page {
+  min-height: 100vh;
+  min-width: 100vw;
+  position: relative;
+}
+
+
+#page--main-content {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: $bn-site-gutter-width-layout-mobile;
+  padding-right: $bn-site-gutter-width-layout-mobile;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-left: $bn-site-gutter-width-layout-tablet;
+    padding-right: $bn-site-gutter-width-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    padding-left: $bn-site-gutter-width-layout-desktop;
+    padding-right: $bn-site-gutter-width-layout-desktop;
+  }
+
+  .column-container {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: $bn-breakpoint-layout-desktop) {
+      flex-direction: row;
+    }
+    margin-left: (0 - ($bn-column-gutter-width-layout-mobile / 2));
+    margin-right: (0 - ($bn-column-gutter-width-layout-mobile / 2));
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      margin-left: (0 - ($bn-column-gutter-width-layout-tablet / 2));
+      margin-right: (0 - ($bn-column-gutter-width-layout-tablet / 2));
+    }
+    @media (min-width: $bn-breakpoint-layout-desktop) {
+      margin-left: (0 - ($bn-column-gutter-width-layout-desktop / 2));
+      margin-right: (0 - ($bn-column-gutter-width-layout-desktop / 2));
+    }
+
+    .column {
+      padding-left: ($bn-column-gutter-width-layout-mobile / 2);
+      padding-right: ($bn-column-gutter-width-layout-mobile / 2);
+      @media (min-width: $bn-breakpoint-layout-tablet) {
+        padding-left: ($bn-column-gutter-width-layout-tablet / 2);
+        padding-right: ($bn-column-gutter-width-layout-tablet / 2);
+      }
+      @media (min-width: $bn-breakpoint-layout-desktop) {
+        padding-left: ($bn-column-gutter-width-layout-desktop / 2);
+        padding-right: ($bn-column-gutter-width-layout-desktop / 2);
+      }
+    }
+
+    &.has-primary-column {
+      .primary {
+        order: 1;
+        flex-basis: 100%;
+      }
+    }
+
+    &.has-primary-column.has-secondary-column {
+      .primary {
+        order: 2;
+        @media (min-width: $bn-breakpoint-layout-desktop) {
+          flex-basis: 63.5%;
+          order: 1;
+        }
+      }
+
+      .secondary {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        order: 1;
+        @media (min-width: $bn-breakpoint-layout-tablet) {
+          margin-bottom: 3rem;
+          padding-bottom: 3rem;
+        }
+        @media (min-width: $bn-breakpoint-layout-desktop) {
+          flex-basis: 36.5%;
+          order: 2;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+}

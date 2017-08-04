@@ -1,0 +1,172 @@
+$bn-breakpoint-layout-tablet: 768px;
+$bn-breakpoint-layout-desktop: 1024px;
+$bn-breakpoint-layout-desktop-wide: 1300px;
+
+$bn-page-content-max-width-layout-desktop: 1000px;
+$bn-page-content-max-width-layout-desktop-wide: 1200px;
+
+$bn-layer-site-header: 100;
+$bn-layer-sidebar: 200;
+
+$bn-site-gutter-width-layout-mobile: 2rem;
+$bn-site-gutter-width-layout-tablet: 4rem;
+$bn-site-gutter-width-layout-desktop: 2rem;
+
+$bn-column-gutter-width-layout-mobile: 0;
+$bn-column-gutter-width-layout-tablet: 0;
+$bn-column-gutter-width-layout-desktop: 8rem;
+
+
+
+// Animations
+
+$bn-transition-duration-default: 0.2s;
+
+
+
+// Typography
+
+$bn-font-family-default: 'Lato';
+$bn-font-family-highlight: 'Oswald';
+
+$bn-line-height-base: 1;
+
+
+
+// Color Assignments
+
+// - Site
+
+$bn-color-element-shadow-light: rgba($bn-color-purple, 0.10);
+$bn-color-element-shadow: rgba($bn-color-purple, 0.35);
+
+// - Text
+
+$bn-color-content-default: $bn-color-gray-dark;
+$bn-color-link-default: $bn-color-orange;
+
+// - Page
+
+$bn-color-page-highlight: $bn-color-orange;
+
+// - Header
+
+$bn-color-header-background: rgba($bn-color-gray-very-light, 0.95);
+$bn-color-header-border-bottom: $bn-color-gray-medium;
+
+$bn-color-header-logo-base-color: $bn-color-gray-dark-2;
+$bn-color-header-logo-highlight-color: $bn-color-page-highlight;
+
+$bn-color-header-text: $bn-color-content-default;
+$bn-color-header-icon: $bn-color-page-highlight;
+
+$bn-color-header-button-text: $bn-color-gray-very-light;
+
+$bn-color-header-secondary-links-separator: $bn-color-gray-medium;
+
+$bn-color-header-main-navigation-text: $bn-color-gray-dark;
+$bn-color-header-main-navigation-text-hover: $bn-color-orange;
+$bn-color-header-main-navigation-active-border-bottom: $bn-color-gray-dark;
+
+$bn-color-header-secondary-navigation-text: $bn-color-white-almost-2;
+$bn-color-header-secondary-navigation-active-border-bottom: $bn-color-white-almost-2;
+
+// - Footer
+
+$bn-color-footer-background: $bn-color-gray-dark;
+$bn-color-footer-border-top: $bn-color-gray-medium;
+
+$bn-color-footer-text: $bn-color-gray-very-light;
+$bn-color-footer-social-media-link-icon: $bn-color-gray-very-light;
+
+$bn-color-footer-main-navigation-text-hover: $bn-color-orange;
+
+// - Main Content
+
+$bn-color-main-content-background: $bn-color-white-almost;
+
+// - Sidebar
+
+$bn-color-sidebar-background: rgba($bn-color-gray-dark, 0.95);
+$bn-color-sidebar-close-background: $bn-color-gray-very-light;
+$bn-color-sidebar-close-icon: $bn-color-sidebar-background;
+
+// - Sidebar -- Navigation
+
+$bn-color-sidebar-navigation-logo: rgba($bn-color-gray-very-light, 0.75);
+$bn-color-sidebar-navigation-main-navigation-link-text: $bn-color-gray-very-light;
+$bn-color-sidebar-navigation-icon-button-background: $bn-color-gray-very-light;
+$bn-color-sidebar-navigation-icon-button-image: $bn-color-gray-dark;
+$bn-color-sidebar-navigation-secondary-links-separator: $bn-color-gray-very-light;
+
+// - Button
+
+$bn-color-button-background: $bn-color-gray-very-light;
+$bn-color-button-shadow: $bn-color-element-shadow-light;
+
+// - Icon Button
+
+$bn-color-icon-button-background: $bn-color-page-highlight;
+$bn-color-icon-button-image: $bn-color-gray-very-light;
+$bn-color-icon-button-shadow: $bn-color-element-shadow;
+
+// - Page Title Ribbon
+
+$bn-color-page-title-ribbon-page-title: $bn-color-white-almost;
+$bn-color-page-title-ribbon-page-subheading: $bn-color-white-almost;
+$bn-color-page-title-ribbon-image-credit: $bn-color-white-almost;
+$bn-color-page-title-ribbon-separator: $bn-color-white;
+
+// - Content Blocks
+
+$bn-color-content-block-column-primary-separator: $bn-color-gray-very-light;
+$bn-color-content-block-call-out-background: $bn-color-white-almost-2;
+
+
+
+// Header
+
+$bn-header-height-layout-mobile: 8.4rem;
+$bn-header-height-layout-tablet: 10.5rem;
+$bn-header-height-layout-desktop: 16.2rem;
+
+$bn-header-gutter-top-layout-mobile: 1.5rem;
+$bn-header-gutter-bottom-layout-mobile: 1.5rem;
+$bn-header-gutter-left-layout-mobile: $bn-site-gutter-width-layout-mobile;
+$bn-header-gutter-right-layout-mobile: $bn-site-gutter-width-layout-mobile;
+
+$bn-header-gutter-top-layout-tablet: 1.5rem;
+$bn-header-gutter-bottom-layout-tablet: 1.5rem;
+$bn-header-gutter-left-layout-tablet: 2rem;
+$bn-header-gutter-right-layout-tablet: 2rem;
+
+$bn-header-gutter-top-layout-desktop: 1.2rem;
+$bn-header-gutter-bottom-layout-desktop: 1.2rem;
+$bn-header-gutter-left-layout-desktop: $bn-site-gutter-width-layout-desktop;
+$bn-header-gutter-right-layout-desktop: $bn-site-gutter-width-layout-desktop;
+
+$bn-header-icon-button-diameter-layout-tablet: 3.6rem;
+$bn-header-icon-button-diameter-layout-desktop: 2.4rem;
+
+
+
+// Footer
+
+$bn-footer-height-layout-mobile: 35.5rem;
+$bn-footer-height-layout-tablet: 31.3rem;
+$bn-footer-height-layout-desktop: 37rem;
+
+$bn-footer-gutter-top-layout-mobile: 2rem;
+$bn-footer-gutter-bottom-layout-mobile: 2rem;
+$bn-footer-gutter-left-layout-mobile: $bn-site-gutter-width-layout-mobile;
+$bn-footer-gutter-right-layout-mobile: $bn-site-gutter-width-layout-mobile;
+
+$bn-footer-gutter-top-layout-tablet: 2rem;
+$bn-footer-gutter-bottom-layout-tablet: 2rem;
+$bn-footer-gutter-left-layout-tablet: 2rem;
+$bn-footer-gutter-right-layout-tablet: 2rem;
+
+$bn-footer-gutter-top-layout-desktop: 2rem;
+$bn-footer-gutter-bottom-layout-desktop: 2rem;
+$bn-footer-gutter-left-layout-desktop: 2rem;
+$bn-footer-gutter-right-layout-desktop: 2rem;

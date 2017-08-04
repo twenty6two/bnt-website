@@ -1,0 +1,58 @@
+a {
+  color: $bn-color-link-default;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+
+button,
+input[type="button"],
+input[type="submit"] {
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $bn-font-family-default;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+
+input[type="text"],
+input[type="email"] {
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+
+iframe {
+  border: none;
+}

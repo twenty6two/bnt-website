@@ -1,0 +1,83 @@
+.button {
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+
+  background-image: linear-gradient(rgba(225,228,231,1), rgba(213,216,219,1));
+  border-radius: 0.5rem;
+
+  padding: 0.2rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 96.6667%;
+    height: 90%;
+    top: 10%;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    z-index: -1;
+    box-shadow: 0 0.5rem 1.3rem 0 $bn-color-button-shadow;
+  }
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    left: 0.7rem;
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      left: 1rem;
+    }
+    width: 3.6rem;
+    height: 3.2rem;
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      width: 4rem;
+      height: 3.6rem;
+    }
+
+    > * {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .label {
+    background-color: $bn-color-button-background;
+    color: $bn-color-link-default;
+    display: block;
+    font-family: $bn-font-family-highlight;
+    font-size: 1.6rem;
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      font-size: 2rem;
+    }
+    font-weight: 500;
+    line-height: 1;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      padding-top: 1.3rem;
+      padding-bottom: 1.3rem;
+      padding-left: 0.8rem;
+      padding-right: 0.8rem;
+    }
+    text-transform: uppercase;
+  }
+
+  &.with-icon {
+    .label {
+      padding-left: 4.9rem;
+      @media (min-width: $bn-breakpoint-layout-tablet) {
+        padding-left: 5.8rem;
+      }
+    }
+  }
+}
+
+
+a.button {
+  &:hover {
+    text-decoration: none;
+  }
+}

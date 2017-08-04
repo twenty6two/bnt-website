@@ -1,0 +1,113 @@
+<?php
+
+use Drupal\Core\Render\Markup;
+
+function big_noise_preprocess_html(&$variables) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  if ($node) {
+    // Page highlight color
+    if ($node->hasField('field_page_highlight_color') &&
+      !empty($node->field_page_highlight_color->value)) {
+      $css = _get_page_highlight_color_css($node->field_page_highlight_color->value);
+
+      $variables['page']['#attached']['html_head'][] = [
+        [
+          '#tag' => 'style',
+          '#value' => $css,
+          '#weight' => '999',
+        ],
+        'page_highlight_color_css',
+      ];
+    }
+  }
+}
+
+
+function big_noise_preprocess_page(&$variables) {
+  $node = false;
+  if (array_key_exists('node', $variables)) {
+    $node = $variables['node'];
+  }
+
+  if ($node) {
+    $node_type = $node->getType();
+
+    $variables['node_type'] = $node_type;
+  }
+}
+
+
+function big_noise_preprocess_node(&$variables) {
+  $variables['base_path'] = base_path();
+
+  $node = $variables['node'];
+
+  $node_type = $node->getType();
+  switch ($node_type) {
+    case 'page':
+
+      break;
+    case 'show':
+
+      // Calculate the performance date rate for presentation
+      $show_performances = $node->field_performances;
+      $show_performance_dates = [];
+      for ($i = 0; $i < count($show_performances); $i++) {
+        $show_performance_dates[] = strtotime($show_performances[$i]->value);
+      }
+      sort($show_performance_dates);
+      $show_performance_begin_date = $show_performance_dates[0];
+      $show_performance_end_date = $show_performance_dates[count($show_performance_dates) - 1];
+
+      $show_performance_begin_date_format = (date('Y', $show_performance_begin_date) == date('Y', $show_performance_end_date)) ? 'F j' : 'F j, Y';
+      $show_performance_end_date_format = 'F j, Y';
+
+      $show_performance_date_range = date($show_performance_begin_date_format, $show_performance_begin_date) . ' - ' . date($show_performance_end_date_format, $show_performance_end_date);
+
+      $variables['show__performance_date_range'] = $show_performance_date_range;
+
+
+      // Calculate season status
+      $show_season = $node->field_season;
+
+      break;
+    default:
+      break;
+  }
+}
+
+
+function big_noise_preprocess_menu__main(&$variables) {
+  foreach ($variables['items'] as &$item) {
+    _convert_menu_title_to_markup($item);
+  }
+}
+
+
+function _convert_menu_title_to_markup(&$item) {
+  if (array_key_exists('below', $item) && count($item['below'])) {
+    foreach ($item['below'] as &$item) {
+      _convert_menu_title_to_markup($item);
+    }
+  }
+  else {
+    $item['title'] = Markup::create($item['title']);
+  }
+}
+
+
+function _get_page_highlight_color_css($color) {
+  $css = '';
+
+  $css .= '
+    svg .page--highlight-color {
+      fill: hsla(' . $color . ', 100%, 50%, 1) !important; 
+    }';
+  $css .= '
+    a.page--highlight-color {
+      background-color: hsla(' . $color . ', 100%, 50%, 1) !important; 
+    }';
+
+  return $css;
+}

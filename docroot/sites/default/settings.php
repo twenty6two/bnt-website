@@ -760,18 +760,6 @@ $settings['file_scan_ignore_directories'] = [
  * Keep this code block at the end of this file to take full effect.
  */
 #
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
-$databases['default']['default'] = array (
-  'database' => 'bignoise',
-  'username' => 'bignoise',
-  'password' => 'bignoise',
-  'prefix' => '',
-  'host' => '127.0.0.1',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
-$settings['install_profile'] = 'minimal';
-$config_directories['sync'] = 'sites/default/files/config_aW6RHEWJidPSivKa3heNfi9R2bLBU4XLyqT4s86uAgRpuMmR5L9sBVuDN3m7jWJUur-hfn8dXg/sync';
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
+}

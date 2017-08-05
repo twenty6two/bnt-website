@@ -73,12 +73,27 @@
  */
 #}
 <div id="page--main-content">
-  <div>@@title logo@@</div>
-  <div id="page--show--performance-date-range">{{ show__performance_date_range }}</div>
-  {{ content.field_billing_credits }}
-  {{ content.field_buy_tickets_url }}
-  {{ content.field_ticket_price_details }}
-  {{ content.field_performance_details }}
-  <div id="page--show--venue-details">@@venue details@@</div>
-  {{ content.field_synopsis }}
+
+  <div id="page--show--main-content-blocks" class="site-width-constraint">
+
+    <div id="page--show--content-block-1">
+      {{ content.field_title_image }}
+      <div id="page--show--performance-date-range">{{ show__performance_date_range }}</div>
+    </div>
+
+    <div id="page--show--content-block-2">
+      {{ content.field_billing_credits }}
+      {{ content.field_synopsis }}
+    </div>
+
+    <div id="page--show--content-block-3">
+      {{ content.field_buy_tickets_url }}
+      {{ content.field_ticket_price_details }}
+      {{ content.field_performance_details }}
+      <div id="page--show--venue-details">@@venue details@@</div>
+      {{ content.field_synopsis_concise }}
+    </div>
+
+  </div>
+
 </div>

@@ -1136,6 +1136,100 @@ nav ul {
   height: 3.4rem;
 }
 
+/* line 1, ../scss/layout/_page-show.scss */
+#page--show--main-content-blocks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* line 7, ../scss/layout/_page-show.scss */
+#page--show--content-block-1 {
+  flex-basis: 100%;
+}
+
+/* line 11, ../scss/layout/_page-show.scss */
+#page--show--content-block-2 {
+  flex-basis: 100%;
+}
+@media (min-width: 768px) {
+  /* line 11, ../scss/layout/_page-show.scss */
+  #page--show--content-block-2 {
+    flex-basis: 50%;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 11, ../scss/layout/_page-show.scss */
+  #page--show--content-block-2 {
+    flex-basis: 63.5%;
+  }
+}
+
+/* line 21, ../scss/layout/_page-show.scss */
+#page--show--content-block-3 {
+  flex-basis: 100%;
+}
+@media (min-width: 768px) {
+  /* line 21, ../scss/layout/_page-show.scss */
+  #page--show--content-block-3 {
+    flex-basis: 50%;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 21, ../scss/layout/_page-show.scss */
+  #page--show--content-block-3 {
+    flex-basis: 36.5%;
+  }
+}
+
+/* line 35, ../scss/layout/_page-show.scss */
+#page--show--performance-date-range {
+  margin-bottom: 2.5rem;
+}
+
+/* line 40, ../scss/layout/_page-show.scss */
+#page--show--billing-credits {
+  margin-bottom: 1.5rem;
+}
+
+/* line 45, ../scss/layout/_page-show.scss */
+#page--show--synopsis {
+  display: none;
+}
+@media (min-width: 768px) {
+  /* line 45, ../scss/layout/_page-show.scss */
+  #page--show--synopsis {
+    display: block;
+  }
+}
+
+/* line 53, ../scss/layout/_page-show.scss */
+#page--show--buy-tickets {
+  margin-bottom: 1.5rem;
+}
+
+/* line 58, ../scss/layout/_page-show.scss */
+#page--show--ticket-price-details {
+  margin-bottom: 1.5rem;
+}
+
+/* line 63, ../scss/layout/_page-show.scss */
+#page--show--performance-details {
+  margin-bottom: 1.5rem;
+}
+
+/* line 68, ../scss/layout/_page-show.scss */
+#page--show--venue-details {
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  /* line 73, ../scss/layout/_page-show.scss */
+  #page--show--synopsis-concise {
+    display: none;
+  }
+}
+
 /* line 1, ../scss/style/_elements.scss */
 a {
   color: #e3673d;
@@ -2294,17 +2388,15 @@ a.page--highlight-color {
 
 /* line 2, ../scss/style/_page-show.scss */
 .page-type--show #page--main-content {
-  background: rgba(6, 112, 150, 0.3);
-  background: radial-gradient(cicle at center top, #ffffff 0%, rgba(0, 0, 0, 0.75) 100%);
+  background-color: #2D5C80;
+  color: #f0f2f4;
 }
 
 /* line 9, ../scss/style/_page-show.scss */
 #page--show--performance-date-range {
-  color: #f0f2f4;
-  font-family: 'Oswald';
+  font-family: "Oswald";
   font-size: 1.6rem;
   font-weight: 500;
-  margin-bottom: 2.5rem;
 }
 @media (min-width: 768px) {
   /* line 9, ../scss/style/_page-show.scss */
@@ -2319,38 +2411,8 @@ a.page--highlight-color {
   }
 }
 
-/* line 24, ../scss/style/_page-show.scss */
-#page--show--billing-credits {
-  color: #f0f2f4;
-  margin-bottom: 1.5rem;
-}
-
-/* line 30, ../scss/style/_page-show.scss */
-#page--show--buy-tickets {
-  margin-bottom: 1.5rem;
-}
-
-/* line 35, ../scss/style/_page-show.scss */
-#page--show--ticket-price-details {
-  color: #f0f2f4;
-  margin-bottom: 1.5rem;
-}
-
-/* line 41, ../scss/style/_page-show.scss */
-#page--show--performance-details {
-  color: #f0f2f4;
-  margin-bottom: 1.5rem;
-}
-
-/* line 47, ../scss/style/_page-show.scss */
-#page--show--venue-details {
-  color: #f0f2f4;
-  margin-bottom: 1.5rem;
-}
-
-/* line 53, ../scss/style/_page-show.scss */
+/* line 22, ../scss/style/_page-show.scss */
 #page--show--synopsis {
-  color: #f0f2f4;
   font-weight: 300;
 }
 

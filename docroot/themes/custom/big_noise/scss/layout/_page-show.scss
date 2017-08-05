@@ -1,0 +1,77 @@
+#page--show--main-content-blocks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#page--show--content-block-1 {
+  flex-basis: 100%;
+}
+
+#page--show--content-block-2 {
+  flex-basis: 100%;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    flex-basis: 50%;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    flex-basis: 63.5%;
+  }
+}
+
+#page--show--content-block-3 {
+  flex-basis: 100%;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    flex-basis: 50%;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    flex-basis: 36.5%;
+  }
+}
+
+
+#page--show--title-image {}
+
+
+#page--show--performance-date-range {
+  margin-bottom: 2.5rem;
+}
+
+
+#page--show--billing-credits {
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--synopsis {
+  display: none;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    display: block;
+  }
+}
+
+
+#page--show--buy-tickets {
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--ticket-price-details {
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--performance-details {
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--venue-details {
+  margin-bottom: 1.5rem;
+}
+
+
+#page--show--synopsis-concise {
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    display: none;
+  }
+}

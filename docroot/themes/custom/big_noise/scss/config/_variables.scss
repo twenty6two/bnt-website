@@ -5,6 +5,7 @@ $bn-breakpoint-layout-desktop-wide: 1300px;
 $bn-page-content-max-width-layout-desktop: 1000px;
 $bn-page-content-max-width-layout-desktop-wide: 1200px;
 
+$bn-layer-secondary-navigation: 50;
 $bn-layer-site-header: 100;
 $bn-layer-sidebar: 200;
 
@@ -68,9 +69,6 @@ $bn-color-header-main-navigation-text: $bn-color-gray-dark;
 $bn-color-header-main-navigation-text-hover: $bn-color-orange;
 $bn-color-header-main-navigation-active-border-bottom: $bn-color-gray-dark;
 
-$bn-color-header-secondary-navigation-text: $bn-color-white-almost-2;
-$bn-color-header-secondary-navigation-active-border-bottom: $bn-color-white-almost-2;
-
 // - Footer
 
 $bn-color-footer-background: $bn-color-gray-dark;
@@ -84,6 +82,10 @@ $bn-color-footer-main-navigation-text-hover: $bn-color-orange;
 // - Main Content
 
 $bn-color-main-content-background: $bn-color-white-almost;
+
+$bn-color-main-secondary-navigation-background: rgba($bn-color-black, 0.35);
+$bn-color-main-secondary-navigation-text: $bn-color-white-almost-2;
+$bn-color-main-secondary-navigation-active-border-bottom: $bn-color-white-almost-2;
 
 // - Sidebar
 

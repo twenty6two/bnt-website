@@ -95,8 +95,3 @@
   {{ drupal_block('locate_link_header') }}
   {{ drupal_block('buy_tickets_link_header') }}
 </div>
-{% if (drupal_block('secondary_navigation_header')|render|trim is not empty) %}
-<div id="site-header-secondary-navigation-container">
-  {{ drupal_block('secondary_navigation_header') }}
-</div>
-{% endif %}

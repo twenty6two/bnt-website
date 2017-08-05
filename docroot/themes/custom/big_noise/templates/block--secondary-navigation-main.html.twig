@@ -33,8 +33,10 @@
  * @ingroup themeable
  */
 #}
-<nav role="navigation" aria-label="Secondary Navigation" id="navigation--secondary-navigation-header" class="site-width-constraint">
-  {% block content %}
-    {{ content }}
-  {% endblock %}
-</nav>
+<div id="site-main-secondary-navigation-container">
+  <nav role="navigation" aria-label="Secondary Navigation" id="navigation--secondary-navigation-main" class="site-width-constraint">
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </nav>
+</div>

@@ -35,11 +35,6 @@
 }
 
 
-#site-header-secondary-navigation-container {
-  background-color: rgba(51, 23, 14, 0.75);
-}
-
-
 #site-header-social-media-navigation-container {
   border-left-color: $bn-color-header-secondary-links-separator;
   border-left-style: solid;
@@ -175,52 +170,6 @@
 
         &.active {
           border-bottom-color: $bn-color-header-main-navigation-active-border-bottom;
-        }
-      }
-    }
-  }
-}
-
-
-#navigation--secondary-navigation-header {
-  > ul {
-    > li {
-      > a {
-        border-bottom-color: transparent;
-        border-bottom-style: solid;
-        border-bottom-width: 0.3rem;
-        color: $bn-color-header-secondary-navigation-text;
-        font-family: $bn-font-family-highlight;
-        font-size: 1.2rem;
-        @media (min-width: $bn-breakpoint-layout-tablet) {
-          font-size: 1.6rem;
-        }
-        @media (min-width: $bn-breakpoint-layout-desktop) {
-          font-size: 2rem;
-        }
-        font-weight: 500;
-        line-height: 1.3;
-        margin-bottom: 0.2rem;
-        padding-top: 0.5rem;
-        padding-left: 0.2rem;
-        padding-right: 0.2rem;
-        text-transform: uppercase;
-
-        &:hover {
-          text-decoration: none;
-        }
-
-        &.active {
-          border-bottom-color: $bn-color-header-secondary-navigation-active-border-bottom;
-        }
-
-        > sub {
-          font-family: $bn-font-family-default;
-          font-size: 1.3rem;
-          @media (min-width: $bn-breakpoint-layout-desktop) {
-            font-size: 1.6rem;
-          }
-          text-transform: none;
         }
       }
     }

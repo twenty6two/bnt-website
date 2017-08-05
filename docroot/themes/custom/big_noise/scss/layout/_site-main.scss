@@ -1,5 +1,6 @@
 #site-main {
   min-height: 100vh;
+  position: relative;
 
   padding-top: $bn-header-height-layout-mobile;
   padding-bottom: $bn-footer-height-layout-mobile;
@@ -11,4 +12,19 @@
     padding-top: $bn-header-height-layout-desktop;
     padding-bottom: $bn-footer-height-layout-desktop;
   }
+}
+
+
+#site-main-secondary-navigation-container {
+  position: absolute;
+  top: $bn-header-height-layout-mobile;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    top: $bn-header-height-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    top: $bn-header-height-layout-desktop;
+  }
+  left: 0;
+  width: 100%;
+  z-index: $bn-layer-secondary-navigation;
 }

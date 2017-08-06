@@ -72,25 +72,25 @@
  * @ingroup themeable
  */
 #}
-<div id="page--main-content">
+<div id="show--container">
 
-  <div id="page--show--main-content-blocks" class="site-width-constraint">
+  <div id="show--main-content-blocks" class="site-width-constraint">
 
-    <div id="page--show--content-block-1">
+    <div class="content-block first">
       {{ content.field_title_image }}
-      <div id="page--show--performance-date-range">{{ show__performance_date_range }}</div>
+      <div class="show--performance-date-range">{{ show__performance_date_range }}</div>
     </div>
 
-    <div id="page--show--content-block-2">
+    <div class="content-block second">
       {{ content.field_billing_credits }}
       {{ content.field_synopsis }}
     </div>
 
-    <div id="page--show--content-block-3">
+    <div class="content-block third">
       {{ content.field_buy_tickets_url }}
       {{ content.field_ticket_price_details }}
       {{ content.field_performance_details }}
-      <div id="page--show--venue-details">@@venue details@@</div>
+      <div class="show--venue-details">@@venue details@@</div>
       {{ content.field_synopsis_concise }}
     </div>
 

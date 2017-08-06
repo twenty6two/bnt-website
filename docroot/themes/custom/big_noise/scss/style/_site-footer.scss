@@ -7,7 +7,7 @@
 }
 
 
-#navigation--main-navigation-footer {
+.navigation--main-navigation-footer {
   > ul {
     > li {
       > a {
@@ -44,11 +44,6 @@
 
     &:focus {
       outline: none;
-    }
-
-    &:hover,
-    &:focus {
-      color: $bn-color-footer-main-navigation-text-hover;
     }
   }
 }
@@ -159,7 +154,6 @@
     }
 
     #edit-submit {
-      background-color: $bn-color-page-highlight;
       color: $bn-color-footer-text;
       font-family: $bn-font-family-highlight;
       font-size: 1.3rem;

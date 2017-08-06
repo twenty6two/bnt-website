@@ -1,77 +1,81 @@
-#page--show--main-content-blocks {
+#show--main-content-blocks {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
 
-#page--show--content-block-1 {
-  flex-basis: 100%;
-}
-
-#page--show--content-block-2 {
-  flex-basis: 100%;
+  padding-top: 22rem;
   @media (min-width: $bn-breakpoint-layout-tablet) {
-    flex-basis: 50%;
+    padding-top: 36rem;
   }
   @media (min-width: $bn-breakpoint-layout-desktop) {
-    flex-basis: 63.5%;
+    padding-top: 50rem;
   }
-}
 
-#page--show--content-block-3 {
-  flex-basis: 100%;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
-    flex-basis: 50%;
-  }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
-    flex-basis: 36.5%;
-  }
-}
+  > .content-block {
+    &.first {
+      flex-basis: 100%;
+    }
 
+    &.second {
+      flex-basis: 100%;
+      @media (min-width: $bn-breakpoint-layout-tablet) {
+        flex-basis: 50%;
+      }
+      @media (min-width: $bn-breakpoint-layout-desktop) {
+        flex-basis: 63.5%;
+      }
+    }
 
-#page--show--title-image {}
-
-
-#page--show--performance-date-range {
-  margin-bottom: 2.5rem;
-}
-
-
-#page--show--billing-credits {
-  margin-bottom: 1.5rem;
-}
-
-
-#page--show--synopsis {
-  display: none;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
-    display: block;
+    &.third {
+      flex-basis: 100%;
+      @media (min-width: $bn-breakpoint-layout-tablet) {
+        flex-basis: 50%;
+      }
+      @media (min-width: $bn-breakpoint-layout-desktop) {
+        flex-basis: 36.5%;
+      }
+    }
   }
 }
 
 
-#page--show--buy-tickets {
-  margin-bottom: 1.5rem;
-}
+#show--container {
+  .show--title-image {}
 
+  .show--performance-date-range {
+    margin-bottom: 2.5rem;
+  }
 
-#page--show--ticket-price-details {
-  margin-bottom: 1.5rem;
-}
+  .show--billing-credits {
+    margin-bottom: 1.5rem;
+  }
 
-
-#page--show--performance-details {
-  margin-bottom: 1.5rem;
-}
-
-
-#page--show--venue-details {
-  margin-bottom: 1.5rem;
-}
-
-
-#page--show--synopsis-concise {
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  .show--synopsis {
     display: none;
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      display: block;
+    }
+  }
+
+  .show--buy-tickets {
+    margin-bottom: 1.5rem;
+  }
+
+  .show--ticket-price-details {
+    margin-bottom: 1.5rem;
+  }
+
+  .show--performance-details {
+    margin-bottom: 1.5rem;
+  }
+
+  .show--venue-details {
+    margin-bottom: 1.5rem;
+  }
+
+  .show--synopsis-concise {
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      display: none;
+    }
   }
 }

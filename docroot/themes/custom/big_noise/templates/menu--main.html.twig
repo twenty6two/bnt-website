@@ -40,7 +40,11 @@
       <li{{ item.attributes }}>
         {%
           set item_classes = [
-            item.in_active_trail ? 'active'
+            item.in_active_trail ? 'active',
+            not item.in_active_trail ? 'page--highlight-color--text--hover',
+            not item.in_active_trail ? 'page--highlight-color--text--hover--custom',
+            not item.in_active_trail ? 'page--highlight-color--text--focus',
+            not item.in_active_trail ? 'page--highlight-color--text--focus--custom'            
           ]
         %}
         {%

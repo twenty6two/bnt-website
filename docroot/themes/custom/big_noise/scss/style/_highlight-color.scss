@@ -1,7 +1,24 @@
-svg .page--highlight-color {
-  fill: $bn-color-page-highlight;
+svg {
+  .page--highlight-color {
+    fill: $bn-color-page-highlight;
+  }
 }
 
-a.page--highlight-color {
+
+.page--highlight-color--background {
   background-color: $bn-color-page-highlight;
+}
+
+
+.page--highlight-color--text--hover {
+  &:hover {
+    color: $bn-color-page-highlight;
+  }
+}
+
+
+.page--highlight-color--text--focus {
+  &:focus {
+    color: $bn-color-page-highlight;
+  }
 }

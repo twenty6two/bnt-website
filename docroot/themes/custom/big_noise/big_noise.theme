@@ -1,23 +1,33 @@
 <?php
 
 use Drupal\Core\Render\Markup;
+use Drupal\Core\Form\FormStateInterface;
 
 function big_noise_preprocess_html(&$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
 
   if ($node) {
-    // Page highlight color
-    if ($node->hasField('field_page_highlight_color') &&
-      !empty($node->field_page_highlight_color->value)) {
-      $css = _get_page_highlight_color_css($node->field_page_highlight_color->value);
+    // Custom color CSS
+    $css = '';
 
+    if ($node->hasField('field_page_colors') &&
+      !$node->field_page_colors->isEmpty()) {
+      $css .= _get_page_color_css($node->field_page_colors->getValue()[0]);
+    }
+
+    if ($node->hasField('field_show_page_colors') &&
+      !$node->field_show_page_colors->isEmpty()) {
+      $css .= _get_show_page_css($node->field_show_page_colors->getValue()[0]);
+    }
+
+    if (!empty($css)) {
       $variables['page']['#attached']['html_head'][] = [
         [
           '#tag' => 'style',
           '#value' => $css,
           '#weight' => '999',
         ],
-        'page_highlight_color_css',
+        'custom_color_css',
       ];
     }
   }
@@ -51,6 +61,8 @@ function big_noise_preprocess_node(&$variables) {
     case 'show':
 
       // Calculate the performance date rate for presentation
+
+      // @TODO Address error when no performance dates have been entered
       $show_performances = $node->field_performances;
       $show_performance_dates = [];
       for ($i = 0; $i < count($show_performances); $i++) {
@@ -78,6 +90,16 @@ function big_noise_preprocess_node(&$variables) {
 }
 
 
+function big_noise_form_mailchimp_signup_subscribe_block_general_mailing_list_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['actions']['submit']['#attributes'] = array(
+    'class' => array(
+      'page--highlight-color--background',
+      'page--highlight-color--background--custom',
+    ),
+  );
+}
+
+
 function big_noise_preprocess_menu__main(&$variables) {
   foreach ($variables['items'] as &$item) {
     _convert_menu_title_to_markup($item);
@@ -97,17 +119,65 @@ function _convert_menu_title_to_markup(&$item) {
 }
 
 
-function _get_page_highlight_color_css($color) {
+function _get_show_page_css($colors) {
   $css = '';
 
   $css .= '
-    svg .page--highlight-color {
-      fill: hsla(' . $color . ', 100%, 50%, 1) !important; 
-    }';
-  $css .= '
-    a.page--highlight-color {
-      background-color: hsla(' . $color . ', 100%, 50%, 1) !important; 
-    }';
+    #show--container {
+      background-image: url(\'/sites/default/files/images/BNT_L5Y_SplashImage.jpg\'),
+        radial-gradient(circle at center 14rem, rgba(255,255,255,0.8) 0%, rgba(0,0,0,0.6) 34rem, rgba(0,0,0,0.6) 100%),
+        linear-gradient(130deg, ' . $colors['left_gradient_color'] . ' 0%, ' . $colors['left_gradient_color'] . ' 25%, ' . $colors['right_gradient_color'] . ' 100%);
+    }
+    @media (min-width: 768px) {
+      #show--container {
+        background-image: url(\'/sites/default/files/images/BNT_L5Y_SplashImage.jpg\'),
+          radial-gradient(circle at center 20.5rem, rgba(255,255,255,0.8) 0%, rgba(0,0,0,0.6) 46rem, rgba(0,0,0,0.6) 100%),
+          linear-gradient(130deg, ' . $colors['left_gradient_color'] . ' 0%, ' . $colors['left_gradient_color'] . ' 25%, ' . $colors['right_gradient_color'] . ' 100%);
+      }
+    }
+    @media (min-width: 1024px) {
+      #show--container {
+        background-image: url(\'/sites/default/files/images/BNT_L5Y_SplashImage.jpg\'),
+          radial-gradient(circle at center 24rem, rgba(255,255,255,0.8) 0%, rgba(0,0,0,0.6) 62rem, rgba(0,0,0,0.6) 100%),
+          linear-gradient(130deg, ' . $colors['left_gradient_color'] . ' 0%, ' . $colors['left_gradient_color'] . ' 25%, ' . $colors['right_gradient_color'] . ' 100%);
+      }
+    }
+  ';
+
+  return $css;
+}
+
+
+function _get_page_color_css($colors) {
+  $css = '';
+
+  if (array_key_exists('logo_color', $colors)) {
+    $css .= '
+      #site-header-logo .image .logo--highlight-color.logo--highlight-color--custom {
+        fill: ' . $colors['logo_color'] . ';
+      }
+    ';
+  }
+
+  if (array_key_exists('page_element_color', $colors)) {
+    $css .= '
+      svg .page--highlight-color.page--highlight-color--custom {
+        fill: ' . $colors['page_element_color'] . ';
+      }
+
+      .page--highlight-color--background.page--highlight-color--background--custom {
+        background-color: ' . $colors['page_element_color'] . ';
+      }
+
+      .page--highlight-color--text--hover.page--highlight-color--text--hover--custom:hover {
+        color: ' . $colors['page_element_color'] . ';
+      }
+
+      .page--highlight-color--text--focus.page--highlight-color--text--focus--custom:focus {
+        color: ' . $colors['page_element_color'] . ';
+      }
+    ';
+  }
 
   return $css;
 }

@@ -1,24 +1,23 @@
-.page-type--show {
-  #page--main-content {
-    background-color: #2D5C80;
-    color: $bn-color-show-page-content;
+#show--container {
+  background-blend-mode: multiply, soft-light, soft-light;
+  background-position: center top, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: 100% auto, 100%, 100%;
+  color: $bn-color-show-page-content;
+
+  .show--performance-date-range {
+    font-family: $bn-font-family-highlight;
+    font-size: 1.6rem;
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      font-size: 2rem;
+    }
+    @media (min-width: $bn-breakpoint-layout-desktop) {
+      font-size: 2.4rem;
+    }
+    font-weight: 500;
   }
-}
 
-
-#page--show--performance-date-range {
-  font-family: $bn-font-family-highlight;
-  font-size: 1.6rem;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
-    font-size: 2rem;
+  .show--synopsis {
+    font-weight: 300;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
-    font-size: 2.4rem;
-  }
-  font-weight: 500;
-}
-
-
-#page--show--synopsis {
-  font-weight: 300;
 }

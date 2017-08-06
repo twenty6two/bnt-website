@@ -12,6 +12,9 @@
     .logo--base-color {
       fill: $bn-color-header-logo-base-color;
     }
+    .logo--highlight-color {
+      fill: $bn-color-header-logo-highlight-color;
+    }
   }
 }
 
@@ -131,7 +134,7 @@
 }
 
 
-#navigation--main-navigation-header {
+.navigation--main-navigation-header {
   > ul {
     > li {
       > a {
@@ -158,14 +161,7 @@
         }
 
         &:focus {
-          color: $bn-color-header-main-navigation-text-hover;
           outline: none;
-        }
-
-        &:not(.active) {
-          &:hover {
-            color: $bn-color-header-main-navigation-text-hover;
-          }
         }
 
         &.active {

@@ -1,0 +1,9 @@
+name: Page Colors
+type: module
+description: Defines the custom colors to be used on a page
+package: Big Noise Theatre
+version: 1.0
+core: 8.x
+
+dependencies:
+  - field

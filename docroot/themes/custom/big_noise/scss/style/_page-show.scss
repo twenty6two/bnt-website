@@ -20,4 +20,12 @@
   .show--synopsis {
     font-weight: 300;
   }
+
+  .show--buy-tickets {
+    .icon {
+      .icon--base-color {
+        fill: $bn-color-show-page-buy-tickets-icon-base-color;
+      }
+    }
+  }
 }

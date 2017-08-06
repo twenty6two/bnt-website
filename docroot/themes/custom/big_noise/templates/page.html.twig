@@ -45,7 +45,17 @@
  * @ingroup themeable
  */
 #}
-<div id="page" class="page-type--{{ node_type }}">
+{%
+  set page_classes = [
+    node_type ? 'page-type--' ~ node_type
+  ]
+%}
+{%
+  set footer_classes = [
+    footer_theme_style ? 'theme-' ~ footer_theme_style
+  ]
+%}
+<div id="page" class="{{ page_classes|join(' ') }}">
 
   <div id="site-off-canvas">
     {{ page.sidebar_main_navigation }}
@@ -62,7 +72,7 @@
     </div>
   </main>
 
-  <footer id="site-footer">
+  <footer id="site-footer" class="{{ footer_classes|join(' ') }}">
     {{ page.footer }}
   </footer>
 

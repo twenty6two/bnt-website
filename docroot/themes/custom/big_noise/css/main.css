@@ -1368,31 +1368,32 @@ body {
 /* line 1, ../scss/style/_site-header.scss */
 #site-header {
   background-color: rgba(225, 228, 231, 0.95);
-  background-image: radial-gradient(ellipse at center bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+  background-image: radial-gradient(circle at center bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  background-blend-mode: soft-light;
   box-shadow: inset 0 -0.1rem 0 0 #a5adb8;
 }
 
-/* line 12, ../scss/style/_site-header.scss */
+/* line 13, ../scss/style/_site-header.scss */
 #site-header-logo .image .logo--base-color {
   fill: #58585b;
 }
-/* line 15, ../scss/style/_site-header.scss */
+/* line 16, ../scss/style/_site-header.scss */
 #site-header-logo .image .logo--highlight-color {
   fill: #f05a22;
 }
 
-/* line 22, ../scss/style/_site-header.scss */
+/* line 23, ../scss/style/_site-header.scss */
 #header--sidebar--main-navigation--toggle {
   display: block;
 }
-/* line 25, ../scss/style/_site-header.scss */
+/* line 26, ../scss/style/_site-header.scss */
 #header--sidebar--main-navigation--toggle .label {
   color: #3e464f;
   display: block;
   font-size: 1.3rem;
   text-transform: uppercase;
 }
-/* line 32, ../scss/style/_site-header.scss */
+/* line 33, ../scss/style/_site-header.scss */
 #header--sidebar--main-navigation--toggle .icon {
   display: block;
   margin-left: auto;
@@ -1400,41 +1401,41 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* line 41, ../scss/style/_site-header.scss */
+/* line 42, ../scss/style/_site-header.scss */
 #site-header-social-media-navigation-container {
   border-left-color: #a5adb8;
   border-left-style: solid;
   border-left-width: 0.1rem;
 }
 
-/* line 49, ../scss/style/_site-header.scss */
+/* line 50, ../scss/style/_site-header.scss */
 #site-header-phone-link-container .phone-link {
   text-decoration: none;
 }
-/* line 52, ../scss/style/_site-header.scss */
+/* line 53, ../scss/style/_site-header.scss */
 #site-header-phone-link-container .phone-link .icon {
   width: 1.2rem;
   height: 1.3rem;
   margin-right: 0.4rem;
 }
-/* line 57, ../scss/style/_site-header.scss */
+/* line 58, ../scss/style/_site-header.scss */
 #site-header-phone-link-container .phone-link .icon svg {
   width: 100%;
   height: 100%;
 }
-/* line 63, ../scss/style/_site-header.scss */
+/* line 64, ../scss/style/_site-header.scss */
 #site-header-phone-link-container .phone-link .label {
   color: #3e464f;
   font-size: 1.4rem;
 }
 @media (min-width: 1024px) {
-  /* line 63, ../scss/style/_site-header.scss */
+  /* line 64, ../scss/style/_site-header.scss */
   #site-header-phone-link-container .phone-link .label {
     font-size: 1.5rem;
   }
 }
 
-/* line 75, ../scss/style/_site-header.scss */
+/* line 76, ../scss/style/_site-header.scss */
 #site-header-locate-link-container .locate-link {
   border-radius: 100%;
   display: block;
@@ -1486,21 +1487,21 @@ body {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 75, ../scss/style/_site-header.scss */
+  /* line 76, ../scss/style/_site-header.scss */
   #site-header-locate-link-container .locate-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 75, ../scss/style/_site-header.scss */
+  /* line 76, ../scss/style/_site-header.scss */
   #site-header-locate-link-container .locate-link {
     width: 2.4rem;
     height: 2.4rem;
   }
 }
 
-/* line 91, ../scss/style/_site-header.scss */
+/* line 92, ../scss/style/_site-header.scss */
 #site-header-buy-tickets-link-container .buy-tickets-link {
   border-radius: 100%;
   display: block;
@@ -1552,14 +1553,14 @@ body {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 91, ../scss/style/_site-header.scss */
+  /* line 92, ../scss/style/_site-header.scss */
   #site-header-buy-tickets-link-container .buy-tickets-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 91, ../scss/style/_site-header.scss */
+  /* line 92, ../scss/style/_site-header.scss */
   #site-header-buy-tickets-link-container .buy-tickets-link {
     display: flex;
     align-items: center;
@@ -1570,11 +1571,11 @@ body {
     border-radius: 0.5rem;
     text-decoration: none;
   }
-  /* line 109, ../scss/style/_site-header.scss */
+  /* line 110, ../scss/style/_site-header.scss */
   #site-header-buy-tickets-link-container .buy-tickets-link:hover, #site-header-buy-tickets-link-container .buy-tickets-link:focus {
     transform: none;
   }
-  /* line 114, ../scss/style/_site-header.scss */
+  /* line 115, ../scss/style/_site-header.scss */
   #site-header-buy-tickets-link-container .buy-tickets-link .icon {
     position: relative;
     display: block;
@@ -1585,7 +1586,7 @@ body {
     height: 1.8rem;
     margin-right: 0.4rem;
   }
-  /* line 125, ../scss/style/_site-header.scss */
+  /* line 126, ../scss/style/_site-header.scss */
   #site-header-buy-tickets-link-container .buy-tickets-link .label {
     display: block;
     color: #e1e4e7;
@@ -1595,7 +1596,7 @@ body {
   }
 }
 
-/* line 140, ../scss/style/_site-header.scss */
+/* line 141, ../scss/style/_site-header.scss */
 .navigation--main-navigation-header > ul > li > a {
   border-bottom-color: transparent;
   border-bottom-style: solid;
@@ -1613,25 +1614,25 @@ body {
   transition: color 0.2s;
 }
 @media (min-width: 1024px) {
-  /* line 140, ../scss/style/_site-header.scss */
+  /* line 141, ../scss/style/_site-header.scss */
   .navigation--main-navigation-header > ul > li > a {
     font-size: 2rem;
   }
 }
-/* line 159, ../scss/style/_site-header.scss */
+/* line 160, ../scss/style/_site-header.scss */
 .navigation--main-navigation-header > ul > li > a:hover {
   text-decoration: none;
 }
-/* line 163, ../scss/style/_site-header.scss */
+/* line 164, ../scss/style/_site-header.scss */
 .navigation--main-navigation-header > ul > li > a:focus {
   outline: none;
 }
-/* line 167, ../scss/style/_site-header.scss */
+/* line 168, ../scss/style/_site-header.scss */
 .navigation--main-navigation-header > ul > li > a.active {
   border-bottom-color: #3e464f;
 }
 
-/* line 177, ../scss/style/_site-header.scss */
+/* line 178, ../scss/style/_site-header.scss */
 #navigation--social-media-navigation-header .social-media-link {
   border-radius: 100%;
   display: block;
@@ -1683,14 +1684,14 @@ body {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 177, ../scss/style/_site-header.scss */
+  /* line 178, ../scss/style/_site-header.scss */
   #navigation--social-media-navigation-header .social-media-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 177, ../scss/style/_site-header.scss */
+  /* line 178, ../scss/style/_site-header.scss */
   #navigation--social-media-navigation-header .social-media-link {
     width: 2.4rem;
     height: 2.4rem;
@@ -1700,11 +1701,17 @@ body {
 /* line 1, ../scss/style/_site-footer.scss */
 #site-footer {
   background-color: #3e464f;
-  background-image: radial-gradient(ellipse at center top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background-image: radial-gradient(circle at center top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 110%);
+  background-blend-mode: soft-light;
   box-shadow: inset 0 0.1rem 0 0 #a5adb8;
 }
+/* line 9, ../scss/style/_site-footer.scss */
+#site-footer.theme-dark {
+  background-color: #202429;
+  box-shadow: inset 0 0.1rem 0 0 #3e464f;
+}
 
-/* line 13, ../scss/style/_site-footer.scss */
+/* line 19, ../scss/style/_site-footer.scss */
 .navigation--main-navigation-footer > ul > li > a {
   color: #e1e4e7;
   font-size: 1.6rem;
@@ -1712,30 +1719,30 @@ body {
   line-height: 1.1875;
   text-transform: uppercase;
 }
-/* line 24, ../scss/style/_site-footer.scss */
+/* line 30, ../scss/style/_site-footer.scss */
 .navigation--main-navigation-footer > ul > li > ul > li > a {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.25;
 }
-/* line 29, ../scss/style/_site-footer.scss */
+/* line 35, ../scss/style/_site-footer.scss */
 .navigation--main-navigation-footer > ul > li > ul > li > a > sub {
   display: none;
 }
-/* line 38, ../scss/style/_site-footer.scss */
+/* line 44, ../scss/style/_site-footer.scss */
 .navigation--main-navigation-footer a {
   transition: color 0.2s;
 }
-/* line 41, ../scss/style/_site-footer.scss */
+/* line 47, ../scss/style/_site-footer.scss */
 .navigation--main-navigation-footer a:hover {
   text-decoration: none;
 }
-/* line 45, ../scss/style/_site-footer.scss */
+/* line 51, ../scss/style/_site-footer.scss */
 .navigation--main-navigation-footer a:focus {
   outline: none;
 }
 
-/* line 53, ../scss/style/_site-footer.scss */
+/* line 59, ../scss/style/_site-footer.scss */
 #navigation--social-media-navigation-footer .social-media-link {
   border-radius: 100%;
   display: block;
@@ -1787,29 +1794,29 @@ body {
   display: none;
 }
 
-/* line 59, ../scss/style/_site-footer.scss */
+/* line 65, ../scss/style/_site-footer.scss */
 #site-footer-contact {
   color: #e1e4e7;
 }
-/* line 62, ../scss/style/_site-footer.scss */
+/* line 68, ../scss/style/_site-footer.scss */
 #site-footer-contact #site-footer-contact-name {
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 68, ../scss/style/_site-footer.scss */
+/* line 74, ../scss/style/_site-footer.scss */
 #site-footer-contact #site-footer-contact-phone,
 #site-footer-contact #site-footer-contact-address {
   font-size: 1.2rem;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  /* line 75, ../scss/style/_site-footer.scss */
+  /* line 81, ../scss/style/_site-footer.scss */
   #site-footer-contact #site-footer-contact-address {
     display: flex;
     flex-direction: row;
   }
-  /* line 81, ../scss/style/_site-footer.scss */
+  /* line 87, ../scss/style/_site-footer.scss */
   #site-footer-contact #site-footer-contact-address > div:not(:last-of-type)::after {
     content: '/';
     margin-left: 0.5rem;
@@ -1817,59 +1824,59 @@ body {
   }
 }
 
-/* line 93, ../scss/style/_site-footer.scss */
+/* line 99, ../scss/style/_site-footer.scss */
 #site-footer-closure {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 
-/* line 100, ../scss/style/_site-footer.scss */
+/* line 106, ../scss/style/_site-footer.scss */
 #site-footer-copyright {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  /* line 100, ../scss/style/_site-footer.scss */
+  /* line 106, ../scss/style/_site-footer.scss */
   #site-footer-copyright {
     display: flex;
     flex-direction: row;
   }
 }
 @media (min-width: 768px) {
-  /* line 113, ../scss/style/_site-footer.scss */
+  /* line 119, ../scss/style/_site-footer.scss */
   #site-footer-copyright > div:not(:last-of-type)::after {
     content: '\00a0';
   }
 }
 
-/* line 123, ../scss/style/_site-footer.scss */
+/* line 129, ../scss/style/_site-footer.scss */
 #block-mailing-list-subscription-form-footer .heading {
   color: #e1e4e7;
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 130, ../scss/style/_site-footer.scss */
+/* line 136, ../scss/style/_site-footer.scss */
 #block-mailing-list-subscription-form-footer form {
   height: 3.4rem;
   position: relative;
 }
-/* line 134, ../scss/style/_site-footer.scss */
+/* line 140, ../scss/style/_site-footer.scss */
 #block-mailing-list-subscription-form-footer form .mailchimp-newsletter-mergefields {
   height: 100%;
   padding-right: 10rem;
 }
-/* line 139, ../scss/style/_site-footer.scss */
+/* line 145, ../scss/style/_site-footer.scss */
 #block-mailing-list-subscription-form-footer form .form-item-mergevars-email {
   height: 100%;
 }
-/* line 143, ../scss/style/_site-footer.scss */
+/* line 149, ../scss/style/_site-footer.scss */
 #block-mailing-list-subscription-form-footer form label[for="edit-mergevars-email"] {
   display: none;
 }
-/* line 147, ../scss/style/_site-footer.scss */
+/* line 153, ../scss/style/_site-footer.scss */
 #block-mailing-list-subscription-form-footer form #edit-mergevars-email {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -1878,7 +1885,7 @@ body {
   padding-left: 1rem;
   font-size: 1.3rem;
 }
-/* line 156, ../scss/style/_site-footer.scss */
+/* line 162, ../scss/style/_site-footer.scss */
 #block-mailing-list-subscription-form-footer form #edit-submit {
   color: #e1e4e7;
   font-family: "Oswald";
@@ -2109,12 +2116,17 @@ svg .page--highlight-color {
   background-color: #e3673d;
 }
 
-/* line 14, ../scss/style/_highlight-color.scss */
+/* line 13, ../scss/style/_highlight-color.scss */
+.page--highlight-color--text {
+  color: #e3673d;
+}
+
+/* line 19, ../scss/style/_highlight-color.scss */
 .page--highlight-color--text--hover:hover {
   color: #e3673d;
 }
 
-/* line 21, ../scss/style/_highlight-color.scss */
+/* line 26, ../scss/style/_highlight-color.scss */
 .page--highlight-color--text--focus:focus {
   color: #e3673d;
 }
@@ -2416,6 +2428,10 @@ svg .page--highlight-color {
 #show--container .show--synopsis {
   font-weight: 300;
 }
+/* line 26, ../scss/style/_page-show.scss */
+#show--container .show--buy-tickets .icon .icon--base-color {
+  fill: #58585b;
+}
 
 /* line 1, ../scss/style/_button.scss */
 .button {
@@ -2468,7 +2484,6 @@ svg .page--highlight-color {
 /* line 44, ../scss/style/_button.scss */
 .button .label {
   background-color: #e1e4e7;
-  color: #e3673d;
   display: block;
   font-family: "Oswald";
   font-size: 1.6rem;
@@ -2495,18 +2510,18 @@ svg .page--highlight-color {
     padding-right: 0.8rem;
   }
 }
-/* line 69, ../scss/style/_button.scss */
+/* line 68, ../scss/style/_button.scss */
 .button.with-icon .label {
   padding-left: 4.9rem;
 }
 @media (min-width: 768px) {
-  /* line 69, ../scss/style/_button.scss */
+  /* line 68, ../scss/style/_button.scss */
   .button.with-icon .label {
     padding-left: 5.8rem;
   }
 }
 
-/* line 80, ../scss/style/_button.scss */
+/* line 79, ../scss/style/_button.scss */
 a.button:hover {
   text-decoration: none;
 }

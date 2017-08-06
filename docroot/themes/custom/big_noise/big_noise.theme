@@ -44,6 +44,8 @@ function big_noise_preprocess_page(&$variables) {
     $node_type = $node->getType();
 
     $variables['node_type'] = $node_type;
+
+    $variables['footer_theme_style'] = ($node_type == 'show') ? 'dark' : '';
   }
 }
 
@@ -167,6 +169,10 @@ function _get_page_color_css($colors) {
 
       .page--highlight-color--background.page--highlight-color--background--custom {
         background-color: ' . $colors['page_element_color'] . ';
+      }
+
+      .page--highlight-color--text.page--highlight-color--text--custom {
+        color: ' . $colors['page_element_color'] . ';
       }
 
       .page--highlight-color--text--hover.page--highlight-color--text--hover--custom:hover {

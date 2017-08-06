@@ -10,6 +10,11 @@ svg {
 }
 
 
+.page--highlight-color--text {
+  color: $bn-color-page-highlight;
+}
+
+
 .page--highlight-color--text--hover {
   &:hover {
     color: $bn-color-page-highlight;

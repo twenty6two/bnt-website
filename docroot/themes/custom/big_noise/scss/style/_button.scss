@@ -17,7 +17,11 @@
     left: 50%;
     transform: translate3d(-50%, 0, 0);
     z-index: -1;
-    box-shadow: 0 0.5rem 1.3rem 0 $bn-color-button-shadow;
+    mix-blend-mode: multiply;
+    box-shadow: 0 0.4rem 1rem 0 $bn-color-button-shadow;
+    @media (min-width: $bn-breakpoint-layout-tablet) {
+      box-shadow: 0 0.5rem 1.3rem 0 $bn-color-button-shadow;
+    }
   }
 
   .icon {

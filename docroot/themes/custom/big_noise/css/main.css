@@ -261,7 +261,7 @@ body.sidebar-active {
 /* line 7, ../scss/layout/_sidebar.scss */
 .sidebar {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   z-index: 200;
 }
 

@@ -1,4 +1,6 @@
 .site--main--main-content-container {
+  min-height: 100vh;
+
   padding-top: $bn-header-height-layout-mobile;
   padding-bottom: $bn-footer-height-layout-mobile;
   @media (min-width: $bn-breakpoint-layout-tablet) {

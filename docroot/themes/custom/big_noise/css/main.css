@@ -704,22 +704,6 @@ button.sidebar-close .icon {
 #site--main {
   min-height: 100vh;
   position: relative;
-  padding-top: 8.4rem;
-  padding-bottom: 35.5rem;
-}
-@media (min-width: 768px) {
-  /* line 1, ../scss/layout/_site--main.scss */
-  #site--main {
-    padding-top: 10.5rem;
-    padding-bottom: 31.3rem;
-  }
-}
-@media (min-width: 1024px) {
-  /* line 1, ../scss/layout/_site--main.scss */
-  #site--main {
-    padding-top: 16.2rem;
-    padding-bottom: 37rem;
-  }
 }
 
 /* line 1, ../scss/layout/_site--main--secondary-navigation.scss */
@@ -810,6 +794,26 @@ button.sidebar-close .icon {
 }
 
 /* line 1, ../scss/layout/_site--main--main-content.scss */
+.site--main--main-content-container {
+  padding-top: 8.4rem;
+  padding-bottom: 35.5rem;
+}
+@media (min-width: 768px) {
+  /* line 1, ../scss/layout/_site--main--main-content.scss */
+  .site--main--main-content-container {
+    padding-top: 10.5rem;
+    padding-bottom: 31.3rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 1, ../scss/layout/_site--main--main-content.scss */
+  .site--main--main-content-container {
+    padding-top: 16.2rem;
+    padding-bottom: 37rem;
+  }
+}
+
+/* line 15, ../scss/layout/_site--main--main-content.scss */
 .site--main--main-content {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -817,7 +821,7 @@ button.sidebar-close .icon {
   padding-right: 2rem;
 }
 @media (min-width: 768px) {
-  /* line 1, ../scss/layout/_site--main--main-content.scss */
+  /* line 15, ../scss/layout/_site--main--main-content.scss */
   .site--main--main-content {
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -826,7 +830,7 @@ button.sidebar-close .icon {
   }
 }
 @media (min-width: 1024px) {
-  /* line 1, ../scss/layout/_site--main--main-content.scss */
+  /* line 15, ../scss/layout/_site--main--main-content.scss */
   .site--main--main-content {
     padding-left: 2rem;
     padding-right: 2rem;

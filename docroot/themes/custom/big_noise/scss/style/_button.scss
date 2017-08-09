@@ -14,8 +14,7 @@
     width: 96.6667%;
     height: 90%;
     top: 10%;
-    left: 50%;
-    transform: translate3d(-50%, 0, 0);
+    left: percentage((1 - .966667) / 2);
     z-index: -1;
     mix-blend-mode: multiply;
     box-shadow: 0 0.4rem 1rem 0 $bn-color-button-shadow;

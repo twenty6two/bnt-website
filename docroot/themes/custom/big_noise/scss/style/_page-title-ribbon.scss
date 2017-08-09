@@ -1,4 +1,4 @@
-#page--page-title-ribbon {
+.page-title-ribbon {
   background-image: url('/sites/default/files/images/BNT_HeaderSplash_Drowsy.png'),
     linear-gradient(to right, #e3673d 0%, #ff9a52 50%, #e3673d 100%),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 5%, rgba(255, 255, 255, 0) 33.3334%),
@@ -10,7 +10,7 @@
 }
 
 
-#page--page-title-ribbon-content {
+.page-title-ribbon--content {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -18,8 +18,8 @@
 }
 
 
-#page--page-title-ribbon {
-  #page--title {
+.page-title-ribbon {
+  .page--title {
     background-image: linear-gradient(to right,
         rgba($bn-color-white, 1) 0%,
         rgba($bn-color-white, 0) 100%);
@@ -46,7 +46,7 @@
     }
   }
 
-  #page--subheading {
+  .page--subheading {
     color: $bn-color-page-title-ribbon-page-subheading;
     font-size: 1.3rem;
     @media (min-width: $bn-breakpoint-layout-tablet) {
@@ -63,11 +63,11 @@
     text-shadow: 0 0.2rem 0.5rem rgba(77, 19, 0, 0.75);
   }
 
-  #page--page-title-ribbon--image-credit {
+  .page-title-ribbon--image-caption {
     display: none;
     @media (min-width: $bn-breakpoint-layout-tablet) {
       display: block;
-      color: $bn-color-page-title-ribbon-image-credit;
+      color: $bn-color-page-title-ribbon-image-caption;
       font-size: 1rem;
       font-style: italic;
       line-height: 1.25;

@@ -1,4 +1,11 @@
-#show--main-content-blocks {
+.page-type--show {
+  .site--main--main-content {
+    padding: 0;
+  }
+}
+
+
+.show--main-content-blocks {
   @include SiteGutter();
 
   display: flex;
@@ -46,7 +53,7 @@
 }
 
 
-#show--container {
+.show--container {
   .show--title-image {}
 
   .show--performance-date-range {

@@ -1,40 +1,24 @@
-{#
-/**
- * @file
- * Default theme implementation to display a region.
- *
- * Available variables:
- * - content: The content for this region, typically blocks.
- * - attributes: HTML attributes for the region <div>.
- * - region: The name of the region variable as defined in the theme's
- *   .info.yml file.
- *
- * @see template_preprocess_region()
- *
- * @ingroup themeable
- */
-#}
-<div id="site-footer-container" class="site-width-constraint">
-  <div id="site-footer-main-navigation-container">
+<div id="site--footer--container" class="site--footer--container site-width-constraint">
+  <div id="site--footer--main-navigation-container" class="site--footer--main-navigation-container">
     {{ drupal_block('main_navigation_footer') }}
   </div>
-  <div id="site-footer-social-media-navigation-container">
+  <div id="site--footer--social-media-navigation-container" class="site--footer--social-media-navigation-container">
     {{ drupal_block('social_media_navigation_footer') }}
   </div>
-  <div id="site-footer-contact">
-    <div id="site-footer-contact-name">Big Noise Theatre</div>
-    <div id="site-footer-contact-phone">847.604.0275</div>
-    <div id="site-footer-contact-address">
+  <div id="site--footer--contact" class="site--footer--contact">
+    <div id="site--footer--contact--name" class="site--footer--contact--name">Big Noise Theatre</div>
+    <div id="site--footer--contact--phone" class="site--footer--contact--phone">847.604.0275</div>
+    <div id="site--footer--contact--address" class="site--footer--contact--address">
       <div>515 E. Thacker Street</div>
       <div>Des Plaines, IL 60016</div>
     </div>
   </div>
-  <div id="site-footer-closure">Big Noise Theatre Company is a division of Winnetka Theatre, Inc., a 501(c)3 organization.</div>
-  <div id="site-footer-copyright">
+  <div id="site--footer--closure" class="site--footer--closure">Big Noise Theatre Company is a division of Winnetka Theatre, Inc., a 501(c)3 organization.</div>
+  <div id="site--footer--copyright" class="site--footer--copyright">
     <div>&copy; 2017 Big Noise Theatre Company.</div>
     <div>All Rights Reserved.</div>
   </div>
-  <div id="site-footer-mailing-list-subscription-form-container">
+  <div id="site--footer--mailing-list-subscription-form-container" class="site--footer--mailing-list-subscription-form-container">
     {{ drupal_block('mailing_list_subscription_form_footer') }}
   </div>
 </div>

@@ -1,4 +1,19 @@
-#navigation--secondary-navigation-main {
+.site--main--secondary-navigation-container {
+  position: absolute;
+  top: $bn-header-height-layout-mobile;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    top: $bn-header-height-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    top: $bn-header-height-layout-desktop;
+  }
+  left: 0;
+  width: 100%;
+  z-index: $bn-layer-secondary-navigation;
+}
+
+
+.navigation--secondary-navigation-main {
   padding-left: $bn-header-gutter-left-layout-mobile;
   padding-right: $bn-header-gutter-right-layout-mobile;
   @media (min-width: $bn-breakpoint-layout-tablet) {

@@ -1,34 +1,39 @@
 @import "config/normalize";
 @import "config/colors";
 @import "config/fonts";
-@import "config/mixins";
 @import "config/variables";
 
+@import "mixins/layout";
+@import "mixins/vista";
+@import "mixins/icon-button";
+
+@import "layout/vista";
 @import "layout/off-canvas";
 @import "layout/sidebar";
-@import "layout/page";
-@import "layout/navigation";
-@import "layout/site-header";
-@import "layout/site-footer";
-@import "layout/site-main";
-@import "layout/secondary-navigation";
+@import "layout/sidebar--main-navigation";
+@import "layout/site--header";
+@import "layout/site--main";
+@import "layout/site--main--secondary-navigation";
+@import "layout/site--main--main-content";
+@import "layout/site--footer";
 @import "layout/page-title-ribbon";
-@import "layout/sidebar-main-navigation";
-@import "layout/page-show";
+@import "layout/navigation";
+@import "layout/columns";
+@import "layout/node--show";
 
 @import "style/elements";
-@import "style/page";
+@import "style/vista";
 @import "style/sidebar";
-@import "style/site-header";
-@import "style/site-footer";
-@import "style/secondary-navigation";
-@import "style/icon-button";
+@import "style/sidebar--main-navigation";
+@import "style/site--header";
+@import "style/site--main--secondary-navigation";
+@import "style/site--main--main-content";
+@import "style/site--footer";
 @import "style/page-title-ribbon";
-@import "style/highlight-color";
-@import "style/sidebar-main-navigation";
-@import "style/content-block";
-@import "style/page-show";
+@import "style/page-highlight-color";
+@import "style/node--show";
 @import "style/button";
+@import "style/content-block";
 
 @import "custom/single-show-prices-callout";
 @import "custom/plan-your-visit-map";

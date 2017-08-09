@@ -1,4 +1,4 @@
-#site-footer {
+.site--footer {
   background-color: $bn-color-footer-background;
   background-image: radial-gradient(circle at center top,
     rgba($bn-color-black, 0) 0%,
@@ -55,30 +55,30 @@
 }
 
 
-#navigation--social-media-navigation-footer {
+.navigation--social-media-navigation-footer {
   .social-media-link {
     @include IconButton();
   }
 }
 
 
-#site-footer-contact {
+.site--footer--contact {
   color: $bn-color-footer-text;
 
-  #site-footer-contact-name {
+  .site--footer--contact--name {
     font-size: 1.6rem;
     font-weight: 600;
     text-transform: uppercase;
   }
 
-  #site-footer-contact-phone,
-  #site-footer-contact-address {
+  #site--footer--contact--phone,
+  #site--footer--contact--address {
     font-size: 1.2rem;
     line-height: 1.4;
   }
 
   @media (min-width: $bn-breakpoint-layout-tablet) {
-    #site-footer-contact-address {
+    .site--footer--contact--address {
       display: flex;
       flex-direction: row;
 
@@ -96,14 +96,14 @@
 }
 
 
-#site-footer-closure {
+.site--footer--closure {
   color: $bn-color-footer-text;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 
 
-#site-footer-copyright {
+.site--footer--copyright {
   color: $bn-color-footer-text;
   font-size: 1.2rem;
   line-height: 1.4;
@@ -125,7 +125,7 @@
 }
 
 
-#block-mailing-list-subscription-form-footer {
+.site--footer--mailing-list-subscription-form-container {
   .heading {
     color: $bn-color-footer-text;
     font-size: 1.6rem;
@@ -159,7 +159,7 @@
       font-size: 1.3rem;
     }
 
-    #edit-submit {
+    .form-submit {
       color: $bn-color-footer-text;
       font-family: $bn-font-family-highlight;
       font-size: 1.3rem;

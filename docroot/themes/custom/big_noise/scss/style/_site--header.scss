@@ -1,4 +1,4 @@
-#site-header {
+.site--header {
   background-color: $bn-color-header-background;
   background-image: radial-gradient(circle at center bottom,
     rgba($bn-color-black, 0) 0%,
@@ -8,7 +8,7 @@
 }
 
 
-#site-header-logo {
+.site--header--logo {
   .image {
     .logo--base-color {
       fill: $bn-color-header-logo-base-color;
@@ -20,7 +20,7 @@
 }
 
 
-#header--sidebar--main-navigation--toggle {
+.header--sidebar--main-navigation--toggle {
   display: block;
 
   .label {
@@ -39,14 +39,14 @@
 }
 
 
-#site-header-social-media-navigation-container {
+.site--header--social-media-navigation-container {
   border-left-color: $bn-color-header-secondary-links-separator;
   border-left-style: solid;
   border-left-width: 0.1rem;
 }
 
 
-#site-header-phone-link-container {
+.site--header--phone-link-container {
   .phone-link {
     text-decoration: none;
 
@@ -72,7 +72,7 @@
 }
 
 
-#site-header-locate-link-container {
+.site--header--locate-link-container {
   .locate-link {
     @include IconButton();
 
@@ -88,7 +88,7 @@
 }
 
 
-#site-header-buy-tickets-link-container {
+.site--header--buy-tickets-link-container {
   .buy-tickets-link {
     @include IconButton();
 
@@ -126,7 +126,7 @@
       .label {
         display: block;
         color: $bn-color-header-button-text;
-        font-family: 'Oswald';
+        font-family: $bn-font-family-highlight;
         font-size: 1.2rem;
         text-transform: uppercase;
       }
@@ -174,7 +174,7 @@
 }
 
 
-#navigation--social-media-navigation-header {
+.navigation--social-media-navigation-header {
   .social-media-link {
     @include IconButton();
 

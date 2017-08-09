@@ -35,6 +35,9 @@ function big_noise_preprocess_html(&$variables) {
 
 
 function big_noise_preprocess_page(&$variables) {
+  $variables['page_classes'] = [];
+  $variables['footer_classes'] = [];
+
   $node = false;
   if (array_key_exists('node', $variables)) {
     $node = $variables['node'];
@@ -43,9 +46,11 @@ function big_noise_preprocess_page(&$variables) {
   if ($node) {
     $node_type = $node->getType();
 
-    $variables['node_type'] = $node_type;
+    $variables['vista_classes'][] = 'page-type--' . $node_type;
 
-    $variables['footer_theme_style'] = ($node_type == 'show') ? 'dark' : '';
+    if ($node_type == 'show') {
+      $variables['footer_classes'][] = 'theme-dark';
+    }
   }
 }
 
@@ -155,7 +160,7 @@ function _get_page_color_css($colors) {
 
   if (array_key_exists('logo_color', $colors)) {
     $css .= '
-      #site-header-logo .image .logo--highlight-color.logo--highlight-color--custom {
+      .site--header--logo .image .logo--highlight-color.logo--highlight-color--custom {
         fill: ' . $colors['logo_color'] . ';
       }
     ';
@@ -168,7 +173,7 @@ function _get_page_color_css($colors) {
       }
 
       .page--highlight-color--background.page--highlight-color--background--custom {
-        background-color: ' . $colors['page_element_color'] . ';
+        background: ' . $colors['page_element_color'] . ';
       }
 
       .page--highlight-color--text.page--highlight-color--text--custom {

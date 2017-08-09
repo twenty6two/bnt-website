@@ -1,0 +1,12 @@
+.site--main--main-content {
+  color: $bn-color-content-default;
+  font-size: $bn-font-size-main-content-layout-mobile;
+  line-height: 1.3;
+  @media (min-width: $bn-breakpoint-layout-tablet) {
+    font-size: $bn-font-size-main-content-layout-tablet;
+    line-height: 1.5;
+  }
+  @media (min-width: $bn-breakpoint-layout-desktop) {
+    font-size: $bn-font-size-main-content-layout-desktop;
+  }
+}

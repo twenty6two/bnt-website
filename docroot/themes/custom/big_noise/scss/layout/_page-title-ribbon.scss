@@ -1,16 +1,16 @@
-#page--page-title-ribbon {
-  min-height: 15.4rem;
+.page-title-ribbon {
+  min-height: $bn-page-title-ribbon-height-layout-mobile;
   @media (min-width: $bn-breakpoint-layout-tablet) {
-    min-height: 16.4rem;
+    min-height: $bn-page-title-ribbon-height-layout-tablet;
   }
   @media (min-width: $bn-breakpoint-layout-desktop) {
-    min-height: 28.8rem;
+    min-height: $bn-page-title-ribbon-height-layout-desktop;
   }
   position: relative;
 }
 
 
-#page--page-title-ribbon-content {
+.page-title-ribbon--content {
   position: absolute;
   left: 50%;
   bottom: 0;

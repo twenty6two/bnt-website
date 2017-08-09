@@ -16,10 +16,10 @@ body.sidebar-active {
 }
 
 
-.sidebar-close {
+button.sidebar-close {
+  position: relative;
   width: 2.6rem;
   height: 2.6rem;
-  position: relative;
 
   .icon {
     position: absolute;

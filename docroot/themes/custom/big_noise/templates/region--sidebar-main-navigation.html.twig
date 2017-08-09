@@ -1,24 +1,8 @@
-{#
-/**
- * @file
- * Default theme implementation to display a region.
- *
- * Available variables:
- * - content: The content for this region, typically blocks.
- * - attributes: HTML attributes for the region <div>.
- * - region: The name of the region variable as defined in the theme's
- *   .info.yml file.
- *
- * @see template_preprocess_region()
- *
- * @ingroup themeable
- */
-#}
-<div id="sidebar--main-navigation" class="sidebar off-canvas off-canvas-right">
+<div id="sidebar--main-navigation" class="sidebar--main-navigation sidebar off-canvas off-canvas-right">
   <header class="sidebar-header">
-    <div id="sidebar--main-navigation--site-logo-container">
+    <div id="sidebar--main-navigation--site-logo-container" class="sidebar--main-navigation--site-logo-container">
       <a href="{{ url('<front>') }}">
-        <div id="sidebar--main-navigation--site-logo">
+        <div id="sidebar--main-navigation--site-logo" class="sidebar--main-navigation--site-logo">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="54px" viewBox="0 0 100 54" class="image condensed">
             <g class="bn-logo-condensed">
               <path class="bn-logo-logo-b-top logo--highlight-color" d="M30.1276943,12.5190086 C30.1276943,5.60442488 24.507228,5.16746412e-05 17.5740674,5.16746412e-05 L-2.59067358e-05,5.16746412e-05 L-2.59067358e-05,25.038999 L17.5740674,25.038999 C24.507228,25.038999 30.1276943,19.4335923 30.1276943,12.5190086"></path>
@@ -48,8 +32,8 @@
         </div>
       </a>
     </div>
-    <div id="sidebar--main-navigation--sidebar-close-container">
-      <button id="sidebar--main-navigation--sidebar-close" class="sidebar-close">
+    <div id="sidebar--main-navigation--sidebar-close-container" class="sidebar--main-navigation--sidebar-close-container">
+      <button id="sidebar--main-navigation--sidebar-close" class="sidebar--main-navigation--sidebar-close sidebar-close">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="13px" height="13px" viewBox="0 0 13 13" class="icon">
           <g class="close" transform="translate(-6.000000, -6.000000)">
             <path d="M18.7011719,16.1783854 C18.7011719,16.4550781 18.5872396,16.7317708 18.3919271,16.9270833 L16.9270833,18.3919271 C16.7317708,18.5872396 16.4550781,18.7011719 16.1783854,18.7011719 C15.9016927,18.7011719 15.641276,18.5872396 15.4459635,18.3919271 L12.5,15.4459635 L9.55403646,18.3919271 C9.35872396,18.5872396 9.09830729,18.7011719 8.82161458,18.7011719 C8.54492188,18.7011719 8.26822917,18.5872396 8.07291667,18.3919271 L6.60807292,16.9270833 C6.41276042,16.7317708 6.29882813,16.4550781 6.29882813,16.1783854 C6.29882813,15.9016927 6.41276042,15.641276 6.60807292,15.4459635 L9.55403646,12.5 L6.60807292,9.55403646 C6.41276042,9.35872396 6.29882813,9.09830729 6.29882813,8.82161458 C6.29882813,8.54492188 6.41276042,8.26822917 6.60807292,8.07291667 L8.07291667,6.60807292 C8.26822917,6.41276042 8.54492188,6.29882812 8.82161458,6.29882812 C9.09830729,6.29882812 9.35872396,6.41276042 9.55403646,6.60807292 L12.5,9.55403646 L15.4459635,6.60807292 C15.641276,6.41276042 15.9016927,6.29882812 16.1783854,6.29882812 C16.4550781,6.29882812 16.7317708,6.41276042 16.9270833,6.60807292 L18.3919271,8.07291667 C18.5872396,8.26822917 18.7011719,8.54492188 18.7011719,8.82161458 C18.7011719,9.09830729 18.5872396,9.35872396 18.3919271,9.55403646 L15.4459635,12.5 L18.3919271,15.4459635 C18.5872396,15.641276 18.7011719,15.9016927 18.7011719,16.1783854 L18.7011719,16.1783854 Z"></path>
@@ -60,11 +44,11 @@
     </div>
   </header>
   <div class="sidebar-content">
-    <div id="sidebar--main-navigation--content-block--main-navigation">
+    <div id="sidebar--main-navigation--content-block--main-navigation" class="sidebar--main-navigation--content-block--main-navigation">
       {{ drupal_block('main_navigation_sidebar') }}
     </div>
-    <div id="sidebar--main-navigation--content-block--secondary-links">
-      <ul id="navigation--secondary-links-sidebar">
+    <div id="sidebar--main-navigation--content-block--secondary-links" class="sidebar--main-navigation--content-block--secondary-links">
+      <ul id="navigation--secondary-links-sidebar" class="navigation--secondary-links-sidebar">
         <li>
           {{ drupal_block('phone_link_sidebar') }}
         </li>

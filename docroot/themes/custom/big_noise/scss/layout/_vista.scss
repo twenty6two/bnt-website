@@ -1,0 +1,15 @@
+#vista {
+  min-height: 100vh;
+  min-width: 100vw;
+  position: relative;
+}
+
+
+.site-width-constraint {
+  @include SiteWidthConstraint();
+}
+
+
+.site-gutter {
+  @include SiteGutter();
+}

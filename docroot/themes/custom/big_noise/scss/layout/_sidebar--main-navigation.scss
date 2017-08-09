@@ -1,4 +1,4 @@
-#sidebar--main-navigation {
+.sidebar--main-navigation {
   .sidebar-header {
     height: $bn-header-height-layout-mobile;
   }
@@ -10,7 +10,7 @@
 }
 
 
-#sidebar--main-navigation--site-logo-container {
+.sidebar--main-navigation--site-logo-container {
   position: absolute;
   top: 50%;
   left: $bn-site-gutter-width-layout-mobile;
@@ -18,7 +18,7 @@
 }
 
 
-#sidebar--main-navigation--sidebar-close-container {
+.sidebar--main-navigation--sidebar-close-container {
   position: absolute;
   top: 50%;
   right: 2.6rem;
@@ -26,13 +26,13 @@
 }
 
 
-#sidebar--main-navigation--site-logo {
+.sidebar--main-navigation--site-logo {
   width: 10rem;
   height: 5.4rem;
 }
 
 
-#sidebar--main-navigation--content-block--secondary-links {
+.sidebar--main-navigation--content-block--secondary-links {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,7 +40,17 @@
 }
 
 
-#navigation--secondary-links-sidebar {
+.navigation--main-navigation-sidebar {
+  > ul {
+    > li {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+
+.navigation--secondary-links-sidebar {
   list-style: none;
   margin-top: 0;
   margin-bottom: 0;
@@ -67,25 +77,15 @@
 }
 
 
-#sidebar-navigation-phone-link-container .phone-link,
-#sidebar-navigation-locate-link-container .locate-link,
-#sidebar-navigation-buy-tickets-link-container .buy-tickets-link {
+.sidebar--navigation--phone-link-container .phone-link,
+.sidebar--navigation--locate-link-container .locate-link,
+.sidebar--navigation--buy-tickets-link-container .buy-tickets-link {
   width: 3.4rem;
   height: 3.4rem;
 }
 
 
-#navigation--main-navigation-sidebar {
-  > ul {
-    > li {
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
-  }
-}
-
-
-#navigation--social-media-navigation-sidebar {
+.navigation--social-media-navigation-sidebar {
   margin-left: 2rem;
 
   > ul {

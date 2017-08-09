@@ -1,23 +1,7 @@
-{#
-/**
- * @file
- * Default theme implementation to display a region.
- *
- * Available variables:
- * - content: The content for this region, typically blocks.
- * - attributes: HTML attributes for the region <div>.
- * - region: The name of the region variable as defined in the theme's
- *   .info.yml file.
- *
- * @see template_preprocess_region()
- *
- * @ingroup themeable
- */
-#}
-<div id="site-header-container" class="site-width-constraint">
-  <div id="site-header-logo-container">
-    <a href="{{ url('<front>') }}" id="site-header-home-link">
-      <div id="site-header-logo">
+<div id="site--header--container" class="site--header--container site-width-constraint">
+  <div id="site--header--logo-container" class="site--header--logo-container">
+    <a href="{{ url('<front>') }}" id="site--header--home-link" class="site--header--home-link">
+      <div id="site--header--logo" class="site--header--logo">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="54px" viewBox="0 0 100 54" class="image condensed">
           <g class="bn-logo-condensed">
             <path class="bn-logo-logo-b-top logo--highlight-color logo--highlight-color--custom" d="M30.1276943,12.5190086 C30.1276943,5.60442488 24.507228,5.16746412e-05 17.5740674,5.16746412e-05 L-2.59067358e-05,5.16746412e-05 L-2.59067358e-05,25.038999 L17.5740674,25.038999 C24.507228,25.038999 30.1276943,19.4335923 30.1276943,12.5190086"></path>
@@ -73,8 +57,8 @@
       </div>
     </a>
   </div>
-  <div id="site-header-sidebar-main-navigation-toggle-container">
-    <button type="button" id="header--sidebar--main-navigation--toggle">
+  <div id="site--header--sidebar-main-navigation-toggle-container" class="site--header--sidebar-main-navigation-toggle-container">
+    <button type="button" id="header--sidebar--main-navigation--toggle" class="header--sidebar--main-navigation--toggle">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26px" height="6px" viewBox="0 0 26 6" class="icon">
         <g class="three-dots">
           <circle class="three-dots--dot-1 page--highlight-color page--highlight-color--custom" cx="3" cy="3" r="3"></circle>
@@ -85,10 +69,10 @@
       <span class="label">Menu</span>
     </button>
   </div>
-  <div id="site-header-main-navigation-container">
+  <div id="site--header--main-navigation-container" class="site--header--main-navigation-container">
     {{ drupal_block('main_navigation_header') }}
   </div>
-  <div id="site-header-social-media-navigation-container">
+  <div id="site--header--social-media-navigation-container" class="site--header--social-media-navigation-container">
     {{ drupal_block('social_media_navigation_header') }}
   </div>
   {{ drupal_block('phone_link_header') }}

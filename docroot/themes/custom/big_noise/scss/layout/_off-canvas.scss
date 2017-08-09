@@ -1,7 +1,7 @@
 .off-canvas {
   position: fixed;
-  transition: left 0.3s,
-    right 0.3s;
+  transition: left $bn-transition-duration-sidebar-hide-show,
+    right $bn-transition-duration-sidebar-hide-show;
 
   &:not(.active) {
     overflow: hidden;

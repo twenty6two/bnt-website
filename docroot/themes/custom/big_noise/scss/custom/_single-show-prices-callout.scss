@@ -81,7 +81,7 @@
     > li {
       display: inline-block;
 
-      font-size: 1.3rem;
+      font-size: $bn-font-size-main-content-layout-mobile;
     }
 
     > li:not(:last-of-type) {
@@ -95,7 +95,13 @@
 
     @media (min-width: $bn-breakpoint-layout-tablet) {
       > li {
-        font-size: 1.6rem;
+        font-size: $bn-font-size-main-content-layout-tablet;
+      }
+    }
+
+    @media (min-width: $bn-breakpoint-layout-desktop) {
+      > li {
+        font-size: $bn-font-size-main-content-layout-desktop;
       }
     }
   }

@@ -1,4 +1,4 @@
-#show--container {
+.show--container {
   background-blend-mode: multiply, soft-light, soft-light;
   background-position: center top, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat;
@@ -35,7 +35,7 @@
 }
 
 
-#show--main-content-blocks {
+.show--main-content-blocks {
   p {
     margin-bottom: 2rem;
   }

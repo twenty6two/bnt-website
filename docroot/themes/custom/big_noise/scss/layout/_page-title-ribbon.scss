@@ -6,15 +6,13 @@
   @media (min-width: $bn-breakpoint-layout-desktop) {
     min-height: $bn-page-title-ribbon-height-layout-desktop;
   }
-  position: relative;
+
+  display: flex;
 }
 
 
 .page-title-ribbon--content {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translate3d(-50%, 0, 0);
+  align-self: flex-end;
   width: 100%;
 
   padding-top: 0.7rem;

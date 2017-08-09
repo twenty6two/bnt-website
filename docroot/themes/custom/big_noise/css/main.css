@@ -1074,7 +1074,7 @@ button.sidebar-close .icon {
 /* line 1, ../scss/layout/_page-title-ribbon.scss */
 .page-title-ribbon {
   min-height: 15.4rem;
-  position: relative;
+  display: flex;
 }
 @media (min-width: 768px) {
   /* line 1, ../scss/layout/_page-title-ribbon.scss */
@@ -1089,12 +1089,9 @@ button.sidebar-close .icon {
   }
 }
 
-/* line 13, ../scss/layout/_page-title-ribbon.scss */
+/* line 14, ../scss/layout/_page-title-ribbon.scss */
 .page-title-ribbon--content {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translate3d(-50%, 0, 0);
+  align-self: flex-end;
   width: 100%;
   padding-top: 0.7rem;
   padding-bottom: 0.7rem;
@@ -1102,14 +1099,14 @@ button.sidebar-close .icon {
   padding-right: 2rem;
 }
 @media (min-width: 768px) {
-  /* line 13, ../scss/layout/_page-title-ribbon.scss */
+  /* line 14, ../scss/layout/_page-title-ribbon.scss */
   .page-title-ribbon--content {
     padding-left: 4rem;
     padding-right: 4rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 13, ../scss/layout/_page-title-ribbon.scss */
+  /* line 14, ../scss/layout/_page-title-ribbon.scss */
   .page-title-ribbon--content {
     padding-left: 2rem;
     padding-right: 2rem;

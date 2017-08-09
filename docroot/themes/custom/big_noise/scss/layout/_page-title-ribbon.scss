@@ -1,10 +1,10 @@
 .page-title-ribbon {
-  min-height: $bn-page-title-ribbon-height-layout-mobile;
+  height: $bn-page-title-ribbon-height-layout-mobile;
   @media (min-width: $bn-breakpoint-layout-tablet) {
-    min-height: $bn-page-title-ribbon-height-layout-tablet;
+    height: $bn-page-title-ribbon-height-layout-tablet;
   }
   @media (min-width: $bn-breakpoint-layout-desktop) {
-    min-height: $bn-page-title-ribbon-height-layout-desktop;
+    height: $bn-page-title-ribbon-height-layout-desktop;
   }
 
   display: flex;

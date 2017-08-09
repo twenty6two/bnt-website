@@ -1077,19 +1077,19 @@ button.sidebar-close .icon {
 
 /* line 1, ../scss/layout/_page-title-ribbon.scss */
 .page-title-ribbon {
-  min-height: 15.4rem;
+  height: 15.4rem;
   display: flex;
 }
 @media (min-width: 768px) {
   /* line 1, ../scss/layout/_page-title-ribbon.scss */
   .page-title-ribbon {
-    min-height: 16.4rem;
+    height: 16.4rem;
   }
 }
 @media (min-width: 1024px) {
   /* line 1, ../scss/layout/_page-title-ribbon.scss */
   .page-title-ribbon {
-    min-height: 28.8rem;
+    height: 28.8rem;
   }
 }
 

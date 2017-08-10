@@ -1696,15 +1696,16 @@ button.sidebar-close .icon .close {
 /* line 23, ../scss/style/_site--header.scss */
 .header--sidebar--main-navigation--toggle {
   display: block;
+  background: none;
 }
-/* line 26, ../scss/style/_site--header.scss */
+/* line 27, ../scss/style/_site--header.scss */
 .header--sidebar--main-navigation--toggle .label {
   color: #3e464f;
   display: block;
   font-size: 1.3rem;
   text-transform: uppercase;
 }
-/* line 33, ../scss/style/_site--header.scss */
+/* line 34, ../scss/style/_site--header.scss */
 .header--sidebar--main-navigation--toggle .icon {
   display: block;
   margin-left: auto;
@@ -1712,41 +1713,41 @@ button.sidebar-close .icon .close {
   margin-bottom: 0.5rem;
 }
 
-/* line 42, ../scss/style/_site--header.scss */
+/* line 43, ../scss/style/_site--header.scss */
 .site--header--social-media-navigation-container {
   border-left-color: #a5adb8;
   border-left-style: solid;
   border-left-width: 0.1rem;
 }
 
-/* line 50, ../scss/style/_site--header.scss */
+/* line 51, ../scss/style/_site--header.scss */
 .site--header--phone-link-container .phone-link {
   text-decoration: none;
 }
-/* line 53, ../scss/style/_site--header.scss */
+/* line 54, ../scss/style/_site--header.scss */
 .site--header--phone-link-container .phone-link .icon {
   width: 1.2rem;
   height: 1.3rem;
   margin-right: 0.4rem;
 }
-/* line 58, ../scss/style/_site--header.scss */
+/* line 59, ../scss/style/_site--header.scss */
 .site--header--phone-link-container .phone-link .icon svg {
   width: 100%;
   height: 100%;
 }
-/* line 64, ../scss/style/_site--header.scss */
+/* line 65, ../scss/style/_site--header.scss */
 .site--header--phone-link-container .phone-link .label {
   color: #3e464f;
   font-size: 1.4rem;
 }
 @media (min-width: 1024px) {
-  /* line 64, ../scss/style/_site--header.scss */
+  /* line 65, ../scss/style/_site--header.scss */
   .site--header--phone-link-container .phone-link .label {
     font-size: 1.5rem;
   }
 }
 
-/* line 76, ../scss/style/_site--header.scss */
+/* line 77, ../scss/style/_site--header.scss */
 .site--header--locate-link-container .locate-link {
   border-radius: 100%;
   display: block;
@@ -1798,21 +1799,21 @@ button.sidebar-close .icon .close {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 76, ../scss/style/_site--header.scss */
+  /* line 77, ../scss/style/_site--header.scss */
   .site--header--locate-link-container .locate-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 76, ../scss/style/_site--header.scss */
+  /* line 77, ../scss/style/_site--header.scss */
   .site--header--locate-link-container .locate-link {
     width: 2.4rem;
     height: 2.4rem;
   }
 }
 
-/* line 92, ../scss/style/_site--header.scss */
+/* line 93, ../scss/style/_site--header.scss */
 .site--header--buy-tickets-link-container .buy-tickets-link {
   border-radius: 100%;
   display: block;
@@ -1864,14 +1865,14 @@ button.sidebar-close .icon .close {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 92, ../scss/style/_site--header.scss */
+  /* line 93, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 92, ../scss/style/_site--header.scss */
+  /* line 93, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link {
     display: flex;
     align-items: center;
@@ -1882,11 +1883,11 @@ button.sidebar-close .icon .close {
     border-radius: 0.5rem;
     text-decoration: none;
   }
-  /* line 110, ../scss/style/_site--header.scss */
+  /* line 111, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link:hover, .site--header--buy-tickets-link-container .buy-tickets-link:focus {
     transform: none;
   }
-  /* line 115, ../scss/style/_site--header.scss */
+  /* line 116, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .icon {
     position: relative;
     display: block;
@@ -1897,7 +1898,7 @@ button.sidebar-close .icon .close {
     height: 1.8rem;
     margin-right: 0.4rem;
   }
-  /* line 126, ../scss/style/_site--header.scss */
+  /* line 127, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .label {
     display: block;
     color: #e1e4e7;
@@ -1907,7 +1908,7 @@ button.sidebar-close .icon .close {
   }
 }
 
-/* line 141, ../scss/style/_site--header.scss */
+/* line 142, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a {
   border-bottom-color: transparent;
   border-bottom-style: solid;
@@ -1925,25 +1926,25 @@ button.sidebar-close .icon .close {
   transition: color 0.2s;
 }
 @media (min-width: 1024px) {
-  /* line 141, ../scss/style/_site--header.scss */
+  /* line 142, ../scss/style/_site--header.scss */
   .navigation--main-navigation-header > ul > li > a {
     font-size: 2rem;
   }
 }
-/* line 160, ../scss/style/_site--header.scss */
+/* line 161, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a:hover {
   text-decoration: none;
 }
-/* line 164, ../scss/style/_site--header.scss */
+/* line 165, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a:focus {
   outline: none;
 }
-/* line 168, ../scss/style/_site--header.scss */
+/* line 169, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a.active {
   border-bottom-color: #3e464f;
 }
 
-/* line 178, ../scss/style/_site--header.scss */
+/* line 179, ../scss/style/_site--header.scss */
 .navigation--social-media-navigation-header .social-media-link {
   border-radius: 100%;
   display: block;
@@ -1995,14 +1996,14 @@ button.sidebar-close .icon .close {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 178, ../scss/style/_site--header.scss */
+  /* line 179, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 178, ../scss/style/_site--header.scss */
+  /* line 179, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 2.4rem;
     height: 2.4rem;

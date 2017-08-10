@@ -811,6 +811,7 @@ button.sidebar-close .icon {
 
 /* line 1, ../scss/layout/_site--main--main-content.scss */
 .site--main--main-content {
+  overflow: hidden;
   padding-top: 2rem;
   padding-bottom: 2rem;
   padding-left: 2rem;

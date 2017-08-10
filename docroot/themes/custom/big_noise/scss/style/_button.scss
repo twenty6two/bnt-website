@@ -1,4 +1,4 @@
-.button {
+.big-button {
   display: inline-block;
   position: relative;
   z-index: 0;
@@ -78,7 +78,7 @@
 }
 
 
-a.button {
+a.big-button {
   &:hover {
     text-decoration: none;
   }

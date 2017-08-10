@@ -1124,15 +1124,10 @@ nav ul {
 /* line 1, ../scss/layout/_columns.scss */
 .column-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin-left: 0;
   margin-right: 0;
-}
-@media (min-width: 1024px) {
-  /* line 1, ../scss/layout/_columns.scss */
-  .column-container {
-    flex-direction: row;
-  }
 }
 @media (min-width: 768px) {
   /* line 1, ../scss/layout/_columns.scss */
@@ -1148,20 +1143,20 @@ nav ul {
     margin-right: -4rem;
   }
 }
-/* line 18, ../scss/layout/_columns.scss */
+/* line 17, ../scss/layout/_columns.scss */
 .column-container .column {
   padding-left: 0;
   padding-right: 0;
 }
 @media (min-width: 768px) {
-  /* line 18, ../scss/layout/_columns.scss */
+  /* line 17, ../scss/layout/_columns.scss */
   .column-container .column {
     padding-left: 0;
     padding-right: 0;
   }
 }
 @media (min-width: 1024px) {
-  /* line 18, ../scss/layout/_columns.scss */
+  /* line 17, ../scss/layout/_columns.scss */
   .column-container .column {
     padding-left: 4rem;
     padding-right: 4rem;
@@ -1170,11 +1165,12 @@ nav ul {
 
 /* line 4, ../scss/layout/_node--page.scss */
 .page-type--page .column-container.has-primary-column .primary {
-  order: 1;
   flex-basis: 100%;
+  order: 1;
 }
 /* line 11, ../scss/layout/_node--page.scss */
 .page-type--page .column-container.has-primary-column.has-secondary-column .primary {
+  flex-basis: 100%;
   order: 2;
 }
 @media (min-width: 1024px) {
@@ -1184,21 +1180,22 @@ nav ul {
     order: 1;
   }
 }
-/* line 19, ../scss/layout/_node--page.scss */
+/* line 20, ../scss/layout/_node--page.scss */
 .page-type--page .column-container.has-primary-column.has-secondary-column .secondary {
+  flex-basis: 100%;
+  order: 1;
   margin-bottom: 2rem;
   padding-bottom: 2rem;
-  order: 1;
 }
 @media (min-width: 768px) {
-  /* line 19, ../scss/layout/_node--page.scss */
+  /* line 20, ../scss/layout/_node--page.scss */
   .page-type--page .column-container.has-primary-column.has-secondary-column .secondary {
     margin-bottom: 3rem;
     padding-bottom: 3rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 19, ../scss/layout/_node--page.scss */
+  /* line 20, ../scss/layout/_node--page.scss */
   .page-type--page .column-container.has-primary-column.has-secondary-column .secondary {
     flex-basis: 36.5%;
     order: 2;

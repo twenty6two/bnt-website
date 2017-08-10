@@ -1,9 +1,8 @@
 .column-container {
   display: flex;
-  flex-direction: column;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
-    flex-direction: row;
-  }
+  flex-direction: row;
+  flex-wrap: wrap;
+
   margin-left: (0 - ($bn-column-gutter-width-layout-mobile / 2));
   margin-right: (0 - ($bn-column-gutter-width-layout-mobile / 2));
   @media (min-width: $bn-breakpoint-layout-tablet) {

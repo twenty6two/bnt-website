@@ -32,9 +32,14 @@ input[type="submit"] {
   // Only do a hard reset of the background if it won't be
   // replaced with the page highlight color. This avoids
   // having to force the page highlight color later.
+  //
+  // Still causing problems. Just set background colors
+  // on all buttons for now.
+  /*
   &:not(.page--highlight-color--background):not(.page--highlight-color--background--custom) {
     background: none;
   }
+  */
 
   &:focus {
     outline: 0;

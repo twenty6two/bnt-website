@@ -8,6 +8,10 @@
     }
 
     &.has-primary-column.has-secondary-column {
+      @media (min-width: $bn-breakpoint-layout-desktop) {
+        flex-wrap: nowrap;
+      }
+
       .primary {
         flex-basis: 100%;
         order: 2;

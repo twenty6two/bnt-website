@@ -1,4 +1,11 @@
-<div id="site--main--secondary-navigation-container" class="site--main--secondary-navigation-container">
+<div id="site--main--secondary-navigation-container" class="site--main--secondary-navigation-container {{ menu_container_classes|join(' ') }}">
+  <button id="site--main--secondary-navigation-toggle" class="site--main--secondary-navigation-toggle">
+    <svg width="9px" height="7px" viewBox="0 0 9 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="icon">
+      <g class="icon-chevron-down" transform="translate(-290.000000, -8.000000)">
+        <path d="M297.921884,9.26786087 L297.531259,8.84933358 C297.406259,8.72098522 297.234384,8.64286012 297.0573,8.64286012 C296.880217,8.64286012 296.708341,8.72098522 296.58855,8.84933358 L294.057297,11.5613904 L291.526043,8.84933358 C291.406252,8.72098522 291.234376,8.64286012 291.057293,8.64286012 C290.880209,8.64286012 290.708334,8.72098522 290.583334,8.84933358 L290.197917,9.26786087 C290.072917,9.4017896 290,9.5859416 290,9.77567397 C290,9.96540634 290.072917,10.1495583 290.197917,10.2779067 L293.588546,13.9107235 C293.708338,14.0446523 293.880213,14.1227774 294.057297,14.1227774 C294.23438,14.1227774 294.406255,14.0446523 294.531255,13.9107235 L297.921884,10.2779067 C298.041676,10.1495583 298.114593,9.96540634 298.114593,9.77567397 C298.114593,9.5859416 298.041676,9.4017896 297.921884,9.26786087 Z"></path>
+      </g>
+    </svg>
+  </button>
   <nav role="navigation" aria-label="Secondary Navigation" id="navigation--secondary-navigation-main" class="site-width-constraint navigation--secondary-navigation-main">
     {% block content %}
       {{ content }}

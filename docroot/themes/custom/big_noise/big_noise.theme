@@ -1,7 +1,8 @@
 <?php
 
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
+
 
 function big_noise_preprocess_html(&$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
@@ -93,6 +94,22 @@ function big_noise_preprocess_node(&$variables) {
       break;
     default:
       break;
+  }
+}
+
+
+function big_noise_preprocess_block__secondary_navigation_main(&$variables) {
+  $variables['menu_container_classes'] = [];
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  if ($node) {
+    $node_type = $node->getType();
+
+    if ($node_type == 'show') {
+      $variables['menu_container_classes'][] = 'theme-collapsible-layout-mobile';
+      $variables['menu_container_classes'][] = 'collapsed';
+    }
   }
 }
 

@@ -33,6 +33,10 @@
     BigNoise.activateSidebar('sidebar--main-navigation');
   };
 
+  BigNoise.secondaryNavigationToggleClickHandler = function () {
+    $('#site--main--secondary-navigation-container').toggleClass('collapsed expanded');
+  };
+
   BigNoise.initializeSidebars = function (context) {
     $('.sidebar-close', context).each(function () {
       $(this).click(BigNoise.sidebarCloseClickHandler);
@@ -40,5 +44,11 @@
 
     // Sidebar Main Navigation Toggle
     $('#header--sidebar--main-navigation--toggle', context).click(BigNoise.sidebarMainNavigationToggleClickHandler);
+  };
+
+  BigNoise.initializeNavigation = function (context) {
+    $('#site--main--secondary-navigation-toggle', context).click(function () {
+      BigNoise.secondaryNavigationToggleClickHandler();
+    });
   };
 })(jQuery);

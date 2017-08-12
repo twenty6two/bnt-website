@@ -6,6 +6,7 @@ global-styling:
   js:
     js/BigNoise.js: {}
     js/sidebar.js: {}
+    js/navigation.js: {}
   dependencies:
     - core/jquery
     - core/drupal

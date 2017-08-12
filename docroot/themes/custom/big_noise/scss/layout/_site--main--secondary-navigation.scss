@@ -10,10 +10,7 @@
   left: 0;
   width: 100%;
   z-index: $bn-layer-secondary-navigation;
-}
 
-
-.navigation--secondary-navigation-main {
   padding-left: $bn-header-gutter-left-layout-mobile;
   padding-right: $bn-header-gutter-right-layout-mobile;
   @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
@@ -24,7 +21,40 @@
     padding-left: $bn-header-gutter-left-layout-desktop;
     padding-right: $bn-header-gutter-right-layout-desktop;
   }
+}
 
+
+.site--main--secondary-navigation-container {
+  .site--main--secondary-navigation-toggle {
+    display: none;
+  }
+  &.theme-collapsible-layout-mobile {
+    .site--main--secondary-navigation-toggle {
+      @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+        display: block;
+      }
+    }
+  }
+}
+
+
+.site--main--secondary-navigation-toggle {
+  position: relative;
+  left: 100%;
+  transform: translate3d(-100%, 0, 0);
+  height: 3rem;
+
+  &::before {
+    margin-right: 0.25rem;
+  }
+
+  .icon {
+    margin-right: -0.1rem; // Visual accommodation for icon
+  }
+}
+
+
+.navigation--secondary-navigation-main {
   > ul {
     @include FlexFloat();
     justify-content: center;
@@ -48,6 +78,55 @@
         }
         @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
           height: $bn-site-main-secondary-navigation-height-layout-desktop
+        }
+      }
+    }
+  }
+
+  .theme-collapsible-layout-mobile & {
+    > ul {
+      @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      > li {
+        @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+          margin-left: 0;
+          margin-right: 0;
+          margin-top: 0.75rem;
+          margin-bottom: 0.75rem;
+
+          &:last-of-type {
+            margin-bottom: 1.5rem;
+          }
+        }
+
+        > a {
+          @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+            flex-direction: row;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+.site--main--secondary-navigation-container {
+  &.theme-collapsible-layout-mobile {
+    &.collapsed {
+      .navigation--secondary-navigation-main {
+        @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+          display: none;
+        }
+      }
+    }
+
+    &.expanded {
+      .navigation--secondary-navigation-main {
+        @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+          display: block;
         }
       }
     }

@@ -44,3 +44,12 @@
     font-weight: 300;
   }
 }
+
+
+.page-type--show {
+  .site--main--secondary-navigation-toggle {
+    &::before {
+      content: 'Other Shows';
+    }
+  }
+}

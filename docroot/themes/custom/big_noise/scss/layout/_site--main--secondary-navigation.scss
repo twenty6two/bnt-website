@@ -10,6 +10,7 @@
   left: 0;
   width: 100%;
   z-index: $bn-layer-secondary-navigation;
+  overflow: hidden; // Needed for IE/Edge and positioning of toggle button
 
   padding-left: $bn-header-gutter-left-layout-mobile;
   padding-right: $bn-header-gutter-right-layout-mobile;

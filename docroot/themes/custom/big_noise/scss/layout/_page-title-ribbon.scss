@@ -1,9 +1,9 @@
 .page-title-ribbon {
   height: $bn-page-title-ribbon-height-layout-mobile;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     height: $bn-page-title-ribbon-height-layout-tablet;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     height: $bn-page-title-ribbon-height-layout-desktop;
   }
 
@@ -19,11 +19,11 @@
   padding-bottom: 0.7rem;
   padding-left: $bn-site-gutter-width-layout-mobile;
   padding-right: $bn-site-gutter-width-layout-mobile;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     padding-left: $bn-site-gutter-width-layout-tablet;
     padding-right: $bn-site-gutter-width-layout-tablet;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     padding-left: $bn-site-gutter-width-layout-desktop;
     padding-right: $bn-site-gutter-width-layout-desktop;
   }

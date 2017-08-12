@@ -8,10 +8,10 @@
   .show--performance-date-range {
     font-family: $bn-font-family-highlight;
     font-size: 1.6rem;
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       font-size: 2rem;
     }
-    @media (min-width: $bn-breakpoint-layout-desktop) {
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
       font-size: 2.4rem;
     }
     font-weight: 500;

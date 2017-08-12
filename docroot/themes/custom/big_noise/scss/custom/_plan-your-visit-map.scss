@@ -1,6 +1,6 @@
 .plan-your-visit-map-container {
   height: 22.6rem;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     height: 28.8rem;
   }
   position: relative;

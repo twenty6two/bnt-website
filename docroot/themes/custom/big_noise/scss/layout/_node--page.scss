@@ -8,14 +8,14 @@
     }
 
     &.has-primary-column.has-secondary-column {
-      @media (min-width: $bn-breakpoint-layout-desktop) {
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
         flex-wrap: nowrap;
       }
 
       .primary {
         flex-basis: 100%;
         order: 2;
-        @media (min-width: $bn-breakpoint-layout-desktop) {
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
           flex-basis: 63.5%;
           order: 1;
         }
@@ -26,11 +26,11 @@
         order: 1;
         margin-bottom: 2rem;
         padding-bottom: 2rem;
-        @media (min-width: $bn-breakpoint-layout-tablet) {
+        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
           margin-bottom: 3rem;
           padding-bottom: 3rem;
         }
-        @media (min-width: $bn-breakpoint-layout-desktop) {
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
           flex-basis: 36.5%;
           order: 2;
           margin-bottom: 0;

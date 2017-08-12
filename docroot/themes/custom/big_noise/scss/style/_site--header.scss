@@ -65,7 +65,7 @@
     .label {
       color: $bn-color-header-text;
       font-size: 1.4rem;
-      @media (min-width: $bn-breakpoint-layout-desktop) {
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
         font-size: 1.5rem;
       }
     }
@@ -77,11 +77,11 @@
   .locate-link {
     @include IconButton();
 
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       width: $bn-header-icon-button-diameter-layout-tablet;
       height: $bn-header-icon-button-diameter-layout-tablet;
     }
-    @media (min-width: $bn-breakpoint-layout-desktop) {
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
       width: $bn-header-icon-button-diameter-layout-desktop;
       height: $bn-header-icon-button-diameter-layout-desktop;
     }
@@ -93,12 +93,12 @@
   .buy-tickets-link {
     @include IconButton();
 
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       width: $bn-header-icon-button-diameter-layout-tablet;
       height: $bn-header-icon-button-diameter-layout-tablet;
     }
 
-    @media (min-width: $bn-breakpoint-layout-desktop) {
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
       display: flex;
       align-items: center;
       width: auto;
@@ -147,7 +147,7 @@
         display: block;
         font-family: $bn-font-family-highlight;
         font-size: 1.6rem;
-        @media (min-width: $bn-breakpoint-layout-desktop) {
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
           font-size: 2rem;
         }
         font-weight: 500;
@@ -179,11 +179,11 @@
   .social-media-link {
     @include IconButton();
 
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       width: $bn-header-icon-button-diameter-layout-tablet;
       height: $bn-header-icon-button-diameter-layout-tablet;
     }
-    @media (min-width: $bn-breakpoint-layout-desktop) {
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
       width: $bn-header-icon-button-diameter-layout-desktop;
       height: $bn-header-icon-button-diameter-layout-desktop;
     }

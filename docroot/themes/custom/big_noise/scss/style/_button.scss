@@ -18,7 +18,7 @@
     z-index: -1;
     mix-blend-mode: multiply;
     box-shadow: 0 0.4rem 1rem 0 $bn-color-button-shadow;
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       box-shadow: 0 0.5rem 1.3rem 0 $bn-color-button-shadow;
     }
   }
@@ -28,12 +28,12 @@
     top: 50%;
     transform: translate3d(0, -50%, 0);
     left: 0.7rem;
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       left: 1rem;
     }
     width: 3.6rem;
     height: 3.2rem;
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       width: 4rem;
       height: 3.6rem;
     }
@@ -49,7 +49,7 @@
     display: block;
     font-family: $bn-font-family-highlight;
     font-size: 1.6rem;
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       font-size: 2rem;
     }
     font-weight: 500;
@@ -58,7 +58,7 @@
     padding-bottom: 1rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       padding-top: 1.3rem;
       padding-bottom: 1.3rem;
       padding-left: 0.8rem;
@@ -70,7 +70,7 @@
   &.with-icon {
     .label {
       padding-left: 4.9rem;
-      @media (min-width: $bn-breakpoint-layout-tablet) {
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
         padding-left: 5.8rem;
       }
     }

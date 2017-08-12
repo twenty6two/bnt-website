@@ -5,13 +5,13 @@
   padding-bottom: 2rem;
   padding-left: $bn-site-gutter-width-layout-mobile;
   padding-right: $bn-site-gutter-width-layout-mobile;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     padding-top: 4rem;
     padding-bottom: 4rem;
     padding-left: $bn-site-gutter-width-layout-tablet;
     padding-right: $bn-site-gutter-width-layout-tablet;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     padding-left: $bn-site-gutter-width-layout-desktop;
     padding-right: $bn-site-gutter-width-layout-desktop;
   }

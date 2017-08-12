@@ -5,11 +5,11 @@
 
   margin-left: (0 - ($bn-column-gutter-width-layout-mobile / 2));
   margin-right: (0 - ($bn-column-gutter-width-layout-mobile / 2));
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     margin-left: (0 - ($bn-column-gutter-width-layout-tablet / 2));
     margin-right: (0 - ($bn-column-gutter-width-layout-tablet / 2));
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     margin-left: (0 - ($bn-column-gutter-width-layout-desktop / 2));
     margin-right: (0 - ($bn-column-gutter-width-layout-desktop / 2));
   }
@@ -17,11 +17,11 @@
   .column {
     padding-left: ($bn-column-gutter-width-layout-mobile / 2);
     padding-right: ($bn-column-gutter-width-layout-mobile / 2);
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       padding-left: ($bn-column-gutter-width-layout-tablet / 2);
       padding-right: ($bn-column-gutter-width-layout-tablet / 2);
     }
-    @media (min-width: $bn-breakpoint-layout-desktop) {
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
       padding-left: ($bn-column-gutter-width-layout-desktop / 2);
       padding-right: ($bn-column-gutter-width-layout-desktop / 2);
     }

@@ -6,7 +6,7 @@
         border-bottom-style: solid;
         border-bottom-width: 0.2rem;
 
-        @media (min-width: $bn-breakpoint-layout-desktop) {
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
           border-bottom: none;
         }
       }

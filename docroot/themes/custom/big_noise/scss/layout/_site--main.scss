@@ -4,11 +4,11 @@
 
   padding-top: $bn-header-height-layout-mobile;
   padding-bottom: $bn-footer-height-layout-mobile;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     padding-top: $bn-header-height-layout-tablet;
     padding-bottom: $bn-footer-height-layout-tablet;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     padding-top: $bn-header-height-layout-desktop;
     padding-bottom: $bn-footer-height-layout-desktop;
   }

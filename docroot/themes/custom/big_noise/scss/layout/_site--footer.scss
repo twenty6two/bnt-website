@@ -4,10 +4,10 @@
   left: 0;
   width: 100%;
   height: $bn-footer-height-layout-mobile;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     height: $bn-footer-height-layout-tablet;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     height: $bn-footer-height-layout-desktop;
   }
 }
@@ -18,7 +18,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     justify-content: flex-end;
   }
 
@@ -26,13 +26,13 @@
   padding-bottom: $bn-footer-gutter-bottom-layout-mobile;
   padding-left: $bn-footer-gutter-left-layout-mobile;
   padding-right: $bn-footer-gutter-right-layout-mobile;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     padding-top: $bn-footer-gutter-top-layout-tablet;
     padding-bottom: $bn-footer-gutter-bottom-layout-tablet;
     padding-left: $bn-footer-gutter-left-layout-tablet;
     padding-right: $bn-footer-gutter-right-layout-tablet;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     padding-top: $bn-footer-gutter-top-layout-desktop;
     padding-bottom: $bn-footer-gutter-bottom-layout-desktop;
     padding-left: $bn-footer-gutter-left-layout-desktop;
@@ -45,11 +45,11 @@
   order: 1;
 
   display: none;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     display: block;
   }
 
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     position: absolute;
     top: $bn-footer-gutter-top-layout-desktop;
     left: $bn-footer-gutter-left-layout-desktop;
@@ -59,7 +59,7 @@
 
 .site--footer--social-media-navigation-container {
   order: 5;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     order: 2;
   }
 
@@ -69,12 +69,12 @@
 
 .site--footer--contact {
   order: 2;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     order: 3;
   }
 
   margin-bottom: 1.7rem;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     margin-bottom: 0;
   }
 
@@ -86,7 +86,7 @@
 
 .site--footer--closure {
   order: 3;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     order: 4;
   }
 
@@ -96,15 +96,15 @@
 
 .site--footer--copyright {
   order: 4;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     order: 5;
   }
 
   margin-bottom: 1.7rem;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     margin-bottom: 4rem;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     margin-bottom: 0;
   }
 }
@@ -112,11 +112,11 @@
 
 .site--footer--mailing-list-subscription-form-container {
   order: 6;
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     order: 0;
   }
 
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     position: absolute;
     bottom: $bn-footer-gutter-bottom-layout-desktop;
     right: $bn-footer-gutter-right-layout-desktop;
@@ -170,7 +170,7 @@
   .social-media-link {
     width: 3.4rem;
     height: 3.4rem;
-    @media (min-width: $bn-breakpoint-layout-tablet) {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       width: 3.6rem;
       height: 3.6rem;
     }

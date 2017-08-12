@@ -1,10 +1,10 @@
 .site--main--secondary-navigation-container {
   position: absolute;
   top: $bn-header-height-layout-mobile;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     top: $bn-header-height-layout-tablet;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     top: $bn-header-height-layout-desktop;
   }
   left: 0;
@@ -16,11 +16,11 @@
 .navigation--secondary-navigation-main {
   padding-left: $bn-header-gutter-left-layout-mobile;
   padding-right: $bn-header-gutter-right-layout-mobile;
-  @media (min-width: $bn-breakpoint-layout-tablet) {
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     padding-left: $bn-header-gutter-left-layout-tablet;
     padding-right: $bn-header-gutter-right-layout-tablet;
   }
-  @media (min-width: $bn-breakpoint-layout-desktop) {
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     padding-left: $bn-header-gutter-left-layout-desktop;
     padding-right: $bn-header-gutter-right-layout-desktop;
   }
@@ -32,7 +32,7 @@
     > li {
       margin-left: 1.2rem;
       margin-right: 1.2rem;
-      @media (min-width: $bn-breakpoint-layout-tablet) {
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
         margin-left: 2.4rem;
         margin-right: 2.4rem;
       }
@@ -43,10 +43,10 @@
         align-items: center;
         justify-content: center;
         height: $bn-site-main-secondary-navigation-height-layout-mobile;
-        @media (min-width: $bn-breakpoint-layout-tablet) {
+        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
           height: $bn-site-main-secondary-navigation-height-layout-tablet;
         }
-        @media (min-width: $bn-breakpoint-layout-desktop) {
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
           height: $bn-site-main-secondary-navigation-height-layout-desktop
         }
       }

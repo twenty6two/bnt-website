@@ -4,13 +4,14 @@
 {%
   set hasColumnSecondary = content.field_content_blocks_secondary|render|trim
 %}
-
 {% if content.field_title|render|trim %}
-<div id="page-title-ribbon" class="page-title-ribbon">
+<div id="page-title-ribbon" class="page-title-ribbon"{% if page_title_ribbon_image_url is not empty %} style="background-image: url('{{ page_title_ribbon_image_url }}');"{% endif %}>
   <div id="page-title-ribbon--content" class="page-title-ribbon--content site-width-constraint">
     {{ content.field_title }}
     {{ content.field_subheading }}
-    <div id="page-title-ribbon--image-caption" class="page-title-ribbon--image-caption">The Drowsy Chaperone, 2011</div>
+    {% if page_title_ribbon_image_caption is not empty %}
+    <div id="page-title-ribbon--image-caption" class="page-title-ribbon--image-caption">{{ page_title_ribbon_image_caption }}</div>
+    {% endif %}
   </div>
 </div>
 {% endif %}

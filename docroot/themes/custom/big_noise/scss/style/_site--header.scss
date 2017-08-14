@@ -162,10 +162,6 @@
           text-decoration: none;
         }
 
-        &:focus {
-          outline: none;
-        }
-
         &.active {
           border-bottom-color: $bn-color-header-main-navigation-active-border-bottom;
         }

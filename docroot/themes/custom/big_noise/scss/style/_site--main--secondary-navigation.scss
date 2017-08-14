@@ -43,7 +43,12 @@
         text-transform: uppercase;
 
         &:hover {
+          color: $bn-color-main-secondary-navigation-text;
           text-decoration: none;
+        }
+
+        &:focus {
+          color: $bn-color-main-secondary-navigation-text;
         }
 
         &.active {

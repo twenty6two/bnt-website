@@ -132,7 +132,7 @@ p {
   src: local("Oswald Bold"), local("Oswald-Bold"), url("../fonts/Oswald/Oswald700Normal.woff2") format("woff2"), url("../fonts/Oswald/Oswald700Normal.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
-/* line 59, ../scss/mixins/_icon-button.scss */
+/* line 55, ../scss/mixins/_icon-button.scss */
 .icon-button {
   background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
@@ -145,10 +145,6 @@ p {
   transform: scale(1.1);
 }
 /* line 14, ../scss/mixins/_icon-button.scss */
-.icon-button:focus {
-  outline: none;
-}
-/* line 18, ../scss/mixins/_icon-button.scss */
 .icon-button::before {
   content: '';
   position: absolute;
@@ -160,7 +156,7 @@ p {
   border-radius: 100%;
   box-shadow: 0 0.2rem 0.8rem 0 rgba(112, 96, 128, 0.35);
 }
-/* line 30, ../scss/mixins/_icon-button.scss */
+/* line 26, ../scss/mixins/_icon-button.scss */
 .icon-button .icon {
   position: absolute;
   top: 3.25%;
@@ -170,7 +166,7 @@ p {
   background-color: inherit;
   border-radius: 100%;
 }
-/* line 39, ../scss/mixins/_icon-button.scss */
+/* line 35, ../scss/mixins/_icon-button.scss */
 .icon-button .icon > * {
   position: absolute;
   top: 50%;
@@ -179,11 +175,11 @@ p {
   width: 64%;
   height: 64%;
 }
-/* line 47, ../scss/mixins/_icon-button.scss */
+/* line 43, ../scss/mixins/_icon-button.scss */
 .icon-button .icon > * g {
   fill: #e1e4e7;
 }
-/* line 53, ../scss/mixins/_icon-button.scss */
+/* line 49, ../scss/mixins/_icon-button.scss */
 .icon-button .label {
   display: none;
 }
@@ -1489,7 +1485,12 @@ em {
   font-weight: 600;
 }
 
-/* line 17, ../scss/style/_elements.scss */
+/* line 18, ../scss/style/_elements.scss */
+*:focus {
+  outline: none;
+}
+
+/* line 24, ../scss/style/_elements.scss */
 button,
 input[type="button"],
 input[type="submit"] {
@@ -1510,14 +1511,8 @@ input[type="submit"] {
   }
   */
 }
-/* line 44, ../scss/style/_elements.scss */
-button:focus,
-input[type="button"]:focus,
-input[type="submit"]:focus {
-  outline: 0;
-}
 
-/* line 50, ../scss/style/_elements.scss */
+/* line 53, ../scss/style/_elements.scss */
 input[type="text"],
 input[type="email"] {
   -webkit-appearance: none;
@@ -1529,13 +1524,8 @@ input[type="email"] {
   margin: 0;
   padding: 0;
 }
-/* line 61, ../scss/style/_elements.scss */
-input[type="text"]:focus,
-input[type="email"]:focus {
-  outline: 0;
-}
 
-/* line 67, ../scss/style/_elements.scss */
+/* line 66, ../scss/style/_elements.scss */
 iframe {
   border: none;
 }
@@ -1557,13 +1547,18 @@ body {
 button.sidebar-close {
   background-color: #e1e4e7;
   border-radius: 100%;
+  transition: transform 0.2s;
 }
-/* line 13, ../scss/style/_sidebar.scss */
+/* line 14, ../scss/style/_sidebar.scss */
+button.sidebar-close:hover {
+  transform: scale(1.1);
+}
+/* line 18, ../scss/style/_sidebar.scss */
 button.sidebar-close .label {
   display: block;
   font-size: 0;
 }
-/* line 19, ../scss/style/_sidebar.scss */
+/* line 24, ../scss/style/_sidebar.scss */
 button.sidebar-close .icon .close {
   fill: rgba(62, 70, 79, 0.95);
 }
@@ -1608,12 +1603,6 @@ button.sidebar-close .icon .close {
   transform: scale(1.1);
 }
 /* line 14, ../scss/mixins/_icon-button.scss */
-.sidebar--navigation--phone-link-container .phone-link:focus,
-.sidebar--navigation--locate-link-container .locate-link:focus,
-.sidebar--navigation--buy-tickets-link-container .buy-tickets-link:focus {
-  outline: none;
-}
-/* line 18, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link::before,
 .sidebar--navigation--locate-link-container .locate-link::before,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link::before {
@@ -1627,7 +1616,7 @@ button.sidebar-close .icon .close {
   border-radius: 100%;
   box-shadow: 0 0.2rem 0.8rem 0 rgba(112, 96, 128, 0.35);
 }
-/* line 30, ../scss/mixins/_icon-button.scss */
+/* line 26, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link .icon,
 .sidebar--navigation--locate-link-container .locate-link .icon,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .icon {
@@ -1639,7 +1628,7 @@ button.sidebar-close .icon .close {
   background-color: inherit;
   border-radius: 100%;
 }
-/* line 39, ../scss/mixins/_icon-button.scss */
+/* line 35, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link .icon > *,
 .sidebar--navigation--locate-link-container .locate-link .icon > *,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .icon > * {
@@ -1650,13 +1639,13 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 47, ../scss/mixins/_icon-button.scss */
+/* line 43, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link .icon > * g,
 .sidebar--navigation--locate-link-container .locate-link .icon > * g,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .icon > * g {
   fill: #e1e4e7;
 }
-/* line 53, ../scss/mixins/_icon-button.scss */
+/* line 49, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link .label,
 .sidebar--navigation--locate-link-container .locate-link .label,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .label {
@@ -1688,13 +1677,14 @@ button.sidebar-close .icon .close {
   font-weight: 500;
   text-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.15);
   text-transform: uppercase;
+  transition: color 0.2s;
 }
-/* line 59, ../scss/style/_sidebar--main-navigation.scss */
+/* line 60, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--main-navigation-sidebar > ul > li > a:hover {
   text-decoration: none;
 }
 
-/* line 69, ../scss/style/_sidebar--main-navigation.scss */
+/* line 70, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--social-media-navigation-sidebar .social-media-link {
   background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
@@ -1708,10 +1698,6 @@ button.sidebar-close .icon .close {
   transform: scale(1.1);
 }
 /* line 14, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-sidebar .social-media-link:focus {
-  outline: none;
-}
-/* line 18, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link::before {
   content: '';
   position: absolute;
@@ -1723,7 +1709,7 @@ button.sidebar-close .icon .close {
   border-radius: 100%;
   box-shadow: 0 0.2rem 0.8rem 0 rgba(112, 96, 128, 0.35);
 }
-/* line 30, ../scss/mixins/_icon-button.scss */
+/* line 26, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .icon {
   position: absolute;
   top: 3.25%;
@@ -1733,7 +1719,7 @@ button.sidebar-close .icon .close {
   background-color: inherit;
   border-radius: 100%;
 }
-/* line 39, ../scss/mixins/_icon-button.scss */
+/* line 35, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .icon > * {
   position: absolute;
   top: 50%;
@@ -1742,15 +1728,15 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 47, ../scss/mixins/_icon-button.scss */
+/* line 43, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .icon > * g {
   fill: #e1e4e7;
 }
-/* line 53, ../scss/mixins/_icon-button.scss */
+/* line 49, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .label {
   display: none;
 }
-/* line 75, ../scss/style/_sidebar--main-navigation.scss */
+/* line 76, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .icon g {
   fill: #3e464f;
 }
@@ -1839,10 +1825,6 @@ button.sidebar-close .icon .close {
   transform: scale(1.1);
 }
 /* line 14, ../scss/mixins/_icon-button.scss */
-.site--header--locate-link-container .locate-link:focus {
-  outline: none;
-}
-/* line 18, ../scss/mixins/_icon-button.scss */
 .site--header--locate-link-container .locate-link::before {
   content: '';
   position: absolute;
@@ -1854,7 +1836,7 @@ button.sidebar-close .icon .close {
   border-radius: 100%;
   box-shadow: 0 0.2rem 0.8rem 0 rgba(112, 96, 128, 0.35);
 }
-/* line 30, ../scss/mixins/_icon-button.scss */
+/* line 26, ../scss/mixins/_icon-button.scss */
 .site--header--locate-link-container .locate-link .icon {
   position: absolute;
   top: 3.25%;
@@ -1864,7 +1846,7 @@ button.sidebar-close .icon .close {
   background-color: inherit;
   border-radius: 100%;
 }
-/* line 39, ../scss/mixins/_icon-button.scss */
+/* line 35, ../scss/mixins/_icon-button.scss */
 .site--header--locate-link-container .locate-link .icon > * {
   position: absolute;
   top: 50%;
@@ -1873,11 +1855,11 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 47, ../scss/mixins/_icon-button.scss */
+/* line 43, ../scss/mixins/_icon-button.scss */
 .site--header--locate-link-container .locate-link .icon > * g {
   fill: #e1e4e7;
 }
-/* line 53, ../scss/mixins/_icon-button.scss */
+/* line 49, ../scss/mixins/_icon-button.scss */
 .site--header--locate-link-container .locate-link .label {
   display: none;
 }
@@ -1909,10 +1891,6 @@ button.sidebar-close .icon .close {
   transform: scale(1.1);
 }
 /* line 14, ../scss/mixins/_icon-button.scss */
-.site--header--buy-tickets-link-container .buy-tickets-link:focus {
-  outline: none;
-}
-/* line 18, ../scss/mixins/_icon-button.scss */
 .site--header--buy-tickets-link-container .buy-tickets-link::before {
   content: '';
   position: absolute;
@@ -1924,7 +1902,7 @@ button.sidebar-close .icon .close {
   border-radius: 100%;
   box-shadow: 0 0.2rem 0.8rem 0 rgba(112, 96, 128, 0.35);
 }
-/* line 30, ../scss/mixins/_icon-button.scss */
+/* line 26, ../scss/mixins/_icon-button.scss */
 .site--header--buy-tickets-link-container .buy-tickets-link .icon {
   position: absolute;
   top: 3.25%;
@@ -1934,7 +1912,7 @@ button.sidebar-close .icon .close {
   background-color: inherit;
   border-radius: 100%;
 }
-/* line 39, ../scss/mixins/_icon-button.scss */
+/* line 35, ../scss/mixins/_icon-button.scss */
 .site--header--buy-tickets-link-container .buy-tickets-link .icon > * {
   position: absolute;
   top: 50%;
@@ -1943,11 +1921,11 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 47, ../scss/mixins/_icon-button.scss */
+/* line 43, ../scss/mixins/_icon-button.scss */
 .site--header--buy-tickets-link-container .buy-tickets-link .icon > * g {
   fill: #e1e4e7;
 }
-/* line 53, ../scss/mixins/_icon-button.scss */
+/* line 49, ../scss/mixins/_icon-button.scss */
 .site--header--buy-tickets-link-container .buy-tickets-link .label {
   display: none;
 }
@@ -2023,15 +2001,11 @@ button.sidebar-close .icon .close {
   text-decoration: none;
 }
 /* line 165, ../scss/style/_site--header.scss */
-.navigation--main-navigation-header > ul > li > a:focus {
-  outline: none;
-}
-/* line 169, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a.active {
   border-bottom-color: #3e464f;
 }
 
-/* line 179, ../scss/style/_site--header.scss */
+/* line 175, ../scss/style/_site--header.scss */
 .navigation--social-media-navigation-header .social-media-link {
   background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
@@ -2044,10 +2018,6 @@ button.sidebar-close .icon .close {
   transform: scale(1.1);
 }
 /* line 14, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-header .social-media-link:focus {
-  outline: none;
-}
-/* line 18, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-header .social-media-link::before {
   content: '';
   position: absolute;
@@ -2059,7 +2029,7 @@ button.sidebar-close .icon .close {
   border-radius: 100%;
   box-shadow: 0 0.2rem 0.8rem 0 rgba(112, 96, 128, 0.35);
 }
-/* line 30, ../scss/mixins/_icon-button.scss */
+/* line 26, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-header .social-media-link .icon {
   position: absolute;
   top: 3.25%;
@@ -2069,7 +2039,7 @@ button.sidebar-close .icon .close {
   background-color: inherit;
   border-radius: 100%;
 }
-/* line 39, ../scss/mixins/_icon-button.scss */
+/* line 35, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-header .social-media-link .icon > * {
   position: absolute;
   top: 50%;
@@ -2078,23 +2048,23 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 47, ../scss/mixins/_icon-button.scss */
+/* line 43, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-header .social-media-link .icon > * g {
   fill: #e1e4e7;
 }
-/* line 53, ../scss/mixins/_icon-button.scss */
+/* line 49, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-header .social-media-link .label {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 179, ../scss/style/_site--header.scss */
+  /* line 175, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 179, ../scss/style/_site--header.scss */
+  /* line 175, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 2.8rem;
     height: 2.8rem;
@@ -2149,26 +2119,31 @@ button.sidebar-close .icon .close {
 }
 /* line 45, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a:hover {
+  color: #f0f2f4;
   text-decoration: none;
 }
-/* line 49, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 50, ../scss/style/_site--main--secondary-navigation.scss */
+.navigation--secondary-navigation-main > ul > li > a:focus {
+  color: #f0f2f4;
+}
+/* line 54, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a.active {
   border-bottom-color: #f0f2f4;
 }
-/* line 53, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 58, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a > sub {
   font-family: "Lato";
   font-size: 1.3rem;
   text-transform: none;
 }
 @media (min-width: 1024px) {
-  /* line 53, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 58, ../scss/style/_site--main--secondary-navigation.scss */
   .navigation--secondary-navigation-main > ul > li > a > sub {
     font-size: 1.6rem;
   }
 }
 @media (max-width: 767px) {
-  /* line 68, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 73, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a {
     border-bottom: none;
     font-family: "Lato";
@@ -2179,11 +2154,11 @@ button.sidebar-close .icon .close {
     padding-right: 0;
     text-align: right;
   }
-  /* line 79, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 84, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a:hover {
     text-decoration: underline;
   }
-  /* line 83, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 88, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a > sub {
     display: none;
   }
@@ -2248,12 +2223,8 @@ button.sidebar-close .icon .close {
 .navigation--main-navigation-footer a:hover {
   text-decoration: none;
 }
-/* line 51, ../scss/style/_site--footer.scss */
-.navigation--main-navigation-footer a:focus {
-  outline: none;
-}
 
-/* line 59, ../scss/style/_site--footer.scss */
+/* line 55, ../scss/style/_site--footer.scss */
 .navigation--social-media-navigation-footer .social-media-link {
   background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
@@ -2266,10 +2237,6 @@ button.sidebar-close .icon .close {
   transform: scale(1.1);
 }
 /* line 14, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-footer .social-media-link:focus {
-  outline: none;
-}
-/* line 18, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-footer .social-media-link::before {
   content: '';
   position: absolute;
@@ -2281,7 +2248,7 @@ button.sidebar-close .icon .close {
   border-radius: 100%;
   box-shadow: 0 0.2rem 0.8rem 0 rgba(112, 96, 128, 0.35);
 }
-/* line 30, ../scss/mixins/_icon-button.scss */
+/* line 26, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-footer .social-media-link .icon {
   position: absolute;
   top: 3.25%;
@@ -2291,7 +2258,7 @@ button.sidebar-close .icon .close {
   background-color: inherit;
   border-radius: 100%;
 }
-/* line 39, ../scss/mixins/_icon-button.scss */
+/* line 35, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-footer .social-media-link .icon > * {
   position: absolute;
   top: 50%;
@@ -2300,38 +2267,38 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 47, ../scss/mixins/_icon-button.scss */
+/* line 43, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-footer .social-media-link .icon > * g {
   fill: #e1e4e7;
 }
-/* line 53, ../scss/mixins/_icon-button.scss */
+/* line 49, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-footer .social-media-link .label {
   display: none;
 }
 
-/* line 65, ../scss/style/_site--footer.scss */
+/* line 61, ../scss/style/_site--footer.scss */
 .site--footer--contact {
   color: #e1e4e7;
 }
-/* line 68, ../scss/style/_site--footer.scss */
+/* line 64, ../scss/style/_site--footer.scss */
 .site--footer--contact .site--footer--contact--name {
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 74, ../scss/style/_site--footer.scss */
+/* line 70, ../scss/style/_site--footer.scss */
 .site--footer--contact #site--footer--contact--phone,
 .site--footer--contact #site--footer--contact--address {
   font-size: 1.2rem;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  /* line 81, ../scss/style/_site--footer.scss */
+  /* line 77, ../scss/style/_site--footer.scss */
   .site--footer--contact .site--footer--contact--address {
     display: flex;
     flex-direction: row;
   }
-  /* line 87, ../scss/style/_site--footer.scss */
+  /* line 83, ../scss/style/_site--footer.scss */
   .site--footer--contact .site--footer--contact--address > div:not(:last-of-type)::after {
     content: '/';
     margin-left: 0.5rem;
@@ -2339,59 +2306,59 @@ button.sidebar-close .icon .close {
   }
 }
 
-/* line 99, ../scss/style/_site--footer.scss */
+/* line 95, ../scss/style/_site--footer.scss */
 .site--footer--closure {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 
-/* line 106, ../scss/style/_site--footer.scss */
+/* line 102, ../scss/style/_site--footer.scss */
 .site--footer--copyright {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  /* line 106, ../scss/style/_site--footer.scss */
+  /* line 102, ../scss/style/_site--footer.scss */
   .site--footer--copyright {
     display: flex;
     flex-direction: row;
   }
 }
 @media (min-width: 768px) {
-  /* line 119, ../scss/style/_site--footer.scss */
+  /* line 115, ../scss/style/_site--footer.scss */
   .site--footer--copyright > div:not(:last-of-type)::after {
     content: '\00a0';
   }
 }
 
-/* line 129, ../scss/style/_site--footer.scss */
+/* line 125, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container .heading {
   color: #e1e4e7;
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 136, ../scss/style/_site--footer.scss */
+/* line 132, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form {
   height: 3.4rem;
   position: relative;
 }
-/* line 140, ../scss/style/_site--footer.scss */
+/* line 136, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .mailchimp-newsletter-mergefields {
   height: 100%;
   padding-right: 10rem;
 }
-/* line 145, ../scss/style/_site--footer.scss */
+/* line 141, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .form-item-mergevars-email {
   height: 100%;
 }
-/* line 149, ../scss/style/_site--footer.scss */
+/* line 145, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form label[for="edit-mergevars-email"] {
   display: none;
 }
-/* line 153, ../scss/style/_site--footer.scss */
+/* line 149, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form #edit-mergevars-email {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -2400,7 +2367,7 @@ button.sidebar-close .icon .close {
   padding-left: 1rem;
   font-size: 1.3rem;
 }
-/* line 162, ../scss/style/_site--footer.scss */
+/* line 158, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .form-submit {
   color: #e1e4e7;
   font-family: "Oswald";
@@ -2421,14 +2388,22 @@ button.sidebar-close .icon .close {
 
 /* line 1, ../scss/style/_page-title-ribbon.scss */
 .page-title-ribbon {
-  background-image: url("/sites/default/files/images/BNT_HeaderSplash_Drowsy.png"), linear-gradient(to right, #e3673d 0%, #ff9a52 50%, #e3673d 100%), linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 5%, rgba(255, 255, 255, 0) 33.3334%), linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+  /*
+  background-image: url('/sites/default/files/images/BNT_HeaderSplash_Drowsy.png'),
+    linear-gradient(to right, #e3673d 0%, #ff9a52 50%, #e3673d 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 5%, rgba(255, 255, 255, 0) 33.3334%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
   background-blend-mode: multiply;
   background-position: center, center, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
   background-size: cover, cover, cover, cover;
+  */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-/* line 13, ../scss/style/_page-title-ribbon.scss */
+/* line 19, ../scss/style/_page-title-ribbon.scss */
 .page-title-ribbon--content {
   display: flex;
   flex-wrap: wrap;
@@ -2436,7 +2411,7 @@ button.sidebar-close .icon .close {
   justify-content: space-between;
 }
 
-/* line 22, ../scss/style/_page-title-ribbon.scss */
+/* line 28, ../scss/style/_page-title-ribbon.scss */
 .page-title-ribbon .page--title {
   background-image: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
   background-position: center bottom;
@@ -2453,24 +2428,24 @@ button.sidebar-close .icon .close {
   text-shadow: 0 0.4rem 1rem rgba(77, 19, 0, 0.75);
 }
 @media (min-width: 768px) {
-  /* line 22, ../scss/style/_page-title-ribbon.scss */
+  /* line 28, ../scss/style/_page-title-ribbon.scss */
   .page-title-ribbon .page--title {
     font-size: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 22, ../scss/style/_page-title-ribbon.scss */
+  /* line 28, ../scss/style/_page-title-ribbon.scss */
   .page-title-ribbon .page--title {
     font-size: 4.8rem;
   }
 }
 @media (min-width: 768px) {
-  /* line 22, ../scss/style/_page-title-ribbon.scss */
+  /* line 28, ../scss/style/_page-title-ribbon.scss */
   .page-title-ribbon .page--title {
     text-shadow: 0 0.5rem 1.3rem rgba(77, 19, 0, 0.75);
   }
 }
-/* line 49, ../scss/style/_page-title-ribbon.scss */
+/* line 55, ../scss/style/_page-title-ribbon.scss */
 .page-title-ribbon .page--subheading {
   color: #fafcff;
   font-size: 1.3rem;
@@ -2482,23 +2457,23 @@ button.sidebar-close .icon .close {
   text-shadow: 0 0.2rem 0.5rem rgba(77, 19, 0, 0.75);
 }
 @media (min-width: 768px) {
-  /* line 49, ../scss/style/_page-title-ribbon.scss */
+  /* line 55, ../scss/style/_page-title-ribbon.scss */
   .page-title-ribbon .page--subheading {
     font-size: 1.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 49, ../scss/style/_page-title-ribbon.scss */
+  /* line 55, ../scss/style/_page-title-ribbon.scss */
   .page-title-ribbon .page--subheading {
     font-size: 2rem;
   }
 }
-/* line 66, ../scss/style/_page-title-ribbon.scss */
+/* line 72, ../scss/style/_page-title-ribbon.scss */
 .page-title-ribbon .page-title-ribbon--image-caption {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 66, ../scss/style/_page-title-ribbon.scss */
+  /* line 72, ../scss/style/_page-title-ribbon.scss */
   .page-title-ribbon .page-title-ribbon--image-caption {
     display: block;
     color: #fafcff;
@@ -2509,7 +2484,7 @@ button.sidebar-close .icon .close {
   }
 }
 @media (min-width: 1024px) {
-  /* line 66, ../scss/style/_page-title-ribbon.scss */
+  /* line 72, ../scss/style/_page-title-ribbon.scss */
   .page-title-ribbon .page-title-ribbon--image-caption {
     font-size: 1.3rem;
   }

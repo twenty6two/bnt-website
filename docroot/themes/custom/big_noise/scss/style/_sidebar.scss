@@ -9,6 +9,11 @@
 button.sidebar-close {
   background-color: $bn-color-sidebar-close-background;
   border-radius: 100%;
+  transition: transform $bn-transition-duration-default;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   .label {
     display: block;

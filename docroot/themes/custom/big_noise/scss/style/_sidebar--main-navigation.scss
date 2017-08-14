@@ -55,6 +55,7 @@
         font-weight: 500;
         text-shadow: 0 0.4rem 0.6rem rgba($bn-color-black, 0.15);
         text-transform: uppercase;
+        transition: color $bn-transition-duration-default;
 
         &:hover {
           text-decoration: none;

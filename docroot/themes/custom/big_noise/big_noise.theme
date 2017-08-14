@@ -2,6 +2,7 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
+use Drupal\media_entity\Entity\Media;
 
 
 function big_noise_preprocess_html(&$variables) {
@@ -65,10 +66,26 @@ function big_noise_preprocess_node(&$variables) {
   switch ($node_type) {
     case 'page':
 
+      // Prepare page title ribbon elements
+
+      $page_title_ribbon_image_field = $node->field_page_title_ribbon_image->getValue();
+      if (!empty($page_title_ribbon_image_field)) {
+        $page_title_ribbon_image_field = $page_title_ribbon_image_field[0];
+        $page_title_ribbon_image_entity = Media::load($page_title_ribbon_image_field['target_id']);
+        $page_title_ribbon_image_url = file_create_url($page_title_ribbon_image_entity->field_image->entity->getFileUri());
+        $variables['page_title_ribbon_image_url'] = $page_title_ribbon_image_url;
+
+        $page_title_ribbon_image_caption_field = $page_title_ribbon_image_entity->field_caption->getValue();
+        if (!empty($page_title_ribbon_image_caption_field)) {
+          $page_title_ribbon_image_caption_field = $page_title_ribbon_image_caption_field[0];
+          $variables['page_title_ribbon_image_caption'] = $page_title_ribbon_image_caption_field['value'];
+        }
+      }
+
       break;
     case 'show':
 
-      // Calculate the performance date rate for presentation
+      // Calculate the performance date range for presentation
 
       // @TODO Address error when no performance dates have been entered
       $show_performances = $node->field_performances;

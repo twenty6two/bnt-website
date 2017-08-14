@@ -2191,18 +2191,23 @@ button.sidebar-close .icon .close {
 
 /* line 1, ../scss/style/_site--footer.scss */
 .site--footer {
-  background-color: #3e464f;
-  background-image: radial-gradient(circle at center top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 110%);
+  /*
+  background-color: $bn-color-footer-background;
+  background-image: radial-gradient(circle at center top,
+    rgba($bn-color-black, 0) 0%,
+    rgba($bn-color-black, 0.6) 110%);
   background-blend-mode: soft-light;
+  */
+  background-image: radial-gradient(circle at center top, #3e464f 0%, #252b32 100%);
   box-shadow: inset 0 0.1rem 0 0 #a5adb8;
 }
-/* line 9, ../scss/style/_site--footer.scss */
+/* line 14, ../scss/style/_site--footer.scss */
 .site--footer.theme-dark {
-  background-color: #202429;
+  background-image: radial-gradient(circle at center top, #1f2428 0%, #111417 100%);
   box-shadow: inset 0 0.1rem 0 0 #3e464f;
 }
 
-/* line 19, ../scss/style/_site--footer.scss */
+/* line 27, ../scss/style/_site--footer.scss */
 .navigation--main-navigation-footer > ul > li > a {
   color: #e1e4e7;
   font-size: 1.6rem;
@@ -2210,26 +2215,26 @@ button.sidebar-close .icon .close {
   line-height: 1.1875;
   text-transform: uppercase;
 }
-/* line 30, ../scss/style/_site--footer.scss */
+/* line 38, ../scss/style/_site--footer.scss */
 .navigation--main-navigation-footer > ul > li > ul > li > a {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.25;
 }
-/* line 35, ../scss/style/_site--footer.scss */
+/* line 43, ../scss/style/_site--footer.scss */
 .navigation--main-navigation-footer > ul > li > ul > li > a > sub {
   display: none;
 }
-/* line 44, ../scss/style/_site--footer.scss */
+/* line 52, ../scss/style/_site--footer.scss */
 .navigation--main-navigation-footer a {
   transition: color 0.2s;
 }
-/* line 47, ../scss/style/_site--footer.scss */
+/* line 55, ../scss/style/_site--footer.scss */
 .navigation--main-navigation-footer a:hover {
   text-decoration: none;
 }
 
-/* line 55, ../scss/style/_site--footer.scss */
+/* line 63, ../scss/style/_site--footer.scss */
 .navigation--social-media-navigation-footer .social-media-link {
   background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
@@ -2281,29 +2286,29 @@ button.sidebar-close .icon .close {
   display: none;
 }
 
-/* line 61, ../scss/style/_site--footer.scss */
+/* line 69, ../scss/style/_site--footer.scss */
 .site--footer--contact {
   color: #e1e4e7;
 }
-/* line 64, ../scss/style/_site--footer.scss */
+/* line 72, ../scss/style/_site--footer.scss */
 .site--footer--contact .site--footer--contact--name {
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 70, ../scss/style/_site--footer.scss */
+/* line 78, ../scss/style/_site--footer.scss */
 .site--footer--contact #site--footer--contact--phone,
 .site--footer--contact #site--footer--contact--address {
   font-size: 1.2rem;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  /* line 77, ../scss/style/_site--footer.scss */
+  /* line 85, ../scss/style/_site--footer.scss */
   .site--footer--contact .site--footer--contact--address {
     display: flex;
     flex-direction: row;
   }
-  /* line 83, ../scss/style/_site--footer.scss */
+  /* line 91, ../scss/style/_site--footer.scss */
   .site--footer--contact .site--footer--contact--address > div:not(:last-of-type)::after {
     content: '/';
     margin-left: 0.5rem;
@@ -2311,59 +2316,59 @@ button.sidebar-close .icon .close {
   }
 }
 
-/* line 95, ../scss/style/_site--footer.scss */
+/* line 103, ../scss/style/_site--footer.scss */
 .site--footer--closure {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 
-/* line 102, ../scss/style/_site--footer.scss */
+/* line 110, ../scss/style/_site--footer.scss */
 .site--footer--copyright {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  /* line 102, ../scss/style/_site--footer.scss */
+  /* line 110, ../scss/style/_site--footer.scss */
   .site--footer--copyright {
     display: flex;
     flex-direction: row;
   }
 }
 @media (min-width: 768px) {
-  /* line 115, ../scss/style/_site--footer.scss */
+  /* line 123, ../scss/style/_site--footer.scss */
   .site--footer--copyright > div:not(:last-of-type)::after {
     content: '\00a0';
   }
 }
 
-/* line 125, ../scss/style/_site--footer.scss */
+/* line 133, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container .heading {
   color: #e1e4e7;
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 132, ../scss/style/_site--footer.scss */
+/* line 140, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form {
   height: 3.4rem;
   position: relative;
 }
-/* line 136, ../scss/style/_site--footer.scss */
+/* line 144, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .mailchimp-newsletter-mergefields {
   height: 100%;
   padding-right: 10rem;
 }
-/* line 141, ../scss/style/_site--footer.scss */
+/* line 149, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .form-item-mergevars-email {
   height: 100%;
 }
-/* line 145, ../scss/style/_site--footer.scss */
+/* line 153, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form label[for="edit-mergevars-email"] {
   display: none;
 }
-/* line 149, ../scss/style/_site--footer.scss */
+/* line 157, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form #edit-mergevars-email {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -2372,7 +2377,7 @@ button.sidebar-close .icon .close {
   padding-left: 1rem;
   font-size: 1.3rem;
 }
-/* line 158, ../scss/style/_site--footer.scss */
+/* line 166, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .form-submit {
   color: #e1e4e7;
   font-family: "Oswald";

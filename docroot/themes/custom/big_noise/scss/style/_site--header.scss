@@ -82,6 +82,10 @@
   .locate-link {
     @include IconButton();
 
+    &::before {
+      box-shadow: 0 0.2rem 0.8rem 0 $bn-color-header-shadow;
+    }
+
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       width: $bn-header-icon-button-diameter-layout-tablet;
       height: $bn-header-icon-button-diameter-layout-tablet;
@@ -96,9 +100,13 @@
 
 .site--header--buy-tickets-link-container {
   .buy-tickets-link {
-    @include IconButton();
-
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      @include IconButton();
+
+      &::before {
+        box-shadow: 0 0.2rem 0.8rem 0 $bn-color-header-shadow;
+      }
+
       width: $bn-header-icon-button-diameter-layout-tablet;
       height: $bn-header-icon-button-diameter-layout-tablet;
     }
@@ -106,31 +114,38 @@
     @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
       display: flex;
       align-items: center;
-      width: auto;
+      width: 14.6rem;
       height: 2.6rem;
-      padding-left: 3.425rem;
-      padding-right: 3.425rem;
       border-radius: 0.5rem;
       text-decoration: none;
 
-      &:hover,
-      &:focus {
-        transform: none;
+      &::before {
+        border-radius: 0.5rem;
+        width: 93.15%;
+        height: 92.3%;
+        top: 7.7%;
+        box-shadow: 0 0.2rem 1rem 0 $bn-color-header-shadow;
       }
 
       .icon {
-        position: relative;
-        display: block;
-        top: auto;
-        left: auto;
-        transform: none;
-        width: 1.7rem;
-        height: 1.8rem;
-        margin-right: 0.4rem;
+        border-radius: 0.5rem;
+        height: 92.3%;
+        width: 98.7%;
+        top: 3.85%;
+        left: 0.7%; // Math doesn't *quite* add up but visually it's better, so go with it.
+
+        > * {
+          width: 1.7rem;
+          height: 1.8rem;
+          left: 3rem;
+          transform: translate3d(0, -50%, 0);
+        }
       }
 
       .label {
         display: block;
+        position: relative;
+        left: 5.625rem;
         color: $bn-color-header-button-text;
         font-family: $bn-font-family-highlight;
         font-size: 1.2rem;
@@ -179,6 +194,10 @@
 .navigation--social-media-navigation-header {
   .social-media-link {
     @include IconButton();
+
+    &::before {
+      box-shadow: 0 0.2rem 0.8rem 0 $bn-color-header-shadow;
+    }
 
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       width: $bn-header-icon-button-diameter-layout-tablet;

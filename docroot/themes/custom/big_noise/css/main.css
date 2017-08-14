@@ -2297,18 +2297,22 @@ button.sidebar-close .icon .close {
   text-transform: uppercase;
 }
 /* line 78, ../scss/style/_site--footer.scss */
-.site--footer--contact #site--footer--contact--phone,
-.site--footer--contact #site--footer--contact--address {
+.site--footer--contact .site--footer--contact--phone,
+.site--footer--contact .site--footer--contact--address {
   font-size: 1.2rem;
   line-height: 1.4;
 }
+/* line 86, ../scss/style/_site--footer.scss */
+.site--footer--contact .site--footer--contact--phone a {
+  color: #e1e4e7;
+}
 @media (min-width: 768px) {
-  /* line 85, ../scss/style/_site--footer.scss */
+  /* line 92, ../scss/style/_site--footer.scss */
   .site--footer--contact .site--footer--contact--address {
     display: flex;
     flex-direction: row;
   }
-  /* line 91, ../scss/style/_site--footer.scss */
+  /* line 98, ../scss/style/_site--footer.scss */
   .site--footer--contact .site--footer--contact--address > div:not(:last-of-type)::after {
     content: '/';
     margin-left: 0.5rem;
@@ -2316,59 +2320,59 @@ button.sidebar-close .icon .close {
   }
 }
 
-/* line 103, ../scss/style/_site--footer.scss */
+/* line 110, ../scss/style/_site--footer.scss */
 .site--footer--closure {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 
-/* line 110, ../scss/style/_site--footer.scss */
+/* line 117, ../scss/style/_site--footer.scss */
 .site--footer--copyright {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  /* line 110, ../scss/style/_site--footer.scss */
+  /* line 117, ../scss/style/_site--footer.scss */
   .site--footer--copyright {
     display: flex;
     flex-direction: row;
   }
 }
 @media (min-width: 768px) {
-  /* line 123, ../scss/style/_site--footer.scss */
+  /* line 130, ../scss/style/_site--footer.scss */
   .site--footer--copyright > div:not(:last-of-type)::after {
     content: '\00a0';
   }
 }
 
-/* line 133, ../scss/style/_site--footer.scss */
+/* line 140, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container .heading {
   color: #e1e4e7;
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 140, ../scss/style/_site--footer.scss */
+/* line 147, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form {
   height: 3.4rem;
   position: relative;
 }
-/* line 144, ../scss/style/_site--footer.scss */
+/* line 151, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .mailchimp-newsletter-mergefields {
   height: 100%;
   padding-right: 10rem;
 }
-/* line 149, ../scss/style/_site--footer.scss */
+/* line 156, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .form-item-mergevars-email {
   height: 100%;
 }
-/* line 153, ../scss/style/_site--footer.scss */
+/* line 160, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form label[for="edit-mergevars-email"] {
   display: none;
 }
-/* line 157, ../scss/style/_site--footer.scss */
+/* line 164, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form #edit-mergevars-email {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -2377,7 +2381,7 @@ button.sidebar-close .icon .close {
   padding-left: 1rem;
   font-size: 1.3rem;
 }
-/* line 166, ../scss/style/_site--footer.scss */
+/* line 173, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .form-submit {
   color: #e1e4e7;
   font-family: "Oswald";

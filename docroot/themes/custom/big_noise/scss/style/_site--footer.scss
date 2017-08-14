@@ -75,10 +75,17 @@
     text-transform: uppercase;
   }
 
-  #site--footer--contact--phone,
-  #site--footer--contact--address {
+  .site--footer--contact--phone,
+  .site--footer--contact--address {
     font-size: 1.2rem;
     line-height: 1.4;
+  }
+
+  .site--footer--contact--phone {
+    // Override for iOS Safari changing the content to a link
+    a {
+      color: $bn-color-footer-text;
+    }
   }
 
   @media (min-width: $bn-breakpoint-width-min-layout-tablet) {

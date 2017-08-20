@@ -132,6 +132,8 @@ function big_noise_preprocess_block__secondary_navigation_main(&$variables) {
 
 
 function big_noise_form_mailchimp_signup_subscribe_block_general_mailing_list_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['mergevars']['EMAIL']['#placeholder'] = 'Enter your email address';
+
   $form['actions']['submit']['#attributes'] = array(
     'class' => array(
       'page--highlight-color--background',

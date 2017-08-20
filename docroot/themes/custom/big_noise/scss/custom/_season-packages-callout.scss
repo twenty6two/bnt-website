@@ -1,0 +1,79 @@
+.season-packages-callout {
+  display: flex;
+  flex-direction: column;
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+    flex-direction: row;
+  }
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+    flex-direction: column;
+  }
+  text-align: center;
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+    text-align: left;
+  }
+
+  .heading {
+    font-size: 1.6rem;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      font-size: 2rem;
+    }
+    font-weight: 600;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  ul {
+    font-size: 1.6rem;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      font-size: 2rem;
+    }
+    font-weight: 600;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+      flex-direction: column;
+      justify-content: normal;
+    }
+
+    li:not(:last-of-type) {
+      padding-right: 0.5em;
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        padding-right: 0;
+      }
+
+      &::after {
+        content: '\2022';
+        padding-left: 0.5em;
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+          content: none;
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
+  .block {
+    flex-basis: 100%;
+    &:not(:last-of-type) {
+      margin-bottom: 2rem;
+    }
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      flex-basis: 50%;
+      &:not(:last-of-type) {
+        margin-bottom: 0;
+      }
+    }
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+      flex-basis: 100%;
+      &:not(:last-of-type) {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}

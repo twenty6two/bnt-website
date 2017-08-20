@@ -2960,3 +2960,116 @@ a.big-button:hover {
   width: 100%;
   height: 100%;
 }
+
+/* line 1, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  /* line 1, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout {
+    flex-direction: row;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 1, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout {
+    flex-direction: column;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 1, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout {
+    text-align: left;
+  }
+}
+/* line 15, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout .heading {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  /* line 15, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout .heading {
+    font-size: 2rem;
+  }
+}
+/* line 23, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout p {
+  margin-bottom: 0;
+}
+/* line 27, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout ul {
+  font-size: 1.6rem;
+  font-weight: 600;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  /* line 27, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul {
+    font-size: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 27, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul {
+    flex-direction: column;
+    justify-content: normal;
+  }
+}
+/* line 44, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout ul li:not(:last-of-type) {
+  padding-right: 0.5em;
+}
+@media (min-width: 1024px) {
+  /* line 44, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul li:not(:last-of-type) {
+    padding-right: 0;
+  }
+}
+/* line 50, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout ul li:not(:last-of-type)::after {
+  content: '\2022';
+  padding-left: 0.5em;
+}
+@media (min-width: 1024px) {
+  /* line 50, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul li:not(:last-of-type)::after {
+    content: none;
+    padding-left: 0;
+  }
+}
+/* line 61, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout .block {
+  flex-basis: 100%;
+}
+/* line 63, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout .block:not(:last-of-type) {
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  /* line 61, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout .block {
+    flex-basis: 50%;
+  }
+  /* line 68, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout .block:not(:last-of-type) {
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 61, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout .block {
+    flex-basis: 100%;
+  }
+  /* line 74, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout .block:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
+}

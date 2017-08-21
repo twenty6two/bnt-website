@@ -1919,27 +1919,23 @@ button.sidebar-close .icon .close {
 }
 
 /* line 18, ../scss/style/_site--header.scss */
-.site--header--logo .image .logo--base-color {
-  fill: #58585b;
-}
-/* line 21, ../scss/style/_site--header.scss */
 .site--header--logo .image .logo--highlight-color {
   fill: #f05a22;
 }
 
-/* line 28, ../scss/style/_site--header.scss */
+/* line 25, ../scss/style/_site--header.scss */
 .header--sidebar--main-navigation--toggle {
   display: block;
   background: none;
 }
-/* line 32, ../scss/style/_site--header.scss */
+/* line 29, ../scss/style/_site--header.scss */
 .header--sidebar--main-navigation--toggle .label {
   color: #3e464f;
   display: block;
   font-size: 1.3rem;
   text-transform: uppercase;
 }
-/* line 39, ../scss/style/_site--header.scss */
+/* line 36, ../scss/style/_site--header.scss */
 .header--sidebar--main-navigation--toggle .icon {
   display: block;
   margin-left: auto;
@@ -1947,41 +1943,41 @@ button.sidebar-close .icon .close {
   margin-bottom: 0.5rem;
 }
 
-/* line 48, ../scss/style/_site--header.scss */
+/* line 45, ../scss/style/_site--header.scss */
 .site--header--social-media-navigation-container {
   border-left-color: #a5adb8;
   border-left-style: solid;
   border-left-width: 0.1rem;
 }
 
-/* line 56, ../scss/style/_site--header.scss */
+/* line 53, ../scss/style/_site--header.scss */
 .site--header--phone-link-container .phone-link {
   text-decoration: none;
 }
-/* line 59, ../scss/style/_site--header.scss */
+/* line 56, ../scss/style/_site--header.scss */
 .site--header--phone-link-container .phone-link .icon {
   width: 1.2rem;
   height: 1.3rem;
   margin-right: 0.4rem;
 }
-/* line 64, ../scss/style/_site--header.scss */
+/* line 61, ../scss/style/_site--header.scss */
 .site--header--phone-link-container .phone-link .icon svg {
   width: 100%;
   height: 100%;
 }
-/* line 70, ../scss/style/_site--header.scss */
+/* line 67, ../scss/style/_site--header.scss */
 .site--header--phone-link-container .phone-link .label {
   color: #3e464f;
   font-size: 1.4rem;
 }
 @media (min-width: 1024px) {
-  /* line 70, ../scss/style/_site--header.scss */
+  /* line 67, ../scss/style/_site--header.scss */
   .site--header--phone-link-container .phone-link .label {
     font-size: 1.5rem;
   }
 }
 
-/* line 82, ../scss/style/_site--header.scss */
+/* line 79, ../scss/style/_site--header.scss */
 .site--header--locate-link-container .locate-link {
   /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
   /* @CMN END TODO */
@@ -2034,19 +2030,19 @@ button.sidebar-close .icon .close {
 .site--header--locate-link-container .locate-link .label {
   display: none;
 }
-/* line 85, ../scss/style/_site--header.scss */
+/* line 82, ../scss/style/_site--header.scss */
 .site--header--locate-link-container .locate-link::before {
   box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
 }
 @media (min-width: 768px) {
-  /* line 82, ../scss/style/_site--header.scss */
+  /* line 79, ../scss/style/_site--header.scss */
   .site--header--locate-link-container .locate-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 82, ../scss/style/_site--header.scss */
+  /* line 79, ../scss/style/_site--header.scss */
   .site--header--locate-link-container .locate-link {
     width: 2.8rem;
     height: 2.8rem;
@@ -2054,7 +2050,7 @@ button.sidebar-close .icon .close {
 }
 
 @media (min-width: 768px) {
-  /* line 102, ../scss/style/_site--header.scss */
+  /* line 99, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link {
     /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
     /* @CMN END TODO */
@@ -2109,13 +2105,13 @@ button.sidebar-close .icon .close {
   .site--header--buy-tickets-link-container .buy-tickets-link .label {
     display: none;
   }
-  /* line 106, ../scss/style/_site--header.scss */
+  /* line 103, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link::before {
     box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
   }
 }
 @media (min-width: 1024px) {
-  /* line 102, ../scss/style/_site--header.scss */
+  /* line 99, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link {
     display: flex;
     align-items: center;
@@ -2124,7 +2120,7 @@ button.sidebar-close .icon .close {
     border-radius: 0.5rem;
     text-decoration: none;
   }
-  /* line 122, ../scss/style/_site--header.scss */
+  /* line 119, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link::before {
     border-radius: 0.5rem;
     width: 93.15%;
@@ -2132,7 +2128,7 @@ button.sidebar-close .icon .close {
     top: 7.7%;
     box-shadow: 0 0.2rem 1rem 0 #9898a5;
   }
-  /* line 130, ../scss/style/_site--header.scss */
+  /* line 127, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .icon {
     border-radius: 0.5rem;
     height: 92.3%;
@@ -2140,14 +2136,14 @@ button.sidebar-close .icon .close {
     top: 3.85%;
     left: 0.7%;
   }
-  /* line 137, ../scss/style/_site--header.scss */
+  /* line 134, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .icon > * {
     width: 1.7rem;
     height: 1.8rem;
     left: 3rem;
     transform: translate3d(0, -50%, 0);
   }
-  /* line 145, ../scss/style/_site--header.scss */
+  /* line 142, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .label {
     display: block;
     position: relative;
@@ -2159,7 +2155,7 @@ button.sidebar-close .icon .close {
   }
 }
 
-/* line 162, ../scss/style/_site--header.scss */
+/* line 159, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a {
   border-bottom-color: transparent;
   border-bottom-style: solid;
@@ -2177,21 +2173,21 @@ button.sidebar-close .icon .close {
   transition: color 0.2s;
 }
 @media (min-width: 1024px) {
-  /* line 162, ../scss/style/_site--header.scss */
+  /* line 159, ../scss/style/_site--header.scss */
   .navigation--main-navigation-header > ul > li > a {
     font-size: 2rem;
   }
 }
-/* line 181, ../scss/style/_site--header.scss */
+/* line 178, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a:hover {
   text-decoration: none;
 }
-/* line 185, ../scss/style/_site--header.scss */
+/* line 182, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a.active {
   border-bottom-color: #3e464f;
 }
 
-/* line 195, ../scss/style/_site--header.scss */
+/* line 192, ../scss/style/_site--header.scss */
 .navigation--social-media-navigation-header .social-media-link {
   /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
   /* @CMN END TODO */
@@ -2244,19 +2240,19 @@ button.sidebar-close .icon .close {
 .navigation--social-media-navigation-header .social-media-link .label {
   display: none;
 }
-/* line 198, ../scss/style/_site--header.scss */
+/* line 195, ../scss/style/_site--header.scss */
 .navigation--social-media-navigation-header .social-media-link::before {
   box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
 }
 @media (min-width: 768px) {
-  /* line 195, ../scss/style/_site--header.scss */
+  /* line 192, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 195, ../scss/style/_site--header.scss */
+  /* line 192, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 2.8rem;
     height: 2.8rem;

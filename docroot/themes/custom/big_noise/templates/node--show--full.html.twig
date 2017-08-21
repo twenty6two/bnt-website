@@ -4,19 +4,19 @@
 
     <div id="show--imagery" class="show--imagery">
       <div id="show--imagery--image" class="show--imagery--image">
-        <img src="/sites/default/files/images/BNT_L5Y_SplashImage2.jpg"/>
+        <img src="{{ show__splash_image_url }}" />
       </div>
       <div id="show--imagery--wash" class="show--imagery--wash"></div>
     </div>
 
-    <div id="show--main-content-blocks" class="show--main-content-blocks site-width-constraint">
+    <div id="show--main-content-blocks" class="show--main-content-blocks site-width-constraint site-gutter">
 
       <div class="content-block first">
         {{ content.field_title_image }}
-        <div class="show--performance-date-range">{{ show__performance_date_range }}</div>
       </div>
 
       <div class="content-block second">
+        <div class="show--performance-date-range">{{ show__performance_date_range }}</div>
         {{ content.field_billing_credits }}
         {{ content.field_synopsis }}
       </div>

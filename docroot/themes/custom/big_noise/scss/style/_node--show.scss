@@ -1,8 +1,4 @@
 .show--container {
-  background-blend-mode: multiply, soft-light, soft-light;
-  background-position: center top, center, center;
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-size: 100% auto, 100%, 100%;
   color: $bn-color-show-page-content;
 
   .show--performance-date-range {
@@ -38,10 +34,6 @@
 .show--main-content-blocks {
   p {
     margin-bottom: 2rem;
-  }
-
-  .lighter {
-    font-weight: 300;
   }
 }
 

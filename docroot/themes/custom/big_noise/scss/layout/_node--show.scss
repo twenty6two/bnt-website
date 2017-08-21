@@ -5,25 +5,92 @@
 }
 
 
-.show--main-content-blocks {
-  @include SiteGutter();
+.show--container {
+  position: relative;
 
+  min-height: $bn-show-imagery-image-height-layout-mobile;
+
+/*
+  $bn-show-imagery-image-height-layout-mobile-2: 59rem;
+*/
+
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+    min-height: $bn-show-imagery-image-height-layout-tablet;
+  }
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+    min-height: $bn-show-imagery-image-height-layout-desktop;
+  }
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
+    min-height: $bn-show-imagery-image-height-layout-desktop-wide;
+  }
+}
+
+
+.show--imagery {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+
+.show--imagery--image {
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  img {
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+
+    height: $bn-show-imagery-image-height-layout-mobile;
+
+/*
+    @media (min-width: ($bn-breakpoint-width-max-layout-mobile * 0.75)) {
+      height: 59rem;
+    }
+*/
+
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      height: $bn-show-imagery-image-height-layout-tablet;
+    }
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+      height: $bn-show-imagery-image-height-layout-desktop;
+    }
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
+      height: $bn-show-imagery-image-height-layout-desktop-wide;
+    }
+  }
+}
+
+
+.show--imagery--wash {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+
+.show--main-content-blocks {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 
-  padding-top: 22rem;
-  padding-bottom: 1rem;
-  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-    padding-top: 36rem;
-  }
-  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-    padding-top: 50rem;
-  }
-
   > .content-block {
     &.first {
       flex-basis: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      height: 33rem;
     }
 
     &.second {
@@ -54,7 +121,25 @@
 
 
 .show--container {
-  .show--title-image {}
+  .show--title-image {
+    .show--title-image-container {
+      display: inline-block;
+      font-size: 0;
+
+      img {
+        width: 50%;
+        height: 50%;
+        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+          width: 80%;
+          height: 80%;
+        }
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+  }
 
   .show--performance-date-range {
     margin-bottom: 2.5rem;

@@ -166,6 +166,16 @@ function _get_show_page_css($colors) {
   $css = '';
 
   $css .= '
+    .show--imagery--image {
+      background-color: ' . $colors['left_gradient_color'] . ';
+    }
+
+    .show--imagery--wash {
+      background-image: linear-gradient(to bottom, ' . $colors['left_gradient_color'] . ' 0%, ' . $colors['right_gradient_color'] . ' 100%);
+  ';
+
+  /*
+  $css .= '
     #show--container {
       background-image: url(\'/sites/default/files/images/BNT_L5Y_SplashImage.jpg\'),
         radial-gradient(circle at center 14rem, rgba(255,255,255,0.8) 0%, rgba(0,0,0,0.6) 34rem, rgba(0,0,0,0.6) 100%),
@@ -186,6 +196,7 @@ function _get_show_page_css($colors) {
       }
     }
   ';
+  */
 
   return $css;
 }

@@ -54,6 +54,10 @@ function big_noise_preprocess_page(&$variables) {
       $variables['footer_classes'][] = 'theme-dark';
     }
   }
+
+  if ($variables['is_front']) {
+    $variables['vista_classes'][] = 'page--home';
+  }
 }
 
 

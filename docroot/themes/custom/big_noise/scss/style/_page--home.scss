@@ -1,0 +1,9 @@
+.page--home {
+  .column.primary {
+    .content-block {
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        border-bottom: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+.page--home {
+  .column.primary {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    /* @CMN TODO - Not working
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+      margin-left: -2.5rem;
+      margin-right: -2.5rem;
+    }
+    */
+
+    .content-block {
+      flex-basis: 100%;
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        flex-basis: 33.3334%;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+    }
+
+    .content-block--icon-heading-content {
+      .icon {
+        float: left;
+        width: 5rem;
+        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+          width: 7.5rem;
+        }
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+          float: none;
+          margin-bottom: 1rem;
+          margin-left: auto;
+          margin-right: auto;
+          width: 6rem;
+        }
+
+        > * {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .heading {
+        padding-left: 7rem;
+        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+          padding-left: 11.5rem;
+        }
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+          padding-left: 0;
+          text-align: center;
+        }
+      }
+
+      .content {
+        padding-left: 7rem;
+        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+          padding-left: 11.5rem;
+        }
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}

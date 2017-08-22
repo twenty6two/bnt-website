@@ -1722,7 +1722,11 @@ iframe {
   border: none;
 }
 
-@impoty "style/text";
+/* line 1, ../scss/style/_text.scss */
+.lighter {
+  font-weight: 300;
+}
+
 /* line 1, ../scss/style/_vista.scss */
 body {
   background-color: #fafcff;

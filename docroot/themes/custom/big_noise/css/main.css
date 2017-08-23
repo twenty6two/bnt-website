@@ -1521,68 +1521,69 @@ nav ul {
 @media (min-width: 768px) {
   /* line 184, ../scss/layout/_node--show.scss */
   .show--container .show--buy-tickets {
-    margin-top: 2.5rem;
+    margin-top: 6rem;
   }
 }
 @media (min-width: 1024px) {
   /* line 184, ../scss/layout/_node--show.scss */
   .show--container .show--buy-tickets {
+    margin-top: 6.6rem;
     margin-bottom: 2.5rem;
   }
 }
-/* line 193, ../scss/layout/_node--show.scss */
+/* line 194, ../scss/layout/_node--show.scss */
 .show--container .show--buy-tickets > .big-button {
   display: block;
 }
-/* line 198, ../scss/layout/_node--show.scss */
+/* line 199, ../scss/layout/_node--show.scss */
 .show--container .show--ticket-price-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 198, ../scss/layout/_node--show.scss */
+  /* line 199, ../scss/layout/_node--show.scss */
   .show--container .show--ticket-price-details {
     margin-bottom: 2.5rem;
   }
 }
-/* line 205, ../scss/layout/_node--show.scss */
+/* line 206, ../scss/layout/_node--show.scss */
 .show--container .show--performance-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 205, ../scss/layout/_node--show.scss */
+  /* line 206, ../scss/layout/_node--show.scss */
   .show--container .show--performance-details {
     margin-bottom: 2.5rem;
   }
 }
-/* line 212, ../scss/layout/_node--show.scss */
+/* line 213, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 212, ../scss/layout/_node--show.scss */
+  /* line 213, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details {
     margin-bottom: 2.5rem;
   }
 }
-/* line 219, ../scss/layout/_node--show.scss */
+/* line 220, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details span:not(:last-of-type) {
   display: block;
   float: left;
 }
 @media (min-width: 768px) {
-  /* line 219, ../scss/layout/_node--show.scss */
+  /* line 220, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details span:not(:last-of-type) {
     float: none;
   }
 }
-/* line 226, ../scss/layout/_node--show.scss */
+/* line 227, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details span:not(:last-of-type)::after {
   content: '/';
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 @media (min-width: 768px) {
-  /* line 226, ../scss/layout/_node--show.scss */
+  /* line 227, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details span:not(:last-of-type)::after {
     content: none;
     padding-left: 0;
@@ -1590,7 +1591,7 @@ nav ul {
   }
 }
 @media (min-width: 768px) {
-  /* line 241, ../scss/layout/_node--show.scss */
+  /* line 242, ../scss/layout/_node--show.scss */
   .show--container .show--synopsis-concise {
     display: none;
   }

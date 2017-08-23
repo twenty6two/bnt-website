@@ -184,9 +184,10 @@
   .show--buy-tickets {
     margin-bottom: 2rem;
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-      margin-top: 2.5rem;
+      margin-top: 6rem;
     }
     @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+      margin-top: 6.6rem;
       margin-bottom: 2.5rem;
     }
 

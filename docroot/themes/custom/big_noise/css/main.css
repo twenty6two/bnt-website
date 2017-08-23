@@ -1397,48 +1397,51 @@ nav ul {
 /* line 104, ../scss/layout/_node--show.scss */
 .show--main-content-blocks > .content-block.first {
   flex-basis: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  position: relative;
   height: 33rem;
 }
-/* line 114, ../scss/layout/_node--show.scss */
+/* line 111, ../scss/layout/_node--show.scss */
 .show--main-content-blocks > .content-block.second {
   flex-basis: 100%;
 }
 @media (min-width: 768px) {
-  /* line 114, ../scss/layout/_node--show.scss */
+  /* line 111, ../scss/layout/_node--show.scss */
   .show--main-content-blocks > .content-block.second {
     flex-basis: 50%;
     padding-right: 2rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 114, ../scss/layout/_node--show.scss */
+  /* line 111, ../scss/layout/_node--show.scss */
   .show--main-content-blocks > .content-block.second {
     flex-basis: 63.5%;
     padding-right: 4rem;
   }
 }
-/* line 126, ../scss/layout/_node--show.scss */
+/* line 123, ../scss/layout/_node--show.scss */
 .show--main-content-blocks > .content-block.third {
   flex-basis: 100%;
 }
 @media (min-width: 768px) {
-  /* line 126, ../scss/layout/_node--show.scss */
+  /* line 123, ../scss/layout/_node--show.scss */
   .show--main-content-blocks > .content-block.third {
     flex-basis: 50%;
     padding-left: 2rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 126, ../scss/layout/_node--show.scss */
+  /* line 123, ../scss/layout/_node--show.scss */
   .show--main-content-blocks > .content-block.third {
     flex-basis: 36.5%;
     padding-left: 4rem;
   }
 }
 
+/* line 139, ../scss/layout/_node--show.scss */
+.show--container .show--title-image {
+  position: absolute;
+  bottom: 0;
+}
 /* line 143, ../scss/layout/_node--show.scss */
 .show--container .show--title-image .show--title-image-container {
   display: inline-block;
@@ -1446,6 +1449,7 @@ nav ul {
 }
 /* line 147, ../scss/layout/_node--show.scss */
 .show--container .show--title-image .show--title-image-container img {
+  display: block;
   width: 50%;
   height: 50%;
 }
@@ -1463,105 +1467,105 @@ nav ul {
     height: auto;
   }
 }
-/* line 162, ../scss/layout/_node--show.scss */
+/* line 163, ../scss/layout/_node--show.scss */
 .show--container .show--performance-date-range {
   margin-bottom: 2.5rem;
 }
 @media (min-width: 768px) {
-  /* line 162, ../scss/layout/_node--show.scss */
+  /* line 163, ../scss/layout/_node--show.scss */
   .show--container .show--performance-date-range {
     margin-bottom: 3rem;
   }
 }
-/* line 169, ../scss/layout/_node--show.scss */
+/* line 170, ../scss/layout/_node--show.scss */
 .show--container .show--billing-credits {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 169, ../scss/layout/_node--show.scss */
+  /* line 170, ../scss/layout/_node--show.scss */
   .show--container .show--billing-credits {
     margin-bottom: 2.5rem;
   }
 }
-/* line 176, ../scss/layout/_node--show.scss */
+/* line 177, ../scss/layout/_node--show.scss */
 .show--container .show--synopsis {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 176, ../scss/layout/_node--show.scss */
+  /* line 177, ../scss/layout/_node--show.scss */
   .show--container .show--synopsis {
     display: block;
   }
 }
-/* line 183, ../scss/layout/_node--show.scss */
+/* line 184, ../scss/layout/_node--show.scss */
 .show--container .show--buy-tickets {
   margin-bottom: 2rem;
 }
 @media (min-width: 768px) {
-  /* line 183, ../scss/layout/_node--show.scss */
+  /* line 184, ../scss/layout/_node--show.scss */
   .show--container .show--buy-tickets {
     margin-top: 2.5rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 183, ../scss/layout/_node--show.scss */
+  /* line 184, ../scss/layout/_node--show.scss */
   .show--container .show--buy-tickets {
     margin-bottom: 2.5rem;
   }
 }
-/* line 192, ../scss/layout/_node--show.scss */
+/* line 193, ../scss/layout/_node--show.scss */
 .show--container .show--buy-tickets > .big-button {
   display: block;
 }
-/* line 197, ../scss/layout/_node--show.scss */
+/* line 198, ../scss/layout/_node--show.scss */
 .show--container .show--ticket-price-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 197, ../scss/layout/_node--show.scss */
+  /* line 198, ../scss/layout/_node--show.scss */
   .show--container .show--ticket-price-details {
     margin-bottom: 2.5rem;
   }
 }
-/* line 204, ../scss/layout/_node--show.scss */
+/* line 205, ../scss/layout/_node--show.scss */
 .show--container .show--performance-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 204, ../scss/layout/_node--show.scss */
+  /* line 205, ../scss/layout/_node--show.scss */
   .show--container .show--performance-details {
     margin-bottom: 2.5rem;
   }
 }
-/* line 211, ../scss/layout/_node--show.scss */
+/* line 212, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 211, ../scss/layout/_node--show.scss */
+  /* line 212, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details {
     margin-bottom: 2.5rem;
   }
 }
-/* line 218, ../scss/layout/_node--show.scss */
+/* line 219, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details span:not(:last-of-type) {
   display: block;
   float: left;
 }
 @media (min-width: 768px) {
-  /* line 218, ../scss/layout/_node--show.scss */
+  /* line 219, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details span:not(:last-of-type) {
     float: none;
   }
 }
-/* line 225, ../scss/layout/_node--show.scss */
+/* line 226, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details span:not(:last-of-type)::after {
   content: '/';
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 @media (min-width: 768px) {
-  /* line 225, ../scss/layout/_node--show.scss */
+  /* line 226, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details span:not(:last-of-type)::after {
     content: none;
     padding-left: 0;
@@ -1569,7 +1573,7 @@ nav ul {
   }
 }
 @media (min-width: 768px) {
-  /* line 240, ../scss/layout/_node--show.scss */
+  /* line 241, ../scss/layout/_node--show.scss */
   .show--container .show--synopsis-concise {
     display: none;
   }

@@ -1444,7 +1444,7 @@ nav ul {
   /* line 130, ../scss/layout/_node--show.scss */
   .show--main-content-blocks > .content-block.third {
     flex-basis: 36.5%;
-    max-width: 63.5%;
+    max-width: 36.5%;
     padding-left: 4rem;
   }
 }

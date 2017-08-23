@@ -9,11 +9,6 @@
   position: relative;
 
   min-height: $bn-show-imagery-image-height-layout-mobile;
-
-/*
-  $bn-show-imagery-image-height-layout-mobile-2: 59rem;
-*/
-
   @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     min-height: $bn-show-imagery-image-height-layout-tablet;
   }
@@ -44,13 +39,6 @@
   flex-shrink: 0;
 
   height: $bn-show-imagery-image-height-layout-mobile;
-
-/*
-  @media (min-width: ($bn-breakpoint-width-max-layout-mobile * 0.75)) {
-    height: 59rem;
-  }
-*/
-
   @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     height: $bn-show-imagery-image-height-layout-tablet;
   }
@@ -68,13 +56,6 @@
     transform: translate3d(-50%, 0, 0);
 
     height: $bn-show-imagery-image-height-layout-mobile;
-
-/*
-    @media (min-width: ($bn-breakpoint-width-max-layout-mobile * 0.75)) {
-      height: 59rem;
-    }
-*/
-
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       height: $bn-show-imagery-image-height-layout-tablet;
     }
@@ -109,7 +90,16 @@
       max-width: 100%;
 
       position: relative;
-      height: 33rem;
+      height: $bn-show-content-negative-space-top-layout-mobile;
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+        height: $bn-show-content-negative-space-top-layout-tablet;
+      }
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        height: $bn-show-content-negative-space-top-layout-desktop;
+      }
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
+        height: $bn-show-content-negative-space-top-layout-desktop-wide;
+      }
     }
 
     &.second {

@@ -1,6 +1,4 @@
 .show--container {
-  color: $bn-color-show-page-content;
-
   .show--performance-date-range {
     font-family: $bn-font-family-highlight;
     font-size: 1.6rem;
@@ -14,6 +12,9 @@
   }
 
   .show--buy-tickets {
+    .label {
+      text-shadow: none;
+    }
     .icon {
       .icon--base-color {
         fill: $bn-color-show-page-buy-tickets-icon-base-color;
@@ -32,6 +33,9 @@
 
 
 .show--main-content-blocks {
+  color: $bn-color-show-page-content;
+  text-shadow: 0 0 2em rgba(0, 0, 0, 0.6);
+
   p {
     margin-bottom: 2rem;
   }

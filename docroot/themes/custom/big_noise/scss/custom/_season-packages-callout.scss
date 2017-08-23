@@ -1,12 +1,7 @@
 .season-packages-callout {
   display: flex;
-  flex-direction: column;
-  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-    flex-direction: row;
-  }
-  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-    flex-direction: column;
-  }
+  flex-direction: row;
+  flex-wrap: wrap;
   text-align: center;
   @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     text-align: left;
@@ -35,10 +30,11 @@
     padding: 0;
 
     display: flex;
-    justify-content: center;
+    @media (max-width: $bn-breakpoint-width-max-layout-tablet) {
+      justify-content: center;
+    }
     @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
       flex-direction: column;
-      justify-content: normal;
     }
 
     li:not(:last-of-type) {

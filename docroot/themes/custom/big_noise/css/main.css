@@ -3377,3 +3377,39 @@ a.big-button:hover {
   margin: 0;
   padding: 0;
 }
+
+/* line 1, ../scss/custom/_season-packages--show-list--images.scss */
+.season-packages--show-list--images {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/* line 6, ../scss/mixins/_layout.scss */
+.season-packages--show-list--images > *:first-of-type {
+  margin-left: 0;
+}
+/* line 9, ../scss/mixins/_layout.scss */
+.season-packages--show-list--images > *:last-of-type {
+  margin-right: 0;
+}
+/* line 9, ../scss/custom/_season-packages--show-list--images.scss */
+.season-packages--show-list--images li {
+  flex: 0 0 33.3334%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+/* line 14, ../scss/custom/_season-packages--show-list--images.scss */
+.season-packages--show-list--images li a {
+  display: block;
+}
+/* line 20, ../scss/custom/_season-packages--show-list--images.scss */
+.season-packages--show-list--images .image-container img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  max-height: 100%;
+}

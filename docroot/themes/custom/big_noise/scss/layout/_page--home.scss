@@ -17,6 +17,7 @@
       flex-basis: 100%;
       @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
         flex-basis: 33.3334%;
+        max-width: 33.3334%; // IE Compatibility
         margin-bottom: 0;
         padding-bottom: 0;
         padding-left: 2.5rem;

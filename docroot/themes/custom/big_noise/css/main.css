@@ -1618,35 +1618,36 @@ nav ul {
   /* line 16, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block {
     flex-basis: 33.3334%;
+    max-width: 33.3334%;
     margin-bottom: 0;
     padding-bottom: 0;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
 }
-/* line 26, ../scss/layout/_page--home.scss */
+/* line 27, ../scss/layout/_page--home.scss */
 .page--home .column.primary .content-block > .heading {
   margin-bottom: 1rem;
 }
 @media (min-width: 768px) {
-  /* line 26, ../scss/layout/_page--home.scss */
+  /* line 27, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block > .heading {
     margin-bottom: 2rem;
   }
 }
-/* line 35, ../scss/layout/_page--home.scss */
+/* line 36, ../scss/layout/_page--home.scss */
 .page--home .column.primary .content-block--icon-heading-content .icon {
   float: left;
   width: 5rem;
 }
 @media (min-width: 768px) {
-  /* line 35, ../scss/layout/_page--home.scss */
+  /* line 36, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block--icon-heading-content .icon {
     width: 7.5rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 35, ../scss/layout/_page--home.scss */
+  /* line 36, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block--icon-heading-content .icon {
     float: none;
     position: relative;
@@ -1657,47 +1658,47 @@ nav ul {
     height: 6rem;
   }
 }
-/* line 51, ../scss/layout/_page--home.scss */
+/* line 52, ../scss/layout/_page--home.scss */
 .page--home .column.primary .content-block--icon-heading-content .icon > * {
   width: 100%;
   height: 100%;
 }
 @media (min-width: 1024px) {
-  /* line 51, ../scss/layout/_page--home.scss */
+  /* line 52, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block--icon-heading-content .icon > * {
     position: absolute;
     bottom: 0;
   }
 }
-/* line 61, ../scss/layout/_page--home.scss */
+/* line 62, ../scss/layout/_page--home.scss */
 .page--home .column.primary .content-block--icon-heading-content .heading {
   padding-left: 7rem;
 }
 @media (min-width: 768px) {
-  /* line 61, ../scss/layout/_page--home.scss */
+  /* line 62, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block--icon-heading-content .heading {
     padding-left: 11.5rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 61, ../scss/layout/_page--home.scss */
+  /* line 62, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block--icon-heading-content .heading {
     padding-left: 0;
     text-align: center;
   }
 }
-/* line 72, ../scss/layout/_page--home.scss */
+/* line 73, ../scss/layout/_page--home.scss */
 .page--home .column.primary .content-block--icon-heading-content .content {
   padding-left: 7rem;
 }
 @media (min-width: 768px) {
-  /* line 72, ../scss/layout/_page--home.scss */
+  /* line 73, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block--icon-heading-content .content {
     padding-left: 11.5rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 72, ../scss/layout/_page--home.scss */
+  /* line 73, ../scss/layout/_page--home.scss */
   .page--home .column.primary .content-block--icon-heading-content .content {
     padding-left: 0;
   }

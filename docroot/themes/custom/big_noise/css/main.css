@@ -3210,6 +3210,42 @@ a.big-button:hover {
   height: 100%;
 }
 
+/* line 1, ../scss/custom/_contact-us-map.scss */
+.contact-us-map-container {
+  height: 22.6rem;
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 1024px) {
+  /* line 1, ../scss/custom/_contact-us-map.scss */
+  .contact-us-map-container {
+    height: 28.8rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 1, ../scss/custom/_contact-us-map.scss */
+  .contact-us-map-container {
+    max-width: 63.5%;
+  }
+}
+/* line 12, ../scss/custom/_contact-us-map.scss */
+.contact-us-map-container::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 98%;
+  box-shadow: 0 0.4rem 1rem 0 rgba(112, 96, 128, 0.35);
+}
+/* line 24, ../scss/custom/_contact-us-map.scss */
+.contact-us-map-container > iframe {
+  width: 100%;
+  height: 100%;
+}
+
 /* line 1, ../scss/custom/_season-packages-callout.scss */
 .season-packages-callout {
   display: flex;

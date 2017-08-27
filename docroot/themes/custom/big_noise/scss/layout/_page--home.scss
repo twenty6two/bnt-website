@@ -36,8 +36,10 @@
       .icon {
         float: left;
         width: 5rem;
+        height: 5rem;
         @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
           width: 7.5rem;
+          height: 7.5rem;
         }
         @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
           float: none;

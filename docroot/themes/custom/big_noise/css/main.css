@@ -2389,31 +2389,34 @@ button.sidebar-close .icon .close {
 }
 /* line 45, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a:hover {
-  color: #f0f2f4;
   text-decoration: none;
 }
-/* line 50, ../scss/style/_site--main--secondary-navigation.scss */
-.navigation--secondary-navigation-main > ul > li > a:focus {
+/* line 49, ../scss/style/_site--main--secondary-navigation.scss */
+.navigation--secondary-navigation-main > ul > li > a:hover, .navigation--secondary-navigation-main > ul > li > a.page--highlight-color--text--hover:hover, .navigation--secondary-navigation-main > ul > li > a.page--highlight-color--text--hover--custom:hover {
   color: #f0f2f4;
 }
-/* line 54, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 55, ../scss/style/_site--main--secondary-navigation.scss */
+.navigation--secondary-navigation-main > ul > li > a:focus, .navigation--secondary-navigation-main > ul > li > a.page--highlight-color--text--focus:focus, .navigation--secondary-navigation-main > ul > li > a.page--highlight-color--text--focus--custom:focus {
+  color: #f0f2f4;
+}
+/* line 61, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a.active {
   border-bottom-color: #f0f2f4;
 }
-/* line 58, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 65, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a > sub {
   font-family: "Lato";
   font-size: 1.3rem;
   text-transform: none;
 }
 @media (min-width: 1024px) {
-  /* line 58, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 65, ../scss/style/_site--main--secondary-navigation.scss */
   .navigation--secondary-navigation-main > ul > li > a > sub {
     font-size: 1.6rem;
   }
 }
 @media (max-width: 767px) {
-  /* line 73, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 80, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a {
     border-bottom: none;
     font-family: "Lato";
@@ -2424,11 +2427,11 @@ button.sidebar-close .icon .close {
     padding-right: 0;
     text-align: right;
   }
-  /* line 84, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 91, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a:hover {
     text-decoration: underline;
   }
-  /* line 88, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 95, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a > sub {
     display: none;
   }

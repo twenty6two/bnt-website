@@ -43,11 +43,18 @@
         text-transform: uppercase;
 
         &:hover {
-          color: $bn-color-main-secondary-navigation-text;
           text-decoration: none;
         }
 
-        &:focus {
+        &:hover,
+        &.page--highlight-color--text--hover:hover,
+        &.page--highlight-color--text--hover--custom:hover {
+          color: $bn-color-main-secondary-navigation-text;
+        }
+
+        &:focus,
+        &.page--highlight-color--text--focus:focus,
+        &.page--highlight-color--text--focus--custom:focus {
           color: $bn-color-main-secondary-navigation-text;
         }
 

@@ -3339,6 +3339,35 @@ a.big-button:hover {
   height: 100%;
 }
 
+/* line 1, ../scss/custom/_plan-your-visit-restaurant-list.scss */
+.plan-your-visit--restaurant-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 6, ../scss/custom/_plan-your-visit-restaurant-list.scss */
+.plan-your-visit--restaurant-list li {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+/* line 10, ../scss/custom/_plan-your-visit-restaurant-list.scss */
+.plan-your-visit--restaurant-list li:last-of-type {
+  margin-bottom: 0;
+}
+/* line 15, ../scss/custom/_plan-your-visit-restaurant-list.scss */
+.plan-your-visit--restaurant-list .restaurant-name {
+  font-weight: 600;
+}
+/* line 19, ../scss/custom/_plan-your-visit-restaurant-list.scss */
+.plan-your-visit--restaurant-list .restaurant-cuisine {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+/* line 24, ../scss/custom/_plan-your-visit-restaurant-list.scss */
+.plan-your-visit--restaurant-list .restaurant-directions {
+  margin-bottom: 1rem;
+}
+
 /* line 1, ../scss/custom/_contact-us-map.scss */
 .contact-us-map-container {
   height: 22.6rem;

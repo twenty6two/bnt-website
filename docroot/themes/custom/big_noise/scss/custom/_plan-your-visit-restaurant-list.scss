@@ -1,0 +1,27 @@
+.plan-your-visit--restaurant-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .restaurant-name {
+    font-weight: 600;
+  }
+
+  .restaurant-cuisine {
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .restaurant-directions {
+    margin-bottom: 1rem;
+  }
+}

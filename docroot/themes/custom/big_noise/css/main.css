@@ -1465,126 +1465,139 @@ nav ul {
 .show--container .show--title-image {
   position: absolute;
   bottom: 0;
+  margin-left: -0.7rem;
   display: none;
 }
+@media (min-width: 768px) {
+  /* line 143, ../scss/layout/_node--show.scss */
+  .show--container .show--title-image {
+    margin-left: -1.2rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 143, ../scss/layout/_node--show.scss */
+  .show--container .show--title-image {
+    margin-left: -1.5rem;
+  }
+}
 @media (max-width: 767px) {
-  /* line 148, ../scss/layout/_node--show.scss */
+  /* line 156, ../scss/layout/_node--show.scss */
   .show--container .show--title-image.mobile {
     display: block;
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
-  /* line 153, ../scss/layout/_node--show.scss */
+  /* line 161, ../scss/layout/_node--show.scss */
   .show--container .show--title-image.tablet {
     display: block;
   }
 }
 @media (min-width: 1024px) {
-  /* line 158, ../scss/layout/_node--show.scss */
+  /* line 166, ../scss/layout/_node--show.scss */
   .show--container .show--title-image.desktop {
     display: block;
   }
 }
-/* line 165, ../scss/layout/_node--show.scss */
+/* line 173, ../scss/layout/_node--show.scss */
 .show--container .show--performance-date-range {
   margin-bottom: 2.5rem;
 }
 @media (min-width: 768px) {
-  /* line 165, ../scss/layout/_node--show.scss */
+  /* line 173, ../scss/layout/_node--show.scss */
   .show--container .show--performance-date-range {
     margin-bottom: 3rem;
   }
 }
-/* line 172, ../scss/layout/_node--show.scss */
+/* line 180, ../scss/layout/_node--show.scss */
 .show--container .show--billing-credits {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 172, ../scss/layout/_node--show.scss */
+  /* line 180, ../scss/layout/_node--show.scss */
   .show--container .show--billing-credits {
     margin-bottom: 2.5rem;
   }
 }
-/* line 179, ../scss/layout/_node--show.scss */
+/* line 187, ../scss/layout/_node--show.scss */
 .show--container .show--synopsis {
   display: none;
 }
 @media (min-width: 768px) {
-  /* line 179, ../scss/layout/_node--show.scss */
+  /* line 187, ../scss/layout/_node--show.scss */
   .show--container .show--synopsis {
     display: block;
   }
 }
-/* line 186, ../scss/layout/_node--show.scss */
+/* line 194, ../scss/layout/_node--show.scss */
 .show--container .show--buy-tickets {
   margin-bottom: 2rem;
 }
 @media (min-width: 768px) {
-  /* line 186, ../scss/layout/_node--show.scss */
+  /* line 194, ../scss/layout/_node--show.scss */
   .show--container .show--buy-tickets {
     margin-top: 6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 186, ../scss/layout/_node--show.scss */
+  /* line 194, ../scss/layout/_node--show.scss */
   .show--container .show--buy-tickets {
     margin-top: 6.6rem;
     margin-bottom: 2.5rem;
   }
 }
-/* line 196, ../scss/layout/_node--show.scss */
+/* line 204, ../scss/layout/_node--show.scss */
 .show--container .show--buy-tickets > .big-button {
   display: block;
 }
-/* line 201, ../scss/layout/_node--show.scss */
+/* line 209, ../scss/layout/_node--show.scss */
 .show--container .show--ticket-price-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 201, ../scss/layout/_node--show.scss */
+  /* line 209, ../scss/layout/_node--show.scss */
   .show--container .show--ticket-price-details {
     margin-bottom: 2.5rem;
   }
 }
-/* line 208, ../scss/layout/_node--show.scss */
+/* line 216, ../scss/layout/_node--show.scss */
 .show--container .show--performance-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 1024px) {
-  /* line 208, ../scss/layout/_node--show.scss */
+  /* line 216, ../scss/layout/_node--show.scss */
   .show--container .show--performance-details {
     margin-bottom: 2.5rem;
   }
 }
-/* line 215, ../scss/layout/_node--show.scss */
+/* line 223, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details {
   margin-bottom: 2rem;
 }
 @media (min-width: 768px) {
-  /* line 215, ../scss/layout/_node--show.scss */
+  /* line 223, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details {
     margin-bottom: 0;
   }
 }
-/* line 222, ../scss/layout/_node--show.scss */
+/* line 230, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details span:not(:last-of-type) {
   display: block;
   float: left;
 }
 @media (min-width: 768px) {
-  /* line 222, ../scss/layout/_node--show.scss */
+  /* line 230, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details span:not(:last-of-type) {
     float: none;
   }
 }
-/* line 229, ../scss/layout/_node--show.scss */
+/* line 237, ../scss/layout/_node--show.scss */
 .show--container .show--venue-details span:not(:last-of-type)::after {
   content: '/';
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 @media (min-width: 768px) {
-  /* line 229, ../scss/layout/_node--show.scss */
+  /* line 237, ../scss/layout/_node--show.scss */
   .show--container .show--venue-details span:not(:last-of-type)::after {
     content: none;
     padding-left: 0;
@@ -1592,31 +1605,31 @@ nav ul {
   }
 }
 @media (min-width: 768px) {
-  /* line 244, ../scss/layout/_node--show.scss */
+  /* line 252, ../scss/layout/_node--show.scss */
   .show--container .show--synopsis-concise {
     display: none;
   }
 }
 
-/* line 252, ../scss/layout/_node--show.scss */
+/* line 260, ../scss/layout/_node--show.scss */
 .show--cast-creative-media {
   position: relative;
   margin-top: 2rem;
 }
 @media (min-width: 768px) {
-  /* line 252, ../scss/layout/_node--show.scss */
+  /* line 260, ../scss/layout/_node--show.scss */
   .show--cast-creative-media {
     margin-top: 2.5rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 252, ../scss/layout/_node--show.scss */
+  /* line 260, ../scss/layout/_node--show.scss */
   .show--cast-creative-media {
     margin-top: 4rem;
   }
 }
 
-/* line 265, ../scss/layout/_node--show.scss */
+/* line 273, ../scss/layout/_node--show.scss */
 .show--cast-creative-media--navigation > ul {
   display: flex;
   flex-direction: row;
@@ -1630,19 +1643,19 @@ nav ul {
 .show--cast-creative-media--navigation > ul > *:last-of-type {
   margin-right: 0;
 }
-/* line 269, ../scss/layout/_node--show.scss */
+/* line 277, ../scss/layout/_node--show.scss */
 .show--cast-creative-media--navigation > ul > li {
   margin-left: 1.2rem;
   margin-right: 1.2rem;
 }
 @media (min-width: 768px) {
-  /* line 269, ../scss/layout/_node--show.scss */
+  /* line 277, ../scss/layout/_node--show.scss */
   .show--cast-creative-media--navigation > ul > li {
     margin-left: 2.4rem;
     margin-right: 2.4rem;
   }
 }
-/* line 277, ../scss/layout/_node--show.scss */
+/* line 285, ../scss/layout/_node--show.scss */
 .show--cast-creative-media--navigation > ul > li > a {
   display: flex;
   flex-direction: column;
@@ -1651,13 +1664,13 @@ nav ul {
   height: 4rem;
 }
 @media (min-width: 768px) {
-  /* line 277, ../scss/layout/_node--show.scss */
+  /* line 285, ../scss/layout/_node--show.scss */
   .show--cast-creative-media--navigation > ul > li > a {
     height: 4.8rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 277, ../scss/layout/_node--show.scss */
+  /* line 285, ../scss/layout/_node--show.scss */
   .show--cast-creative-media--navigation > ul > li > a {
     height: 6.7rem;
   }

@@ -70,6 +70,11 @@ function big_noise_preprocess_node(&$variables) {
   switch ($node_type) {
     case 'page':
 
+      // Identify home page for additional elements
+
+      $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+
+
       // Prepare page title ribbon elements
 
       $page_title_ribbon_image_field = $node->field_page_title_ribbon_image->getValue();

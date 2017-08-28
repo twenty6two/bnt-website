@@ -4,6 +4,14 @@
 {%
   set hasColumnSecondary = content.field_content_blocks_secondary|render|trim
 %}
+{%
+  set columnContainerClasses = [
+    'column-container',
+    hasColumnPrimary ? 'has-primary-column',
+    hasColumnSecondary ? 'has-secondary-column'
+  ]
+%}
+
 {% if content.field_title|render|trim %}
 <div id="page-title-ribbon" class="page-title-ribbon"{% if page_title_ribbon_image_url is not empty %} style="background-image: url('{{ page_title_ribbon_image_url }}');"{% endif %}>
   <div id="page-title-ribbon--content" class="page-title-ribbon--content site-width-constraint">
@@ -16,14 +24,14 @@
 </div>
 {% endif %}
 
+{% if is_front %}
+{{ drupal_block('home_page_slideshow') }}
+{% endif %}
+
 <div id="site--main--main-content" class="site--main--main-content site-width-constraint">
-  {%
-    set columnContainerClasses = [
-      'column-container',
-      hasColumnPrimary ? 'has-primary-column',
-      hasColumnSecondary ? 'has-secondary-column'
-    ]
-  %}
+  {% if is_front %}
+  {{ drupal_block('home_page_lead_in') }}
+  {% endif %}
   <div class="{{ columnContainerClasses|join(' ') }}">
     {% if hasColumnPrimary %}
     <div class="column primary">{{ content.field_content_blocks }}</div>

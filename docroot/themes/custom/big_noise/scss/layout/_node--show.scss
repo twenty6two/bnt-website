@@ -144,22 +144,20 @@
     position: absolute;
     bottom: 0;
 
-    .show--title-image-container {
-      display: inline-block;
-      font-size: 0;
-
-      img {
+    display: none;
+    &.mobile {
+      @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
         display: block;
-        width: 50%;
-        height: 50%;
-        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-          width: 80%;
-          height: 80%;
-        }
-        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-          width: auto;
-          height: auto;
-        }
+      }
+    }
+    &.tablet {
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) and (max-width: $bn-breakpoint-width-max-layout-tablet) {
+        display: block;
+      }
+    }
+    &.desktop {
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        display: block;
       }
     }
   }

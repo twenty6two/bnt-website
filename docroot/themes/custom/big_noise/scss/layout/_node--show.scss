@@ -140,6 +140,13 @@
 
 
 .show--container {
+  .show--title {
+    position: absolute;
+    bottom: 0;
+
+    visibility: hidden;
+  }
+
   .show--title-image {
     position: absolute;
     bottom: 0;

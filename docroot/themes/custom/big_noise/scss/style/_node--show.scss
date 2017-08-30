@@ -1,4 +1,15 @@
 .show--container {
+  .show--title {
+    h1 {
+      font-family: $bn-font-family-highlight;
+      font-size: 2.4rem;
+      font-weight: 500;
+      margin-top: 0;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+  }
+
   .show--performance-date-range {
     font-family: $bn-font-family-highlight;
     font-size: 1.6rem;

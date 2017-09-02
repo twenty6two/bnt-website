@@ -1,56 +1,16 @@
-{#
-/**
- * @file
- * Default theme implementation for a field.
- *
- * To override output, copy the "field.html.twig" from the templates directory
- * to your theme's directory and customize it, just like customizing other
- * Drupal templates such as page.html.twig or node.html.twig.
- *
- * Instead of overriding the theming for all fields, you can also just override
- * theming for a subset of fields using
- * @link themeable Theme hook suggestions. @endlink For example,
- * here are some theme hook suggestions that can be used for a field_foo field
- * on an article node type:
- * - field--node--field-foo--article.html.twig
- * - field--node--field-foo.html.twig
- * - field--node--article.html.twig
- * - field--field-foo.html.twig
- * - field--text-with-summary.html.twig
- * - field.html.twig
- *
- * Available variables:
- * - attributes: HTML attributes for the containing element.
- * - label_hidden: Whether to show the field label or not.
- * - title_attributes: HTML attributes for the title.
- * - label: The label for the field.
- * - multiple: TRUE if a field can contain multiple items.
- * - items: List of all the field items. Each item contains:
- *   - attributes: List of HTML attributes for each item.
- *   - content: The field item's content.
- * - entity_type: The entity type to which the field belongs.
- * - field_name: The name of the field.
- * - field_type: The type of the field.
- * - label_display: The display settings for the label.
- *
- * @see template_preprocess_field()
- *
- * @ingroup themeable
- */
-#}
 {% for item in items %}
-  <div class="show--buy-tickets">
-    <a href="{{ item.content['#url'] }}" target="_blank" class="big-button with-icon">
-      <span class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="40px" height="36px" viewBox="0 0 40 36">
-          <g class="icon-ticket-double">
-            <path class="icon-ticket-2" fill="#57585A" d="M37.3286675,17.2457866 C36.2295823,18.1773304 34.5898821,18.0329361 33.6683567,16.9219021 C32.7448473,15.8108681 32.8876887,14.1533418 33.9877659,13.2197925 L31.3154414,10 L13,25.5354237 L15.6723245,28.7552162 C16.7704177,27.8236723 18.4121018,27.9680666 19.3326353,29.0801034 C20.2571366,30.1901346 20.1123113,31.8476609 19.0132261,32.7802075 L21.6855505,36 L40,20.4655791 L37.3286675,17.2457866 Z"></path>
-            <path class="icon-ticket-1 page--highlight-color page--highlight-color--custom" d="M21.1351246,4.01615531 C20.5227262,5.70781262 18.6665808,6.58228787 16.9869736,5.96512947 C15.3053716,5.34998136 14.4406332,3.47739814 15.0520342,1.78473569 L10.184764,-0.0004 L0.000400000001,28.1989141 L4.86567543,29.9820395 C5.47907117,28.2903822 7.33621402,27.4179173 9.01781599,28.0350757 C10.694431,28.6492186 11.5621615,30.5197916 10.9477684,32.2144643 L15.8150386,33.9996 L26.0004,5.80028586 L21.1351246,4.01615531 Z"></path>
-            <path class="icon-ticket-1-2-overlap" fill="#000000" fill-opacity="0.65" d="M21.4659172,18.3545097 L17.908292,28.2041934 C17.1459733,28.0329161 16.3158135,28.209326 15.6723245,28.7552162 L13,25.5354237 L21.4659172,18.3545097 Z"></path>
-          </g>
-        </svg>
-      </span>
-      <span class="label page--highlight-color--text page--highlight-color--text--custom">Buy Tickets</span>
-    </a>
-  </div>
+<div class="show--buy-tickets">
+  <a href="{{ item.content['#url'] }}" target="_blank" class="big-button with-icon">
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="40px" height="36px" viewBox="0 0 40 36">
+        <g class="icon-ticket-double">
+          <path class="icon-ticket-2" fill="#57585A" d="M37.3286675,17.2457866 C36.2295823,18.1773304 34.5898821,18.0329361 33.6683567,16.9219021 C32.7448473,15.8108681 32.8876887,14.1533418 33.9877659,13.2197925 L31.3154414,10 L13,25.5354237 L15.6723245,28.7552162 C16.7704177,27.8236723 18.4121018,27.9680666 19.3326353,29.0801034 C20.2571366,30.1901346 20.1123113,31.8476609 19.0132261,32.7802075 L21.6855505,36 L40,20.4655791 L37.3286675,17.2457866 Z"></path>
+          <path class="icon-ticket-1 page--highlight-color page--highlight-color--custom" d="M21.1351246,4.01615531 C20.5227262,5.70781262 18.6665808,6.58228787 16.9869736,5.96512947 C15.3053716,5.34998136 14.4406332,3.47739814 15.0520342,1.78473569 L10.184764,-0.0004 L0.000400000001,28.1989141 L4.86567543,29.9820395 C5.47907117,28.2903822 7.33621402,27.4179173 9.01781599,28.0350757 C10.694431,28.6492186 11.5621615,30.5197916 10.9477684,32.2144643 L15.8150386,33.9996 L26.0004,5.80028586 L21.1351246,4.01615531 Z"></path>
+          <path class="icon-ticket-1-2-overlap" fill="#000000" fill-opacity="0.65" d="M21.4659172,18.3545097 L17.908292,28.2041934 C17.1459733,28.0329161 16.3158135,28.209326 15.6723245,28.7552162 L13,25.5354237 L21.4659172,18.3545097 Z"></path>
+        </g>
+      </svg>
+    </span>
+    <span class="label page--highlight-color--text page--highlight-color--text--custom">Buy Tickets</span>
+  </a>
+</div>
 {% endfor %}

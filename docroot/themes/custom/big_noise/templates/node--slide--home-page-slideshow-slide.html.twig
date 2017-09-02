@@ -1,0 +1,15 @@
+<article class="home-page-slideshow-slide"{% if slide__background_image_url %} style="background-image: url('{{ slide__background_image_url }}');"{% endif %}>
+  <div class="home-page-slideshow-slide--container site-width-constraint site-gutter">
+    <div class="home-page-slideshow-slide--heading-container">
+      {{ content.field_slide_heading }}
+    </div>
+    <div class="home-page-slideshow-slide--body-container">
+      <div class="home-page-slideshow-slide--highlight-image-container">
+        {{ content.field_slide_highlight_image }}
+      </div>
+      <div class="home-page-slideshow-slide--content-container">
+        {{ content.field_slide_content }}
+      </div>
+    </div>
+  </div>
+</article>

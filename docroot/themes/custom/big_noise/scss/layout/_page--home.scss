@@ -1,5 +1,10 @@
 .page--home {
   .site--main--main-content {
+    padding-top: 2rem;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      padding-top: 3rem;
+    }
+
     .column-container {
       @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
         margin-left: (0 - (($bn-column-gutter-width-layout-desktop / 2) + 2.5rem));

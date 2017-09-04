@@ -16,6 +16,12 @@
 
 .home-page-slideshow-slide--body-container {
   display: flex;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
 .home-page-slideshow-slide--heading-container {
@@ -28,11 +34,39 @@
 .home-page-slideshow-slide--highlight-image-container {
   flex-basis: 45%;
   padding-right: 0.75rem;
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+    padding-right: 1.5rem;
+  }
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+    padding-right: 3rem;
+  }
+
+  .image-container {
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    .slide-highlight-image {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
 
 .home-page-slideshow-slide--content-container {
   flex-basis: 55%;
   padding-left: 0.75rem;
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+    padding-left: 1.5rem;
+  }
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+    padding-left: 3rem;
+  }
 }
 
 .home-page-slideshow-slide--highlight-image-container,

@@ -12,3 +12,12 @@ regions:
   sidebar_main_navigation: 'Sidebar: Main Navigation'
 libraries:
   - big_noise/global-styling
+libraries-override:
+  flexslider/flexslider:
+    css:
+      component:
+        /libraries/flexslider/flexslider.css: false
+  flexslider/integration:
+    css:
+      theme:
+        assets/css/flexslider_img.css: false

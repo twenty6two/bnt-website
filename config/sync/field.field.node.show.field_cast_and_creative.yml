@@ -1,0 +1,21 @@
+uuid: 287287c5-7794-415f-a2fe-d4e37e901c38
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cast_and_creative
+    - node.type.show
+  module:
+    - text
+id: node.show.field_cast_and_creative
+field_name: field_cast_and_creative
+entity_type: node
+bundle: show
+label: 'Cast & Creative'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

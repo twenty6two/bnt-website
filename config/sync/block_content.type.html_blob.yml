@@ -1,0 +1,8 @@
+uuid: aee14613-36b9-412a-8837-ddd2dc3035d7
+langcode: en
+status: true
+dependencies: {  }
+id: html_blob
+label: 'HTML Blob'
+revision: 0
+description: ''

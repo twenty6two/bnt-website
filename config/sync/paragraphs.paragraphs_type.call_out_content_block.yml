@@ -1,0 +1,7 @@
+uuid: 37d1bc2f-00c6-4662-9f38-699d4b41c428
+langcode: en
+status: true
+dependencies: {  }
+id: call_out_content_block
+label: 'Call Out Content Block'
+behavior_plugins: {  }

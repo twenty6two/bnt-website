@@ -1,0 +1,25 @@
+uuid: 0879d4ad-13d4-4824-8d59-4415812d41df
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:html_blob:c5230a58-fab3-4f0f-b658-441eff2389dc'
+  module:
+    - block_content
+  theme:
+    - big_noise
+id: locate_link_header
+theme: big_noise
+region: header
+weight: -8
+provider: null
+plugin: 'block_content:c5230a58-fab3-4f0f-b658-441eff2389dc'
+settings:
+  id: 'block_content:c5230a58-fab3-4f0f-b658-441eff2389dc'
+  label: 'Locate Link'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

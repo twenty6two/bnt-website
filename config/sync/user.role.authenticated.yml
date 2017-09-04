@@ -1,0 +1,14 @@
+uuid: 79be3880-88cd-43fd-b466-4f21a9ce1c54
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'administer flexslider'
+  - 'use text format html_content'

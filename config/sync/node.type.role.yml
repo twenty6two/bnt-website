@@ -1,0 +1,17 @@
+uuid: a92436fa-239c-49c0-93ac-df1cbe7c2a90
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Role
+type: role
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

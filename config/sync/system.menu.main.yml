@@ -1,0 +1,10 @@
+uuid: 0df4670b-89be-4e4e-bea8-e46b57f08eed
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: Q2Ra3jfoIVk0f3SjxJX61byRQFVBAbpzYDQOiY-kno8
+id: main
+label: 'Main Navigation'
+description: ''
+locked: true

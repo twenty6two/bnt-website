@@ -1,0 +1,24 @@
+uuid: 8c11c65e-f06b-4b3b-8ebd-4e7b98a89526
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.home_page_slideshow
+  module:
+    - views
+  theme:
+    - big_noise
+id: home_page_slideshow
+theme: big_noise
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:home_page_slideshow-block'
+settings:
+  id: 'views_block:home_page_slideshow-block'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: '40'
+visibility: {  }

@@ -1,0 +1,21 @@
+uuid: 51f4c6e8-6576-4b47-905a-ff6225e9238f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_heading
+    - paragraphs.paragraphs_type.content_block_heading_and_icon
+  module:
+    - text
+id: paragraph.content_block_heading_and_icon.field_heading
+field_name: field_heading
+entity_type: paragraph
+bundle: content_block_heading_and_icon
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

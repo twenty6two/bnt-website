@@ -1,0 +1,25 @@
+uuid: 7e3de53a-7071-4b1f-9afd-e4a0a57d6b0f
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:html_blob:6eb9006a-1beb-40eb-b311-d55e6be35045'
+  module:
+    - block_content
+  theme:
+    - big_noise
+id: phone_link_sidebar
+theme: big_noise
+region: sidebar_main_navigation
+weight: 0
+provider: null
+plugin: 'block_content:6eb9006a-1beb-40eb-b311-d55e6be35045'
+settings:
+  id: 'block_content:6eb9006a-1beb-40eb-b311-d55e6be35045'
+  label: 'Phone Link'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

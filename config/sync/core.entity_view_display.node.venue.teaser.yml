@@ -1,0 +1,18 @@
+uuid: 3dc6347a-a128-4459-86a1-1c0ec472e774
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.venue
+  module:
+    - user
+id: node.venue.teaser
+targetEntityType: node
+bundle: venue
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden: {  }

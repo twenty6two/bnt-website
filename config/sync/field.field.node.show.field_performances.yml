@@ -1,0 +1,21 @@
+uuid: bd56a523-95a2-4c5c-aea1-25d858546309
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_performances
+    - node.type.show
+  module:
+    - datetime
+id: node.show.field_performances
+field_name: field_performances
+entity_type: node
+bundle: show
+label: Performances
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,21 @@
+uuid: 7a91deec-ce63-4fa9-ad44-062247a550e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_slide_heading
+    - node.type.slide
+  module:
+    - text
+id: node.slide.field_slide_heading
+field_name: field_slide_heading
+entity_type: node
+bundle: slide
+label: 'Slide Heading'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

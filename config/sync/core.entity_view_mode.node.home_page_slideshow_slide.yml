@@ -1,0 +1,10 @@
+uuid: 54c145d8-b109-471f-989f-840d9c9336a4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.home_page_slideshow_slide
+label: 'Home Page Slideshow Slide'
+targetEntityType: node
+cache: true

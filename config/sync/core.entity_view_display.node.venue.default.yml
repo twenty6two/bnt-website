@@ -1,0 +1,17 @@
+uuid: 3f9cf43f-e5d5-48d8-9e9f-da95786fa69d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.venue
+  module:
+    - user
+id: node.venue.default
+targetEntityType: node
+bundle: venue
+mode: default
+content:
+  links:
+    weight: 100
+    region: content
+hidden: {  }

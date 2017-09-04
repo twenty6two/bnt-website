@@ -1,0 +1,24 @@
+uuid: a27c3a3c-fb3c-41f0-9de5-ac8205e3ecdc
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - big_noise
+id: main_navigation_sidebar
+theme: big_noise
+region: sidebar_main_navigation
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main Navigation'
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 1
+visibility: {  }

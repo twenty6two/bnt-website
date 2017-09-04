@@ -1,0 +1,19 @@
+uuid: 682a23b2-b479-4a39-b3f9-adb000b92d8d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_venue_details
+field_name: field_venue_details
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

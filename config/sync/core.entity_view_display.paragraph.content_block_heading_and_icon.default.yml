@@ -1,0 +1,38 @@
+uuid: d67791aa-dc31-4c74-ac7e-44d81e24b122
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_block_heading_and_icon.field_content
+    - field.field.paragraph.content_block_heading_and_icon.field_heading
+    - field.field.paragraph.content_block_heading_and_icon.field_icon
+    - paragraphs.paragraphs_type.content_block_heading_and_icon
+  module:
+    - text
+id: paragraph.content_block_heading_and_icon.default
+targetEntityType: paragraph
+bundle: content_block_heading_and_icon
+mode: default
+content:
+  field_content:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_heading:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_icon:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

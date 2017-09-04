@@ -1,0 +1,30 @@
+uuid: 44c8a033-9c67-41af-9752-97facd6880f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.season.field_season_status
+    - taxonomy.vocabulary.season
+  module:
+    - options
+    - text
+id: taxonomy_term.season.default
+targetEntityType: taxonomy_term
+bundle: season
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_season_status:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden: {  }

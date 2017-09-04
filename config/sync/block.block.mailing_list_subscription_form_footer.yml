@@ -1,0 +1,20 @@
+uuid: c212c78f-8698-4ee7-9098-ee760f685f54
+langcode: en
+status: true
+dependencies:
+  module:
+    - mailchimp_signup
+  theme:
+    - big_noise
+id: mailing_list_subscription_form_footer
+theme: big_noise
+region: footer
+weight: 0
+provider: null
+plugin: 'mailchimp_signup_subscribe_block:general_mailing_list'
+settings:
+  id: 'mailchimp_signup_subscribe_block:general_mailing_list'
+  label: 'Join Our Email List'
+  provider: mailchimp_signup
+  label_display: visible
+visibility: {  }

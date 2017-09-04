@@ -1,0 +1,21 @@
+uuid: 3e42f07a-b610-4a74-9f4a-3d3823fe6890
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_season_status
+    - taxonomy.vocabulary.season
+  module:
+    - options
+id: taxonomy_term.season.field_season_status
+field_name: field_season_status
+entity_type: taxonomy_term
+bundle: season
+label: 'Season Status'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,38 @@
+uuid: e584f7bf-ebee-48f0-b561-8c3d442f8aa3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title_image_desktop
+    - node.type.show
+  module:
+    - image
+id: node.show.field_title_image_desktop
+field_name: field_title_image_desktop
+entity_type: node
+bundle: show
+label: 'Title Image (Desktop)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: images/shows/titles
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

@@ -1,0 +1,21 @@
+uuid: 47422afd-b243-42fd-9b94-0ab4a23c84ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_synopsis
+    - node.type.show
+  module:
+    - text
+id: node.show.field_synopsis
+field_name: field_synopsis
+entity_type: node
+bundle: show
+label: Synopsis
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

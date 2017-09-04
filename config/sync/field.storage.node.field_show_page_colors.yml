@@ -1,0 +1,19 @@
+uuid: 5fdb928d-1803-47f6-be4a-5ed950f97769
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - show_page_colors
+id: node.field_show_page_colors
+field_name: field_show_page_colors
+entity_type: node
+type: show_page_colors
+settings: {  }
+module: show_page_colors
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,21 @@
+uuid: db26246a-ee13-4e9c-bbfb-97086ea481b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - paragraphs.paragraphs_type.content_block_heading_and_icon
+  module:
+    - text
+id: paragraph.content_block_heading_and_icon.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: content_block_heading_and_icon
+label: Content
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

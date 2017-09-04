@@ -1,0 +1,22 @@
+uuid: 07d61a9a-f5c6-47a1-aba1-59ee95a32e20
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - big_noise
+_core:
+  default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
+id: big_noise_messages
+theme: big_noise
+region: content
+weight: -6
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

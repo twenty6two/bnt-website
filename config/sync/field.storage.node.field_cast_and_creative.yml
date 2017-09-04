@@ -1,0 +1,19 @@
+uuid: 75615d55-dd36-450b-9077-d2d9c7470491
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_cast_and_creative
+field_name: field_cast_and_creative
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

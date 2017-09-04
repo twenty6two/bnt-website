@@ -1,0 +1,21 @@
+uuid: 455aa72c-3542-4771-a60d-22f3d9f83319
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon
+    - paragraphs.paragraphs_type.content_block_heading_and_icon
+  module:
+    - text
+id: paragraph.content_block_heading_and_icon.field_icon
+field_name: field_icon
+entity_type: paragraph
+bundle: content_block_heading_and_icon
+label: Icon
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

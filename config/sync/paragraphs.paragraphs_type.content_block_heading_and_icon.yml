@@ -1,0 +1,7 @@
+uuid: 566bb65a-99a4-481e-89e3-f74d9ad478d5
+langcode: en
+status: true
+dependencies: {  }
+id: content_block_heading_and_icon
+label: 'Content Block with Heading and Icon'
+behavior_plugins: {  }

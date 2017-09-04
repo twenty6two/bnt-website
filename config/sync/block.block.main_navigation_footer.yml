@@ -1,0 +1,24 @@
+uuid: 9a537053-cb0b-41b6-b119-a832b75833d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - big_noise
+id: main_navigation_footer
+theme: big_noise
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main Navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 2
+visibility: {  }

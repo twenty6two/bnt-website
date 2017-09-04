@@ -1,0 +1,25 @@
+uuid: afe3d3ef-5202-4e64-a07e-7921e5e73c6b
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:html_blob:16b58a2a-d798-4c59-9cbc-14917b93a529'
+  module:
+    - block_content
+  theme:
+    - big_noise
+id: buy_tickets_link_header
+theme: big_noise
+region: header
+weight: -9
+provider: null
+plugin: 'block_content:16b58a2a-d798-4c59-9cbc-14917b93a529'
+settings:
+  id: 'block_content:16b58a2a-d798-4c59-9cbc-14917b93a529'
+  label: 'Buy Tickets Link'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

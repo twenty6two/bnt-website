@@ -1,0 +1,71 @@
+uuid: b4391374-f18e-49ef-bf2c-0bc9844ca845
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.slide.field_slide_background_image
+    - field.field.node.slide.field_slide_content
+    - field.field.node.slide.field_slide_heading
+    - field.field.node.slide.field_slide_highlight_image
+    - field.field.node.slide.field_slide_link
+    - node.type.slide
+  module:
+    - image
+    - link
+    - text
+    - user
+id: node.slide.default
+targetEntityType: node
+bundle: slide
+mode: default
+content:
+  field_slide_background_image:
+    weight: 102
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_slide_content:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_slide_heading:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_slide_highlight_image:
+    weight: 103
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_slide_link:
+    weight: 105
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

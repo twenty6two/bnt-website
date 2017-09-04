@@ -1,0 +1,19 @@
+uuid: 9eddbcfa-fc85-4f3d-96d9-e94534320374
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title
+    - node.type.show
+id: node.show.field_title
+field_name: field_title
+entity_type: node
+bundle: show
+label: 'Show Name'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

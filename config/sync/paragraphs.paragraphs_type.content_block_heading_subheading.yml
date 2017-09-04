@@ -1,0 +1,7 @@
+uuid: ba6a25f1-16c5-41de-b996-d40b61427484
+langcode: en
+status: true
+dependencies: {  }
+id: content_block_heading_subheading
+label: 'Content Block with Heading and Subheading'
+behavior_plugins: {  }

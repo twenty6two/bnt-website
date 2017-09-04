@@ -1,0 +1,24 @@
+uuid: 217e82b8-d900-4d72-a466-38475be44bc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.page.field_content_blocks
+    - field.field.node.page.field_subheading
+    - field.field.node.page.field_title
+    - node.type.page
+  module:
+    - user
+id: node.page.teaser
+targetEntityType: node
+bundle: page
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_content_blocks: true
+  field_subheading: true
+  field_title: true

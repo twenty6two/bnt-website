@@ -1,0 +1,22 @@
+uuid: 969130a3-491c-4c00-a9cf-a3445dfe4dca
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - bignoise
+_core:
+  default_config_hash: 4QlSnWBcxxKMIFRM8sbu_MjSkcp3NjGgnVrc-lynQHI
+id: bignoise_login
+theme: bignoise
+region: sidebar_first
+weight: 0
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'User login'
+  provider: user
+  label_display: visible
+visibility: {  }

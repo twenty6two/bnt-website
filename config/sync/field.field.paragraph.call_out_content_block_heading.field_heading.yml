@@ -1,0 +1,21 @@
+uuid: ba373826-edfb-4d68-8270-705d81ad225c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_heading
+    - paragraphs.paragraphs_type.call_out_content_block_heading
+  module:
+    - text
+id: paragraph.call_out_content_block_heading.field_heading
+field_name: field_heading
+entity_type: paragraph
+bundle: call_out_content_block_heading
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

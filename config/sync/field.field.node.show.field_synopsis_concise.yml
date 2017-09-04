@@ -1,0 +1,21 @@
+uuid: 6b53fa79-a1e2-4d8a-aca1-4d707de1648e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_synopsis_concise
+    - node.type.show
+  module:
+    - text
+id: node.show.field_synopsis_concise
+field_name: field_synopsis_concise
+entity_type: node
+bundle: show
+label: 'Synopsis (Concise)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

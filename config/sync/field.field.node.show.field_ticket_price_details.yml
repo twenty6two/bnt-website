@@ -1,0 +1,21 @@
+uuid: 0fc2c7ed-959e-4830-91d2-a80870ee2ae1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ticket_price_details
+    - node.type.show
+  module:
+    - text
+id: node.show.field_ticket_price_details
+field_name: field_ticket_price_details
+entity_type: node
+bundle: show
+label: 'Ticket Price Details'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

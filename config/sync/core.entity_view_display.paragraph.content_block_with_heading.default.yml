@@ -1,0 +1,30 @@
+uuid: d115c5a7-2cce-45ab-9199-cc74c7c390f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_block_with_heading.field_content
+    - field.field.paragraph.content_block_with_heading.field_heading
+    - paragraphs.paragraphs_type.content_block_with_heading
+  module:
+    - text
+id: paragraph.content_block_with_heading.default
+targetEntityType: paragraph
+bundle: content_block_with_heading
+mode: default
+content:
+  field_content:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_heading:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

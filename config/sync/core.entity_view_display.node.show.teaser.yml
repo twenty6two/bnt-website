@@ -1,0 +1,24 @@
+uuid: 47a1999a-0bbb-4421-a020-14b99ac3a89c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.show.field_performances
+    - field.field.node.show.field_season
+    - field.field.node.show.field_venue
+    - node.type.show
+  module:
+    - user
+id: node.show.teaser
+targetEntityType: node
+bundle: show
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_performances: true
+  field_season: true
+  field_venue: true

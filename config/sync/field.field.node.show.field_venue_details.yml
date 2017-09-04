@@ -1,0 +1,21 @@
+uuid: 3dc8b7c8-7845-4e0d-9654-396e1976bcfb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_venue_details
+    - node.type.show
+  module:
+    - text
+id: node.show.field_venue_details
+field_name: field_venue_details
+entity_type: node
+bundle: show
+label: 'Venue Details'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,22 @@
+uuid: c587936c-51cc-4d20-9b9c-f014c2254cc6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: default_show_path
+label: 'Default Show Path'
+type: 'canonical_entities:node'
+pattern: '/shows/[node:field_season:entity:name]/[node:field_title]'
+selection_criteria:
+  58747dd8-c717-4dd4-a21e-6cf99143cd1d:
+    id: node_type
+    bundles:
+      show: show
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 58747dd8-c717-4dd4-a21e-6cf99143cd1d
+selection_logic: and
+weight: -5
+relationships: {  }

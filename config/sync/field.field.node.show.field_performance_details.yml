@@ -1,0 +1,21 @@
+uuid: 98564339-89d5-442a-bba1-56b5e936ad16
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_performance_details
+    - node.type.show
+  module:
+    - text
+id: node.show.field_performance_details
+field_name: field_performance_details
+entity_type: node
+bundle: show
+label: 'Performance Details'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

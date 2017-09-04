@@ -1,0 +1,24 @@
+uuid: fbe3eb5b-a722-4d95-94d6-c427955873d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.social-media
+  module:
+    - system
+  theme:
+    - big_noise
+id: social_media_navigation_header
+theme: big_noise
+region: header
+weight: -5
+provider: null
+plugin: 'system_menu_block:social-media'
+settings:
+  id: 'system_menu_block:social-media'
+  label: 'Social Media'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 1
+visibility: {  }

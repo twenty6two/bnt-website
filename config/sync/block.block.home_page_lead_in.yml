@@ -1,0 +1,31 @@
+uuid: 028b1767-65a2-489c-bedc-f96d8378d3e2
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:html_blob:6f3fe4ab-faab-481a-bf8c-9564d2b31ce7'
+  module:
+    - block_content
+    - system
+  theme:
+    - big_noise
+id: home_page_lead_in
+theme: big_noise
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:6f3fe4ab-faab-481a-bf8c-9564d2b31ce7'
+settings:
+  id: 'block_content:6f3fe4ab-faab-481a-bf8c-9564d2b31ce7'
+  label: 'Home Page Lead In'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

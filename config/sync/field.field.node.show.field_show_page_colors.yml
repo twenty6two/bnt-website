@@ -1,0 +1,21 @@
+uuid: 25dfed20-1c66-46f3-a0b3-14b1b2833efd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_page_colors
+    - node.type.show
+  module:
+    - show_page_colors
+id: node.show.field_show_page_colors
+field_name: field_show_page_colors
+entity_type: node
+bundle: show
+label: 'Show Page Colors'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: show_page_colors

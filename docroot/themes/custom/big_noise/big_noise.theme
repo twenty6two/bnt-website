@@ -142,6 +142,31 @@ function big_noise_preprocess_node(&$variables) {
 }
 
 
+function big_noise_preprocess_field(&$variables) {
+  $field_name = $variables['element']['#field_name'];
+
+  switch ($field_name) {
+    case 'field_title_image_mobile':
+    case 'field_title_image_tablet':
+    case 'field_title_image_desktop':
+
+      $original_width = $variables['element'][0]['#item']->getProperties()['width']->getValue();
+      $original_height = $variables['element'][0]['#item']->getProperties()['height']->getValue();
+
+      $adjusted_width = ($original_width / 2);
+      $adjusted_height = ($original_height / 2);
+
+      $variables['adjusted_width'] = $adjusted_width;
+      $variables['adjusted_height'] = $adjusted_height;
+
+      break;
+    default:
+
+      break;
+  }
+}
+
+
 function big_noise_preprocess_block__secondary_navigation_main(&$variables) {
   $variables['menu_container_classes'] = [];
 

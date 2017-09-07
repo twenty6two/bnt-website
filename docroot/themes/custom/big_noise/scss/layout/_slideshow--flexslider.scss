@@ -53,7 +53,7 @@
           width: 1.5rem;
           height: 1.5rem;
         }
-        transition: $bn-transition-duration-default;
+        transition: background $bn-transition-duration-default;
 
         &.flex-active {
           background: #3e464f;

@@ -4122,104 +4122,133 @@ a.big-button:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  text-align: center;
 }
-@media (min-width: 1024px) {
-  /* line 1, ../scss/custom/_season-packages-callout.scss */
-  .season-packages-callout {
-    text-align: left;
-  }
-}
-/* line 10, ../scss/custom/_season-packages-callout.scss */
-.season-packages-callout .heading {
-  font-size: 1.6rem;
-  font-weight: 600;
-}
-@media (min-width: 768px) {
-  /* line 10, ../scss/custom/_season-packages-callout.scss */
-  .season-packages-callout .heading {
-    font-size: 2rem;
-  }
-}
-/* line 18, ../scss/custom/_season-packages-callout.scss */
-.season-packages-callout p {
-  margin-bottom: 0;
-}
-/* line 22, ../scss/custom/_season-packages-callout.scss */
-.season-packages-callout ul {
-  font-size: 1.6rem;
-  font-weight: 600;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-@media (min-width: 768px) {
-  /* line 22, ../scss/custom/_season-packages-callout.scss */
-  .season-packages-callout ul {
-    font-size: 2rem;
-  }
-}
-@media (max-width: 1023px) {
-  /* line 22, ../scss/custom/_season-packages-callout.scss */
-  .season-packages-callout ul {
-    justify-content: center;
-  }
-}
-@media (min-width: 1024px) {
-  /* line 22, ../scss/custom/_season-packages-callout.scss */
-  .season-packages-callout ul {
-    flex-direction: column;
-  }
-}
-/* line 40, ../scss/custom/_season-packages-callout.scss */
-.season-packages-callout ul li:not(:last-of-type) {
-  padding-right: 0.5em;
-}
-@media (min-width: 1024px) {
-  /* line 40, ../scss/custom/_season-packages-callout.scss */
-  .season-packages-callout ul li:not(:last-of-type) {
-    padding-right: 0;
-  }
-}
-/* line 46, ../scss/custom/_season-packages-callout.scss */
-.season-packages-callout ul li:not(:last-of-type)::after {
-  content: '\2022';
-  padding-left: 0.5em;
-}
-@media (min-width: 1024px) {
-  /* line 46, ../scss/custom/_season-packages-callout.scss */
-  .season-packages-callout ul li:not(:last-of-type)::after {
-    content: none;
-    padding-left: 0;
-  }
-}
-/* line 57, ../scss/custom/_season-packages-callout.scss */
+/* line 6, ../scss/custom/_season-packages-callout.scss */
 .season-packages-callout .block {
   flex-basis: 100%;
 }
-/* line 59, ../scss/custom/_season-packages-callout.scss */
+/* line 8, ../scss/custom/_season-packages-callout.scss */
 .season-packages-callout .block:not(:last-of-type) {
   margin-bottom: 2rem;
 }
 @media (min-width: 768px) {
-  /* line 57, ../scss/custom/_season-packages-callout.scss */
+  /* line 6, ../scss/custom/_season-packages-callout.scss */
   .season-packages-callout .block {
     flex-basis: 50%;
   }
-  /* line 64, ../scss/custom/_season-packages-callout.scss */
+  /* line 13, ../scss/custom/_season-packages-callout.scss */
   .season-packages-callout .block:not(:last-of-type) {
     margin-bottom: 0;
   }
 }
 @media (min-width: 1024px) {
-  /* line 57, ../scss/custom/_season-packages-callout.scss */
+  /* line 6, ../scss/custom/_season-packages-callout.scss */
   .season-packages-callout .block {
     flex-basis: 100%;
   }
-  /* line 70, ../scss/custom/_season-packages-callout.scss */
+  /* line 19, ../scss/custom/_season-packages-callout.scss */
   .season-packages-callout .block:not(:last-of-type) {
     margin-bottom: 2rem;
+  }
+}
+/* line 25, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout p {
+  margin-bottom: 0;
+}
+/* line 29, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout p,
+.season-packages-callout ul,
+.season-packages-callout li {
+  line-height: 1.5;
+  text-align: center;
+}
+@media (min-width: 1024px) {
+  /* line 29, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout p,
+  .season-packages-callout ul,
+  .season-packages-callout li {
+    text-align: left;
+  }
+}
+/* line 39, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout .heading {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  /* line 39, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout .heading {
+    font-size: 2rem;
+  }
+}
+/* line 47, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout .highlight {
+  font-style: italic;
+}
+/* line 51, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout ul {
+  font-size: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 57, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout ul > li {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  /* line 57, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul > li {
+    font-size: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 57, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul > li {
+    text-align: left;
+  }
+}
+/* line 69, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout ul > li:nth-child(1) {
+  padding-right: 0.5em;
+}
+@media (min-width: 1024px) {
+  /* line 69, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul > li:nth-child(1) {
+    padding-right: 0;
+  }
+}
+/* line 75, ../scss/custom/_season-packages-callout.scss */
+.season-packages-callout ul > li:nth-child(1)::after {
+  content: '\2022';
+  padding-left: 0.5em;
+}
+@media (min-width: 1024px) {
+  /* line 75, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul > li:nth-child(1)::after {
+    content: none;
+    padding-left: 0;
+  }
+}
+@media (max-width: 1023px) {
+  /* line 57, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul > li {
+    display: inline-block;
+  }
+}
+@media (max-width: 1023px) {
+  /* line 90, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul > li:nth-child(3) {
+    display: block;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 57, ../scss/custom/_season-packages-callout.scss */
+  .season-packages-callout ul > li {
+    display: block;
   }
 }
 

@@ -2,57 +2,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  text-align: center;
-  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-    text-align: left;
-  }
-
-  .heading {
-    font-size: 1.6rem;
-    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-      font-size: 2rem;
-    }
-    font-weight: 600;
-  }
-
-  p {
-    margin-bottom: 0;
-  }
-
-  ul {
-    font-size: 1.6rem;
-    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-      font-size: 2rem;
-    }
-    font-weight: 600;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    display: flex;
-    @media (max-width: $bn-breakpoint-width-max-layout-tablet) {
-      justify-content: center;
-    }
-    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-      flex-direction: column;
-    }
-
-    li:not(:last-of-type) {
-      padding-right: 0.5em;
-      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-        padding-right: 0;
-      }
-
-      &::after {
-        content: '\2022';
-        padding-left: 0.5em;
-        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-          content: none;
-          padding-left: 0;
-        }
-      }
-    }
-  }
 
   .block {
     flex-basis: 100%;
@@ -69,6 +18,83 @@
       flex-basis: 100%;
       &:not(:last-of-type) {
         margin-bottom: 2rem;
+      }
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  p,
+  ul,
+  li {
+    line-height: 1.5;
+    text-align: center;
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+      text-align: left;
+    }
+  }
+
+  .heading {
+    font-size: 1.6rem;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      font-size: 2rem;
+    }
+    font-weight: 600;
+  }
+
+  .highlight {
+    font-style: italic;
+  }
+
+  ul {
+    font-size: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    > li {
+      display: inline-block;
+      font-size: 1.6rem;
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+        font-size: 2rem;
+      }
+      font-weight: 600;
+      text-align: center;
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        text-align: left;
+      }
+
+      &:nth-child(1) {
+        padding-right: 0.5em;
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+          padding-right: 0;
+        }
+
+        &::after {
+          content: '\2022';
+          padding-left: 0.5em;
+          @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+            content: none;
+            padding-left: 0;
+          }
+        }
+      }
+
+
+      @media (max-width: $bn-breakpoint-width-max-layout-tablet) {
+        display: inline-block;
+      }
+
+      &:nth-child(3) {
+        @media (max-width: $bn-breakpoint-width-max-layout-tablet) {
+          display: block;
+        }
+      }
+
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        display: block;
       }
     }
   }

@@ -1774,29 +1774,13 @@ nav ul {
   padding-bottom: 1rem;
 }
 
-/* line 1, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
-.home-page-slideshow-slide {
-  height: 18rem;
-}
-@media (min-width: 768px) {
-  /* line 1, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
-  .home-page-slideshow-slide {
-    height: 31rem;
-  }
-}
-@media (min-width: 1024px) {
-  /* line 1, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
-  .home-page-slideshow-slide {
-    height: 36rem;
-  }
-}
-/* line 10, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 2, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide > a {
   display: block;
   height: 100%;
 }
 
-/* line 16, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 8, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--container {
   height: 100%;
   display: flex;
@@ -1804,18 +1788,18 @@ nav ul {
   justify-content: space-between;
 }
 
-/* line 23, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 15, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--heading-container {
   padding-top: 1.5rem;
 }
 @media (min-width: 768px) {
-  /* line 23, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 15, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--heading-container {
     padding-top: 2rem;
   }
 }
 
-/* line 30, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 22, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--body-container {
   display: flex;
   flex-grow: 1;
@@ -1823,28 +1807,41 @@ nav ul {
   padding-bottom: 1.5rem;
 }
 @media (min-width: 768px) {
-  /* line 30, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 22, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--body-container {
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
 }
 
-/* line 41, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 33, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--highlight-image-container {
+  height: 11rem;
   display: flex;
   align-items: center;
   flex-basis: 45%;
   padding-right: 0.75rem;
 }
 @media (min-width: 768px) {
-  /* line 41, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 33, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  .home-page-slideshow-slide--highlight-image-container {
+    height: 21.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 33, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  .home-page-slideshow-slide--highlight-image-container {
+    height: 26rem;
+  }
+}
+@media (min-width: 768px) {
+  /* line 33, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--highlight-image-container {
     padding-right: 1.5rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 41, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 33, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--highlight-image-container {
     padding-right: 3rem;
   }
@@ -1857,10 +1854,23 @@ nav ul {
 
 /* line 60, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--content-container {
+  height: 11rem;
   display: flex;
   align-items: center;
   flex-basis: 55%;
   padding-left: 0.75rem;
+}
+@media (min-width: 768px) {
+  /* line 60, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  .home-page-slideshow-slide--content-container {
+    height: 21.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 60, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  .home-page-slideshow-slide--content-container {
+    height: 26rem;
+  }
 }
 @media (min-width: 768px) {
   /* line 60, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */

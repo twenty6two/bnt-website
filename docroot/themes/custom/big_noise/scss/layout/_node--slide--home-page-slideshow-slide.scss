@@ -1,12 +1,4 @@
 .home-page-slideshow-slide {
-  height: 18rem;
-  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-    height: 31rem;
-  }
-  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-    height: 36rem;
-  }
-
   > a {
     display: block;
     height: 100%;
@@ -39,6 +31,14 @@
 }
 
 .home-page-slideshow-slide--highlight-image-container {
+  height: 11rem;
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+    height: 21.5rem;
+  }
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+    height: 26rem;
+  }
+
   display: flex;
   align-items: center;
 
@@ -58,6 +58,14 @@
 }
 
 .home-page-slideshow-slide--content-container {
+  height: 11rem;
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+    height: 21.5rem;
+  }
+  @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+    height: 26rem;
+  }
+
   display: flex;
   align-items: center;
 

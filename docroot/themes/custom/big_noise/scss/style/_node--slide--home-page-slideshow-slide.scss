@@ -2,8 +2,11 @@
   background-position: center center;
   background-size: cover;
 
-  cursor: default;
   text-shadow: 0 0 3em rgba(0, 0, 0, 0.4);
+
+  > a {
+    text-decoration: none;
+  }
 
   .slide-heading {
     background-image: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);

@@ -1790,8 +1790,13 @@ nav ul {
     height: 36rem;
   }
 }
+/* line 10, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+.home-page-slideshow-slide > a {
+  display: block;
+  height: 100%;
+}
 
-/* line 11, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 16, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--container {
   height: 100%;
   display: flex;
@@ -1799,18 +1804,18 @@ nav ul {
   justify-content: space-between;
 }
 
-/* line 18, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 23, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--heading-container {
   padding-top: 1.5rem;
 }
 @media (min-width: 768px) {
-  /* line 18, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 23, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--heading-container {
     padding-top: 2rem;
   }
 }
 
-/* line 25, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 30, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--body-container {
   display: flex;
   flex-grow: 1;
@@ -1818,14 +1823,14 @@ nav ul {
   padding-bottom: 1.5rem;
 }
 @media (min-width: 768px) {
-  /* line 25, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 30, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--body-container {
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
 }
 
-/* line 36, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 41, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--highlight-image-container {
   display: flex;
   align-items: center;
@@ -1833,24 +1838,24 @@ nav ul {
   padding-right: 0.75rem;
 }
 @media (min-width: 768px) {
-  /* line 36, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 41, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--highlight-image-container {
     padding-right: 1.5rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 36, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 41, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--highlight-image-container {
     padding-right: 3rem;
   }
 }
-/* line 49, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 54, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--highlight-image-container .slide-highlight-image {
   width: 100%;
   height: 100%;
 }
 
-/* line 55, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+/* line 60, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide--content-container {
   display: flex;
   align-items: center;
@@ -1858,13 +1863,13 @@ nav ul {
   padding-left: 0.75rem;
 }
 @media (min-width: 768px) {
-  /* line 55, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 60, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--content-container {
     padding-left: 1.5rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 55, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
+  /* line 60, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide--content-container {
     padding-left: 3rem;
   }
@@ -3497,10 +3502,13 @@ svg .page--highlight-color {
 .home-page-slideshow-slide {
   background-position: center center;
   background-size: cover;
-  cursor: default;
   text-shadow: 0 0 3em rgba(0, 0, 0, 0.4);
 }
-/* line 8, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+/* line 7, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+.home-page-slideshow-slide > a {
+  text-decoration: none;
+}
+/* line 11, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide .slide-heading {
   background-image: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
   background-position: center bottom;
@@ -3515,24 +3523,24 @@ svg .page--highlight-color {
   padding-bottom: 0.7rem;
 }
 @media (min-width: 768px) {
-  /* line 8, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+  /* line 11, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide .slide-heading {
     font-size: 2.4rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 8, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+  /* line 11, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide .slide-heading {
     font-size: 2.8rem;
   }
 }
-/* line 28, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+/* line 31, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide .slide-highlight-image {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
 }
-/* line 34, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+/* line 37, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide .slide-content {
   color: #f0f2f4;
   font-size: 1.3rem;
@@ -3541,36 +3549,36 @@ svg .page--highlight-color {
   line-height: 1.2;
 }
 @media (min-width: 768px) {
-  /* line 34, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+  /* line 37, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide .slide-content {
     font-size: 2rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 34, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+  /* line 37, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide .slide-content {
     font-size: 2.4rem;
   }
 }
-/* line 47, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+/* line 50, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide .slide-content .heading {
   font-family: "Oswald";
   font-size: 1.6rem;
   font-style: normal;
 }
 @media (min-width: 768px) {
-  /* line 47, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+  /* line 50, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide .slide-content .heading {
     font-size: 2.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 47, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+  /* line 50, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
   .home-page-slideshow-slide .slide-content .heading {
     font-size: 3.6rem;
   }
 }
-/* line 59, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+/* line 62, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide .slide-content p:not(:last-child) {
   margin-bottom: 1em;
 }

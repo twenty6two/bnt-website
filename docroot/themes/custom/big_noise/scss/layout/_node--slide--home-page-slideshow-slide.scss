@@ -6,6 +6,11 @@
   @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     height: 36rem;
   }
+
+  > a {
+    display: block;
+    height: 100%;
+  }
 }
 
 .home-page-slideshow-slide--container {

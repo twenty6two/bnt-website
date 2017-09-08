@@ -3804,7 +3804,7 @@ a.big-button:hover {
   justify-content: center;
   margin-bottom: 2rem;
   padding-top: 2rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
 }
 @media (min-width: 768px) {
   /* line 1, ../scss/custom/_home-page-lead-in.scss */
@@ -3820,7 +3820,7 @@ a.big-button:hover {
   font-style: italic;
   font-weight: 600;
   line-height: 1.5;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 @media (min-width: 768px) {
@@ -3829,14 +3829,8 @@ a.big-button:hover {
     font-size: 2rem;
   }
 }
-@media (min-width: 768px) {
-  /* line 21, ../scss/custom/_home-page-lead-in.scss */
-  .home-page--lead-in--text {
-    margin-bottom: 2rem;
-  }
-}
 
-/* line 38, ../scss/custom/_home-page-lead-in.scss */
+/* line 35, ../scss/custom/_home-page-lead-in.scss */
 .home-page--lead-in--show-list {
   flex-basis: 100%;
   list-style: none;
@@ -3849,20 +3843,20 @@ a.big-button:hover {
   font-size: 0;
 }
 @media (min-width: 768px) {
-  /* line 38, ../scss/custom/_home-page-lead-in.scss */
+  /* line 35, ../scss/custom/_home-page-lead-in.scss */
   .home-page--lead-in--show-list {
     margin-left: -1rem;
     margin-right: -1rem;
   }
 }
 @media (min-width: 1300px) {
-  /* line 38, ../scss/custom/_home-page-lead-in.scss */
+  /* line 35, ../scss/custom/_home-page-lead-in.scss */
   .home-page--lead-in--show-list {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
   }
 }
-/* line 57, ../scss/custom/_home-page-lead-in.scss */
+/* line 54, ../scss/custom/_home-page-lead-in.scss */
 .home-page--lead-in--show-list > li {
   display: inline-block;
   padding-left: 0.5rem;
@@ -3870,31 +3864,31 @@ a.big-button:hover {
   width: 33.3334%;
 }
 @media (min-width: 768px) {
-  /* line 57, ../scss/custom/_home-page-lead-in.scss */
+  /* line 54, ../scss/custom/_home-page-lead-in.scss */
   .home-page--lead-in--show-list > li {
     padding-left: 1rem;
     padding-right: 1rem;
   }
 }
 @media (min-width: 1300px) {
-  /* line 57, ../scss/custom/_home-page-lead-in.scss */
+  /* line 54, ../scss/custom/_home-page-lead-in.scss */
   .home-page--lead-in--show-list > li {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 }
-/* line 71, ../scss/custom/_home-page-lead-in.scss */
+/* line 68, ../scss/custom/_home-page-lead-in.scss */
 .home-page--lead-in--show-list > li > a {
   display: block;
   width: 100%;
   height: 100%;
 }
-/* line 78, ../scss/custom/_home-page-lead-in.scss */
+/* line 75, ../scss/custom/_home-page-lead-in.scss */
 .home-page--lead-in--show-list .show-list-block {
   width: 100%;
   height: 100%;
 }
-/* line 83, ../scss/custom/_home-page-lead-in.scss */
+/* line 80, ../scss/custom/_home-page-lead-in.scss */
 .home-page--lead-in--show-list .show-list-block .image-container img {
   display: block;
   max-width: 100%;
@@ -3902,13 +3896,13 @@ a.big-button:hover {
   width: auto;
   height: auto;
 }
-/* line 92, ../scss/custom/_home-page-lead-in.scss */
+/* line 89, ../scss/custom/_home-page-lead-in.scss */
 .home-page--lead-in--show-list .show-list-block .label-container {
   font-size: 1.6rem;
   text-align: center;
 }
 @media (max-width: 767px) {
-  /* line 92, ../scss/custom/_home-page-lead-in.scss */
+  /* line 89, ../scss/custom/_home-page-lead-in.scss */
   .home-page--lead-in--show-list .show-list-block .label-container {
     display: none;
   }
@@ -4351,13 +4345,19 @@ a.big-button:hover {
 .season-packages--show-list--images {
   font-size: 0;
   list-style: none;
-  margin-top: 0;
+  margin-top: 2.5rem;
   margin-bottom: 0;
   margin-left: -1rem;
   margin-right: -1rem;
   padding: 0;
 }
-/* line 10, ../scss/custom/_season-packages--show-list--images.scss */
+@media (min-width: 768px) {
+  /* line 1, ../scss/custom/_season-packages--show-list--images.scss */
+  .season-packages--show-list--images {
+    margin-top: 3rem;
+  }
+}
+/* line 13, ../scss/custom/_season-packages--show-list--images.scss */
 .season-packages--show-list--images li {
   display: inline-block;
   font-size: inherit;
@@ -4365,11 +4365,11 @@ a.big-button:hover {
   padding-right: 1rem;
   width: 33.3334%;
 }
-/* line 17, ../scss/custom/_season-packages--show-list--images.scss */
+/* line 20, ../scss/custom/_season-packages--show-list--images.scss */
 .season-packages--show-list--images li a {
   display: block;
 }
-/* line 20, ../scss/custom/_season-packages--show-list--images.scss */
+/* line 23, ../scss/custom/_season-packages--show-list--images.scss */
 .season-packages--show-list--images li a img {
   display: block;
   max-width: 100%;

@@ -332,7 +332,7 @@
     flex-basis: 100%;
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       flex-basis: 50%;
-
+      max-width: 50%;
     }
 
     @media (max-width: $bn-breakpoint-width-max-layout-mobile) {

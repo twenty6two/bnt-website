@@ -1729,6 +1729,7 @@ nav ul {
   /* line 331, ../scss/layout/_node--show.scss */
   .show--cast-creative section {
     flex-basis: 50%;
+    max-width: 50%;
   }
 }
 @media (max-width: 767px) {

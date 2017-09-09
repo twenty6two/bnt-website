@@ -2883,6 +2883,7 @@ button.sidebar-close .icon .close {
     color: #e1e4e7;
     font-family: "Oswald";
     font-size: 1.2rem;
+    font-weight: 500;
     line-height: 2.4rem;
     padding-left: 2.1rem;
     text-align: center;
@@ -2890,7 +2891,7 @@ button.sidebar-close .icon .close {
   }
 }
 
-/* line 181, ../scss/style/_site--header.scss */
+/* line 182, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a {
   border-bottom-color: transparent;
   border-bottom-style: solid;
@@ -2908,21 +2909,21 @@ button.sidebar-close .icon .close {
   transition: color 0.2s;
 }
 @media (min-width: 1024px) {
-  /* line 181, ../scss/style/_site--header.scss */
+  /* line 182, ../scss/style/_site--header.scss */
   .navigation--main-navigation-header > ul > li > a {
     font-size: 2rem;
   }
 }
-/* line 200, ../scss/style/_site--header.scss */
+/* line 201, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a:hover {
   text-decoration: none;
 }
-/* line 204, ../scss/style/_site--header.scss */
+/* line 205, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a.active {
   border-bottom-color: #3e464f;
 }
 
-/* line 214, ../scss/style/_site--header.scss */
+/* line 215, ../scss/style/_site--header.scss */
 .navigation--social-media-navigation-header .social-media-link {
   display: block;
   position: relative;
@@ -2993,14 +2994,14 @@ button.sidebar-close .icon .close {
   fill: #e1e4e7;
 }
 @media (min-width: 768px) {
-  /* line 214, ../scss/style/_site--header.scss */
+  /* line 215, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 214, ../scss/style/_site--header.scss */
+  /* line 215, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 2.8rem;
     height: 2.8rem;
@@ -3343,7 +3344,7 @@ button.sidebar-close .icon .close {
   color: #e1e4e7;
   font-family: "Oswald";
   font-size: 1.3rem;
-  font-weight: 400;
+  font-weight: 500;
   text-align: center;
   text-transform: uppercase;
   width: 10rem;
@@ -3720,6 +3721,7 @@ svg .page--highlight-color {
   font-family: "Oswald";
   font-size: 1.6rem;
   font-style: normal;
+  font-weight: 500;
 }
 @media (min-width: 768px) {
   /* line 50, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
@@ -3733,7 +3735,7 @@ svg .page--highlight-color {
     font-size: 3.6rem;
   }
 }
-/* line 62, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
+/* line 63, ../scss/style/_node--slide--home-page-slideshow-slide.scss */
 .home-page-slideshow-slide .slide-content p:not(:last-child) {
   margin-bottom: 1em;
 }

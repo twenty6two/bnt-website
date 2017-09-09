@@ -2389,7 +2389,6 @@ button.sidebar-close .icon .close {
   transition: transform 0.2s;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  background-color: #e1e4e7;
 }
 /* line 9, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link::before,
@@ -2465,6 +2464,12 @@ button.sidebar-close .icon .close {
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .icon > * g {
   fill: #e1e4e7;
 }
+/* line 31, ../scss/style/_sidebar--main-navigation.scss */
+.sidebar--navigation--phone-link-container .phone-link .icon,
+.sidebar--navigation--locate-link-container .locate-link .icon,
+.sidebar--navigation--buy-tickets-link-container .buy-tickets-link .icon {
+  background-color: #e1e4e7;
+}
 /* line 34, ../scss/style/_sidebar--main-navigation.scss */
 .sidebar--navigation--phone-link-container .phone-link .icon g,
 .sidebar--navigation--locate-link-container .locate-link .icon g,
@@ -2475,15 +2480,14 @@ button.sidebar-close .icon .close {
 .sidebar--navigation--phone-link-container .phone-link .label,
 .sidebar--navigation--locate-link-container .locate-link .label,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .label {
-  display: block;
-  font-size: 0;
+  background-color: #e1e4e7;
 }
 
-/* line 48, ../scss/style/_sidebar--main-navigation.scss */
+/* line 47, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--main-navigation-sidebar > ul > li {
   text-align: right;
 }
-/* line 51, ../scss/style/_sidebar--main-navigation.scss */
+/* line 50, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--main-navigation-sidebar > ul > li > a {
   color: #e1e4e7;
   font-family: "Oswald";
@@ -2493,12 +2497,12 @@ button.sidebar-close .icon .close {
   text-transform: uppercase;
   transition: color 0.2s;
 }
-/* line 60, ../scss/style/_sidebar--main-navigation.scss */
+/* line 59, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--main-navigation-sidebar > ul > li > a:hover {
   text-decoration: none;
 }
 
-/* line 70, ../scss/style/_sidebar--main-navigation.scss */
+/* line 69, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--social-media-navigation-sidebar .social-media-link {
   display: block;
   position: relative;
@@ -2506,7 +2510,6 @@ button.sidebar-close .icon .close {
   transition: transform 0.2s;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  background-color: #e1e4e7;
 }
 /* line 9, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link::before {
@@ -2568,9 +2571,17 @@ button.sidebar-close .icon .close {
 .navigation--social-media-navigation-sidebar .social-media-link .icon > * g {
   fill: #e1e4e7;
 }
+/* line 73, ../scss/style/_sidebar--main-navigation.scss */
+.navigation--social-media-navigation-sidebar .social-media-link .icon {
+  background-color: #e1e4e7;
+}
 /* line 76, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .icon g {
   fill: #3e464f;
+}
+/* line 81, ../scss/style/_sidebar--main-navigation.scss */
+.navigation--social-media-navigation-sidebar .social-media-link .label {
+  background-color: #e1e4e7;
 }
 
 /* line 1, ../scss/style/_site--header.scss */

@@ -28,17 +28,16 @@
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link {
   @include IconButton();
 
-  background-color: $bn-color-sidebar-navigation-icon-button-background;
-
   .icon {
+    background-color: $bn-color-sidebar-navigation-icon-button-background;
+
     g {
       fill: $bn-color-sidebar-navigation-icon-button-image;
     }
   }
 
   .label {
-    display: block;
-    font-size: 0;
+    background-color: $bn-color-sidebar-navigation-icon-button-background;
   }
 }
 
@@ -70,12 +69,17 @@
   .social-media-link {
     @include IconButton();
 
-    background-color: $bn-color-sidebar-navigation-icon-button-background;
 
     .icon {
+      background-color: $bn-color-sidebar-navigation-icon-button-background;
+
       g {
         fill: $bn-color-sidebar-navigation-icon-button-image;
       }
+    }
+
+    .label {
+      background-color: $bn-color-sidebar-navigation-icon-button-background;
     }
   }
 }

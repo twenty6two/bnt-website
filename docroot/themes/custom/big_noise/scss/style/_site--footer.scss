@@ -61,7 +61,13 @@
 
 .navigation--social-media-navigation-footer {
   .social-media-link {
-    @include IconButton();
+    @include IconButton($bn-color-footer-shadow);
+
+    .site--footer.theme-dark & {
+      &::before {
+        box-shadow: 0 0.2rem 0.8rem 0 $bn-color-footer-theme-dark-shadow;
+      }
+    }
   }
 }
 

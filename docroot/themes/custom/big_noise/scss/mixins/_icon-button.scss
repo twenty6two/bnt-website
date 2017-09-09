@@ -1,18 +1,10 @@
-@mixin IconButton {
-  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
-  //background-color: $bn-color-icon-button-background;
-  /* @CMN END TODO */
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.175) 100%);
-  border-radius: 100%;
+@mixin IconButton ($colorShadow: false) {
   display: block;
   position: relative;
+  border-radius: 100%;
   transition: transform $bn-transition-duration-default;
-  /* @CMN TODO -webkit-backface-visibility: hidden; */
-
-  &:hover,
-  &:focus {
-    transform: scale(1.1);
-  }
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 
   &::before {
     content: '';
@@ -21,17 +13,53 @@
     height: 91.6667%;
     top: 8.3334%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
+    border-radius: 100%;
+    @if $colorShadow {
+      box-shadow: 0 0.2rem 0.8rem 0 $colorShadow;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
+
+  .label {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+
+    /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+    //background-color: $bn-color-icon-button-background;
+    /* @CMN END TODO */
+
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.175) 100%);
     border-radius: 100%;
   }
 
   .icon {
+    z-index: 2;
     position: absolute;
-    top: 3.25%;
-    left: 3.25%;
-    width: 93.5%;
-    height: 93.5%;
-    background-color: inherit;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+    //background-color: $bn-color-icon-button-background;
+    /* @CMN END TODO */
+
+    background-clip: padding-box;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
     border-radius: 100%;
 
     > * {
@@ -46,10 +74,6 @@
         fill: $bn-color-icon-button-image;
       }
     }
-  }
-
-  .label {
-    display: none;
   }
 }
 

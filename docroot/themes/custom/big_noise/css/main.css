@@ -132,22 +132,16 @@ p {
   src: local("Oswald Bold"), local("Oswald-Bold"), url("../fonts/Oswald/Oswald700Normal.woff2") format("woff2"), url("../fonts/Oswald/Oswald700Normal.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
-/* line 57, ../scss/mixins/_icon-button.scss */
+/* line 81, ../scss/mixins/_icon-button.scss */
 .icon-button {
-  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
-  /* @CMN END TODO */
-  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
-  border-radius: 100%;
   display: block;
   position: relative;
+  border-radius: 100%;
   transition: transform 0.2s;
-  /* @CMN TODO -webkit-backface-visibility: hidden; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
-/* line 12, ../scss/mixins/_icon-button.scss */
-.icon-button:hover, .icon-button:focus {
-  transform: scale(1.1);
-}
-/* line 17, ../scss/mixins/_icon-button.scss */
+/* line 9, ../scss/mixins/_icon-button.scss */
 .icon-button::before {
   content: '';
   position: absolute;
@@ -155,20 +149,46 @@ p {
   height: 91.6667%;
   top: 8.3334%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   border-radius: 100%;
+}
+/* line 23, ../scss/mixins/_icon-button.scss */
+.icon-button:hover, .icon-button:focus {
+  transform: scale(1.1);
 }
 /* line 28, ../scss/mixins/_icon-button.scss */
-.icon-button .icon {
+.icon-button .label {
+  z-index: 1;
   position: absolute;
-  top: 3.25%;
-  left: 3.25%;
-  width: 93.5%;
-  height: 93.5%;
-  background-color: inherit;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
 }
-/* line 37, ../scss/mixins/_icon-button.scss */
+/* line 47, ../scss/mixins/_icon-button.scss */
+.icon-button .icon {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-clip: padding-box;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 100%;
+}
+/* line 65, ../scss/mixins/_icon-button.scss */
 .icon-button .icon > * {
   position: absolute;
   top: 50%;
@@ -177,13 +197,9 @@ p {
   width: 64%;
   height: 64%;
 }
-/* line 45, ../scss/mixins/_icon-button.scss */
+/* line 73, ../scss/mixins/_icon-button.scss */
 .icon-button .icon > * g {
   fill: #e1e4e7;
-}
-/* line 51, ../scss/mixins/_icon-button.scss */
-.icon-button .label {
-  display: none;
 }
 
 /* line 1, ../scss/layout/_vista.scss */
@@ -2367,25 +2383,15 @@ button.sidebar-close .icon .close {
 .sidebar--navigation--phone-link-container .phone-link,
 .sidebar--navigation--locate-link-container .locate-link,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link {
-  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
-  /* @CMN END TODO */
-  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
-  border-radius: 100%;
   display: block;
   position: relative;
+  border-radius: 100%;
   transition: transform 0.2s;
-  /* @CMN TODO -webkit-backface-visibility: hidden; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   background-color: #e1e4e7;
 }
-/* line 12, ../scss/mixins/_icon-button.scss */
-.sidebar--navigation--phone-link-container .phone-link:hover, .sidebar--navigation--phone-link-container .phone-link:focus,
-.sidebar--navigation--locate-link-container .locate-link:hover,
-.sidebar--navigation--locate-link-container .locate-link:focus,
-.sidebar--navigation--buy-tickets-link-container .buy-tickets-link:hover,
-.sidebar--navigation--buy-tickets-link-container .buy-tickets-link:focus {
-  transform: scale(1.1);
-}
-/* line 17, ../scss/mixins/_icon-button.scss */
+/* line 9, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link::before,
 .sidebar--navigation--locate-link-container .locate-link::before,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link::before {
@@ -2395,22 +2401,54 @@ button.sidebar-close .icon .close {
   height: 91.6667%;
   top: 8.3334%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   border-radius: 100%;
 }
+/* line 23, ../scss/mixins/_icon-button.scss */
+.sidebar--navigation--phone-link-container .phone-link:hover, .sidebar--navigation--phone-link-container .phone-link:focus,
+.sidebar--navigation--locate-link-container .locate-link:hover,
+.sidebar--navigation--locate-link-container .locate-link:focus,
+.sidebar--navigation--buy-tickets-link-container .buy-tickets-link:hover,
+.sidebar--navigation--buy-tickets-link-container .buy-tickets-link:focus {
+  transform: scale(1.1);
+}
 /* line 28, ../scss/mixins/_icon-button.scss */
+.sidebar--navigation--phone-link-container .phone-link .label,
+.sidebar--navigation--locate-link-container .locate-link .label,
+.sidebar--navigation--buy-tickets-link-container .buy-tickets-link .label {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
+  border-radius: 100%;
+}
+/* line 47, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link .icon,
 .sidebar--navigation--locate-link-container .locate-link .icon,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .icon {
+  z-index: 2;
   position: absolute;
-  top: 3.25%;
-  left: 3.25%;
-  width: 93.5%;
-  height: 93.5%;
-  background-color: inherit;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-clip: padding-box;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
   border-radius: 100%;
 }
-/* line 37, ../scss/mixins/_icon-button.scss */
+/* line 65, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link .icon > *,
 .sidebar--navigation--locate-link-container .locate-link .icon > *,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .icon > * {
@@ -2421,17 +2459,11 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 45, ../scss/mixins/_icon-button.scss */
+/* line 73, ../scss/mixins/_icon-button.scss */
 .sidebar--navigation--phone-link-container .phone-link .icon > * g,
 .sidebar--navigation--locate-link-container .locate-link .icon > * g,
 .sidebar--navigation--buy-tickets-link-container .buy-tickets-link .icon > * g {
   fill: #e1e4e7;
-}
-/* line 51, ../scss/mixins/_icon-button.scss */
-.sidebar--navigation--phone-link-container .phone-link .label,
-.sidebar--navigation--locate-link-container .locate-link .label,
-.sidebar--navigation--buy-tickets-link-container .buy-tickets-link .label {
-  display: none;
 }
 /* line 34, ../scss/style/_sidebar--main-navigation.scss */
 .sidebar--navigation--phone-link-container .phone-link .icon g,
@@ -2468,21 +2500,15 @@ button.sidebar-close .icon .close {
 
 /* line 70, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--social-media-navigation-sidebar .social-media-link {
-  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
-  /* @CMN END TODO */
-  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
-  border-radius: 100%;
   display: block;
   position: relative;
+  border-radius: 100%;
   transition: transform 0.2s;
-  /* @CMN TODO -webkit-backface-visibility: hidden; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   background-color: #e1e4e7;
 }
-/* line 12, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-sidebar .social-media-link:hover, .navigation--social-media-navigation-sidebar .social-media-link:focus {
-  transform: scale(1.1);
-}
-/* line 17, ../scss/mixins/_icon-button.scss */
+/* line 9, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link::before {
   content: '';
   position: absolute;
@@ -2490,20 +2516,46 @@ button.sidebar-close .icon .close {
   height: 91.6667%;
   top: 8.3334%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   border-radius: 100%;
+}
+/* line 23, ../scss/mixins/_icon-button.scss */
+.navigation--social-media-navigation-sidebar .social-media-link:hover, .navigation--social-media-navigation-sidebar .social-media-link:focus {
+  transform: scale(1.1);
 }
 /* line 28, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-sidebar .social-media-link .icon {
+.navigation--social-media-navigation-sidebar .social-media-link .label {
+  z-index: 1;
   position: absolute;
-  top: 3.25%;
-  left: 3.25%;
-  width: 93.5%;
-  height: 93.5%;
-  background-color: inherit;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
 }
-/* line 37, ../scss/mixins/_icon-button.scss */
+/* line 47, ../scss/mixins/_icon-button.scss */
+.navigation--social-media-navigation-sidebar .social-media-link .icon {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-clip: padding-box;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 100%;
+}
+/* line 65, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .icon > * {
   position: absolute;
   top: 50%;
@@ -2512,13 +2564,9 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 45, ../scss/mixins/_icon-button.scss */
+/* line 73, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .icon > * g {
   fill: #e1e4e7;
-}
-/* line 51, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-sidebar .social-media-link .label {
-  display: none;
 }
 /* line 76, ../scss/style/_sidebar--main-navigation.scss */
 .navigation--social-media-navigation-sidebar .social-media-link .icon g {
@@ -2599,20 +2647,14 @@ button.sidebar-close .icon .close {
 
 /* line 79, ../scss/style/_site--header.scss */
 .site--header--locate-link-container .locate-link {
-  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
-  /* @CMN END TODO */
-  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
-  border-radius: 100%;
   display: block;
   position: relative;
+  border-radius: 100%;
   transition: transform 0.2s;
-  /* @CMN TODO -webkit-backface-visibility: hidden; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
-/* line 12, ../scss/mixins/_icon-button.scss */
-.site--header--locate-link-container .locate-link:hover, .site--header--locate-link-container .locate-link:focus {
-  transform: scale(1.1);
-}
-/* line 17, ../scss/mixins/_icon-button.scss */
+/* line 9, ../scss/mixins/_icon-button.scss */
 .site--header--locate-link-container .locate-link::before {
   content: '';
   position: absolute;
@@ -2620,20 +2662,47 @@ button.sidebar-close .icon .close {
   height: 91.6667%;
   top: 8.3334%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   border-radius: 100%;
+  box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
+}
+/* line 23, ../scss/mixins/_icon-button.scss */
+.site--header--locate-link-container .locate-link:hover, .site--header--locate-link-container .locate-link:focus {
+  transform: scale(1.1);
 }
 /* line 28, ../scss/mixins/_icon-button.scss */
-.site--header--locate-link-container .locate-link .icon {
+.site--header--locate-link-container .locate-link .label {
+  z-index: 1;
   position: absolute;
-  top: 3.25%;
-  left: 3.25%;
-  width: 93.5%;
-  height: 93.5%;
-  background-color: inherit;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
 }
-/* line 37, ../scss/mixins/_icon-button.scss */
+/* line 47, ../scss/mixins/_icon-button.scss */
+.site--header--locate-link-container .locate-link .icon {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-clip: padding-box;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 100%;
+}
+/* line 65, ../scss/mixins/_icon-button.scss */
 .site--header--locate-link-container .locate-link .icon > * {
   position: absolute;
   top: 50%;
@@ -2642,17 +2711,9 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 45, ../scss/mixins/_icon-button.scss */
+/* line 73, ../scss/mixins/_icon-button.scss */
 .site--header--locate-link-container .locate-link .icon > * g {
   fill: #e1e4e7;
-}
-/* line 51, ../scss/mixins/_icon-button.scss */
-.site--header--locate-link-container .locate-link .label {
-  display: none;
-}
-/* line 82, ../scss/style/_site--header.scss */
-.site--header--locate-link-container .locate-link::before {
-  box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
 }
 @media (min-width: 768px) {
   /* line 79, ../scss/style/_site--header.scss */
@@ -2669,25 +2730,19 @@ button.sidebar-close .icon .close {
   }
 }
 
-@media (min-width: 768px) {
-  /* line 99, ../scss/style/_site--header.scss */
+@media (max-width: 1023px) {
+  /* line 95, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link {
-    /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
-    /* @CMN END TODO */
-    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
-    border-radius: 100%;
     display: block;
     position: relative;
+    border-radius: 100%;
     transition: transform 0.2s;
-    /* @CMN TODO -webkit-backface-visibility: hidden; */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     width: 3.6rem;
     height: 3.6rem;
   }
-  /* line 12, ../scss/mixins/_icon-button.scss */
-  .site--header--buy-tickets-link-container .buy-tickets-link:hover, .site--header--buy-tickets-link-container .buy-tickets-link:focus {
-    transform: scale(1.1);
-  }
-  /* line 17, ../scss/mixins/_icon-button.scss */
+  /* line 9, ../scss/mixins/_icon-button.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link::before {
     content: '';
     position: absolute;
@@ -2695,20 +2750,47 @@ button.sidebar-close .icon .close {
     height: 91.6667%;
     top: 8.3334%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
     border-radius: 100%;
+    box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
+  }
+  /* line 23, ../scss/mixins/_icon-button.scss */
+  .site--header--buy-tickets-link-container .buy-tickets-link:hover, .site--header--buy-tickets-link-container .buy-tickets-link:focus {
+    transform: scale(1.1);
   }
   /* line 28, ../scss/mixins/_icon-button.scss */
-  .site--header--buy-tickets-link-container .buy-tickets-link .icon {
+  .site--header--buy-tickets-link-container .buy-tickets-link .label {
+    z-index: 1;
     position: absolute;
-    top: 3.25%;
-    left: 3.25%;
-    width: 93.5%;
-    height: 93.5%;
-    background-color: inherit;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+    /* @CMN END TODO */
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
     border-radius: 100%;
   }
-  /* line 37, ../scss/mixins/_icon-button.scss */
+  /* line 47, ../scss/mixins/_icon-button.scss */
+  .site--header--buy-tickets-link-container .buy-tickets-link .icon {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+    /* @CMN END TODO */
+    background-clip: padding-box;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 100%;
+  }
+  /* line 65, ../scss/mixins/_icon-button.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .icon > * {
     position: absolute;
     top: 50%;
@@ -2717,65 +2799,86 @@ button.sidebar-close .icon .close {
     width: 64%;
     height: 64%;
   }
-  /* line 45, ../scss/mixins/_icon-button.scss */
+  /* line 73, ../scss/mixins/_icon-button.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .icon > * g {
     fill: #e1e4e7;
   }
-  /* line 51, ../scss/mixins/_icon-button.scss */
-  .site--header--buy-tickets-link-container .buy-tickets-link .label {
-    display: none;
-  }
-  /* line 103, ../scss/style/_site--header.scss */
-  .site--header--buy-tickets-link-container .buy-tickets-link::before {
-    box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
-  }
 }
 @media (min-width: 1024px) {
-  /* line 99, ../scss/style/_site--header.scss */
+  /* line 95, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link {
-    display: flex;
-    align-items: center;
+    display: block;
+    position: relative;
     width: 14.6rem;
     height: 2.6rem;
     border-radius: 0.5rem;
-    text-decoration: none;
+    transition: transform 0.2s;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
-  /* line 119, ../scss/style/_site--header.scss */
+  /* line 113, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link::before {
+    content: '';
+    position: absolute;
     border-radius: 0.5rem;
     width: 93.15%;
     height: 92.3%;
     top: 7.7%;
-    box-shadow: 0 0.2rem 1rem 0 #9898a5;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
   }
-  /* line 127, ../scss/style/_site--header.scss */
+  /* line 125, ../scss/style/_site--header.scss */
+  .site--header--buy-tickets-link-container .buy-tickets-link:hover, .site--header--buy-tickets-link-container .buy-tickets-link:focus {
+    transform: scale(1.1);
+  }
+  /* line 130, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
     border-radius: 0.5rem;
-    height: 92.3%;
-    width: 98.7%;
-    top: 3.85%;
-    left: 0.7%;
   }
-  /* line 134, ../scss/style/_site--header.scss */
-  .site--header--buy-tickets-link-container .buy-tickets-link .icon > * {
+  /* line 139, ../scss/style/_site--header.scss */
+  .site--header--buy-tickets-link-container .buy-tickets-link .icon svg {
+    position: absolute;
+    top: 50%;
+    left: 3.3rem;
+    transform: translate3d(0, -50%, 0);
+    z-index: 1;
     width: 1.7rem;
     height: 1.8rem;
-    left: 3rem;
-    transform: translate3d(0, -50%, 0);
   }
-  /* line 142, ../scss/style/_site--header.scss */
+  /* line 148, ../scss/style/_site--header.scss */
+  .site--header--buy-tickets-link-container .buy-tickets-link .icon svg g {
+    fill: #e1e4e7;
+  }
+  /* line 154, ../scss/style/_site--header.scss */
   .site--header--buy-tickets-link-container .buy-tickets-link .label {
-    display: block;
-    position: relative;
-    left: 5.625rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-clip: padding-box;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.5rem;
     color: #e1e4e7;
     font-family: "Oswald";
     font-size: 1.2rem;
+    line-height: 2.4rem;
+    padding-left: 2.1rem;
+    text-align: center;
     text-transform: uppercase;
   }
 }
 
-/* line 159, ../scss/style/_site--header.scss */
+/* line 181, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a {
   border-bottom-color: transparent;
   border-bottom-style: solid;
@@ -2793,36 +2896,30 @@ button.sidebar-close .icon .close {
   transition: color 0.2s;
 }
 @media (min-width: 1024px) {
-  /* line 159, ../scss/style/_site--header.scss */
+  /* line 181, ../scss/style/_site--header.scss */
   .navigation--main-navigation-header > ul > li > a {
     font-size: 2rem;
   }
 }
-/* line 178, ../scss/style/_site--header.scss */
+/* line 200, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a:hover {
   text-decoration: none;
 }
-/* line 182, ../scss/style/_site--header.scss */
+/* line 204, ../scss/style/_site--header.scss */
 .navigation--main-navigation-header > ul > li > a.active {
   border-bottom-color: #3e464f;
 }
 
-/* line 192, ../scss/style/_site--header.scss */
+/* line 214, ../scss/style/_site--header.scss */
 .navigation--social-media-navigation-header .social-media-link {
-  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
-  /* @CMN END TODO */
-  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
-  border-radius: 100%;
   display: block;
   position: relative;
+  border-radius: 100%;
   transition: transform 0.2s;
-  /* @CMN TODO -webkit-backface-visibility: hidden; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
-/* line 12, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-header .social-media-link:hover, .navigation--social-media-navigation-header .social-media-link:focus {
-  transform: scale(1.1);
-}
-/* line 17, ../scss/mixins/_icon-button.scss */
+/* line 9, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-header .social-media-link::before {
   content: '';
   position: absolute;
@@ -2830,20 +2927,47 @@ button.sidebar-close .icon .close {
   height: 91.6667%;
   top: 8.3334%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   border-radius: 100%;
+  box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
+}
+/* line 23, ../scss/mixins/_icon-button.scss */
+.navigation--social-media-navigation-header .social-media-link:hover, .navigation--social-media-navigation-header .social-media-link:focus {
+  transform: scale(1.1);
 }
 /* line 28, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-header .social-media-link .icon {
+.navigation--social-media-navigation-header .social-media-link .label {
+  z-index: 1;
   position: absolute;
-  top: 3.25%;
-  left: 3.25%;
-  width: 93.5%;
-  height: 93.5%;
-  background-color: inherit;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
 }
-/* line 37, ../scss/mixins/_icon-button.scss */
+/* line 47, ../scss/mixins/_icon-button.scss */
+.navigation--social-media-navigation-header .social-media-link .icon {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-clip: padding-box;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 100%;
+}
+/* line 65, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-header .social-media-link .icon > * {
   position: absolute;
   top: 50%;
@@ -2852,27 +2976,19 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 45, ../scss/mixins/_icon-button.scss */
+/* line 73, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-header .social-media-link .icon > * g {
   fill: #e1e4e7;
 }
-/* line 51, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-header .social-media-link .label {
-  display: none;
-}
-/* line 195, ../scss/style/_site--header.scss */
-.navigation--social-media-navigation-header .social-media-link::before {
-  box-shadow: 0 0.2rem 0.8rem 0 #9898a5;
-}
 @media (min-width: 768px) {
-  /* line 192, ../scss/style/_site--header.scss */
+  /* line 214, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 3.6rem;
     height: 3.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 192, ../scss/style/_site--header.scss */
+  /* line 214, ../scss/style/_site--header.scss */
   .navigation--social-media-navigation-header .social-media-link {
     width: 2.8rem;
     height: 2.8rem;
@@ -3042,20 +3158,14 @@ button.sidebar-close .icon .close {
 
 /* line 63, ../scss/style/_site--footer.scss */
 .navigation--social-media-navigation-footer .social-media-link {
-  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
-  /* @CMN END TODO */
-  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
-  border-radius: 100%;
   display: block;
   position: relative;
+  border-radius: 100%;
   transition: transform 0.2s;
-  /* @CMN TODO -webkit-backface-visibility: hidden; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
-/* line 12, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-footer .social-media-link:hover, .navigation--social-media-navigation-footer .social-media-link:focus {
-  transform: scale(1.1);
-}
-/* line 17, ../scss/mixins/_icon-button.scss */
+/* line 9, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-footer .social-media-link::before {
   content: '';
   position: absolute;
@@ -3063,20 +3173,47 @@ button.sidebar-close .icon .close {
   height: 91.6667%;
   top: 8.3334%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, 0, 0);
   border-radius: 100%;
+  box-shadow: 0 0.2rem 0.8rem 0 #1e2229;
+}
+/* line 23, ../scss/mixins/_icon-button.scss */
+.navigation--social-media-navigation-footer .social-media-link:hover, .navigation--social-media-navigation-footer .social-media-link:focus {
+  transform: scale(1.1);
 }
 /* line 28, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-footer .social-media-link .icon {
+.navigation--social-media-navigation-footer .social-media-link .label {
+  z-index: 1;
   position: absolute;
-  top: 3.25%;
-  left: 3.25%;
-  width: 93.5%;
-  height: 93.5%;
-  background-color: inherit;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.175) 100%);
   border-radius: 100%;
 }
-/* line 37, ../scss/mixins/_icon-button.scss */
+/* line 47, ../scss/mixins/_icon-button.scss */
+.navigation--social-media-navigation-footer .social-media-link .icon {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* @CMN TODO - Should I just remove this? Make it a parameter variable? Remove from variables.scss? */
+  /* @CMN END TODO */
+  background-clip: padding-box;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 100%;
+}
+/* line 65, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-footer .social-media-link .icon > * {
   position: absolute;
   top: 50%;
@@ -3085,46 +3222,42 @@ button.sidebar-close .icon .close {
   width: 64%;
   height: 64%;
 }
-/* line 45, ../scss/mixins/_icon-button.scss */
+/* line 73, ../scss/mixins/_icon-button.scss */
 .navigation--social-media-navigation-footer .social-media-link .icon > * g {
   fill: #e1e4e7;
 }
-/* line 51, ../scss/mixins/_icon-button.scss */
-.navigation--social-media-navigation-footer .social-media-link .label {
-  display: none;
-}
-/* line 66, ../scss/style/_site--footer.scss */
-.navigation--social-media-navigation-footer .social-media-link::before {
-  box-shadow: 0 0.2rem 0.8rem 0 #1e2229;
+/* line 67, ../scss/style/_site--footer.scss */
+.site--footer.theme-dark .navigation--social-media-navigation-footer .social-media-link::before {
+  box-shadow: 0 0.2rem 0.8rem 0 #0e1013;
 }
 
-/* line 73, ../scss/style/_site--footer.scss */
+/* line 75, ../scss/style/_site--footer.scss */
 .site--footer--contact {
   color: #e1e4e7;
 }
-/* line 76, ../scss/style/_site--footer.scss */
+/* line 78, ../scss/style/_site--footer.scss */
 .site--footer--contact .site--footer--contact--name {
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 82, ../scss/style/_site--footer.scss */
+/* line 84, ../scss/style/_site--footer.scss */
 .site--footer--contact .site--footer--contact--phone,
 .site--footer--contact .site--footer--contact--address {
   font-size: 1.2rem;
   line-height: 1.4;
 }
-/* line 90, ../scss/style/_site--footer.scss */
+/* line 92, ../scss/style/_site--footer.scss */
 .site--footer--contact .site--footer--contact--phone a {
   color: #e1e4e7;
 }
 @media (min-width: 768px) {
-  /* line 96, ../scss/style/_site--footer.scss */
+  /* line 98, ../scss/style/_site--footer.scss */
   .site--footer--contact .site--footer--contact--address {
     display: flex;
     flex-direction: row;
   }
-  /* line 102, ../scss/style/_site--footer.scss */
+  /* line 104, ../scss/style/_site--footer.scss */
   .site--footer--contact .site--footer--contact--address > div:not(:last-of-type)::after {
     content: '/';
     margin-left: 0.5rem;
@@ -3132,59 +3265,59 @@ button.sidebar-close .icon .close {
   }
 }
 
-/* line 114, ../scss/style/_site--footer.scss */
+/* line 116, ../scss/style/_site--footer.scss */
 .site--footer--closure {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 
-/* line 121, ../scss/style/_site--footer.scss */
+/* line 123, ../scss/style/_site--footer.scss */
 .site--footer--copyright {
   color: #e1e4e7;
   font-size: 1.2rem;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  /* line 121, ../scss/style/_site--footer.scss */
+  /* line 123, ../scss/style/_site--footer.scss */
   .site--footer--copyright {
     display: flex;
     flex-direction: row;
   }
 }
 @media (min-width: 768px) {
-  /* line 134, ../scss/style/_site--footer.scss */
+  /* line 136, ../scss/style/_site--footer.scss */
   .site--footer--copyright > div:not(:last-of-type)::after {
     content: '\00a0';
   }
 }
 
-/* line 144, ../scss/style/_site--footer.scss */
+/* line 146, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container .heading {
   color: #e1e4e7;
   font-size: 1.6rem;
   font-weight: 600;
   text-transform: uppercase;
 }
-/* line 151, ../scss/style/_site--footer.scss */
+/* line 153, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form {
   height: 3.4rem;
   position: relative;
 }
-/* line 155, ../scss/style/_site--footer.scss */
+/* line 157, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .mailchimp-newsletter-mergefields {
   height: 100%;
   padding-right: 10rem;
 }
-/* line 160, ../scss/style/_site--footer.scss */
+/* line 162, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .form-item-mergevars-email {
   height: 100%;
 }
-/* line 164, ../scss/style/_site--footer.scss */
+/* line 166, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form label[for="edit-mergevars-email"] {
   display: none;
 }
-/* line 168, ../scss/style/_site--footer.scss */
+/* line 170, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form #edit-mergevars-email {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -3193,7 +3326,7 @@ button.sidebar-close .icon .close {
   padding-left: 1rem;
   font-size: 1.3rem;
 }
-/* line 177, ../scss/style/_site--footer.scss */
+/* line 179, ../scss/style/_site--footer.scss */
 .site--footer--mailing-list-subscription-form-container form .form-submit {
   color: #e1e4e7;
   font-family: "Oswald";

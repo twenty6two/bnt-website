@@ -8,7 +8,7 @@ options:
   animation: fade
   animationSpeed: 600
   direction: horizontal
-  slideshow: false
+  slideshow: true
   easing: swing
   smoothHeight: false
   reverse: false

@@ -90,13 +90,18 @@ p {
   src: local("Lato Black Italic"), local("Lato-BlackItalic"), url("../fonts/Lato/Lato900Italic.woff2") format("woff2"), url("../fonts/Lato/Lato900Italic.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
+/*
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 200;
-  src: local("Oswald ExtraLight"), local("Oswald-ExtraLight"), url("../fonts/Oswald/Oswald200Normal.woff2") format("woff2"), url("../fonts/Oswald/Oswald200Normal.woff") format("woff");
+  src: local('Oswald ExtraLight'),
+    local('Oswald-ExtraLight'),
+    url('../fonts/Oswald/Oswald200Normal.woff2') format('woff2'),
+    url('../fonts/Oswald/Oswald200Normal.woff') format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
+*/
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
@@ -104,13 +109,18 @@ p {
   src: local("Oswald Light"), local("Oswald-Light"), url("../fonts/Oswald/Oswald300Normal.woff2") format("woff2"), url("../fonts/Oswald/Oswald300Normal.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
+/*
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 400;
-  src: local("Oswald Regular"), local("Oswald-Regular"), url("../fonts/Oswald/Oswald400Normal.woff2") format("woff2") url("../fonts/Oswald/Oswald400Normal.woff") format("woff");
+  src: local('Oswald Regular'),
+    local('Oswald-Regular'),
+    url('../fonts/Oswald/Oswald400Normal.woff2') format('woff2')
+    url('../fonts/Oswald/Oswald400Normal.woff') format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
+*/
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
@@ -118,20 +128,30 @@ p {
   src: local("Oswald Medium"), local("Oswald-Medium"), url("../fonts/Oswald/Oswald500Normal.woff2") format("woff2"), url("../fonts/Oswald/Oswald500Normal.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
+/*
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 600;
-  src: local("Oswald SemiBold"), local("Oswald-SemiBold"), url("../fonts/Oswald/Oswald600Normal.woff2") format("woff2"), url("../fonts/Oswald/Oswald600Normal.woff") format("woff");
+  src: local('Oswald SemiBold'),
+    local('Oswald-SemiBold'),
+    url('../fonts/Oswald/Oswald600Normal.woff2') format('woff2'),
+    url('../fonts/Oswald/Oswald600Normal.woff') format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
+*/
+/*
 @font-face {
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 700;
-  src: local("Oswald Bold"), local("Oswald-Bold"), url("../fonts/Oswald/Oswald700Normal.woff2") format("woff2"), url("../fonts/Oswald/Oswald700Normal.woff") format("woff");
+  src: local('Oswald Bold'),
+    local('Oswald-Bold'),
+    url('../fonts/Oswald/Oswald700Normal.woff2') format('woff2'),
+    url('../fonts/Oswald/Oswald700Normal.woff') format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
+*/
 /* line 81, ../scss/mixins/_icon-button.scss */
 .icon-button {
   display: block;

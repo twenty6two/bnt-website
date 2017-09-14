@@ -11,6 +11,7 @@
 
 
 .content-block {
+  position: relative;
 
   > .heading {
     margin-bottom: 2rem;
@@ -37,6 +38,12 @@
     > *:not(:last-child) {
       margin-bottom: 2rem;
     }
+  }
+
+  .content-block-anchor {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
 
@@ -76,6 +83,16 @@
       @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
         margin-bottom: 3rem;
         padding-bottom: 3rem;
+      }
+
+      .content-block-anchor {
+        margin-top: (0 - ($bn-header-height-layout-mobile + 2rem));
+        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+          margin-top: (0 - ($bn-header-height-layout-tablet + 3rem));
+        }
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+          margin-top: (0 - ($bn-header-height-layout-desktop + 3rem));
+        }
       }
     }
   }

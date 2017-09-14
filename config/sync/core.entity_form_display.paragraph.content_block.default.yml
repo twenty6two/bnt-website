@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.content_block.field_anchor_id
     - field.field.paragraph.content_block.field_content
     - paragraphs.paragraphs_type.content_block
   module:
@@ -12,6 +13,14 @@ targetEntityType: paragraph
 bundle: content_block
 mode: default
 content:
+  field_anchor_id:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_content:
     weight: 0
     settings:

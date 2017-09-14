@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.content_block_heading_subheading.field_anchor_id
     - field.field.paragraph.content_block_heading_subheading.field_content
     - field.field.paragraph.content_block_heading_subheading.field_heading
     - field.field.paragraph.content_block_heading_subheading.field_subheading
@@ -14,6 +15,14 @@ targetEntityType: paragraph
 bundle: content_block_heading_subheading
 mode: default
 content:
+  field_anchor_id:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_content:
     weight: 2
     settings:

@@ -1,6 +1,7 @@
 {% block paragraph %}
   <div class="content-block content-block--heading-subheading-content">
     {% block content %}
+      {{ content.field_anchor_id }}
       <div class="heading">{{ content.field_heading }}</div>
       <div class="subheading">{{ content.field_subheading }}</div>
       <div class="content">{{ content.field_content }}</div>

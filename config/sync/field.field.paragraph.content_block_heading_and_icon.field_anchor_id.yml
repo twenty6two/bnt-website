@@ -1,0 +1,19 @@
+uuid: 4da004a9-dfed-46be-87cf-1e8ed0b3e611
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_anchor_id
+    - paragraphs.paragraphs_type.content_block_heading_and_icon
+id: paragraph.content_block_heading_and_icon.field_anchor_id
+field_name: field_anchor_id
+entity_type: paragraph
+bundle: content_block_heading_and_icon
+label: 'Anchor ID'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

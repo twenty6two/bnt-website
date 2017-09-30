@@ -1,9 +1,10 @@
-name: Entity
-description: Provides expanded entity APIs, which will be moved to Drupal core one day.
+name: 'Entity bundle plugin test'
 type: module
+description: 'Module for testing bundle plugins.'
+package: Testing
 # core: 8.x
 dependencies:
-  - drupal:system (>=8.3.0)
+  - entity
 
 # Information added by Drupal.org packaging script on 2017-09-20
 version: '8.x-1.0-beta1'

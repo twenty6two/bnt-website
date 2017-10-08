@@ -122,6 +122,10 @@ function big_noise_preprocess_node(&$variables) {
       $variables['show__performance_date_range'] = $show_performance_date_range;
 
 
+      // Prepare metadata variables
+      $variables['show__is_for_sale'] = $node->field_show_sale_status->value;
+
+
       // Calculate season status
       $show_season = $node->field_season;
 

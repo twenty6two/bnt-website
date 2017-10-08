@@ -1,0 +1,23 @@
+uuid: 6715e0d2-d1ba-4994-a4bb-ff2a121c1e02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_sale_status
+    - node.type.show
+id: node.show.field_show_sale_status
+field_name: field_show_sale_status
+entity_type: node
+bundle: show
+label: 'Show Sale Status'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On Sale'
+  off_label: 'Not On Sale'
+field_type: boolean

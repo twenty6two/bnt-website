@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.show.field_performances
     - field.field.node.show.field_season
     - field.field.node.show.field_show_page_colors
+    - field.field.node.show.field_show_sale_status
     - field.field.node.show.field_splash_image
     - field.field.node.show.field_synopsis
     - field.field.node.show.field_synopsis_concise
@@ -91,6 +92,16 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_show_sale_status:
+    weight: 125
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_splash_image:
     weight: 120

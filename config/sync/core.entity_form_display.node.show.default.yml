@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.show.field_performances
     - field.field.node.show.field_season
     - field.field.node.show.field_show_page_colors
+    - field.field.node.show.field_show_sale_status
     - field.field.node.show.field_splash_image
     - field.field.node.show.field_synopsis
     - field.field.node.show.field_synopsis_concise
@@ -104,6 +105,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: show_page_colors
+    region: content
+  field_show_sale_status:
+    weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_splash_image:
     weight: 28

@@ -28,7 +28,9 @@
         {% if show__is_for_sale %}
         {{ content.field_buy_tickets_url }}
         {% endif %}
+        {% if show__is_for_sale %}
         {{ content.field_ticket_price_details }}
+        {% endif %}
         {{ content.field_performance_details }}
         {{ content.field_venue_details }}
         {{ content.field_synopsis_concise }}

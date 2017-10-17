@@ -1826,9 +1826,15 @@ nav ul {
 /* line 379, ../scss/layout/_node--show.scss */
 .show--cast-creative ul li {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+/* line 391, ../scss/layout/_node--show.scss */
+.show--cast-creative ul li .role,
+.show--cast-creative ul li .entity {
+  flex-basis: 50%;
 }
 
 /* line 2, ../scss/layout/_node--slide--home-page-slideshow-slide.scss */

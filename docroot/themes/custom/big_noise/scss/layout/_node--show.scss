@@ -378,10 +378,16 @@
 
     li {
       display: flex;
+      align-items: center;
       justify-content: space-between;
 
       padding-top: 1rem;
       padding-bottom: 1rem;
+
+      .role,
+      .entity {
+        flex-basis: 50%;
+      }
     }
   }
   

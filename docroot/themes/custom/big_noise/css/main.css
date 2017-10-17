@@ -3676,6 +3676,10 @@ svg .page--highlight-color {
 .show--cast-creative .role {
   font-weight: 300;
 }
+/* line 156, ../scss/style/_node--show.scss */
+.show--cast-creative .entity {
+  text-align: right;
+}
 
 /* line 4, ../scss/style/_node--page.scss */
 .page-type--page .column-container.has-primary-column.has-secondary-column .secondary {

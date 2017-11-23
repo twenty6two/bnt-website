@@ -3,20 +3,7 @@
   @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
     height: 28.8rem;
   }
-  position: relative;
-  z-index: 1;
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100%;
-    width: 98%;
-    box-shadow: 0 0.4rem 1rem 0 $bn-color-element-shadow;
-  }
+  @include ShadowBox();
 
   > iframe {
     width: 100%;

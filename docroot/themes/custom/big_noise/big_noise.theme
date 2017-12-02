@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Component\Utility;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\media_entity\Entity\Media;
@@ -48,7 +49,7 @@ function big_noise_preprocess_page(&$variables) {
   if ($node) {
     $node_type = $node->getType();
 
-    $variables['vista_classes'][] = 'page-type--' . $node_type;
+    $variables['vista_classes'][] = 'page-type--' . \Drupal\Component\Utility\Html::cleanCssIdentifier($node_type);
 
     if ($node_type == 'show') {
       $variables['footer_classes'][] = 'theme-dark';

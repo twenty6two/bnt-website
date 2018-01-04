@@ -1,4 +1,6 @@
 .page-title-ribbon {
+  display: flex;
+
   height: $bn-page-title-ribbon-height-layout-mobile;
   @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     height: $bn-page-title-ribbon-height-layout-tablet;
@@ -7,7 +9,15 @@
     height: $bn-page-title-ribbon-height-layout-desktop;
   }
 
-  display: flex;
+  &.height-condensed {
+    height: $bn-page-title-ribbon-condensed-height-layout-mobile;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      height: $bn-page-title-ribbon-condensed-height-layout-tablet;
+    }
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+      height: $bn-page-title-ribbon-condensed-height-layout-desktop;
+    }
+  }
 }
 
 

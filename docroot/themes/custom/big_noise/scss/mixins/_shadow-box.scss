@@ -14,3 +14,7 @@
     box-shadow: 0 0.4rem 1rem 0 $bn-color-element-shadow;
   }
 }
+
+.shadow-box-container {
+  @include ShadowBox();
+}

@@ -1,0 +1,110 @@
+.page-type--page.page--news {
+  .column-container {
+    &.has-primary-column {
+      .primary {
+        order: 1;
+      }
+    }
+    &.has-primary-column.has-secondary-column {
+      .secondary {
+        order: 2;
+      }
+    }
+  }
+
+  .pager {
+    margin-top: 1.5rem;
+  }
+}
+
+.news-article-list-item {
+  &:not(:last-of-type) {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      padding-bottom: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+.news-article--block--teaser,
+.external-news-article--block--teaser {
+  @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+    overflow: auto;
+  }
+  @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+    display: flex;
+  }
+
+  .news-article--block--teaser--image,
+  .external-news-article--block--teaser--image {
+    @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+      float: right;
+      margin-left: 2rem;
+      margin-bottom: 1.25rem;
+      max-width: 32.75%;
+    }
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      order: 2;
+      flex-basis: 30%;
+      max-width: 30%;
+    }
+  }
+
+  .news-article--block--teaser--content,
+  .external-news-article--block--teaser--content {
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      order: 1;
+    }
+  }
+  &.has-image {
+    .news-article--block--teaser--content,
+    .external-news-article--block--teaser--content {
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+        flex-basis: 70%;
+        padding-right: 4rem;
+      }
+    }
+  }
+
+  .article-title {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.news-article--block--teaser {
+  .article-date {
+    margin-bottom: 1rem;
+  }
+}
+
+.external-news-article--block--teaser {
+  .article-source {
+    margin-bottom: 1rem;
+    margin-top: 0.2rem;
+
+    .icon {
+      display: block;
+      float: left;
+      margin-right: 0.4rem;
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+        margin-top: 0.2rem;
+      }
+
+      width: 1.5rem;
+      height: 1.5rem;
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+        width: 1.7rem;
+        height: 1.7rem;
+      }
+
+      > svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

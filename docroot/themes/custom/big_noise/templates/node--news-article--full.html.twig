@@ -1,0 +1,20 @@
+<div id="page-title-ribbon" class="page-title-ribbon height-condensed image-default">
+  <div id="page-title-ribbon--content" class="page-title-ribbon--content site-width-constraint">
+    <div id="page--title" class="page--title">News</div>
+    <div id="page--subheading" class="page--subheading">Extra! Extra! Read all about it!</div>
+  </div>
+</div>
+
+<div id="site--main--main-content" class="site--main--main-content site-width-constraint">
+  <div class="column-container has-primary-column has-secondary-column">
+    <div class="column primary">
+      <article{{ attributes.addClass('news-article--page') }}>
+        {{ content.field_banner_image }}
+        <h1 class="article-title">{{ label }}</h1>
+        {{ content.field_article_date }}
+        {{ content.field_content }}
+      </article>
+    </div>
+    <div class="column secondary">
+    </div>
+</div>

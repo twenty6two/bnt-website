@@ -59,6 +59,18 @@ function big_noise_preprocess_page(&$variables) {
   if ($variables['is_front']) {
     $variables['vista_classes'][] = 'page--home';
   }
+  else {
+    $current_path = \Drupal::service('path.current')->getPath();
+    $current_alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+
+    switch ($current_alias) {
+      case '/news':
+        $variables['vista_classes'][] = 'page--news';
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 

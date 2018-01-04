@@ -1,0 +1,9 @@
+uuid: 1cad571d-70dc-44bb-9e43-399e90c71ddc
+langcode: en
+status: true
+dependencies: {  }
+id: paragraph
+label: Paragraph
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

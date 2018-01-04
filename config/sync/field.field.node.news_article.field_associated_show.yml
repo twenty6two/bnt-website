@@ -1,0 +1,29 @@
+uuid: 5cf29d4e-5b7d-4c93-9ccd-41f3c9627ea7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_associated_show
+    - node.type.news_article
+    - node.type.show
+id: node.news_article.field_associated_show
+field_name: field_associated_show
+entity_type: node
+bundle: news_article
+label: 'Associated Show'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      show: show
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

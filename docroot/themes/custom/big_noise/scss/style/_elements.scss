@@ -1,6 +1,7 @@
 a {
   color: $bn-color-link-default;
   text-decoration: none;
+  transition: color $bn-transition-link-color-default;
 
   &:hover {
     text-decoration: underline;

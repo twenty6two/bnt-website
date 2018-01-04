@@ -1,0 +1,30 @@
+uuid: f7b89422-4fd8-4c2b-85bb-7ee2eff6c337
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.news
+  module:
+    - system
+    - views
+  theme:
+    - big_noise
+id: news_list_block
+theme: big_noise
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:news-news_list_block'
+settings:
+  id: 'views_block:news-news_list_block'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /news
+    negate: false
+    context_mapping: {  }

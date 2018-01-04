@@ -5,6 +5,12 @@ dependencies:
   config:
     - field.storage.node.field_content_blocks_secondary
     - node.type.page
+    - paragraphs.paragraphs_type.call_out_content_block
+    - paragraphs.paragraphs_type.call_out_content_block_heading
+    - paragraphs.paragraphs_type.content_block
+    - paragraphs.paragraphs_type.content_block_heading_and_icon
+    - paragraphs.paragraphs_type.content_block_heading_subheading
+    - paragraphs.paragraphs_type.content_block_with_heading
   module:
     - entity_reference_revisions
 id: node.page.field_content_blocks_secondary
@@ -20,15 +26,43 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    target_bundles: null
+    negate: 0
+    target_bundles:
+      content_block: content_block
+      content_block_heading_and_icon: content_block_heading_and_icon
+      content_block_with_heading: content_block_with_heading
+      call_out_content_block: call_out_content_block
+      call_out_content_block_heading: call_out_content_block_heading
+      content_block_heading_subheading: content_block_heading_subheading
     target_bundles_drag_drop:
       content_block:
+        enabled: true
         weight: 4
-        enabled: false
       content_block_heading_and_icon:
+        enabled: true
         weight: 5
-        enabled: false
       content_block_with_heading:
+        enabled: true
         weight: 6
+      call_out_content_block:
+        enabled: true
+        weight: 11
+      call_out_content_block_heading:
+        enabled: true
+        weight: 12
+      content_block_heading_subheading:
+        enabled: true
+        weight: 15
+      image:
+        weight: 17
+        enabled: false
+      paragraph:
+        weight: 18
+        enabled: false
+      paragraph_image:
+        weight: 19
+        enabled: false
+      pull_quote:
+        weight: 20
         enabled: false
 field_type: entity_reference_revisions

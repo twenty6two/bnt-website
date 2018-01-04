@@ -23,8 +23,11 @@
 @import "layout/node--page";
 @import "layout/node--show";
 @import "layout/node--slide--home-page-slideshow-slide";
+@import "layout/node--news-article";
 @import "layout/page--home";
 @import "layout/slideshow--flexslider";
+@import "layout/view--news-articles";
+@import "layout/pager";
 
 @import "style/elements";
 @import "style/text";
@@ -40,9 +43,11 @@
 @import "style/node--show";
 @import "style/node--page";
 @import "style/node--slide--home-page-slideshow-slide";
+@import "style/node--news-article";
 @import "style/page--home";
 @import "style/button";
 @import "style/content-block";
+@import "style/view--news-articles";
 
 @import "custom/home-page-lead-in";
 @import "custom/single-show-prices-callout";

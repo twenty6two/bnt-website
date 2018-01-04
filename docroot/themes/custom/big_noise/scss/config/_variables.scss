@@ -156,6 +156,10 @@ $bn-color-home-page-slideshow-heading-text-default: $bn-color-white-almost-2;
 $bn-color-home-page-slideshow-content-text-default: $bn-color-white-almost-2;
 
 
+// - News
+
+$bn-color-news-list-item-separator: $bn-color-page-page-content-block-separator;
+
 
 
 // Header
@@ -189,6 +193,10 @@ $bn-header-icon-button-diameter-layout-desktop: 2.8rem;
 $bn-page-title-ribbon-height-layout-mobile: 15.4rem;
 $bn-page-title-ribbon-height-layout-tablet: 16.4rem;
 $bn-page-title-ribbon-height-layout-desktop: 28.8rem;
+
+$bn-page-title-ribbon-condensed-height-layout-mobile: 7rem;
+$bn-page-title-ribbon-condensed-height-layout-tablet: 9.5rem;
+$bn-page-title-ribbon-condensed-height-layout-desktop: 12rem;
 
 
 
@@ -238,3 +246,9 @@ $bn-show-imagery-image-height-layout-desktop-wide: 112rem;
 $bn-show-cast-creative-media-navigation-height-layout-mobile: 4rem;
 $bn-show-cast-creative-media-navigation-height-layout-tablet: 4.8rem;
 $bn-show-cast-creative-media-navigation-height-layout-desktop: 6.7rem;
+
+
+
+// News Articles
+
+$bn-news-article-teaser-title-color-default: $bn-color-gray-dark;

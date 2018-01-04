@@ -1,0 +1,29 @@
+uuid: 51dd3f10-0762-48a6-b19b-ace7c7520e59
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_associated_show
+    - node.type.external_news_article
+    - node.type.show
+id: node.external_news_article.field_associated_show
+field_name: field_associated_show
+entity_type: node
+bundle: external_news_article
+label: 'Associated Show'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      show: show
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

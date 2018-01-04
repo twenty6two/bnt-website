@@ -1,0 +1,55 @@
+.news-article--page {
+  .banner-image {
+    .image-container {
+      @include ShadowBox();
+    }
+  }
+
+  .article-title {
+    font-size: 1.5rem;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      font-size: 2rem;
+    }
+    font-weight: 600;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .article-date {
+    font-weight: 600;
+  }
+
+  .article-content {
+    .paragraph--type--pull-quote {
+      .paragraph-content {
+        font-size: 1.7rem;
+        @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+          font-size: 2rem;
+        }
+        font-weight: 900;
+        line-height: 1.3;
+      }
+    }
+
+    .paragraph--type--image {
+      .image-container {
+        @include ShadowBox();
+      }
+    }
+
+    .paragraph--type--paragraph-image {
+      .image-container {
+        @include ShadowBox();
+      }
+
+      .image-caption-container {
+        font-size: 1.3rem;
+        line-height: 1.3;
+      }
+    }
+
+    .image-caption-container {
+      font-weight: 100;
+    }
+  }
+}

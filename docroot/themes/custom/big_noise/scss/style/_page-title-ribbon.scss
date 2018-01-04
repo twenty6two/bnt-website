@@ -13,6 +13,14 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  &.image-default {
+    background-image: url('/themes/custom/big_noise/images/page-title-banner/default.jpg');
+
+    &.height-condensed {
+      background-image: url('/themes/custom/big_noise/images/page-title-banner/default--condensed.jpg');
+    }
+  }
 }
 
 

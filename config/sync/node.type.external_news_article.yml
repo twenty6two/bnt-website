@@ -1,0 +1,17 @@
+uuid: 47a3ed83-1b73-4412-8273-bf31f66d2017
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'External News Article'
+type: external_news_article
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

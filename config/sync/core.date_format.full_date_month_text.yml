@@ -1,0 +1,8 @@
+uuid: 8737d8be-e393-4809-8c84-9f4029fcf2d6
+langcode: en
+status: true
+dependencies: {  }
+id: full_date_month_text
+label: 'Full Date Month Text'
+locked: false
+pattern: 'F j, Y'

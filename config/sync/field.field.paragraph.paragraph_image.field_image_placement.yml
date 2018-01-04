@@ -1,0 +1,21 @@
+uuid: a5cb0356-2ad8-46cf-beae-f22d033cd2eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_placement
+    - paragraphs.paragraphs_type.paragraph_image
+  module:
+    - options
+id: paragraph.paragraph_image.field_image_placement
+field_name: field_image_placement
+entity_type: paragraph
+bundle: paragraph_image
+label: 'Image Placement'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

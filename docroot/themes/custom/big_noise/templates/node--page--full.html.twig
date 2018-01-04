@@ -28,6 +28,7 @@
 {{ drupal_block('home_page_slideshow') }}
 {% endif %}
 
+{% if is_front or hasColumnPrimary or hasColumnSecondary %}
 <div id="site--main--main-content" class="site--main--main-content site-width-constraint">
   {% if is_front %}
   {{ drupal_block('home_page_lead_in') }}
@@ -41,3 +42,4 @@
     {% endif %}
   </div>
 </div>
+{% endif %}

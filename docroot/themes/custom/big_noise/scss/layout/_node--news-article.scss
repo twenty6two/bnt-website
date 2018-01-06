@@ -82,6 +82,7 @@
           padding-left: 3rem;
           padding-right: 3rem;
         }
+        text-align: center;
       }
     }
 
@@ -93,7 +94,8 @@
         margin-bottom: 3rem;
       }
 
-      .image-container {
+      .image-container,
+      .image-caption-container {
         margin-left: 2rem;
         margin-right: 2rem;
         @media (min-width: $bn-breakpoint-width-min-layout-tablet) {

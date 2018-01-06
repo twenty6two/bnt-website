@@ -5,7 +5,9 @@
 <div class="news-article--block--teaser{% if hasThumbnailImage %} has-image{% endif %}">
   {% if hasThumbnailImage %}
   <div class="news-article--block--teaser--image">
-    {{ content.field_banner_image_thumbnail }}
+    <a href="{{ url }}">
+      {{ content.field_banner_image_thumbnail }}
+    </a>
   </div>
   {% endif %}
   <div class="news-article--block--teaser--content">
@@ -20,7 +22,9 @@
 <div class="external-news-article--block--teaser{% if hasThumbnailImage %} has-image{% endif %}">
   {% if hasThumbnailImage %}
   <div class="external-news-article--block--teaser--image">
-    {{ content.field_banner_image_thumbnail }}
+    <a href="{{ node.field_article_url.0.url }}" target="_blank">
+      {{ content.field_banner_image_thumbnail }}
+    </a>
   </div>
   {% endif %}
   <div class="external-news-article--block--teaser--content">

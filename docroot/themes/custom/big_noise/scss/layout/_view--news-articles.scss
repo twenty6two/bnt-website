@@ -40,12 +40,11 @@
       float: right;
       margin-left: 2rem;
       margin-bottom: 1.25rem;
-      max-width: 32.75%;
+      width: 32.75%;
     }
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       order: 2;
-      flex-basis: 30%;
-      max-width: 30%;
+      width: 30%;
     }
   }
 
@@ -62,8 +61,8 @@
     .news-article--block--teaser--content,
     .external-news-article--block--teaser--content {
       @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-        flex-basis: 70%;
         padding-right: 4rem;
+        width: 70%;
       }
     }
   }

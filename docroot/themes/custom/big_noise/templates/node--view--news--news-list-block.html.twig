@@ -2,7 +2,7 @@
   set hasThumbnailImage = content.field_banner_image_thumbnail|render
 %}
 {% if node.bundle == 'news_article' %}
-<div class="news-article--block--teaser{% if hasThumbnailImage %} has-image{% endif %}">
+<div class="clearfix news-article--block--teaser{% if hasThumbnailImage %} has-image{% endif %}">
   {% if hasThumbnailImage %}
   <div class="news-article--block--teaser--image">
     <a href="{{ url }}">
@@ -19,7 +19,7 @@
   </div>
 </div>
 {% elseif node.bundle == 'external_news_article' %}
-<div class="external-news-article--block--teaser{% if hasThumbnailImage %} has-image{% endif %}">
+<div class="clearfix external-news-article--block--teaser{% if hasThumbnailImage %} has-image{% endif %}">
   {% if hasThumbnailImage %}
   <div class="external-news-article--block--teaser--image">
     <a href="{{ node.field_article_url.0.url }}" target="_blank">

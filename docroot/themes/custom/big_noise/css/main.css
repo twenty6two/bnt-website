@@ -2568,7 +2568,7 @@ nav ul {
 
 /* line 21, ../scss/layout/_view--news-articles.scss */
 .news-article-list-item:not(:last-of-type) {
-  padding-bottom: 2rem;
+  padding-bottom: 0.75rem;
   margin-bottom: 2rem;
 }
 @media (min-width: 768px) {
@@ -2579,13 +2579,6 @@ nav ul {
   }
 }
 
-@media (max-width: 767px) {
-  /* line 31, ../scss/layout/_view--news-articles.scss */
-  .news-article--block--teaser,
-  .external-news-article--block--teaser {
-    overflow: auto;
-  }
-}
 @media (min-width: 768px) {
   /* line 31, ../scss/layout/_view--news-articles.scss */
   .news-article--block--teaser,
@@ -2594,7 +2587,7 @@ nav ul {
   }
 }
 @media (max-width: 767px) {
-  /* line 40, ../scss/layout/_view--news-articles.scss */
+  /* line 37, ../scss/layout/_view--news-articles.scss */
   .news-article--block--teaser .news-article--block--teaser--image,
   .news-article--block--teaser .external-news-article--block--teaser--image,
   .external-news-article--block--teaser .news-article--block--teaser--image,
@@ -2606,7 +2599,7 @@ nav ul {
   }
 }
 @media (min-width: 768px) {
-  /* line 40, ../scss/layout/_view--news-articles.scss */
+  /* line 37, ../scss/layout/_view--news-articles.scss */
   .news-article--block--teaser .news-article--block--teaser--image,
   .news-article--block--teaser .external-news-article--block--teaser--image,
   .external-news-article--block--teaser .news-article--block--teaser--image,
@@ -2616,8 +2609,17 @@ nav ul {
     max-width: 30%;
   }
 }
+@media (max-width: 767px) {
+  /* line 52, ../scss/layout/_view--news-articles.scss */
+  .news-article--block--teaser .news-article--block--teaser--content,
+  .news-article--block--teaser .external-news-article--block--teaser--content,
+  .external-news-article--block--teaser .news-article--block--teaser--content,
+  .external-news-article--block--teaser .external-news-article--block--teaser--content {
+    margin-bottom: 1.25rem;
+  }
+}
 @media (min-width: 768px) {
-  /* line 55, ../scss/layout/_view--news-articles.scss */
+  /* line 52, ../scss/layout/_view--news-articles.scss */
   .news-article--block--teaser .news-article--block--teaser--content,
   .news-article--block--teaser .external-news-article--block--teaser--content,
   .external-news-article--block--teaser .news-article--block--teaser--content,

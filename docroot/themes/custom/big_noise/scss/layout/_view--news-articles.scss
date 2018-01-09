@@ -19,7 +19,7 @@
 
 .news-article-list-item {
   &:not(:last-of-type) {
-    padding-bottom: 2rem;
+    padding-bottom: 0.75rem;
     margin-bottom: 2rem;
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       padding-bottom: 3rem;
@@ -30,9 +30,6 @@
 
 .news-article--block--teaser,
 .external-news-article--block--teaser {
-  @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
-    overflow: auto;
-  }
   @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
     display: flex;
   }
@@ -54,6 +51,9 @@
 
   .news-article--block--teaser--content,
   .external-news-article--block--teaser--content {
+    @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+      margin-bottom: 1.25rem;
+    }
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
       order: 1;
     }

@@ -4270,7 +4270,7 @@ svg .page--highlight-color {
 }
 /* line 51, ../scss/style/_node--news-article.scss */
 .news-article--page .article-content .image-caption-container {
-  font-weight: 100;
+  font-weight: 300;
 }
 
 @media (min-width: 1024px) {

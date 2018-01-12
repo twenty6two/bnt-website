@@ -241,6 +241,7 @@ function _get_show_page_css($colors) {
 
     .show--imagery--wash {
       background-image: linear-gradient(to bottom, ' . $colors['left_gradient_color'] . ' 0%, ' . $colors['right_gradient_color'] . ' 100%);
+    }
   ';
 
   /*

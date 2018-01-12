@@ -928,15 +928,22 @@ button.sidebar-close .icon {
 }
 
 @media (max-width: 767px) {
-  /* line 120, ../scss/layout/_site--main--secondary-navigation.scss */
-  .site--main--secondary-navigation-container.theme-collapsible-layout-mobile.collapsed .navigation--secondary-navigation-main {
-    display: none;
+  /* line 118, ../scss/layout/_site--main--secondary-navigation.scss */
+  .site--main--secondary-navigation-container.theme-collapsible-layout-mobile {
+    transition: height 0.2s;
   }
 }
 @media (max-width: 767px) {
-  /* line 128, ../scss/layout/_site--main--secondary-navigation.scss */
-  .site--main--secondary-navigation-container.theme-collapsible-layout-mobile.expanded .navigation--secondary-navigation-main {
-    display: block;
+  /* line 123, ../scss/layout/_site--main--secondary-navigation.scss */
+  .site--main--secondary-navigation-container.theme-collapsible-layout-mobile.collapsed {
+    height: 3rem;
+  }
+}
+@media (max-width: 767px) {
+  /* line 129, ../scss/layout/_site--main--secondary-navigation.scss */
+  .site--main--secondary-navigation-container.theme-collapsible-layout-mobile .navigation--secondary-navigation-main {
+    position: absolute;
+    right: 2rem;
   }
 }
 
@@ -3452,12 +3459,20 @@ button.sidebar-close .icon .close {
   font-size: 1.2rem;
   line-height: 1.3;
 }
-/* line 13, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 12, ../scss/style/_site--main--secondary-navigation.scss */
+.site--main--secondary-navigation-toggle .icon {
+  transition: transform 0.2s;
+}
+/* line 15, ../scss/style/_site--main--secondary-navigation.scss */
+.site--main--secondary-navigation-container.expanded .site--main--secondary-navigation-toggle .icon {
+  transform: scaleY(-1);
+}
+/* line 19, ../scss/style/_site--main--secondary-navigation.scss */
 .site--main--secondary-navigation-toggle .icon g {
   fill: #f0f2f4;
 }
 
-/* line 23, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 29, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a {
   border-bottom-color: transparent;
   border-bottom-style: solid;
@@ -3475,47 +3490,47 @@ button.sidebar-close .icon .close {
   text-transform: uppercase;
 }
 @media (min-width: 768px) {
-  /* line 23, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 29, ../scss/style/_site--main--secondary-navigation.scss */
   .navigation--secondary-navigation-main > ul > li > a {
     font-size: 1.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 23, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 29, ../scss/style/_site--main--secondary-navigation.scss */
   .navigation--secondary-navigation-main > ul > li > a {
     font-size: 2rem;
   }
 }
-/* line 45, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 51, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a:hover {
   text-decoration: none;
 }
-/* line 49, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 55, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a:hover, .navigation--secondary-navigation-main > ul > li > a.page--highlight-color--text--hover:hover, .navigation--secondary-navigation-main > ul > li > a.page--highlight-color--text--hover--custom:hover {
   color: #f0f2f4;
 }
-/* line 55, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 61, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a:focus, .navigation--secondary-navigation-main > ul > li > a.page--highlight-color--text--focus:focus, .navigation--secondary-navigation-main > ul > li > a.page--highlight-color--text--focus--custom:focus {
   color: #f0f2f4;
 }
-/* line 61, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 67, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a.active {
   border-bottom-color: #f0f2f4;
 }
-/* line 65, ../scss/style/_site--main--secondary-navigation.scss */
+/* line 71, ../scss/style/_site--main--secondary-navigation.scss */
 .navigation--secondary-navigation-main > ul > li > a > sub {
   font-family: "Lato";
   font-size: 1.3rem;
   text-transform: none;
 }
 @media (min-width: 1024px) {
-  /* line 65, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 71, ../scss/style/_site--main--secondary-navigation.scss */
   .navigation--secondary-navigation-main > ul > li > a > sub {
     font-size: 1.6rem;
   }
 }
 @media (max-width: 767px) {
-  /* line 80, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 86, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a {
     border-bottom: none;
     font-family: "Lato";
@@ -3526,11 +3541,11 @@ button.sidebar-close .icon .close {
     padding-right: 0;
     text-align: right;
   }
-  /* line 91, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 97, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a:hover {
     text-decoration: underline;
   }
-  /* line 95, ../scss/style/_site--main--secondary-navigation.scss */
+  /* line 101, ../scss/style/_site--main--secondary-navigation.scss */
   .theme-collapsible-layout-mobile .navigation--secondary-navigation-main > ul > li > a > sub {
     display: none;
   }

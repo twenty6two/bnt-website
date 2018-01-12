@@ -28,6 +28,8 @@ $bn-transition-duration-default: 0.2s;
 
 $bn-transition-duration-sidebar-hide-show: $bn-transition-duration-default;
 $bn-transition-duration-link-color-default: $bn-transition-duration-default;
+$bn-transition-duration-site-main-secondary-navigation-toggle-icon-flip: $bn-transition-duration-default;
+$bn-transition-duration-site-main-secondary-navigation-height: $bn-transition-duration-default;
 
 
 
@@ -206,6 +208,8 @@ $bn-page-title-ribbon-condensed-height-layout-desktop: 12rem;
 $bn-site-main-secondary-navigation-height-layout-mobile: 4rem;
 $bn-site-main-secondary-navigation-height-layout-tablet: 4.8rem;
 $bn-site-main-secondary-navigation-height-layout-desktop: 6.7rem;
+
+$bn-site-main-secondary-navigation-toggle-height: 3rem;
 
 
 

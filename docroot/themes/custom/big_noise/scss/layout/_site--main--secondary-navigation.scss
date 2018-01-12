@@ -43,7 +43,7 @@
   position: relative;
   left: 100%;
   transform: translate3d(-100%, 0, 0);
-  height: 3rem;
+  height: $bn-site-main-secondary-navigation-toggle-height;
 
   &::before {
     margin-right: 0.25rem;
@@ -116,19 +116,20 @@
 
 .site--main--secondary-navigation-container {
   &.theme-collapsible-layout-mobile {
+    @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+      transition: height $bn-transition-duration-site-main-secondary-navigation-height;
+    }
+
     &.collapsed {
-      .navigation--secondary-navigation-main {
-        @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
-          display: none;
-        }
+      @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+        height: $bn-site-main-secondary-navigation-toggle-height;
       }
     }
 
-    &.expanded {
-      .navigation--secondary-navigation-main {
-        @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
-          display: block;
-        }
+    .navigation--secondary-navigation-main {
+      @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+        position: absolute;
+        right: $bn-header-gutter-right-layout-mobile;
       }
     }
   }

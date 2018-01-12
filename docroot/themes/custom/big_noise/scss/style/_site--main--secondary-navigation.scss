@@ -10,6 +10,12 @@
   line-height: 1.3;
 
   .icon {
+    transition: transform $bn-transition-duration-site-main-secondary-navigation-toggle-icon-flip;
+
+    .site--main--secondary-navigation-container.expanded & {
+      transform: scaleY(-1);
+    }
+
     g {
       fill: $bn-color-main-secondary-navigation-toggle-button;
     }

@@ -5,7 +5,6 @@ namespace Drupal\system\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Menu\MenuActiveTrailInterface;
 use Drupal\Core\Menu\MenuLinkTreeInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -17,7 +16,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "system_menu_block",
  *   admin_label = @Translation("Menu"),
  *   category = @Translation("Menus"),
- *   deriver = "Drupal\system\Plugin\Derivative\SystemMenuBlock"
+ *   deriver = "Drupal\system\Plugin\Derivative\SystemMenuBlock",
+ *   forms = {
+ *     "settings_tray" = "\Drupal\system\Form\SystemMenuOffCanvasForm",
+ *   },
  * )
  */
 class SystemMenuBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -30,13 +32,6 @@ class SystemMenuBlock extends BlockBase implements ContainerFactoryPluginInterfa
   protected $menuTree;
 
   /**
-   * The active menu trail service.
-   *
-   * @var \Drupal\Core\Menu\MenuActiveTrailInterface
-   */
-  protected $menuActiveTrail;
-
-  /**
    * Constructs a new SystemMenuBlock.
    *
    * @param array $configuration
@@ -47,13 +42,10 @@ class SystemMenuBlock extends BlockBase implements ContainerFactoryPluginInterfa
    *   The plugin implementation definition.
    * @param \Drupal\Core\Menu\MenuLinkTreeInterface $menu_tree
    *   The menu tree service.
-   * @param \Drupal\Core\Menu\MenuActiveTrailInterface $menu_active_trail
-   *   The active menu trail service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, MenuLinkTreeInterface $menu_tree, MenuActiveTrailInterface $menu_active_trail) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, MenuLinkTreeInterface $menu_tree) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->menuTree = $menu_tree;
-    $this->menuActiveTrail = $menu_active_trail;
   }
 
   /**
@@ -64,8 +56,7 @@ class SystemMenuBlock extends BlockBase implements ContainerFactoryPluginInterfa
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('menu.link_tree'),
-      $container->get('menu.active_trail')
+      $container->get('menu.link_tree')
     );
   }
 
@@ -147,8 +138,6 @@ class SystemMenuBlock extends BlockBase implements ContainerFactoryPluginInterfa
       $parameters->setMaxDepth(min($level + $depth - 1, $this->menuTree->maxDepth()));
     }
 
-    // @CMN Patch from https://www.drupal.org/files/issues/menu_subtrees_in_menu-2631468-122.patch
-
     // For menu blocks with start level greater than 1, only show menu items
     // from the current active trail. Adjust the root according to the current
     // position in the menu in order to determine if we can show the subtree.
@@ -164,11 +153,9 @@ class SystemMenuBlock extends BlockBase implements ContainerFactoryPluginInterfa
         }
       }
       else {
-        return array();
+        return [];
       }
     }
-
-    // @CMN End Patch
 
     $tree = $this->menuTree->load($menu_name, $parameters);
     $manipulators = [

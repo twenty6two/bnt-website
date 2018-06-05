@@ -135,6 +135,20 @@ function big_noise_preprocess_node(&$variables) {
       $variables['show__performance_date_range'] = $show_performance_date_range;
 
 
+      // Determine whether show title images are present
+      // and prepare container classes
+      $variables['show__title_container_classes'] = [];
+      if ($node->field_title_image_mobile->entity) {
+        $variables['show__title_container_classes'][] = 'has-title-image--mobile';
+      }
+      if ($node->field_title_image_tablet->entity) {
+        $variables['show__title_container_classes'][] = 'has-title-image--tablet';
+      }
+      if ($node->field_title_image_desktop->entity) {
+        $variables['show__title_container_classes'][] = 'has-title-image--desktop';
+      }
+
+
       // Prepare metadata variables
       $variables['show__is_for_sale'] = $node->field_show_sale_status->value;
 

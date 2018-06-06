@@ -143,13 +143,35 @@
 
 .show--container {
   .show--title {
-    position: absolute;
-    bottom: 0;
-
-    visibility: hidden;
+    &.has-title-image--mobile {
+      @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+        .show--title--text {
+          @include VisuallyHidden();
+        }
+      }
+    }
+    &.has-title-image--tablet {
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) and (max-width: $bn-breakpoint-width-max-layout-tablet) {
+        .show--title--text {
+          @include VisuallyHidden();
+        }
+      }
+    }
+    &.has-title-image--desktop {
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        .show--title--text {
+          @include VisuallyHidden();
+        }
+      }
+    }
   }
 
-  .show--title-image {
+  .show--title--text {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .show--title--image {
     position: absolute;
     bottom: 0;
 

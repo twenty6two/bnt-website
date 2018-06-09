@@ -1,5 +1,9 @@
 .show--container {
-  .show--title {
+  .show--title--text {
+    @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+      margin-bottom: 0.4rem;
+    }
+
     h1 {
       font-family: $bn-font-family-highlight;
       font-size: 2.4rem;

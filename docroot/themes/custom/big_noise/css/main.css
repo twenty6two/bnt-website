@@ -4019,58 +4019,70 @@ svg .page--highlight-color {
   margin-bottom: 0;
   text-transform: uppercase;
 }
-/* line 13, ../scss/style/_node--show.scss */
+@media (min-width: 768px) {
+  /* line 3, ../scss/style/_node--show.scss */
+  .show--container .show--title h1 {
+    font-size: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 3, ../scss/style/_node--show.scss */
+  .show--container .show--title h1 {
+    font-size: 3.6rem;
+  }
+}
+/* line 19, ../scss/style/_node--show.scss */
 .show--container .show--performance-date-range {
   font-family: "Oswald";
   font-size: 1.6rem;
   font-weight: 500;
 }
 @media (min-width: 768px) {
-  /* line 13, ../scss/style/_node--show.scss */
+  /* line 19, ../scss/style/_node--show.scss */
   .show--container .show--performance-date-range {
     font-size: 2rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 13, ../scss/style/_node--show.scss */
+  /* line 19, ../scss/style/_node--show.scss */
   .show--container .show--performance-date-range {
     font-size: 2.4rem;
   }
 }
-/* line 26, ../scss/style/_node--show.scss */
+/* line 32, ../scss/style/_node--show.scss */
 .show--container .show--buy-tickets .label {
   text-shadow: none;
 }
-/* line 32, ../scss/style/_node--show.scss */
+/* line 38, ../scss/style/_node--show.scss */
 .show--container .show--ticket-price-details > ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* line 41, ../scss/style/_node--show.scss */
+/* line 47, ../scss/style/_node--show.scss */
 .show--main-content-blocks,
 .show--cast-creative-media--container {
   color: #f0f2f4;
   text-shadow: 0 0 2em rgba(0, 0, 0, 0.6);
 }
 
-/* line 50, ../scss/style/_node--show.scss */
+/* line 56, ../scss/style/_node--show.scss */
 .show--main-content-blocks p:not(:last-child) {
   margin-bottom: 2rem;
 }
 
-/* line 58, ../scss/style/_node--show.scss */
+/* line 64, ../scss/style/_node--show.scss */
 .page-type--show .site--main--secondary-navigation-toggle::before {
   content: 'Other Shows';
 }
 
-/* line 65, ../scss/style/_node--show.scss */
+/* line 71, ../scss/style/_node--show.scss */
 .show--cast-creative-media--navigation-container {
   background-color: rgba(0, 0, 0, 0.35);
 }
 
-/* line 73, ../scss/style/_node--show.scss */
+/* line 79, ../scss/style/_node--show.scss */
 .show--cast-creative-media--navigation > ul > li > a {
   border-bottom-color: transparent;
   border-bottom-style: solid;
@@ -4088,47 +4100,47 @@ svg .page--highlight-color {
   text-transform: uppercase;
 }
 @media (min-width: 768px) {
-  /* line 73, ../scss/style/_node--show.scss */
+  /* line 79, ../scss/style/_node--show.scss */
   .show--cast-creative-media--navigation > ul > li > a {
     font-size: 1.6rem;
   }
 }
 @media (min-width: 1024px) {
-  /* line 73, ../scss/style/_node--show.scss */
+  /* line 79, ../scss/style/_node--show.scss */
   .show--cast-creative-media--navigation > ul > li > a {
     font-size: 2rem;
   }
 }
-/* line 95, ../scss/style/_node--show.scss */
+/* line 101, ../scss/style/_node--show.scss */
 .show--cast-creative-media--navigation > ul > li > a:hover {
   text-decoration: none;
 }
-/* line 99, ../scss/style/_node--show.scss */
+/* line 105, ../scss/style/_node--show.scss */
 .show--cast-creative-media--navigation > ul > li > a:hover, .show--cast-creative-media--navigation > ul > li > a.page--highlight-color--text--hover:hover, .show--cast-creative-media--navigation > ul > li > a.page--highlight-color--text--hover--custom:hover {
   color: #f0f2f4;
 }
-/* line 105, ../scss/style/_node--show.scss */
+/* line 111, ../scss/style/_node--show.scss */
 .show--cast-creative-media--navigation > ul > li > a:focus, .show--cast-creative-media--navigation > ul > li > a.page--highlight-color--text--focus:focus, .show--cast-creative-media--navigation > ul > li > a.page--highlight-color--text--focus--custom:focus {
   color: #f0f2f4;
 }
-/* line 111, ../scss/style/_node--show.scss */
+/* line 117, ../scss/style/_node--show.scss */
 .show--cast-creative-media--navigation > ul > li > a.active {
   border-bottom-color: #f0f2f4;
 }
-/* line 115, ../scss/style/_node--show.scss */
+/* line 121, ../scss/style/_node--show.scss */
 .show--cast-creative-media--navigation > ul > li > a > sub {
   font-family: "Lato";
   font-size: 1.3rem;
   text-transform: none;
 }
 @media (min-width: 1024px) {
-  /* line 115, ../scss/style/_node--show.scss */
+  /* line 121, ../scss/style/_node--show.scss */
   .show--cast-creative-media--navigation > ul > li > a > sub {
     font-size: 1.6rem;
   }
 }
 
-/* line 130, ../scss/style/_node--show.scss */
+/* line 136, ../scss/style/_node--show.scss */
 .show--cast-creative h2 {
   font-size: 1.5rem;
   font-weight: 600;
@@ -4138,22 +4150,22 @@ svg .page--highlight-color {
   text-transform: uppercase;
 }
 @media (min-width: 768px) {
-  /* line 130, ../scss/style/_node--show.scss */
+  /* line 136, ../scss/style/_node--show.scss */
   .show--cast-creative h2 {
     font-size: 2rem;
   }
 }
-/* line 144, ../scss/style/_node--show.scss */
+/* line 150, ../scss/style/_node--show.scss */
 .show--cast-creative ul li:not(:last-of-type) {
   border-bottom-color: rgba(225, 228, 231, 0.6);
   border-bottom-style: solid;
   border-bottom-width: 0.05rem;
 }
-/* line 152, ../scss/style/_node--show.scss */
+/* line 158, ../scss/style/_node--show.scss */
 .show--cast-creative .role {
   font-weight: 300;
 }
-/* line 156, ../scss/style/_node--show.scss */
+/* line 162, ../scss/style/_node--show.scss */
 .show--cast-creative .entity {
   text-align: right;
 }

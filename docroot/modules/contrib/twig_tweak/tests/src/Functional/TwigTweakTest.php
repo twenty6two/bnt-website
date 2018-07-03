@@ -2,7 +2,10 @@
 
 namespace Drupal\Tests\twig_tweak\Functional;
 
+use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -22,6 +25,7 @@ class TwigTweakTest extends BrowserTestBase {
     'node',
     'block',
     'image',
+    'responsive_image',
   ];
 
   /**
@@ -33,6 +37,21 @@ class TwigTweakTest extends BrowserTestBase {
     $this->createNode(['title' => 'Alpha']);
     $this->createNode(['title' => 'Beta']);
     $this->createNode(['title' => 'Gamma']);
+
+    file_unmanaged_copy(DRUPAL_ROOT . '/core/misc/druplicon.png', 'public://druplicon.png');
+    $file = File::create([
+      'uri' => 'public://druplicon.png',
+      'filename' => 'druplicon.png',
+      'uuid' => 'b2c22b6f-7bf8-4da4-9de5-316e93487518',
+      'status' => 1,
+    ]);
+    $file->save();
+
+    ResponsiveImageStyle::create([
+      'id' => 'example',
+      'label' => 'Example',
+      'breakpoint_group' => 'responsive_image',
+    ])->save();
   }
 
   /**
@@ -65,15 +84,26 @@ class TwigTweakTest extends BrowserTestBase {
     $xpath .= '/div[@class = "view-content"]//ul[count(./li) = 1]/li';
     $this->assertByXpath($xpath . '//a[contains(@href, "/node/1") and text() = "Alpha"]');
 
+    // Test view result.
+    $xpath = '//div[@class = "tt-view-result" and text() = 3]';
+    $this->assertByXpath($xpath);
+
     // Test block.
     $xpath = '//div[@class = "tt-block"]';
-    $xpath .= '/div[@id="block-classy-powered-by-drupal"]/span[contains(., "Powered by Drupal")]';
+    $xpath .= '/img[contains(@src, "/core/themes/classy/logo.svg") and @alt="Home"]';
+    $this->assertByXpath($xpath);
+
+    // Test block with wrapper.
+    $xpath = '//div[@class = "tt-block-with-wrapper"]';
+    $xpath .= '/div[@class = "block block-system block-system-branding-block"]';
+    $xpath .= '/h2[text() = "Branding"]';
+    $xpath .= '/following-sibling::a[img[contains(@src, "/core/themes/classy/logo.svg") and @alt="Home"]]';
+    $xpath .= '/following-sibling::div[@class = "site-name"]/a';
     $this->assertByXpath($xpath);
 
     // Test region.
-    $xpath = '//div[@class = "tt-region"]';
+    $xpath = '//div[@class = "tt-region"]/div[@class = "region region-sidebar-first"]';
     $xpath .= '/div[contains(@class, "block-page-title-block") and h1[@class="page-title" and text() = "Log in"]]';
-    $xpath .= '/following-sibling::div[@class="messages messages--warning" and contains(., "Hi!")]';
     $xpath .= '/following-sibling::div[contains(@class, "block-system-powered-by-block")]/span[. = "Powered by Drupal"]';
     $this->assertByXpath($xpath);
 
@@ -118,6 +148,26 @@ class TwigTweakTest extends BrowserTestBase {
     $xpath = '//div[@class = "tt-form"]/form[@class="system-cron-settings"]/input[@type = "submit" and @value = "Run cron"]';
     $this->assertByXpath($xpath);
 
+    // Test image by FID.
+    $xpath = '//div[@class = "tt-image-by-fid"]/img[contains(@src, "/files/druplicon.png")]';
+    $this->assertByXpath($xpath);
+
+    // Test image by URI.
+    $xpath = '//div[@class = "tt-image-by-uri"]/img[contains(@src, "/files/druplicon.png")]';
+    $this->assertByXpath($xpath);
+
+    // Test image by UUID.
+    $xpath = '//div[@class = "tt-image-by-uuid"]/img[contains(@src, "/files/druplicon.png")]';
+    $this->assertByXpath($xpath);
+
+    // Test image with style.
+    $xpath = '//div[@class = "tt-image-with-style"]/img[contains(@src, "/files/styles/thumbnail/public/druplicon.png")]';
+    $this->assertByXpath($xpath);
+
+    // Test image with responsive style.
+    $xpath = '//div[@class = "tt-image-with-responsive-style"]/picture/img[contains(@src, "/files/druplicon.png")]';
+    $this->assertByXpath($xpath);
+
     // Test token.
     $xpath = '//div[@class = "tt-token" and text() = "Drupal"]';
     $this->assertByXpath($xpath);
@@ -130,10 +180,6 @@ class TwigTweakTest extends BrowserTestBase {
     $xpath = '//div[@class = "tt-config" and text() = "Anonymous"]';
     $this->assertByXpath($xpath);
 
-    // Test status message.
-    $xpath = '//div[@class = "messages messages--warning" and contains(., "Hi!")]';
-    $this->assertByXpath($xpath);
-
     // Test page title.
     $xpath = '//div[@class = "tt-title" and text() = "Beta"]';
     $this->assertByXpath($xpath);
@@ -143,16 +189,30 @@ class TwigTweakTest extends BrowserTestBase {
     $xpath = sprintf('//div[@class = "tt-url" and text() = "%s"]', $url);
     $this->assertByXpath($xpath);
 
+    // Test link.
+    $url = Url::fromUserInput('/node/1/edit', ['absolute' => TRUE]);
+    $link = Link::fromTextAndUrl('Edit', $url)->toString();
+    $xpath = '//div[@class = "tt-link"]';
+    self::assertEquals($link, trim($this->xpath($xpath)[0]->getHtml()));
+
+    // Test status messages.
+    $xpath = '//div[@class = "tt-messages"]/div[contains(@class, "messages--status") and contains(., "Hello world!")]';
+    $this->assertByXpath($xpath);
+
+    // Test breadcrumb.
+    $xpath = '//div[@class = "tt-breadcrumb"]/nav[@class = "breadcrumb"]/ol/li/a[text() = "Home"]';
+    $this->assertByXpath($xpath);
+
+    // Test protected link.
+    $xpath = '//div[@class = "tt-link-access"]';
+    self::assertEquals('', trim($this->xpath($xpath)[0]->getHtml()));
+
     // Test token replacement.
     $xpath = '//div[@class = "tt-token-replace" and text() = "Site name: Drupal"]';
     $this->assertByXpath($xpath);
 
     // Test preg replacement.
     $xpath = '//div[@class = "tt-preg-replace" and text() = "FOO-bar"]';
-    $this->assertByXpath($xpath);
-
-    // Test preg replacement (legacy).
-    $xpath = '//div[@class = "tt-preg-replace-legacy" and text() = "foo-bar"]';
     $this->assertByXpath($xpath);
 
     // Test image style.
@@ -165,7 +225,29 @@ class TwigTweakTest extends BrowserTestBase {
 
     // Test text format.
     $xpath = '//div[@class = "tt-check-markup"]';
-    $this->assertEquals('<b>bold</b> strong', trim($this->xpath($xpath)[0]->getHtml()));
+    self::assertEquals('<b>bold</b> strong', trim($this->xpath($xpath)[0]->getHtml()));
+
+    // Test truncation.
+    $xpath = '//div[@class = "tt-truncate" and text() = "Hello…"]';
+    $this->assertByXpath($xpath);
+
+    // Test 'with'.
+    $xpath = '//div[@class = "tt-with"]/b[text() = "Example"]';
+    $this->assertByXpath($xpath);
+
+    // Test node view.
+    $xpath = '//div[@class = "tt-node-view"]/article[contains(@class, "node--view-mode-default")]/h2[a/span[text() = "Beta"]]';
+    $xpath .= '/following-sibling::footer[//h4[text() = "Member for"]]';
+    $xpath .= '/following-sibling::div[@class = "node__content"]/div/p';
+    $this->assertByXpath($xpath);
+
+    // Field list view.
+    $xpath = '//div[@class = "tt-field-list-view"]/span[contains(@class, "field--name-title") and text() = "Beta"]';
+    $this->assertByXpath($xpath);
+
+    // Field item view.
+    $xpath = '//div[@class = "tt-field-item-view" and text() = "Beta"]';
+    $this->assertByXpath($xpath);
   }
 
   /**

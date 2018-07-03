@@ -45,21 +45,21 @@
   </header>
   <div class="sidebar-content">
     <div id="sidebar--main-navigation--content-block--main-navigation" class="sidebar--main-navigation--content-block--main-navigation">
-      {{ drupal_block('main_navigation_sidebar') }}
+      {{ drupal_entity('block', 'main_navigation_sidebar') }}
     </div>
     <div id="sidebar--main-navigation--content-block--secondary-links" class="sidebar--main-navigation--content-block--secondary-links">
       <ul id="navigation--secondary-links-sidebar" class="navigation--secondary-links-sidebar">
         <li>
-          {{ drupal_block('phone_link_sidebar') }}
+          {{ drupal_entity('block', 'phone_link_sidebar') }}
         </li>
         <li>
-          {{ drupal_block('locate_link_sidebar') }}
+          {{ drupal_entity('block', 'locate_link_sidebar') }}
         </li>
         <li>
-          {{ drupal_block('buy_tickets_link_sidebar') }}
+          {{ drupal_entity('block', 'buy_tickets_link_sidebar') }}
         </li>
       </ul>
-      {{ drupal_block('social_media_navigation_sidebar') }}
+      {{ drupal_entity('block', 'social_media_navigation_sidebar') }}
     </div>
   </div>
 </div>

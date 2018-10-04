@@ -2,18 +2,17 @@
   border-bottom-color: $bn-color-content-block-column-primary-separator;
   border-bottom-style: solid;
   border-bottom-width: 0.2rem;
-  border-top-color: $bn-color-content-block-column-primary-separator;
-  border-top-style: solid;
-  border-top-width: 0.2rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 2rem;
   padding-top: 2rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 2rem;
   @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }
 

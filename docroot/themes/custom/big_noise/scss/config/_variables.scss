@@ -25,6 +25,7 @@ $bn-column-gutter-width-layout-desktop: 8rem;
 // Animations
 
 $bn-transition-duration-default: 0.2s;
+$bn-transition-duration-home-page-slideshow: 0.6s;
 
 $bn-transition-duration-sidebar-hide-show: $bn-transition-duration-default;
 $bn-transition-duration-link-color-default: $bn-transition-duration-default;
@@ -233,6 +234,23 @@ $bn-footer-gutter-top-layout-desktop: 2rem;
 $bn-footer-gutter-bottom-layout-desktop: 2rem;
 $bn-footer-gutter-left-layout-desktop: 2rem;
 $bn-footer-gutter-right-layout-desktop: 2rem;
+
+
+
+// Home Page
+
+$bn-home-page-slideshow-paging-control-target-size-layout-mobile: 1rem;
+$bn-home-page-slideshow-paging-control-target-size-layout-tablet: 1.5rem;
+$bn-home-page-slideshow-paging-control-target-size-layout-desktop: 1.5rem;
+$bn-home-page-slideshow-paging-control-target-size-layout-desktop-wide: 1.5rem;
+$bn-home-page-slideshow-paging-control-negative-space-top-layout-mobile: 1.5rem;
+$bn-home-page-slideshow-paging-control-negative-space-top-layout-tablet: 2rem;
+$bn-home-page-slideshow-paging-control-negative-space-top-layout-desktop: 2rem;
+$bn-home-page-slideshow-paging-control-negative-space-top-layout-desktop-wide: 2rem;
+$bn-home-page-slideshow-paging-control-negative-space-bottom-layout-mobile: 1.5rem;
+$bn-home-page-slideshow-paging-control-negative-space-bottom-layout-tablet: 2rem;
+$bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop: 2rem;
+$bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop-wide: 2rem;
 
 
 

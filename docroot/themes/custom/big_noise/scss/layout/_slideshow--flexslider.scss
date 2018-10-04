@@ -1,4 +1,6 @@
 .flexslider {
+  position: relative;
+
   .slides {
     display: block;
     list-style: none;
@@ -28,8 +30,29 @@
 
   .flex-control-paging {
     list-style: none;
-    margin: 1rem 0 0 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: $bn-home-page-slideshow-paging-control-negative-space-top-layout-mobile;
+    margin-bottom: $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-mobile;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      margin-top: $bn-home-page-slideshow-paging-control-negative-space-top-layout-tablet;
+      margin-bottom: $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-tablet;
+    }
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+      margin-top: $bn-home-page-slideshow-paging-control-negative-space-top-layout-desktop;
+      margin-bottom: $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop;
+    }
+    @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
+      margin-top: $bn-home-page-slideshow-paging-control-negative-space-top-layout-desktop-wide;
+      margin-bottom: $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop-wide;
+    }
+
     padding: 0;
+
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    width: 100%;
 
     display: flex;
     flex-direction: row;
@@ -42,21 +65,29 @@
         overflow: hidden;
         display: block;
 
-        background: #a5abb8;
+        background: rgba(255,255,255,0.2);
         border-radius: 100%;
         cursor: pointer;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
-        width: 1rem;
-        height: 1rem;
+        width: $bn-home-page-slideshow-paging-control-target-size-layout-mobile;
+        height: $bn-home-page-slideshow-paging-control-target-size-layout-mobile;
         @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-          width: 1.5rem;
-          height: 1.5rem;
+          width: $bn-home-page-slideshow-paging-control-target-size-layout-tablet;
+          height: $bn-home-page-slideshow-paging-control-target-size-layout-tablet;
         }
-        transition: background $bn-transition-duration-default;
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+          width: $bn-home-page-slideshow-paging-control-target-size-layout-desktop;
+          height: $bn-home-page-slideshow-paging-control-target-size-layout-desktop;
+        }
+        @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
+          width: $bn-home-page-slideshow-paging-control-target-size-layout-desktop-wide;
+          height: $bn-home-page-slideshow-paging-control-target-size-layout-desktop-wide;
+        }
+        transition: background $bn-transition-duration-home-page-slideshow;
 
         &.flex-active {
-          background: #3e464f;
+          background: rgba(255,255,255,0.8);
           cursor: default;
         }
       }

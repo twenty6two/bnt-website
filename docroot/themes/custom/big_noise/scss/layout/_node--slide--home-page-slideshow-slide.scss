@@ -2,15 +2,9 @@
   > a {
     display: block;
     height: 100%;
-    padding-bottom: ($bn-home-page-slideshow-paging-control-target-size-layout-mobile + ($bn-home-page-slideshow-paging-control-margin-size * 2) + $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-mobile);
+    padding-bottom: 3.75rem;
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-      padding-bottom: ($bn-home-page-slideshow-paging-control-target-size-layout-tablet + ($bn-home-page-slideshow-paging-control-margin-size * 2) + $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-tablet);
-    }
-    @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-      padding-bottom: ($bn-home-page-slideshow-paging-control-target-size-layout-desktop + ($bn-home-page-slideshow-paging-control-margin-size * 2) + $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop);
-    }
-    @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
-      padding-bottom: ($bn-home-page-slideshow-paging-control-target-size-layout-desktop-wide + ($bn-home-page-slideshow-paging-control-margin-size * 2) + $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop-wide);
+      padding-bottom: 4.5rem;
     }
   }
 }

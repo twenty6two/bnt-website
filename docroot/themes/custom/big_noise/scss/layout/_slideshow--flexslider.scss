@@ -35,15 +35,15 @@
 
     position: absolute;
     z-index: 2;
-    bottom: ($bn-home-page-slideshow-paging-control-negative-space-bottom-layout-mobile - $bn-home-page-slideshow-paging-control-margin-size);
+    bottom: $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-mobile;
     @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
-      bottom: ($bn-home-page-slideshow-paging-control-negative-space-bottom-layout-tablet - $bn-home-page-slideshow-paging-control-margin-size);
+      bottom: $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-tablet;
     }
     @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
-      bottom: ($bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop - $bn-home-page-slideshow-paging-control-margin-size);
+      bottom: $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop;
     }
     @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
-      bottom: ($bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop-wide - $bn-home-page-slideshow-paging-control-margin-size);
+      bottom: $bn-home-page-slideshow-paging-control-negative-space-bottom-layout-desktop-wide;
     }
     left: 50%;
     transform: translateX(-50%);

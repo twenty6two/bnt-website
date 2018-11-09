@@ -4,9 +4,26 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.show.field_billing_credits
+    - field.field.node.show.field_buy_tickets_url
+    - field.field.node.show.field_cast_and_creative
+    - field.field.node.show.field_division
+    - field.field.node.show.field_page_colors
+    - field.field.node.show.field_performance_details
     - field.field.node.show.field_performances
     - field.field.node.show.field_season
+    - field.field.node.show.field_show_page_colors
+    - field.field.node.show.field_show_sale_status
+    - field.field.node.show.field_splash_image
+    - field.field.node.show.field_synopsis
+    - field.field.node.show.field_synopsis_concise
+    - field.field.node.show.field_ticket_price_details
+    - field.field.node.show.field_title
+    - field.field.node.show.field_title_image_desktop
+    - field.field.node.show.field_title_image_mobile
+    - field.field.node.show.field_title_image_tablet
     - field.field.node.show.field_venue
+    - field.field.node.show.field_venue_details
     - node.type.show
   module:
     - user
@@ -18,7 +35,26 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
+  field_billing_credits: true
+  field_buy_tickets_url: true
+  field_cast_and_creative: true
+  field_division: true
+  field_page_colors: true
+  field_performance_details: true
   field_performances: true
   field_season: true
+  field_show_page_colors: true
+  field_show_sale_status: true
+  field_splash_image: true
+  field_synopsis: true
+  field_synopsis_concise: true
+  field_ticket_price_details: true
+  field_title: true
+  field_title_image_desktop: true
+  field_title_image_mobile: true
+  field_title_image_tablet: true
   field_venue: true
+  field_venue_details: true

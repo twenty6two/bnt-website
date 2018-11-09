@@ -5,6 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.field_content_blocks
+    - field.field.node.page.field_content_blocks_secondary
+    - field.field.node.page.field_page_title_ribbon_image
     - field.field.node.page.field_subheading
     - field.field.node.page.field_title
     - node.type.page
@@ -18,7 +20,11 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_content_blocks: true
+  field_content_blocks_secondary: true
+  field_page_title_ribbon_image: true
   field_subheading: true
   field_title: true

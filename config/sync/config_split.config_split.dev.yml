@@ -1,0 +1,16 @@
+uuid: e43d2db1-852c-4880-8245-15d3c22d3e5a
+langcode: en
+status: true
+dependencies: {  }
+id: dev
+label: Development
+description: ''
+folder: ../config/dev
+module:
+  kint: 0
+theme: {  }
+blacklist: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 0

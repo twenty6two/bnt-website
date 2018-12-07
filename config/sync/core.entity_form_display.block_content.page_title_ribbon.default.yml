@@ -1,0 +1,57 @@
+uuid: 5d2e33dc-2ffb-45a4-a5fa-521ca1244c4e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.page_title_ribbon
+    - entity_browser.browser.images
+    - field.field.block_content.page_title_ribbon.field_page_title_ribbon_image
+    - field.field.block_content.page_title_ribbon.field_subheading
+    - field.field.block_content.page_title_ribbon.field_title
+  module:
+    - entity_browser
+id: block_content.page_title_ribbon.default
+targetEntityType: block_content
+bundle: page_title_ribbon
+mode: default
+content:
+  field_page_title_ribbon_image:
+    weight: 28
+    settings:
+      entity_browser: images
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      field_widget_replace: false
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_subheading:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_title:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

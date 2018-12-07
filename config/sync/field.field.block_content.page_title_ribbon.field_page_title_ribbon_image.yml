@@ -1,0 +1,28 @@
+uuid: fb7dec04-e720-4de3-ae3e-51347ae53d31
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.page_title_ribbon
+    - field.storage.block_content.field_page_title_ribbon_image
+    - media_entity.bundle.image
+id: block_content.page_title_ribbon.field_page_title_ribbon_image
+field_name: field_page_title_ribbon_image
+entity_type: block_content
+bundle: page_title_ribbon
+label: 'Page Title Ribbon Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

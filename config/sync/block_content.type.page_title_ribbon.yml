@@ -1,0 +1,8 @@
+uuid: 28dc48f6-14ec-4b9c-a721-45c103038121
+langcode: en
+status: true
+dependencies: {  }
+id: page_title_ribbon
+label: 'Page Title Ribbon'
+revision: 1
+description: ''

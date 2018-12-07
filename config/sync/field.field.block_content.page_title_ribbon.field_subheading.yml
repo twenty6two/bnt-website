@@ -1,0 +1,19 @@
+uuid: 2744f500-b75a-4b0b-8621-df8647ba3c65
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.page_title_ribbon
+    - field.storage.block_content.field_subheading
+id: block_content.page_title_ribbon.field_subheading
+field_name: field_subheading
+entity_type: block_content
+bundle: page_title_ribbon
+label: 'Page Subheading'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

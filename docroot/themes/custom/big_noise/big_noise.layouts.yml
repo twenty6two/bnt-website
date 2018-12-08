@@ -1,0 +1,9 @@
+standard_page:
+  label: Standard Page
+  category: Big Noise
+  template: layouts/standard-page
+  regions:
+    page_title_ribbon:
+      label: Page Title Ribbon
+    page_content:
+      label: Page Content

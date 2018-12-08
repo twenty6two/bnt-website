@@ -1,0 +1,9 @@
+{% spaceless %}
+
+  {{ content.page_title_ribbon|without('#prefix')|without('#suffix') }}
+
+  <div id="site--main--main-content" class="site--main--main-content site-width-constraint">
+    {{ content.page_content|without('#prefix')|without('#suffix') }}
+  </div>
+
+{% endspaceless %}

@@ -38,6 +38,9 @@ module:
   options: 0
   page_cache: 0
   page_colors: 0
+  page_manager: 0
+  page_manager_ui: 0
+  panels: 0
   path: 0
   redirect: 0
   show_page_colors: 0

@@ -1,0 +1,104 @@
+.view--show-history {
+  .view--show-history--season-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
+
+    .view--show-history--season {
+      width: 100%;
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        width: 50%;
+      }
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
+        width: 33.3334%;
+      }
+
+      @media (max-width: $bn-breakpoint-width-max-layout-mobile) {
+        &:nth-last-child(n+2) {
+          margin-bottom: 2rem;
+        }
+      }
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) and (max-width: $bn-breakpoint-width-max-layout-desktop) {
+        &:nth-last-child(n+3) {
+          margin-bottom: 3rem;
+        }
+      }
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop-wide) {
+        &:nth-last-child(n+4) {
+          margin-bottom: 3rem;
+        }
+      }
+    }
+  }
+
+  .view--show-history--division {
+    border-bottom-color: $bn-color-content-block-column-primary-separator;
+    border-bottom-style: solid;
+    border-bottom-width: 0.2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+        font-size: 2rem;
+      }
+      font-weight: 600;
+      line-height: 1.3;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: $bn-font-size-main-content-layout-mobile;
+      line-height: 1.3;
+      @media (min-width: $bn-breakpoint-width-min-layout-tablet) {
+        font-size: $bn-font-size-main-content-layout-tablet;
+        line-height: 1.5;
+      }
+      @media (min-width: $bn-breakpoint-width-min-layout-desktop) {
+        font-size: $bn-font-size-main-content-layout-desktop;
+      }
+      font-weight: 600;
+      margin-top: 0;
+      margin-bottom: 1rem;      
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        &:not(:first-of-type) {
+          margin-top: 0.75rem;
+        }
+        &:not(:last-of-type) {
+          margin-bottom: 0.75rem;
+        }
+
+        a {
+          display: inline-block;
+          line-height: 1.3;
+        }
+      }
+    }
+  }
+}

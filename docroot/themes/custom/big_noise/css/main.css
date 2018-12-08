@@ -4710,6 +4710,131 @@ a.big-button:hover {
   height: auto;
 }
 
+/* line 2, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--season-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  /* line 2, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--season-container {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+}
+/* line 11, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--season-container .view--show-history--season {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  /* line 11, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--season-container .view--show-history--season {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 50%;
+  }
+}
+@media (min-width: 1300px) {
+  /* line 11, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--season-container .view--show-history--season {
+    width: 33.3334%;
+  }
+}
+@media (max-width: 767px) {
+  /* line 23, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--season-container .view--show-history--season:nth-last-child(n+2) {
+    margin-bottom: 2rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1299px) {
+  /* line 28, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--season-container .view--show-history--season:nth-last-child(n+3) {
+    margin-bottom: 3rem;
+  }
+}
+@media (min-width: 1300px) {
+  /* line 33, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--season-container .view--show-history--season:nth-last-child(n+4) {
+    margin-bottom: 3rem;
+  }
+}
+/* line 40, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--division {
+  border-bottom-color: #e1e4e7;
+  border-bottom-style: solid;
+  border-bottom-width: 0.2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  /* line 40, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--division {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+/* line 51, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--division:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+/* line 57, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--division h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  /* line 57, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--division h2 {
+    font-size: 2rem;
+  }
+}
+/* line 69, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--division h3 {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  /* line 69, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--division h3 {
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 69, ../scss/style/_view--show-history.scss */
+  .view--show-history .view--show-history--division h3 {
+    font-size: 1.6rem;
+  }
+}
+/* line 84, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--division ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 90, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--division ul li:not(:first-of-type) {
+  margin-top: 0.75rem;
+}
+/* line 93, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--division ul li:not(:last-of-type) {
+  margin-bottom: 0.75rem;
+}
+/* line 97, ../scss/style/_view--show-history.scss */
+.view--show-history .view--show-history--division ul li a {
+  display: inline-block;
+  line-height: 1.3;
+}
+
 /* line 1, ../scss/custom/_home-page-lead-in.scss */
 .home-page--lead-in {
   border-bottom-color: #e1e4e7;

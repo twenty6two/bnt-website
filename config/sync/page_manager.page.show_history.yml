@@ -1,0 +1,12 @@
+uuid: 8c443545-9d65-487b-854c-5292ac5b0e04
+langcode: en
+status: true
+dependencies: {  }
+id: show_history
+label: 'Show History'
+description: ''
+use_admin_theme: false
+path: /shows/history
+access_logic: and
+access_conditions: {  }
+parameters: {  }

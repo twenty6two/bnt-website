@@ -1,0 +1,56 @@
+uuid: 0cfd348c-46b8-4023-87c0-0873f25f927d
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.show_history
+    - views.view.show_history
+  content:
+    - 'block_content:page_title_ribbon:2c01f9d3-79fb-41c8-a6b6-6d95d81f3657'
+  module:
+    - block_content
+    - panels
+    - views
+id: show_history-panels_variant-0
+label: Default
+variant: panels_variant
+variant_settings:
+  blocks:
+    05fe3862-feb3-42ca-836f-4a209195c47e:
+      id: 'block_content:2c01f9d3-79fb-41c8-a6b6-6d95d81f3657'
+      label: 'Show History Page Title Ribbon'
+      provider: block_content
+      label_display: '0'
+      status: true
+      info: ''
+      view_mode: full
+      region: page_title_ribbon
+      weight: -10
+      uuid: 05fe3862-feb3-42ca-836f-4a209195c47e
+      context_mapping: {  }
+    334b16a8-0e0e-41b5-bc99-e30bd088a91f:
+      id: 'views_block:show_history-block'
+      label: ''
+      provider: views
+      label_display: '0'
+      views_label: ''
+      items_per_page: none
+      region: page_content
+      weight: 0
+      uuid: 334b16a8-0e0e-41b5-bc99-e30bd088a91f
+      context_mapping: {  }
+  id: panels_variant
+  uuid: 47b9785a-2868-414b-80d7-5ce0a05d9071
+  label: null
+  weight: 0
+  layout: standard_page
+  layout_settings: {  }
+  page_title: 'Past Shows'
+  storage_type: page_manager
+  storage_id: show_history-panels_variant-0
+  builder: standard
+page: show_history
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

@@ -1,4 +1,4 @@
-<article class="home-page-slideshow-slide"{% if slide__background_image_url %} style="background-image: url('{{ slide__background_image_url }}');"{% endif %}>
+<article class="home-page-slideshow-slide"{% if node.field_slide_background_image|file_url %} style="background-image: url('{{ node.field_slide_background_image|file_url }}');"{% endif %}>
   {% if node.field_slide_link[0].url %}
   <a href="{{ node.field_slide_link[0].url }}">
   {% endif %}

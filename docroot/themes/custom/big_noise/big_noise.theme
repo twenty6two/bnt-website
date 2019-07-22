@@ -81,23 +81,13 @@ function big_noise_preprocess_node(&$variables) {
 
   $node_type = $node->getType();
   switch ($node_type) {
-    case 'slide':
-
-      if ($node->field_slide_background_image->entity) {
-        $slide_background_image_url = file_create_url($node->field_slide_background_image->entity->getFileUri());
-        $variables['slide__background_image_url'] = $slide_background_image_url;
-      }
-
-      break;
     case 'page':
 
       // Identify home page for additional elements
-
       $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
 
 
       // Prepare page title ribbon elements
-
       $page_title_ribbon_image_field = $node->field_page_title_ribbon_image->getValue();
       if (!empty($page_title_ribbon_image_field)) {
         $page_title_ribbon_image_field = $page_title_ribbon_image_field[0];
@@ -113,10 +103,10 @@ function big_noise_preprocess_node(&$variables) {
       }
 
       break;
+
     case 'show':
 
       // Calculate the performance date range for presentation
-
       // @TODO Address error when no performance dates have been entered
       $show_performances = $node->field_performances;
       $show_performance_dates = [];
@@ -157,17 +147,13 @@ function big_noise_preprocess_node(&$variables) {
       $show_season = $node->field_season;
 
 
-      // Prepare splash image elements
-      if ($node->field_splash_image->entity) {
-        $show_splash_image_url = file_create_url($node->field_splash_image->entity->getFileUri());
-        $variables['show__splash_image_url'] = $show_splash_image_url;
-      }
-
       // Prepare Cast/Creative/Media elements
       $variables['show__has_cast_and_creative'] = (!empty($node->field_cast_and_creative->getValue()));
 
       break;
+
     default:
+
       break;
   }
 }

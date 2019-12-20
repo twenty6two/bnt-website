@@ -1,20 +1,13 @@
 <?php
 
-namespace Drupal\mailchimp\Tests;
+namespace Drupal\Tests\mailchimp\Functional;
 
 /**
  * Tests core API functionality.
  *
  * @group mailchimp
  */
-class MailchimpAPITest extends MailchimpTestBase {
-
-  /**
-   * Modules to enable.
-   *
-   * @var array
-   */
-  public static $modules = array('mailchimp', 'mailchimp_test');
+class MailchimpAPITest extends FunctionalMailchimpTestBase {
 
   /**
    * Tests that the test API has been loaded.

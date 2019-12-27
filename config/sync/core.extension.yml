@@ -39,6 +39,7 @@ module:
   page_cache: 0
   page_colors: 0
   path: 0
+  path_alias: 0
   redirect: 0
   show_page_colors: 0
   system: 0

@@ -3,7 +3,7 @@
 use Drupal\Component\Utility;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
-use Drupal\media_entity\Entity\Media;
+use Drupal\media\Entity\Media;
 
 
 function big_noise_preprocess_html(&$variables) {

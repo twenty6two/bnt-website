@@ -1,12 +1,11 @@
-name: Entityqueue test
+name: 'Entityqueue Smartqueue'
 type: module
-description: 'Test content for entityqueue module.'
-package: Testing
+description: 'Provides automated subqueues for each entity of a given entity type.'
+package: Entityqueue
 core_version_requirement: ^8.7.7 || ^9
+
 dependencies:
- - drupal:node
- - drupal:views
- - entityqueue:entityqueue
+  - entityqueue:entityqueue
 
 # Information added by Drupal.org packaging script on 2020-11-25
 version: '8.x-1.2'

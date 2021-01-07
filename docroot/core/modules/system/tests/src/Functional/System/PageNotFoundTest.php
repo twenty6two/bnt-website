@@ -21,7 +21,7 @@ class PageNotFoundTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['system_test'];
+  protected static $modules = ['system_test'];
 
   /**
    * {@inheritdoc}
@@ -30,11 +30,14 @@ class PageNotFoundTest extends BrowserTestBase {
 
   protected $adminUser;
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create an administrative user.
-    $this->adminUser = $this->drupalCreateUser(['administer site configuration', 'link to any page']);
+    $this->adminUser = $this->drupalCreateUser([
+      'administer site configuration',
+      'link to any page',
+    ]);
     $this->adminUser->roles[] = 'administrator';
     $this->adminUser->save();
 
@@ -45,20 +48,20 @@ class PageNotFoundTest extends BrowserTestBase {
   public function testPageNotFound() {
     $this->drupalLogin($this->adminUser);
     $this->drupalGet($this->randomMachineName(10));
-    $this->assertText(t('Page not found'), 'Found the default 404 page');
+    $this->assertText('Page not found', 'Found the default 404 page');
 
     // Set a custom 404 page without a starting slash.
     $edit = [
       'site_404' => 'user/' . $this->adminUser->id(),
     ];
-    $this->drupalPostForm('admin/config/system/site-information', $edit, t('Save configuration'));
+    $this->drupalPostForm('admin/config/system/site-information', $edit, 'Save configuration');
     $this->assertRaw(new FormattableMarkup("The path '%path' has to start with a slash.", ['%path' => $edit['site_404']]));
 
     // Use a custom 404 page.
     $edit = [
       'site_404' => '/user/' . $this->adminUser->id(),
     ];
-    $this->drupalPostForm('admin/config/system/site-information', $edit, t('Save configuration'));
+    $this->drupalPostForm('admin/config/system/site-information', $edit, 'Save configuration');
 
     $this->drupalGet($this->randomMachineName(10));
     $this->assertText($this->adminUser->getAccountName(), 'Found the custom 404 page');
@@ -74,7 +77,7 @@ class PageNotFoundTest extends BrowserTestBase {
     $this->drupalGet('/this-path-does-not-exist');
     $this->assertNoText('Admin-only 4xx response');
     $this->assertText('The requested page could not be found.');
-    $this->assertResponse(404);
+    $this->assertSession()->statusCodeEquals(404);
     // Verify the access cacheability metadata for custom 404 is bubbled.
     $this->assertCacheContext('user.roles');
 
@@ -82,7 +85,7 @@ class PageNotFoundTest extends BrowserTestBase {
     $this->drupalGet('/this-path-does-not-exist');
     $this->assertText('Admin-only 4xx response');
     $this->assertNoText('The requested page could not be found.');
-    $this->assertResponse(404);
+    $this->assertSession()->statusCodeEquals(404);
     // Verify the access cacheability metadata for custom 404 is bubbled.
     $this->assertCacheContext('user.roles');
   }

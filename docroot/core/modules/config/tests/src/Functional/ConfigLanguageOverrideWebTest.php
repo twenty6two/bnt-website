@@ -18,7 +18,7 @@ class ConfigLanguageOverrideWebTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'block',
     'language',
     'system',
@@ -32,7 +32,7 @@ class ConfigLanguageOverrideWebTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
   }
 
@@ -40,7 +40,10 @@ class ConfigLanguageOverrideWebTest extends BrowserTestBase {
    * Tests translating the site name.
    */
   public function testSiteNameTranslation() {
-    $adminUser = $this->drupalCreateUser(['administer site configuration', 'administer languages']);
+    $adminUser = $this->drupalCreateUser([
+      'administer site configuration',
+      'administer languages',
+    ]);
     $this->drupalLogin($adminUser);
 
     // Add a custom language.
@@ -52,7 +55,7 @@ class ConfigLanguageOverrideWebTest extends BrowserTestBase {
       'label' => $name,
       'direction' => LanguageInterface::DIRECTION_LTR,
     ];
-    $this->drupalPostForm('admin/config/regional/language/add', $edit, t('Add custom language'));
+    $this->drupalPostForm('admin/config/regional/language/add', $edit, 'Add custom language');
     \Drupal::languageManager()
       ->getLanguageConfigOverride($langcode, 'system.site')
       ->set('name', 'XX site name')
@@ -71,7 +74,7 @@ class ConfigLanguageOverrideWebTest extends BrowserTestBase {
     // determine the front page. This occurs before language negotiation causing
     // the configuration factory to cache an object without the correct
     // overrides. We are testing that the configuration factory is
-    // re-initialised after language negotiation. Ensure that it applies when
+    // re-initialized after language negotiation. Ensure that it applies when
     // we access the XX front page.
     // @see \Drupal\Core\PathProcessor::processInbound()
     $this->drupalGet('xx');

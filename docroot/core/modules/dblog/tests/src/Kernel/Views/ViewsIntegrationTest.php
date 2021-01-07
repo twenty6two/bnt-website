@@ -26,7 +26,7 @@ class ViewsIntegrationTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['dblog', 'dblog_test_views', 'user'];
+  protected static $modules = ['dblog', 'dblog_test_views', 'user'];
 
   /**
    * {@inheritdoc}
@@ -36,13 +36,13 @@ class ViewsIntegrationTest extends ViewsKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp();
 
     $this->installEntitySchema('user');
     $this->installSchema('dblog', ['watchdog']);
 
-    ViewTestData::createTestViews(get_class($this), ['dblog_test_views']);
+    ViewTestData::createTestViews(static::class, ['dblog_test_views']);
   }
 
   /**
@@ -63,7 +63,9 @@ class ViewsIntegrationTest extends ViewsKernelTestBase {
       if (!isset($entry['variables'])) {
         continue;
       }
-      $this->assertEqual($view->style_plugin->getField($index, 'message'), new FormattableMarkup($entry['message'], $entry['variables']));
+      $message_vars = $entry['variables'];
+      unset($message_vars['link']);
+      $this->assertEqual($view->style_plugin->getField($index, 'message'), new FormattableMarkup($entry['message'], $message_vars));
       $link_field = $view->style_plugin->getField($index, 'link');
       // The 3rd entry contains some unsafe markup that needs to get filtered.
       if ($index == 2) {
@@ -93,10 +95,10 @@ class ViewsIntegrationTest extends ViewsKernelTestBase {
     $view = Views::getView('dblog_integration_test');
     $view->setDisplay('page_1');
     // The uid relationship should now join to the {users_field_data} table.
-    $tables = array_keys($view->getBaseTables());
-    $this->assertTrue(in_array('users_field_data', $tables));
-    $this->assertFalse(in_array('users', $tables));
-    $this->assertTrue(in_array('watchdog', $tables));
+    $base_tables = $view->getBaseTables();
+    $this->assertArrayHasKey('users_field_data', $base_tables);
+    $this->assertArrayNotHasKey('users', $base_tables);
+    $this->assertArrayHasKey('watchdog', $base_tables);
   }
 
   /**

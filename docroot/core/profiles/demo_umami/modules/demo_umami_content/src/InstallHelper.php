@@ -197,7 +197,7 @@ class InstallHelper implements ContainerInjectionInterface {
       }
       else {
         // Language directory exists, but the file in this language was not found,
-        // remove that language from list list of languages to be translated.
+        // remove that language from list of languages to be translated.
         $key = array_search($language, $translated_languages);
         unset($translated_languages[$key]);
       }
@@ -687,28 +687,36 @@ class InstallHelper implements ContainerInjectionInterface {
       case 'recipe':
         $structured_content = $this->processRecipe($content, $langcode);
         break;
+
       case 'article':
         $structured_content = $this->processArticle($content, $langcode);
         break;
+
       case 'page':
         $structured_content = $this->processPage($content, $langcode);
         break;
+
       case 'banner_block':
         $structured_content = $this->processBannerBlock($content, $langcode);
         break;
+
       case 'disclaimer_block':
         $structured_content = $this->processDisclaimerBlock($content);
         break;
+
       case 'footer_promo_block':
         $structured_content = $this->processFooterPromoBlock($content, $langcode);
         break;
+
       case 'image':
         $structured_content = $this->processImage($content);
         break;
+
       case 'recipe_category':
       case 'tags':
         $structured_content = $this->processTerm($content, $bundle_machine_name);
         break;
+
       default:
         break;
     }

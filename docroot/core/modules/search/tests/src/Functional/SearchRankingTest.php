@@ -40,7 +40,7 @@ class SearchRankingTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);
@@ -49,7 +49,12 @@ class SearchRankingTest extends BrowserTestBase {
     $this->nodeSearch = SearchPage::load('node_search');
 
     // Log in with sufficient privileges.
-    $this->drupalLogin($this->drupalCreateUser(['post comments', 'skip comment approval', 'create page content', 'administer search']));
+    $this->drupalLogin($this->drupalCreateUser([
+      'post comments',
+      'skip comment approval',
+      'create page content',
+      'administer search',
+    ]));
   }
 
   public function testRankings() {
@@ -81,13 +86,16 @@ class SearchRankingTest extends BrowserTestBase {
             case 'promote':
               $settings[$node_rank] = 1;
               break;
+
             case 'relevance':
               $settings['body'][0]['value'] .= " really rocks";
               break;
+
             case 'recent':
               // Node is 1 hour hold.
               $settings['created'] = REQUEST_TIME - 3600;
               break;
+
             case 'comments':
               $settings['comment'][0]['status'] = CommentItemInterface::OPEN;
               break;
@@ -102,8 +110,8 @@ class SearchRankingTest extends BrowserTestBase {
     $edit['subject[0][value]'] = 'my comment title';
     $edit['comment_body[0][value]'] = 'some random comment';
     $this->drupalGet('comment/reply/node/' . $nodes['comments'][1]->id() . '/comment');
-    $this->drupalPostForm(NULL, $edit, t('Preview'));
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->submitForm($edit, 'Preview');
+    $this->submitForm($edit, 'Save');
 
     // Enable counting of statistics.
     $this->config('statistics.settings')->set('count_content_views', 1)->save();
@@ -121,7 +129,7 @@ class SearchRankingTest extends BrowserTestBase {
 
     // Test that the settings form displays the content ranking section.
     $this->drupalGet('admin/config/search/pages/manage/node_search');
-    $this->assertText(t('Content ranking'));
+    $this->assertText('Content ranking');
 
     // Check that all rankings are visible and set to 0.
     foreach ($node_ranks as $node_rank) {
@@ -133,7 +141,7 @@ class SearchRankingTest extends BrowserTestBase {
     foreach ($node_ranks as $node_rank) {
       // Enable the ranking we are testing.
       $edit['rankings[' . $node_rank . '][value]'] = 10;
-      $this->drupalPostForm('admin/config/search/pages/manage/node_search', $edit, t('Save search page'));
+      $this->drupalPostForm('admin/config/search/pages/manage/node_search', $edit, 'Save search page');
       $this->drupalGet('admin/config/search/pages/manage/node_search');
       $this->assertNotEmpty($this->xpath('//select[@id="edit-rankings-' . $node_rank . '-value"]//option[@value="10"]'), 'Select list to prioritize ' . $node_rank . ' for node ranks is visible and set to 10.');
 
@@ -150,7 +158,7 @@ class SearchRankingTest extends BrowserTestBase {
 
     // Save the final node_rank change then check that all rankings are visible
     // and have been set back to 0.
-    $this->drupalPostForm('admin/config/search/pages/manage/node_search', $edit, t('Save search page'));
+    $this->drupalPostForm('admin/config/search/pages/manage/node_search', $edit, 'Save search page');
     $this->drupalGet('admin/config/search/pages/manage/node_search');
     foreach ($node_ranks as $node_rank) {
       $this->assertNotEmpty($this->xpath('//select[@id="edit-rankings-' . $node_rank . '-value"]//option[@value="0"]'), 'Select list to prioritize ' . $node_rank . ' for node ranks is visible and set to 0.');
@@ -233,9 +241,11 @@ class SearchRankingTest extends BrowserTestBase {
         case 'a':
           $settings['body'] = [['value' => Link::fromTextAndUrl('Drupal Rocks', Url::fromRoute('<front>'))->toString(), 'format' => 'full_html']];
           break;
+
         case 'notag':
           $settings['body'] = [['value' => 'Drupal Rocks']];
           break;
+
         default:
           $settings['body'] = [['value' => "<$tag>Drupal Rocks</$tag>", 'format' => 'full_html']];
           break;

@@ -56,7 +56,7 @@ class CKEditorIntegrationTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     FilterFormat::create([
@@ -171,8 +171,8 @@ class CKEditorIntegrationTest extends WebDriverTestBase {
 
     $targetSelector = 'ul.ckeditor-toolbar-group-buttons';
     $buttonSelector = 'li[data-drupal-ckeditor-button-name="DrupalMediaLibrary"]';
-    $this->assertNotEmpty($target = $assert_session->waitForElementVisible('css', $targetSelector));
-    $this->assertNotEmpty($button = $assert_session->elementExists('css', $buttonSelector));
+    $this->assertNotEmpty($assert_session->waitForElementVisible('css', $targetSelector));
+    $this->assertNotEmpty($assert_session->elementExists('css', $buttonSelector));
     $this->sortableTo($buttonSelector, 'ul.ckeditor-available-buttons', $targetSelector);
     $page->pressButton('Save configuration');
     $assert_session->pageTextContains('The Embed media filter must be enabled to use the Insert from Media Library button.');
@@ -187,7 +187,7 @@ class CKEditorIntegrationTest extends WebDriverTestBase {
     $page->checkField('filters[filter_html][status]');
     $expected = 'drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title';
     $allowed_html = $assert_session->fieldExists('filters[filter_html][settings][allowed_html]')->getValue();
-    $this->assertContains($expected, $allowed_html);
+    $this->assertStringContainsString($expected, $allowed_html);
     $page->pressButton('Save configuration');
     $assert_session->pageTextContains('The text format Sulaco has been updated.');
 
@@ -278,7 +278,7 @@ class CKEditorIntegrationTest extends WebDriverTestBase {
       'all_media_types' => [],
       'only_image' => ['image' => 'image'],
       'only_arrakis' => ['arrakis' => 'arrakis'],
-      'both_items_chedked' => [
+      'both_items_checked' => [
         'image' => 'image',
         'arrakis' => 'arrakis',
       ],

@@ -3,9 +3,8 @@ type: module
 description: 'Support module for node related exception testing.'
 package: Testing
 # version: VERSION
-core: 8.x
 
-# Information added by Drupal.org packaging script on 2020-11-26
-version: '8.8.12'
+# Information added by Drupal.org packaging script on 2021-01-07
+version: '9.1.2'
 project: 'drupal'
-datestamp: 1606360921
+datestamp: 1609984457

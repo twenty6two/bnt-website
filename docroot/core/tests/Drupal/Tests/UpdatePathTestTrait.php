@@ -5,7 +5,7 @@ namespace Drupal\Tests;
 use Drupal\Core\Url;
 
 /**
- * Trait UpdatePathTestTrait
+ * Trait UpdatePathTestTrait.
  *
  * For use on \Drupal\Tests\BrowserTestBase tests.
  */
@@ -66,6 +66,7 @@ trait UpdatePathTestTrait {
           case 'update':
             $all_updates = update_get_update_list();
             break;
+
           case 'post_update':
             $all_updates = \Drupal::service('update.post_update_registry')->getPendingUpdateInformation();
             break;

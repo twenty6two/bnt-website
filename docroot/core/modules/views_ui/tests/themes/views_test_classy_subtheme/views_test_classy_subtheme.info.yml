@@ -2,10 +2,10 @@ name: 'Theme test subtheme'
 type: theme
 description: 'Test theme which uses test_basetheme as the base theme.'
 # version: VERSION
-core: 8.x
 base theme: classy
+package: Testing
 
-# Information added by Drupal.org packaging script on 2020-11-26
-version: '8.8.12'
+# Information added by Drupal.org packaging script on 2021-01-07
+version: '9.1.2'
 project: 'drupal'
-datestamp: 1606360921
+datestamp: 1609984457

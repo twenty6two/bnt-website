@@ -21,7 +21,12 @@ class ContextualFiltersBlockContextTest extends ViewTestBase {
    *
    * @var array
    */
-  public static $modules = ['block', 'block_test_views', 'views_ui', 'node'];
+  protected static $modules = [
+    'block',
+    'block_test_views',
+    'views_ui',
+    'node',
+  ];
 
   /**
    * {@inheritdoc}
@@ -52,10 +57,10 @@ class ContextualFiltersBlockContextTest extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE) {
+  protected function setUp($import_test_views = TRUE): void {
     parent::setUp($import_test_views);
 
-    ViewTestData::createTestViews(get_class($this), ['block_test_views']);
+    ViewTestData::createTestViews(static::class, ['block_test_views']);
     $this->enableViewsTestModule();
 
     $this->nodeType = $this->container->get('entity_type.manager')
@@ -81,12 +86,15 @@ class ContextualFiltersBlockContextTest extends ViewTestBase {
    * Tests exposed context.
    */
   public function testBlockContext() {
-    $this->drupalLogin($this->drupalCreateUser(['administer views', 'administer blocks']));
+    $this->drupalLogin($this->drupalCreateUser([
+      'administer views',
+      'administer blocks',
+    ]));
 
     // Check if context was correctly propagated to the block.
     $definition = $this->container->get('plugin.manager.block')
       ->getDefinition('views_block:test_view_block_with_context-block_1');
-    $this->assertTrue($definition['context_definitions']['nid'] instanceof ContextDefinitionInterface);
+    $this->assertInstanceOf(ContextDefinitionInterface::class, $definition['context_definitions']['nid']);
     /** @var \Drupal\Core\Plugin\Context\ContextDefinitionInterface $context */
     $context = $definition['context_definitions']['nid'];
     $this->assertEqual($context->getDataType(), 'entity:node', 'Context definition data type is correct.');
@@ -101,7 +109,7 @@ class ContextualFiltersBlockContextTest extends ViewTestBase {
     $edit = [
       'settings[context_mapping][nid]' => '@node.node_route_context:node',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save block');
+    $this->submitForm($edit, 'Save block');
 
     // Check if mapping saved correctly.
     /** @var \Drupal\block\BlockInterface $block */
@@ -133,21 +141,21 @@ class ContextualFiltersBlockContextTest extends ViewTestBase {
     // based on the numeric plugin and the other based on numeric validation.
     $definition = $this->container->get('plugin.manager.block')
       ->getDefinition('views_block:test_view_block_with_context-block_2');
-    $this->assertTrue($definition['context_definitions']['created'] instanceof ContextDefinitionInterface);
+    $this->assertInstanceOf(ContextDefinitionInterface::class, $definition['context_definitions']['created']);
     /** @var \Drupal\Core\Plugin\Context\ContextDefinitionInterface $context */
     $context = $definition['context_definitions']['created'];
     $this->assertEqual($context->getDataType(), 'integer', 'Context definition data type is correct.');
     $this->assertEqual($context->getLabel(), 'Content: Authored on', 'Context definition label is correct.');
     $this->assertFalse($context->isRequired(), 'Context is not required.');
 
-    $this->assertTrue($definition['context_definitions']['vid'] instanceof ContextDefinitionInterface);
+    $this->assertInstanceOf(ContextDefinitionInterface::class, $definition['context_definitions']['vid']);
     /** @var \Drupal\Core\Plugin\Context\ContextDefinitionInterface $context */
     $context = $definition['context_definitions']['vid'];
     $this->assertEqual($context->getDataType(), 'integer', 'Context definition data type is correct.');
     $this->assertEqual($context->getLabel(), 'Content: Revision ID', 'Context definition label is correct.');
     $this->assertFalse($context->isRequired(), 'Context is not required.');
 
-    $this->assertTrue($definition['context_definitions']['title'] instanceof ContextDefinitionInterface);
+    $this->assertInstanceOf(ContextDefinitionInterface::class, $definition['context_definitions']['title']);
     /** @var \Drupal\Core\Plugin\Context\ContextDefinitionInterface $context */
     $context = $definition['context_definitions']['title'];
     $this->assertEqual($context->getDataType(), 'string', 'Context definition data type is correct.');

@@ -106,9 +106,10 @@ abstract class UpdateTestBase extends BrowserTestBase {
    * Runs a series of assertions that are applicable to all update statuses.
    */
   protected function standardTests() {
-    $this->assertRaw('<h3>' . t('Drupal core') . '</h3>');
-    $this->assertRaw(Link::fromTextAndUrl(t('Drupal'), Url::fromUri('http://example.com/project/drupal'))->toString(), 'Link to the Drupal project appears.');
-    $this->assertNoText(t('No available releases found'));
+    $this->assertSession()->responseContains('<h3>Drupal core</h3>');
+    // Verify that the link to the Drupal project appears.
+    $this->assertRaw(Link::fromTextAndUrl(t('Drupal'), Url::fromUri('http://example.com/project/drupal'))->toString());
+    $this->assertNoText('No available releases found');
   }
 
   /**
@@ -140,7 +141,8 @@ abstract class UpdateTestBase extends BrowserTestBase {
       if ($expected_update_message_type === static::SECURITY_UPDATE_REQUIRED) {
         $assert_session->elementTextNotContains('css', $update_element_css_locator, 'Update available');
         $assert_session->elementTextContains('css', $update_element_css_locator, 'Security update required!');
-        $assert_session->responseContains('error.svg', 'Error icon was found.');
+        // Verify that the error icon is found.
+        $assert_session->responseContains('error.svg');
       }
       else {
         $assert_session->elementTextContains('css', $update_element_css_locator, 'Update available');
@@ -154,8 +156,8 @@ abstract class UpdateTestBase extends BrowserTestBase {
         $expected_release_urls[] = $release_url;
         $expected_download_urls[] = $download_url;
         // Ensure the expected links are security links.
-        $this->assertTrue(in_array($release_url, $all_security_release_urls), "Release $release_url is a security release link.");
-        $this->assertTrue(in_array($download_url, $all_security_download_urls), "Release $download_url is a security download link.");
+        $this->assertContains($release_url, $all_security_release_urls, "Release $release_url is a security release link.");
+        $this->assertContains($download_url, $all_security_download_urls, "Release $download_url is a security download link.");
         $assert_session->linkByHrefExists($release_url);
         $assert_session->linkByHrefExists($download_url);
       }

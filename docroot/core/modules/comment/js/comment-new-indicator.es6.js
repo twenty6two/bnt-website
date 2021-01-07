@@ -6,7 +6,7 @@
  * installed.
  */
 
-(function($, Drupal, window) {
+(function ($, Drupal, window) {
   /**
    * Processes the markup for "new comment" indicators.
    *
@@ -41,7 +41,7 @@
         // this is the first new comment in the DOM.
         if (isFirstNewComment) {
           isFirstNewComment = false;
-          $comment.prev().before('<a id="new" />');
+          $comment.prev().before('<a id="new"></a>');
           // If the URL points to the first new comment, then scroll to that
           // comment.
           if (window.location.hash === '#new') {
@@ -72,7 +72,7 @@
       const $placeholders = $(context)
         .find('[data-comment-timestamp]')
         .once('history')
-        .filter(function() {
+        .filter(function () {
           const $placeholder = $(this);
           const commentTimestamp = parseInt(
             $placeholder.attr('data-comment-timestamp'),

@@ -25,7 +25,7 @@ class ManageDisplayTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
     'field_ui',
     'taxonomy',
@@ -43,13 +43,26 @@ class ManageDisplayTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->drupalPlaceBlock('system_breadcrumb_block');
     $this->drupalPlaceBlock('local_tasks_block');
 
     // Create a test user.
-    $admin_user = $this->drupalCreateUser(['access content', 'administer content types', 'administer node fields', 'administer node form display', 'administer node display', 'administer taxonomy', 'administer taxonomy_term fields', 'administer taxonomy_term display', 'administer users', 'administer account settings', 'administer user display', 'bypass node access']);
+    $admin_user = $this->drupalCreateUser([
+      'access content',
+      'administer content types',
+      'administer node fields',
+      'administer node form display',
+      'administer node display',
+      'administer taxonomy',
+      'administer taxonomy_term fields',
+      'administer taxonomy_term display',
+      'administer users',
+      'administer account settings',
+      'administer user display',
+      'bypass node access',
+    ]);
     $this->drupalLogin($admin_user);
 
     // Create content type, with underscores.
@@ -108,14 +121,14 @@ class ManageDisplayTest extends BrowserTestBase {
       'fields[field_test][type]' => 'field_test_with_prepare_view',
       'fields[field_test][region]' => 'content',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display', $edit, t('Save'));
+    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display', $edit, 'Save');
     $this->assertNodeViewText($node, 'rss', $output['field_test_with_prepare_view'], "The field is displayed as expected in view modes that use 'default' settings.");
 
     // Specialize the 'rss' mode, check that the field is displayed the same.
     $edit = [
       "display_modes_custom[rss]" => TRUE,
     ];
-    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display', $edit, t('Save'));
+    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display', $edit, 'Save');
     $this->assertNodeViewText($node, 'rss', $output['field_test_with_prepare_view'], "The field is displayed as expected in newly specialized 'rss' mode.");
 
     // Set the field to 'hidden' in the view mode, check that the field is
@@ -123,7 +136,7 @@ class ManageDisplayTest extends BrowserTestBase {
     $edit = [
       'fields[field_test][region]' => 'hidden',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display/rss', $edit, t('Save'));
+    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display/rss', $edit, 'Save');
     $this->assertNodeViewNoText($node, 'rss', $value, "The field is hidden in 'rss' mode.");
 
     // Set the view mode back to 'default', check that the field is displayed
@@ -131,14 +144,14 @@ class ManageDisplayTest extends BrowserTestBase {
     $edit = [
       "display_modes_custom[rss]" => FALSE,
     ];
-    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display', $edit, t('Save'));
+    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display', $edit, 'Save');
     $this->assertNodeViewText($node, 'rss', $output['field_test_with_prepare_view'], "The field is displayed as expected when 'rss' mode is set back to 'default' settings.");
 
     // Specialize the view mode again.
     $edit = [
       "display_modes_custom[rss]" => TRUE,
     ];
-    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display', $edit, t('Save'));
+    $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display', $edit, 'Save');
     // Check that the previous settings for the view mode have been kept.
     $this->assertNodeViewNoText($node, 'rss', $value, "The previous settings are kept when 'rss' mode is specialized again.");
   }
@@ -149,12 +162,12 @@ class ManageDisplayTest extends BrowserTestBase {
   public function testViewModeLocalTasks() {
     $manage_display = 'admin/structure/types/manage/' . $this->type . '/display';
     $this->drupalGet($manage_display);
-    $this->assertNoLink('Full content');
-    $this->assertLink('Teaser');
+    $this->assertSession()->linkNotExists('Full content');
+    $this->assertSession()->linkExists('Teaser');
 
     $this->drupalGet($manage_display . '/teaser');
-    $this->assertNoLink('Full content');
-    $this->assertLink('Default');
+    $this->assertSession()->linkNotExists('Full content');
+    $this->assertSession()->linkExists('Default');
   }
 
   /**
@@ -167,7 +180,7 @@ class ManageDisplayTest extends BrowserTestBase {
     // Check that the field appears as 'hidden' on the 'Manage display' page
     // for the 'teaser' mode.
     $this->drupalGet('admin/structure/types/manage/' . $this->type . '/display/teaser');
-    $this->assertFieldByName('fields[field_test][region]', 'hidden', 'The field is displayed as \'hidden \'.');
+    $this->assertSession()->fieldValueEquals('fields[field_test][region]', 'hidden');
   }
 
   /**
@@ -178,7 +191,7 @@ class ManageDisplayTest extends BrowserTestBase {
     $this->assertNoText('Use custom display settings for the following view modes', 'Custom display settings fieldset found.');
 
     // This may not trigger a notice when 'view_modes_custom' isn't available.
-    $this->drupalPostForm('admin/structure/taxonomy/manage/' . $this->vocabulary . '/overview/display', [], t('Save'));
+    $this->drupalPostForm('admin/structure/taxonomy/manage/' . $this->vocabulary . '/overview/display', [], 'Save');
   }
 
   /**
@@ -225,6 +238,7 @@ class ManageDisplayTest extends BrowserTestBase {
    *   Plain text to look for.
    * @param $message
    *   Message to display.
+   *
    * @return
    *   TRUE on pass, FALSE on fail.
    */
@@ -260,11 +274,13 @@ class ManageDisplayTest extends BrowserTestBase {
       ->getViewBuilder('node')
       ->view($clone, $view_mode);
     $output = (string) \Drupal::service('renderer')->renderRoot($element);
-    $this->verbose(t('Rendered node - view mode: @view_mode', ['@view_mode' => $view_mode]) . '<hr />' . $output);
 
-    $method = $not_exists ? 'assertNotContains' : 'assertContains';
-
-    $this->{$method}((string) $text, $output, $message);
+    if ($not_exists) {
+      $this->assertStringNotContainsString((string) $text, $output, $message);
+    }
+    else {
+      $this->assertStringContainsString((string) $text, $output, $message);
+    }
   }
 
   /**
@@ -276,7 +292,7 @@ class ManageDisplayTest extends BrowserTestBase {
    *   An array of expected options.
    */
   protected function assertFieldSelectOptions($name, array $expected_options) {
-    $xpath = $this->buildXPathQuery('//select[@name=:name]', [':name' => $name]);
+    $xpath = $this->assertSession()->buildXPathQuery('//select[@name=:name]', [':name' => $name]);
     $fields = $this->xpath($xpath);
     if ($fields) {
       $field = $fields[0];

@@ -73,7 +73,7 @@ class WorkspaceIntegrationTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->entityTypeManager = \Drupal::entityTypeManager();
@@ -86,7 +86,7 @@ class WorkspaceIntegrationTest extends KernelTestBase {
 
     $this->installConfig(['filter', 'node', 'system', 'language', 'content_translation']);
 
-    $this->installSchema('system', ['key_value_expire', 'sequences']);
+    $this->installSchema('system', ['sequences']);
     $this->installSchema('node', ['node_access']);
 
     $language = ConfigurableLanguage::createFromLangcode('de');
@@ -101,8 +101,8 @@ class WorkspaceIntegrationTest extends KernelTestBase {
     // Create two nodes, a published and an unpublished one, so we can test the
     // behavior of the module with default/existing content.
     $this->createdTimestamp = \Drupal::time()->getRequestTime();
-    $this->nodes[] = $this->createNode(['title' => 'live - 1 - r1 - published', 'created' => $this->createdTimestamp++, 'status' => TRUE]);
-    $this->nodes[] = $this->createNode(['title' => 'live - 2 - r2 - unpublished', 'created' => $this->createdTimestamp++, 'status' => FALSE]);
+    $this->nodes[] = $this->createNode(['title' => 'live - 1 - r1 - published', 'body' => 'node 1', 'created' => $this->createdTimestamp++, 'status' => TRUE]);
+    $this->nodes[] = $this->createNode(['title' => 'live - 2 - r2 - unpublished', 'body' => 'node 2', 'created' => $this->createdTimestamp++, 'status' => FALSE]);
 
     $translation = $this->nodes[0]->addTranslation('de');
     $translation->setTitle('live - 1 - r1 - published - de');
@@ -794,6 +794,23 @@ class WorkspaceIntegrationTest extends KernelTestBase {
           $this->assertNoRaw($expected_entity_values[$entity_keys['label']]);
         }
       }
+
+      // Add a filter on a field that is stored in a dedicated table in order to
+      // test field joins with extra conditions (e.g. 'deleted' and 'langcode').
+      $view->destroy();
+      $view->setDisplay('page_1');
+      $filters = $view->displayHandlers->get('page_1')->getOption('filters');
+      $view->displayHandlers->get('page_1')->overrideOption('filters', $filters + [
+        'body_value' => [
+          'id' => 'body_value',
+          'table' => 'node__body',
+          'field' => 'body_value',
+          'operator' => 'not empty',
+          'plugin_id' => 'string',
+        ],
+      ]);
+      $view->execute();
+      $this->assertIdenticalResultset($view, $expected_frontpage, ['nid' => 'nid']);
     }
   }
 
@@ -897,11 +914,11 @@ class WorkspaceIntegrationTest extends KernelTestBase {
     });
 
     // Check entity query counts.
-    $result = $storage->getQuery()->count()->execute();
-    $this->assertEquals(count($expected_default_revisions), $result);
+    $result = (int) $storage->getQuery()->count()->execute();
+    $this->assertSame(count($expected_default_revisions), $result);
 
-    $result = $storage->getAggregateQuery()->count()->execute();
-    $this->assertEquals(count($expected_default_revisions), $result);
+    $result = (int) $storage->getAggregateQuery()->count()->execute();
+    $this->assertSame(count($expected_default_revisions), $result);
 
     // Check entity queries with no conditions.
     $result = $storage->getQuery()->execute();

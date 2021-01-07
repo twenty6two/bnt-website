@@ -316,8 +316,18 @@ class SortArrayTest extends TestCase {
    *   Actual comparison function return value.
    */
   protected function assertBothNegativePositiveOrZero($expected, $result) {
-    $this->assertTrue(is_numeric($expected) && is_numeric($result), 'Parameters are numeric.');
-    $this->assertTrue(($expected < 0 && $result < 0) || ($expected > 0 && $result > 0) || ($expected === 0 && $result === 0), 'Numbers are either both negative, both positive or both zero.');
+    $this->assertIsNumeric($expected);
+    $this->assertIsNumeric($result);
+    $message = "Numbers should be both negative, both positive or both zero. Expected: $expected, actual: $result";
+    if ($expected > 0) {
+      $this->assertGreaterThan(0, $result, $message);
+    }
+    elseif ($expected < 0) {
+      $this->assertLessThan(0, $result, $message);
+    }
+    else {
+      $this->assertEquals(0, $result, $message);
+    }
   }
 
 }

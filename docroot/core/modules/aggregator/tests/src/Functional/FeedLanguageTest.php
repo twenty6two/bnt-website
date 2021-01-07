@@ -19,7 +19,7 @@ class FeedLanguageTest extends AggregatorTestBase {
    *
    * @var array
    */
-  public static $modules = ['language'];
+  protected static $modules = ['language'];
 
   /**
    * {@inheritdoc}
@@ -36,7 +36,7 @@ class FeedLanguageTest extends AggregatorTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create test languages.
@@ -55,14 +55,20 @@ class FeedLanguageTest extends AggregatorTestBase {
    * Tests creation of feeds with a language.
    */
   public function testFeedLanguage() {
-    $admin_user = $this->drupalCreateUser(['administer languages', 'access administration pages', 'administer news feeds', 'access news feeds', 'create article content']);
+    $admin_user = $this->drupalCreateUser([
+      'administer languages',
+      'access administration pages',
+      'administer news feeds',
+      'access news feeds',
+      'create article content',
+    ]);
     $this->drupalLogin($admin_user);
 
     // Enable language selection for feeds.
     $edit['entity_types[aggregator_feed]'] = TRUE;
     $edit['settings[aggregator_feed][aggregator_feed][settings][language][language_alterable]'] = TRUE;
 
-    $this->drupalPostForm('admin/config/regional/content-language', $edit, t('Save configuration'));
+    $this->drupalPostForm('admin/config/regional/content-language', $edit, 'Save configuration');
 
     /** @var \Drupal\aggregator\FeedInterface[] $feeds */
     $feeds = [];
@@ -83,7 +89,8 @@ class FeedLanguageTest extends AggregatorTestBase {
     foreach ($feeds as $feed) {
       /** @var \Drupal\aggregator\ItemInterface[] $items */
       $items = \Drupal::entityTypeManager()->getStorage('aggregator_item')->loadByProperties(['fid' => $feed->id()]);
-      $this->assertTrue(count($items) > 0, 'Feed items were created.');
+      // Verify that the feed items were created.
+      $this->assertNotEmpty($items);
       foreach ($items as $item) {
         $this->assertEqual($item->language()->getId(), $feed->language()->getId());
       }

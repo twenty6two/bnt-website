@@ -28,14 +28,19 @@ class SearchAdvancedSearchFormTest extends BrowserTestBase {
    */
   protected $node;
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->drupalCreateContentType(['type' => 'page', 'name' => 'Basic page']);
     $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
 
     // Create and log in user.
-    $test_user = $this->drupalCreateUser(['access content', 'search content', 'use advanced search', 'administer nodes']);
+    $test_user = $this->drupalCreateUser([
+      'access content',
+      'search content',
+      'use advanced search',
+      'administer nodes',
+    ]);
     $this->drupalLogin($test_user);
 
     // Create initial node.
@@ -96,12 +101,10 @@ class SearchAdvancedSearchFormTest extends BrowserTestBase {
     // Verify that all of the form fields are filled out.
     foreach ($edit as $key => $value) {
       if ($key != 'type[page]') {
-        $elements = $this->xpath('//input[@name=:name]', [':name' => $key]);
-        $this->assertTrue(isset($elements[0]) && $elements[0]->getValue() == $value, "Field $key is set to $value");
+        $this->assertSession()->fieldValueEquals($key, $value);
       }
       else {
-        $elements = $this->xpath('//input[@name=:name]', [':name' => $key]);
-        $this->assertTrue(isset($elements[0]) && !empty($elements[0]->getAttribute('checked')), "Field $key is checked");
+        $this->assertSession()->checkboxChecked($key);
       }
     }
 

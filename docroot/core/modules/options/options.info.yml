@@ -3,12 +3,11 @@ type: module
 description: 'Defines selection, check box and radio button widgets for text and numeric fields.'
 package: Field types
 # version: VERSION
-core: 8.x
 dependencies:
   - drupal:field
   - drupal:text
 
-# Information added by Drupal.org packaging script on 2020-11-26
-version: '8.8.12'
+# Information added by Drupal.org packaging script on 2021-01-07
+version: '9.1.2'
 project: 'drupal'
-datestamp: 1606360921
+datestamp: 1609984457

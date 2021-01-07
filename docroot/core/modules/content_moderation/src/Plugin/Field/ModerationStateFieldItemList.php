@@ -81,6 +81,7 @@ class ModerationStateFieldItemList extends FieldItemList {
       // being reverted.
       ->condition('content_entity_revision_id', $entity->isNewRevision() ? $entity->getLoadedRevisionId() : $entity->getRevisionId())
       ->condition('workflow', $moderation_info->getWorkflowForEntity($entity)->id())
+      ->condition('langcode', $entity->language()->getId())
       ->allRevisions()
       ->sort('revision_id', 'DESC')
       ->execute();
@@ -171,6 +172,14 @@ class ModerationStateFieldItemList extends FieldItemList {
         $published_state ? $entity->setPublished() : $entity->setUnpublished();
       }
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function generateSampleItems($count = 1) {
+    // No sample items generated since the starting moderation state is always
+    // computed based on the default state of the associated workflow.
   }
 
 }

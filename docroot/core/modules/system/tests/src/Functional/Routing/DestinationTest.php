@@ -20,7 +20,7 @@ class DestinationTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['system_test'];
+  protected static $modules = ['system_test'];
 
   /**
    * {@inheritdoc}
@@ -63,7 +63,7 @@ class DestinationTest extends BrowserTestBase {
       [
         'input' => 'javascript:alert(0)',
         'output' => 'javascript:alert(0)',
-        'message' => 'Javascript URL is allowed because it is treated as an internal URL.',
+        'message' => 'JavaScript URL is allowed because it is treated as an internal URL.',
       ],
     ];
     foreach ($test_cases as $test_case) {
@@ -81,7 +81,7 @@ class DestinationTest extends BrowserTestBase {
     // external URLs.
     \Drupal::configFactory()->getEditable('system.site')->set('page.404', '/system-test/get-destination')->save();
     $this->drupalGet('http://example.com', ['external' => FALSE]);
-    $this->assertResponse(404);
+    $this->assertSession()->statusCodeEquals(404);
     $this->assertIdentical(Url::fromRoute('<front>')->toString(), $session->getPage()->getContent(), 'External URL is not allowed on 404 pages.');
   }
 

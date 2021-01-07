@@ -4,6 +4,7 @@ namespace Drupal\KernelTests\Core\Database;
 
 use Drupal\Core\Database\InvalidQueryException;
 use Drupal\Core\Database\Database;
+use Drupal\Core\Database\DatabaseExceptionWrapper;
 
 /**
  * Tests the Select query builder.
@@ -38,8 +39,8 @@ class SelectTest extends DatabaseTestBase {
     $query = (string) $query;
     $expected = "/* Testing query comments */";
 
-    $this->assertEqual(count($records), 4, 'Returned the correct number of rows.');
-    $this->assertNotIdentical(FALSE, strpos($query, $expected), 'The flattened query contains the comment string.');
+    $this->assertCount(4, $records, 'Returned the correct number of rows.');
+    $this->assertStringContainsString($expected, $query, 'The flattened query contains the comment string.');
   }
 
   /**
@@ -58,8 +59,8 @@ class SelectTest extends DatabaseTestBase {
 
     // Check the returned number of rows.
     $this->assertCount(4, $records);
-    // Check that the flattened query contains the sanitised comment string.
-    $this->assertContains($expected, $query);
+    // Check that the flattened query contains the sanitized comment string.
+    $this->assertStringContainsString($expected, $query);
 
     $connection = Database::getConnection();
     foreach ($this->makeCommentsProvider() as $test_set) {
@@ -218,7 +219,7 @@ class SelectTest extends DatabaseTestBase {
       ->condition('age', NULL)
       ->execute()->fetchCol();
 
-    $this->assertEqual(count($names), 0, 'No records found when comparing to NULL.');
+    $this->assertCount(0, $names, 'No records found when comparing to NULL.');
   }
 
   /**
@@ -232,7 +233,7 @@ class SelectTest extends DatabaseTestBase {
       ->isNull('age')
       ->execute()->fetchCol();
 
-    $this->assertEqual(count($names), 1, 'Correct number of records found with NULL age.');
+    $this->assertCount(1, $names, 'Correct number of records found with NULL age.');
     $this->assertEqual($names[0], 'Fozzie', 'Correct record returned for NULL age.');
   }
 
@@ -248,7 +249,7 @@ class SelectTest extends DatabaseTestBase {
       ->orderBy('name')
       ->execute()->fetchCol();
 
-    $this->assertEqual(count($names), 2, 'Correct number of records found withNOT NULL age.');
+    $this->assertCount(2, $names, 'Correct number of records found withNOT NULL age.');
     $this->assertEqual($names[0], 'Gonzo', 'Correct record returned for NOT NULL age.');
     $this->assertEqual($names[1], 'Kermit', 'Correct record returned for NOT NULL age.');
   }
@@ -317,9 +318,9 @@ class SelectTest extends DatabaseTestBase {
     $names = $query_1->execute()->fetchCol();
 
     // Ensure we only get 2 records.
-    $this->assertEqual(count($names), 2, 'UNION correctly discarded duplicates.');
-    sort($names);
-    $this->assertEquals(['George', 'Ringo'], $names);
+    $this->assertCount(2, $names, 'UNION correctly discarded duplicates.');
+
+    $this->assertEqualsCanonicalizing(['George', 'Ringo'], $names);
   }
 
   /**
@@ -339,7 +340,7 @@ class SelectTest extends DatabaseTestBase {
     $names = $query_1->execute()->fetchCol();
 
     // Ensure we get all 3 records.
-    $this->assertEqual(count($names), 3, 'UNION ALL correctly preserved duplicates.');
+    $this->assertCount(3, $names, 'UNION ALL correctly preserved duplicates.');
 
     $this->assertEqual($names[0], 'George', 'First query returned correct first name.');
     $this->assertEqual($names[1], 'Ringo', 'Second query returned correct second name.');
@@ -360,12 +361,10 @@ class SelectTest extends DatabaseTestBase {
 
     $query_1->union($query_2, 'ALL');
     $names = $query_1->execute()->fetchCol();
-
-    $query_3 = $query_1->countQuery();
-    $count = $query_3->execute()->fetchField();
+    $count = (int) $query_1->countQuery()->execute()->fetchField();
 
     // Ensure the counts match.
-    $this->assertEqual(count($names), $count, "The count query's result matched the number of rows in the UNION query.");
+    $this->assertSame(count($names), $count, "The count query's result matched the number of rows in the UNION query.");
   }
 
   /**
@@ -388,7 +387,7 @@ class SelectTest extends DatabaseTestBase {
     $names = $query_1->execute()->fetchCol();
 
     // Ensure we get all 3 records.
-    $this->assertEqual(count($names), 3, 'UNION returned rows from both queries.');
+    $this->assertCount(3, $names, 'UNION returned rows from both queries.');
 
     // Ensure that the names are in the correct reverse alphabetical order,
     // regardless of which query they came from.
@@ -418,7 +417,7 @@ class SelectTest extends DatabaseTestBase {
     $names = $query_1->execute()->fetchCol();
 
     // Ensure we get all only 2 of the 3 records.
-    $this->assertEqual(count($names), 2, 'UNION with a limit returned rows from both queries.');
+    $this->assertCount(2, $names, 'UNION with a limit returned rows from both queries.');
 
     // Ensure that the names are in the correct reverse alphabetical order,
     // regardless of which query they came from.
@@ -446,7 +445,7 @@ class SelectTest extends DatabaseTestBase {
     // same as the chance that a deck of cards will come out in the same order
     // after shuffling it (in other words, nearly impossible).
     $number_of_items = 52;
-    while ($this->connection->query("SELECT MAX(id) FROM {test}")->fetchField() < $number_of_items) {
+    while ($this->connection->query("SELECT MAX([id]) FROM {test}")->fetchField() < $number_of_items) {
       $this->connection->insert('test')->fields(['name' => $this->randomMachineName()])->execute();
     }
 
@@ -551,7 +550,7 @@ class SelectTest extends DatabaseTestBase {
   }
 
   /**
-   * Tests that an invalid merge query throws an exception.
+   * Tests that an invalid count query throws an exception.
    */
   public function testInvalidSelectCount() {
     try {
@@ -559,30 +558,26 @@ class SelectTest extends DatabaseTestBase {
       // Normally it would throw an exception but we are suppressing
       // it with the throw_exception option.
       $options['throw_exception'] = FALSE;
-      $this->connection->select('some_table_that_doesnt_exist', 't', $options)
+      $this->connection->select('some_table_that_does_not_exist', 't', $options)
         ->fields('t')
         ->countQuery()
         ->execute();
-
-      $this->pass('$options[\'throw_exception\'] is FALSE, no Exception thrown.');
     }
     catch (\Exception $e) {
       $this->fail('$options[\'throw_exception\'] is FALSE, but Exception thrown for invalid query.');
-      return;
     }
 
     try {
       // This query will fail because the table does not exist.
-      $this->connection->select('some_table_that_doesnt_exist', 't')
+      $this->connection->select('some_table_that_does_not_exist', 't')
         ->fields('t')
         ->countQuery()
         ->execute();
+      $this->fail('No Exception thrown.');
     }
     catch (\Exception $e) {
-      $this->pass('Exception thrown for invalid query.');
-      return;
+      $this->assertInstanceOf(DatabaseExceptionWrapper::class, $e);
     }
-    $this->fail('No Exception thrown.');
   }
 
   /**

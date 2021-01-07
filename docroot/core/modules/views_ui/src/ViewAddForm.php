@@ -9,7 +9,7 @@ use Drupal\views\Plugin\ViewsPluginManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Form controller for the Views edit form.
+ * Form controller for the Views add form.
  *
  * @internal
  */
@@ -23,7 +23,7 @@ class ViewAddForm extends ViewFormBase {
   protected $wizardManager;
 
   /**
-   * Constructs a new ViewEditForm object.
+   * Constructs a new ViewAddForm object.
    *
    * @param \Drupal\views\Plugin\ViewsPluginManager $wizard_manager
    *   The wizard plugin manager.
@@ -123,6 +123,7 @@ class ViewAddForm extends ViewFormBase {
       '#type' => 'select',
       '#title' => $this->t('Show'),
       '#options' => $options,
+      '#sort_options' => TRUE,
     ];
     $show_form = &$form['displays']['show'];
     $default_value = \Drupal::moduleHandler()->moduleExists('node') ? 'node' : 'users';

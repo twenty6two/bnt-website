@@ -24,7 +24,7 @@ class ImageDimensionsTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['image', 'image_module_test'];
+  protected static $modules = ['image', 'image_module_test'];
 
   /**
    * {@inheritdoc}
@@ -77,11 +77,11 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="120" height="60" alt="" class="image-style-test" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="120" height="60" alt="" loading="lazy" class="image-style-test" />');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     $this->assertEqual($image_file->getWidth(), 120);
     $this->assertEqual($image_file->getHeight(), 60);
@@ -98,11 +98,11 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="60" height="120" alt="" class="image-style-test" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="60" height="120" alt="" loading="lazy" class="image-style-test" />');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     $this->assertEqual($image_file->getWidth(), 60);
     $this->assertEqual($image_file->getHeight(), 120);
@@ -120,11 +120,11 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="45" height="90" alt="" class="image-style-test" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" class="image-style-test" />');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     $this->assertEqual($image_file->getWidth(), 45);
     $this->assertEqual($image_file->getHeight(), 90);
@@ -142,11 +142,11 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="45" height="90" alt="" class="image-style-test" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" class="image-style-test" />');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     $this->assertEqual($image_file->getWidth(), 45);
     $this->assertEqual($image_file->getHeight(), 90);
@@ -160,11 +160,11 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="45" height="90" alt="" class="image-style-test" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="45" height="90" alt="" loading="lazy" class="image-style-test" />');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     $this->assertEqual($image_file->getWidth(), 45);
     $this->assertEqual($image_file->getHeight(), 90);
@@ -182,10 +182,10 @@ class ImageDimensionsTest extends BrowserTestBase {
     $style->addImageEffect($effect);
     $style->save();
     $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" alt="" class="image-style-test" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
 
     // Add a crop effect.
     $effect = [
@@ -200,11 +200,11 @@ class ImageDimensionsTest extends BrowserTestBase {
 
     $style->addImageEffect($effect);
     $style->save();
-    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="30" height="30" alt="" class="image-style-test" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="30" height="30" alt="" loading="lazy" class="image-style-test" />');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     $this->assertEqual($image_file->getWidth(), 30);
     $this->assertEqual($image_file->getHeight(), 30);
@@ -224,10 +224,10 @@ class ImageDimensionsTest extends BrowserTestBase {
     // @todo Uncomment this once
     //   https://www.drupal.org/project/drupal/issues/2670966 is resolved.
     // $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="41" height="41" alt="" class="image-style-test" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     // @todo Uncomment this once
     //   https://www.drupal.org/project/drupal/issues/2670966 is resolved.
@@ -267,11 +267,11 @@ class ImageDimensionsTest extends BrowserTestBase {
     // PNG original image. Should be resized to 100x100.
     $generated_uri = 'public://styles/test_uri/public/' . $file_system->basename($original_uri);
     $url = file_url_transform_relative($style->buildUrl($original_uri));
-    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="100" height="100" alt="" class="image-style-test-uri" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="100" height="100" alt="" loading="lazy" class="image-style-test-uri" />');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     $this->assertEqual($image_file->getWidth(), 100);
     $this->assertEqual($image_file->getHeight(), 100);
@@ -281,11 +281,11 @@ class ImageDimensionsTest extends BrowserTestBase {
     $generated_uri = 'public://styles/test_uri/public/' . $file_system->basename($original_uri);
     $url = file_url_transform_relative($style->buildUrl($original_uri));
     $variables['#uri'] = $original_uri;
-    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="50" height="50" alt="" class="image-style-test-uri" />');
-    $this->assertFalse(file_exists($generated_uri), 'Generated file does not exist.');
+    $this->assertEqual($this->getImageTag($variables), '<img src="' . $url . '" width="50" height="50" alt="" loading="lazy" class="image-style-test-uri" />');
+    $this->assertFileNotExists($generated_uri);
     $this->drupalGet($this->getAbsoluteUrl($url));
-    $this->assertResponse(200, 'Image was generated at the URL.');
-    $this->assertTrue(file_exists($generated_uri), 'Generated file does exist after we accessed it.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertFileExists($generated_uri);
     $image_file = $image_factory->get($generated_uri);
     $this->assertEqual($image_file->getWidth(), 50);
     $this->assertEqual($image_file->getHeight(), 50);

@@ -2,7 +2,6 @@ name: Testing
 type: profile
 description: 'Minimal profile for running tests. Includes absolutely required modules only.'
 # version: VERSION
-core: 8.x
 hidden: true
 install:
   # Enable page_cache and dynamic_page_cache in testing, to ensure that as many
@@ -10,7 +9,7 @@ install:
   - drupal:page_cache
   - dynamic_page_cache
 
-# Information added by Drupal.org packaging script on 2020-11-26
-version: '8.8.12'
+# Information added by Drupal.org packaging script on 2021-01-07
+version: '9.1.2'
 project: 'drupal'
-datestamp: 1606360921
+datestamp: 1609984457

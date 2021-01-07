@@ -20,12 +20,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class FileUploadResourceTestBase extends ResourceTestBase {
 
-  use BcTimestampNormalizerUnixTestTrait;
-
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['rest_test', 'entity_test', 'file'];
+  protected static $modules = ['rest_test', 'entity_test', 'file'];
 
   /**
    * {@inheritdoc}
@@ -139,6 +137,19 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
         'methods' => ['POST'],
         'formats' => [static::$format],
         'authentication' => [static::$auth],
+      ],
+      'status' => TRUE,
+    ])->save();
+
+    // Provisioning the file upload REST resource without the File REST resource
+    // does not make sense.
+    $this->resourceConfigStorage->create([
+      'id' => 'entity.file',
+      'granularity' => RestResourceConfigInterface::RESOURCE_GRANULARITY,
+      'configuration' => [
+        'methods' => ['GET'],
+        'formats' => [static::$format],
+        'authentication' => isset(static::$auth) ? [static::$auth] : [],
       ],
       'status' => TRUE,
     ])->save();
@@ -372,7 +383,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     // Check the actual file data. It should have been written to the configured
     // directory, not /foobar/directory/example.txt.
     $this->assertSame($this->testFileData, file_get_contents('public://foobar/example_2.txt'));
-    $this->assertFalse(file_exists('../../example_2.txt'));
+    $this->assertFileNotExists('../../example_2.txt');
 
     // Check a path from the root. Extensions have to be empty to allow a file
     // with no extension to pass validation.
@@ -455,7 +466,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
 
     // Make sure that no file was saved.
     $this->assertEmpty(File::load(1));
-    $this->assertFalse(file_exists('public://foobar/example.txt'));
+    $this->assertFileNotExists('public://foobar/example.txt');
   }
 
   /**
@@ -481,7 +492,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
 
     // Make sure that no file was saved.
     $this->assertEmpty(File::load(1));
-    $this->assertFalse(file_exists('public://foobar/example.txt'));
+    $this->assertFileNotExists('public://foobar/example.txt');
   }
 
   /**
@@ -510,7 +521,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     // Override the expected filesize.
     $expected['filesize'][0]['value'] = strlen($php_string);
     $this->assertResponseData($expected, $response);
-    $this->assertTrue(file_exists('public://foobar/example.php_.txt'));
+    $this->assertFileExists('public://foobar/example.php_.txt');
 
     // Add php as an allowed format. Allow insecure uploads still being FALSE
     // should still not allow this. So it should still have a .txt extension
@@ -524,8 +535,8 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     // Override the expected filesize.
     $expected['filesize'][0]['value'] = strlen($php_string);
     $this->assertResponseData($expected, $response);
-    $this->assertTrue(file_exists('public://foobar/example_2.php_.txt'));
-    $this->assertFalse(file_exists('public://foobar/example_2.php'));
+    $this->assertFileExists('public://foobar/example_2.php_.txt');
+    $this->assertFileNotExists('public://foobar/example_2.php');
 
     // Allow .doc file uploads and ensure even a mis-configured apache will not
     // fallback to php because the filename will be munged.
@@ -541,8 +552,8 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     // The file mime should be 'application/msword'.
     $expected['filemime'][0]['value'] = 'application/msword';
     $this->assertResponseData($expected, $response);
-    $this->assertTrue(file_exists('public://foobar/example_3.php_.doc'));
-    $this->assertFalse(file_exists('public://foobar/example_3.php.doc'));
+    $this->assertFileExists('public://foobar/example_3.php_.doc');
+    $this->assertFileNotExists('public://foobar/example_3.php.doc');
 
     // Test that a dangerous extension such as .php is munged even if it is in
     // the list of allowed extensions.
@@ -558,8 +569,8 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     // The file mime should be 'application/msword'.
     $expected['filemime'][0]['value'] = 'application/msword';
     $this->assertResponseData($expected, $response);
-    $this->assertTrue(file_exists('public://foobar/example_4.php_.doc'));
-    $this->assertFalse(file_exists('public://foobar/example_4.php.doc'));
+    $this->assertFileExists('public://foobar/example_4.php_.doc');
+    $this->assertFileNotExists('public://foobar/example_4.php.doc');
 
     // Dangerous extensions are munged even when all extensions are allowed.
     $this->field->setSetting('file_extensions', '')->save();
@@ -571,7 +582,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     // The file mime should also now be text.
     $expected['filemime'][0]['value'] = 'text/plain';
     $this->assertResponseData($expected, $response);
-    $this->assertTrue(file_exists('public://foobar/example_5.php_.png_.txt'));
+    $this->assertFileExists('public://foobar/example_5.php_.png_.txt');
 
     // Dangerous extensions are munged if is renamed to end in .txt.
     $response = $this->fileRequest($uri, $php_string, ['Content-Disposition' => 'filename="example_6.cgi.png.txt"']);
@@ -581,7 +592,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     // The file mime should also now be text.
     $expected['filemime'][0]['value'] = 'text/plain';
     $this->assertResponseData($expected, $response);
-    $this->assertTrue(file_exists('public://foobar/example_6.cgi_.png_.txt'));
+    $this->assertFileExists('public://foobar/example_6.cgi_.png_.txt');
 
     // Now allow insecure uploads.
     \Drupal::configFactory()
@@ -599,7 +610,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     // The file mime should also now be PHP.
     $expected['filemime'][0]['value'] = 'application/x-httpd-php';
     $this->assertResponseData($expected, $response);
-    $this->assertTrue(file_exists('public://foobar/example_7.php'));
+    $this->assertFileExists('public://foobar/example_7.php');
   }
 
   /**
@@ -622,7 +633,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
     $expected = $this->getExpectedNormalizedEntity(1, 'example.txt', TRUE);
 
     $this->assertResponseData($expected, $response);
-    $this->assertTrue(file_exists('public://foobar/example.txt'));
+    $this->assertFileExists('public://foobar/example.txt');
   }
 
   /**
@@ -709,10 +720,16 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
         ],
       ],
       'created' => [
-        $this->formatExpectedTimestampItemValues($file->getCreatedTime()),
+        [
+          'value' => (new \DateTime())->setTimestamp($file->getCreatedTime())->setTimezone(new \DateTimeZone('UTC'))->format(\DateTime::RFC3339),
+          'format' => \DateTime::RFC3339,
+        ],
       ],
       'changed' => [
-        $this->formatExpectedTimestampItemValues($file->getChangedTime()),
+        [
+          'value' => (new \DateTime())->setTimestamp($file->getChangedTime())->setTimezone(new \DateTimeZone('UTC'))->format(\DateTime::RFC3339),
+          'format' => \DateTime::RFC3339,
+        ],
       ],
     ];
 
@@ -763,6 +780,7 @@ abstract class FileUploadResourceTestBase extends ResourceTestBase {
       case 'GET':
         $this->grantPermissionsToTestedRole(['view test entity']);
         break;
+
       case 'POST':
         $this->grantPermissionsToTestedRole(['create entity_test entity_test_with_bundle entities', 'access content']);
         break;

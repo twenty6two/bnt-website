@@ -18,7 +18,7 @@ abstract class FileManagedTestBase extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['file_test', 'file'];
+  protected static $modules = ['file_test', 'file'];
 
   protected function setUp() {
     parent::setUp();
@@ -143,6 +143,7 @@ abstract class FileManagedTestBase extends BrowserTestBase {
    * @param string $scheme
    *   Optional string indicating the stream scheme to use. Drupal core includes
    *   public, private, and temporary. The public wrapper is the default.
+   *
    * @return \Drupal\file\FileInterface
    *   File entity.
    */
@@ -156,7 +157,8 @@ abstract class FileManagedTestBase extends BrowserTestBase {
     $file->save();
     // Write the record directly rather than using the API so we don't invoke
     // the hooks.
-    $this->assertTrue($file->id() > 0, 'The file was added to the database.', 'Create test file');
+    // Verify that the file was added to the database.
+    $this->assertGreaterThan(0, $file->id());
 
     \Drupal::state()->set('file_test.count_hook_invocations', TRUE);
     return $file;
@@ -182,6 +184,7 @@ abstract class FileManagedTestBase extends BrowserTestBase {
     if (!isset($filepath)) {
       // Prefix with non-latin characters to ensure that all file-related
       // tests work with international filenames.
+      // cSpell:disable-next-line
       $filepath = 'Файл для тестирования ' . $this->randomMachineName();
     }
     if (!isset($scheme)) {
@@ -194,7 +197,7 @@ abstract class FileManagedTestBase extends BrowserTestBase {
     }
 
     file_put_contents($filepath, $contents);
-    $this->assertTrue(is_file($filepath), t('The test file exists on the disk.'), 'Create test file');
+    $this->assertFileExists($filepath);
     return $filepath;
   }
 

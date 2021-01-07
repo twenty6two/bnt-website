@@ -115,18 +115,19 @@ class Views {
    * @param string $id
    *   The view ID to load.
    *
-   * @return \Drupal\views\ViewExecutable
-   *   A view executable instance, from the loaded entity.
+   * @return \Drupal\views\ViewExecutable|null
+   *   A view executable instance or NULL if the view does not exist.
    */
   public static function getView($id) {
     $view = \Drupal::entityTypeManager()->getStorage('view')->load($id);
     if ($view) {
       return static::executableFactory()->get($view);
     }
+    return NULL;
   }
 
   /**
-   * Fetches a list of all base tables available
+   * Fetches a list of all base tables available.
    *
    * @param string $type
    *   Either 'display', 'style' or 'row'.
@@ -308,6 +309,7 @@ class Views {
         $filter = ucfirst($filter);
         $views = call_user_func("static::get{$filter}Views");
         break;
+
       default:
         return [];
     }

@@ -21,7 +21,7 @@ class ConfigDependencyTest extends EntityKernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['config_test', 'entity_test', 'user'];
+  protected static $modules = ['config_test', 'entity_test', 'user'];
 
   /**
    * Tests that calculating dependencies for system module.
@@ -87,10 +87,10 @@ class ConfigDependencyTest extends EntityKernelTestBase {
     // Test getting $entity2's dependencies as entities.
     $dependents = $config_manager->findConfigEntityDependentsAsEntities('config', [$entity2->getConfigDependencyName()]);
     $dependent_ids = $this->getDependentIds($dependents);
-    $this->assertFalse(in_array('config_test:entity1', $dependent_ids), 'config_test.dynamic.entity1 does not have a dependency on config_test.dynamic.entity1.');
-    $this->assertFalse(in_array('config_test:entity2', $dependent_ids), 'config_test.dynamic.entity2 does not have a dependency on itself.');
-    $this->assertTrue(in_array('config_test:entity3', $dependent_ids), 'config_test.dynamic.entity3 has a dependency on config_test.dynamic.entity2.');
-    $this->assertTrue(in_array('config_test:entity4', $dependent_ids), 'config_test.dynamic.entity4 has a dependency on config_test.dynamic.entity2.');
+    $this->assertNotContains('config_test:entity1', $dependent_ids, 'config_test.dynamic.entity1 does not have a dependency on config_test.dynamic.entity1.');
+    $this->assertNotContains('config_test:entity2', $dependent_ids, 'config_test.dynamic.entity2 does not have a dependency on itself.');
+    $this->assertContains('config_test:entity3', $dependent_ids, 'config_test.dynamic.entity3 has a dependency on config_test.dynamic.entity2.');
+    $this->assertContains('config_test:entity4', $dependent_ids, 'config_test.dynamic.entity4 has a dependency on config_test.dynamic.entity2.');
 
     // Test getting node module's dependencies as configuration dependency
     // objects.
@@ -132,30 +132,30 @@ class ConfigDependencyTest extends EntityKernelTestBase {
 
     $dependents = $config_manager->findConfigEntityDependentsAsEntities('config', [$entity1->getConfigDependencyName()]);
     $dependent_ids = $this->getDependentIds($dependents);
-    $this->assertFalse(in_array('config_test:entity1', $dependent_ids), 'config_test.dynamic.entity1 does not have a dependency on itself.');
-    $this->assertTrue(in_array('config_test:entity2', $dependent_ids), 'config_test.dynamic.entity2 has a dependency on config_test.dynamic.entity1.');
-    $this->assertTrue(in_array('config_test:entity3', $dependent_ids), 'config_test.dynamic.entity3 has a dependency on config_test.dynamic.entity1.');
-    $this->assertTrue(in_array('config_test:entity4', $dependent_ids), 'config_test.dynamic.entity4 has a dependency on config_test.dynamic.entity1.');
-    $this->assertTrue(in_array('config_query_test:entity1', $dependent_ids), 'config_query_test.dynamic.entity1 has a dependency on config_test.dynamic.entity1.');
-    $this->assertFalse(in_array('config_query_test:entity2', $dependent_ids), 'config_query_test.dynamic.entity2 does not have a dependency on config_test.dynamic.entity1.');
+    $this->assertNotContains('config_test:entity1', $dependent_ids, 'config_test.dynamic.entity1 does not have a dependency on itself.');
+    $this->assertContains('config_test:entity2', $dependent_ids, 'config_test.dynamic.entity2 has a dependency on config_test.dynamic.entity1.');
+    $this->assertContains('config_test:entity3', $dependent_ids, 'config_test.dynamic.entity3 has a dependency on config_test.dynamic.entity1.');
+    $this->assertContains('config_test:entity4', $dependent_ids, 'config_test.dynamic.entity4 has a dependency on config_test.dynamic.entity1.');
+    $this->assertContains('config_query_test:entity1', $dependent_ids, 'config_query_test.dynamic.entity1 has a dependency on config_test.dynamic.entity1.');
+    $this->assertNotContains('config_query_test:entity2', $dependent_ids, 'config_query_test.dynamic.entity2 does not have a dependency on config_test.dynamic.entity1.');
 
     $dependents = $config_manager->findConfigEntityDependentsAsEntities('module', ['node', 'views']);
     $dependent_ids = $this->getDependentIds($dependents);
-    $this->assertFalse(in_array('config_test:entity1', $dependent_ids), 'config_test.dynamic.entity1 does not have a dependency on Views or Node.');
-    $this->assertFalse(in_array('config_test:entity2', $dependent_ids), 'config_test.dynamic.entity2 does not have a dependency on Views or Node.');
-    $this->assertTrue(in_array('config_test:entity3', $dependent_ids), 'config_test.dynamic.entity3 has a dependency on Views or Node.');
-    $this->assertTrue(in_array('config_test:entity4', $dependent_ids), 'config_test.dynamic.entity4 has a dependency on Views or Node.');
-    $this->assertFalse(in_array('config_query_test:entity1', $dependent_ids), 'config_test.query.entity1 does not have a dependency on Views or Node.');
-    $this->assertTrue(in_array('config_query_test:entity2', $dependent_ids), 'config_test.query.entity2 has a dependency on Views or Node.');
+    $this->assertNotContains('config_test:entity1', $dependent_ids, 'config_test.dynamic.entity1 does not have a dependency on Views or Node.');
+    $this->assertNotContains('config_test:entity2', $dependent_ids, 'config_test.dynamic.entity2 does not have a dependency on Views or Node.');
+    $this->assertContains('config_test:entity3', $dependent_ids, 'config_test.dynamic.entity3 has a dependency on Views or Node.');
+    $this->assertContains('config_test:entity4', $dependent_ids, 'config_test.dynamic.entity4 has a dependency on Views or Node.');
+    $this->assertNotContains('config_query_test:entity1', $dependent_ids, 'config_test.query.entity1 does not have a dependency on Views or Node.');
+    $this->assertContains('config_query_test:entity2', $dependent_ids, 'config_test.query.entity2 has a dependency on Views or Node.');
 
     $dependents = $config_manager->findConfigEntityDependentsAsEntities('module', ['config_test']);
     $dependent_ids = $this->getDependentIds($dependents);
-    $this->assertTrue(in_array('config_test:entity1', $dependent_ids), 'config_test.dynamic.entity1 has a dependency on config_test module.');
-    $this->assertTrue(in_array('config_test:entity2', $dependent_ids), 'config_test.dynamic.entity2 has a dependency on config_test module.');
-    $this->assertTrue(in_array('config_test:entity3', $dependent_ids), 'config_test.dynamic.entity3 has a dependency on config_test module.');
-    $this->assertTrue(in_array('config_test:entity4', $dependent_ids), 'config_test.dynamic.entity4 has a dependency on config_test module.');
-    $this->assertTrue(in_array('config_query_test:entity1', $dependent_ids), 'config_test.query.entity1 has a dependency on config_test module.');
-    $this->assertTrue(in_array('config_query_test:entity2', $dependent_ids), 'config_test.query.entity2 has a dependency on config_test module.');
+    $this->assertContains('config_test:entity1', $dependent_ids, 'config_test.dynamic.entity1 has a dependency on config_test module.');
+    $this->assertContains('config_test:entity2', $dependent_ids, 'config_test.dynamic.entity2 has a dependency on config_test module.');
+    $this->assertContains('config_test:entity3', $dependent_ids, 'config_test.dynamic.entity3 has a dependency on config_test module.');
+    $this->assertContains('config_test:entity4', $dependent_ids, 'config_test.dynamic.entity4 has a dependency on config_test module.');
+    $this->assertContains('config_query_test:entity1', $dependent_ids, 'config_test.query.entity1 has a dependency on config_test module.');
+    $this->assertContains('config_query_test:entity2', $dependent_ids, 'config_test.query.entity2 has a dependency on config_test module.');
 
     // Test the ability to find missing content dependencies.
     $missing_dependencies = $config_manager->findMissingContentDependencies();
@@ -343,7 +343,7 @@ class ConfigDependencyTest extends EntityKernelTestBase {
     // is called as expected and with the correct dependencies.
     $called = \Drupal::state()->get('config_test.on_dependency_removal_called', []);
     $this->assertArrayNotHasKey($entity_3->id(), $called, 'ConfigEntityInterface::onDependencyRemoval() is not called for entity 3.');
-    $this->assertSame([$entity_1->id(), $entity_4->id(), $entity_2->id(), $entity_5->id()], array_keys($called), 'The most dependent entites have ConfigEntityInterface::onDependencyRemoval() called first.');
+    $this->assertSame([$entity_1->id(), $entity_4->id(), $entity_2->id(), $entity_5->id()], array_keys($called), 'The most dependent entities have ConfigEntityInterface::onDependencyRemoval() called first.');
     $this->assertSame(['config' => [], 'content' => [], 'module' => ['node'], 'theme' => []], $called[$entity_1->id()]);
     $this->assertSame(['config' => [$entity_1->getConfigDependencyName()], 'content' => [], 'module' => [], 'theme' => []], $called[$entity_2->id()]);
     $this->assertSame(['config' => [$entity_1->getConfigDependencyName()], 'content' => [], 'module' => ['node'], 'theme' => []], $called[$entity_4->id()]);

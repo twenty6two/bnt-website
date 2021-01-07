@@ -29,7 +29,7 @@ class LinkFieldTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'entity_test',
     'link',
     'node',
@@ -55,7 +55,7 @@ class LinkFieldTest extends BrowserTestBase {
    */
   protected $field;
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->drupalLogin($this->drupalCreateUser([
@@ -104,7 +104,7 @@ class LinkFieldTest extends BrowserTestBase {
 
     // Display creation form.
     $this->drupalGet('entity_test/add');
-    $this->assertFieldByName("{$field_name}[0][uri]", '', 'Link URL field is displayed');
+    $this->assertSession()->fieldValueEquals("{$field_name}[0][uri]", '');
     $this->assertRaw('placeholder="http://example.com"');
 
     // Create a path alias.
@@ -217,10 +217,10 @@ class LinkFieldTest extends BrowserTestBase {
       $edit = [
         "{$field_name}[0][uri]" => $uri,
       ];
-      $this->drupalPostForm('entity_test/add', $edit, t('Save'));
+      $this->drupalPostForm('entity_test/add', $edit, 'Save');
       preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
       $id = $match[1];
-      $this->assertText(t('entity_test @id has been created.', ['@id' => $id]));
+      $this->assertText('entity_test ' . $id . ' has been created.');
       $this->assertRaw('"' . $string . '"');
     }
   }
@@ -238,8 +238,8 @@ class LinkFieldTest extends BrowserTestBase {
       $edit = [
         "{$field_name}[0][uri]" => $invalid_value,
       ];
-      $this->drupalPostForm('entity_test/add', $edit, t('Save'));
-      $this->assertText(t($error_message, ['@link_path' => $invalid_value]));
+      $this->drupalPostForm('entity_test/add', $edit, 'Save');
+      $this->assertText(strtr($error_message, ['@link_path' => $invalid_value]));
     }
   }
 
@@ -293,39 +293,39 @@ class LinkFieldTest extends BrowserTestBase {
       $this->drupalGet('entity_test/add');
       // Assert label is shown.
       $this->assertText('Read more about this entity');
-      $this->assertFieldByName("{$field_name}[0][uri]", '', 'URL field found.');
+      $this->assertSession()->fieldValueEquals("{$field_name}[0][uri]", '');
       $this->assertRaw('placeholder="http://example.com"');
 
       if ($title_setting === DRUPAL_DISABLED) {
-        $this->assertNoFieldByName("{$field_name}[0][title]", '', 'Link text field not found.');
+        $this->assertSession()->fieldNotExists("{$field_name}[0][title]");
         $this->assertNoRaw('placeholder="Enter the text for this link"');
       }
       else {
         $this->assertRaw('placeholder="Enter the text for this link"');
 
-        $this->assertFieldByName("{$field_name}[0][title]", '', 'Link text field found.');
+        $this->assertSession()->fieldValueEquals("{$field_name}[0][title]", '');
         if ($title_setting === DRUPAL_OPTIONAL) {
           // Verify that the URL is required, if the link text is non-empty.
           $edit = [
             "{$field_name}[0][title]" => 'Example',
           ];
-          $this->drupalPostForm(NULL, $edit, t('Save'));
-          $this->assertText(t('The URL field is required when the @title field is specified.', ['@title' => t('Link text')]));
+          $this->submitForm($edit, 'Save');
+          $this->assertText('The URL field is required when the Link text field is specified.');
         }
         if ($title_setting === DRUPAL_REQUIRED) {
           // Verify that the link text is required, if the URL is non-empty.
           $edit = [
             "{$field_name}[0][uri]" => 'http://www.example.com',
           ];
-          $this->drupalPostForm(NULL, $edit, t('Save'));
-          $this->assertText(t('@title field is required if there is @uri input.', ['@title' => t('Link text'), '@uri' => t('URL')]));
+          $this->submitForm($edit, 'Save');
+          $this->assertText('Link text field is required if there is URL input.');
 
           // Verify that the link text is not required, if the URL is empty.
           $edit = [
             "{$field_name}[0][uri]" => '',
           ];
-          $this->drupalPostForm(NULL, $edit, t('Save'));
-          $this->assertNoText(t('@name field is required.', ['@name' => t('Link text')]));
+          $this->submitForm($edit, 'Save');
+          $this->assertNoText('Link text field is required.');
 
           // Verify that a URL and link text meets requirements.
           $this->drupalGet('entity_test/add');
@@ -333,8 +333,8 @@ class LinkFieldTest extends BrowserTestBase {
             "{$field_name}[0][uri]" => 'http://www.example.com',
             "{$field_name}[0][title]" => 'Example',
           ];
-          $this->drupalPostForm(NULL, $edit, t('Save'));
-          $this->assertNoText(t('@name field is required.', ['@name' => t('Link text')]));
+          $this->submitForm($edit, 'Save');
+          $this->assertNoText('Link text field is required.');
         }
       }
     }
@@ -345,26 +345,26 @@ class LinkFieldTest extends BrowserTestBase {
       "{$field_name}[0][uri]" => $value,
       "{$field_name}[0][title]" => '',
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->submitForm($edit, 'Save');
     preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
     $id = $match[1];
-    $this->assertText(t('entity_test @id has been created.', ['@id' => $id]));
+    $this->assertText('entity_test ' . $id . ' has been created.');
 
     $output = $this->renderTestEntity($id);
     $expected_link = (string) Link::fromTextAndUrl($value, Url::fromUri($value))->toString();
-    $this->assertContains($expected_link, $output);
+    $this->assertStringContainsString($expected_link, $output);
 
     // Verify that a link with text is rendered using the link text.
     $title = $this->randomMachineName();
     $edit = [
       "{$field_name}[0][title]" => $title,
     ];
-    $this->drupalPostForm("entity_test/manage/$id/edit", $edit, t('Save'));
-    $this->assertText(t('entity_test @id has been updated.', ['@id' => $id]));
+    $this->drupalPostForm("entity_test/manage/$id/edit", $edit, 'Save');
+    $this->assertText('entity_test ' . $id . ' has been updated.');
 
     $output = $this->renderTestEntity($id);
     $expected_link = (string) Link::fromTextAndUrl($title, Url::fromUri($value))->toString();
-    $this->assertContains($expected_link, $output);
+    $this->assertStringContainsString($expected_link, $output);
   }
 
   /**
@@ -429,10 +429,10 @@ class LinkFieldTest extends BrowserTestBase {
     ];
     // Assert label is shown.
     $this->assertText('Read more about this entity');
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->submitForm($edit, 'Save');
     preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
     $id = $match[1];
-    $this->assertText(t('entity_test @id has been created.', ['@id' => $id]));
+    $this->assertText('entity_test ' . $id . ' has been created.');
 
     // Verify that the link is output according to the formatter settings.
     // Not using generatePermutations(), since that leads to 32 cases, which
@@ -468,51 +468,51 @@ class LinkFieldTest extends BrowserTestBase {
           case 'trim_length':
             $url = $url1;
             $title = isset($new_value) ? Unicode::truncate($title1, $new_value, FALSE, TRUE) : $title1;
-            $this->assertContains('<a href="' . Html::escape($url) . '">' . Html::escape($title) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url) . '">' . Html::escape($title) . '</a>', $output);
 
             $url = $url2;
             $title = isset($new_value) ? Unicode::truncate($title2, $new_value, FALSE, TRUE) : $title2;
-            $this->assertContains('<a href="' . Html::escape($url) . '">' . Html::escape($title) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url) . '">' . Html::escape($title) . '</a>', $output);
 
             $url = $url3;
             $title = isset($new_value) ? Unicode::truncate($title3, $new_value, FALSE, TRUE) : $title3;
-            $this->assertContains('<a href="' . Html::escape($url) . '">' . Html::escape($title) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url) . '">' . Html::escape($title) . '</a>', $output);
             break;
 
           case 'rel':
             $rel = isset($new_value) ? ' rel="' . $new_value . '"' : '';
-            $this->assertContains('<a href="' . Html::escape($url1) . '"' . $rel . '>' . Html::escape($title1) . '</a>', $output);
-            $this->assertContains('<a href="' . Html::escape($url2) . '"' . $rel . '>' . Html::escape($title2) . '</a>', $output);
-            $this->assertContains('<a href="' . Html::escape($url3) . '"' . $rel . '>' . Html::escape($title3) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url1) . '"' . $rel . '>' . Html::escape($title1) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url2) . '"' . $rel . '>' . Html::escape($title2) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url3) . '"' . $rel . '>' . Html::escape($title3) . '</a>', $output);
             break;
 
           case 'target':
             $target = isset($new_value) ? ' target="' . $new_value . '"' : '';
-            $this->assertContains('<a href="' . Html::escape($url1) . '"' . $target . '>' . Html::escape($title1) . '</a>', $output);
-            $this->assertContains('<a href="' . Html::escape($url2) . '"' . $target . '>' . Html::escape($title2) . '</a>', $output);
-            $this->assertContains('<a href="' . Html::escape($url3) . '"' . $target . '>' . Html::escape($title3) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url1) . '"' . $target . '>' . Html::escape($title1) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url2) . '"' . $target . '>' . Html::escape($title2) . '</a>', $output);
+            $this->assertStringContainsString('<a href="' . Html::escape($url3) . '"' . $target . '>' . Html::escape($title3) . '</a>', $output);
             break;
 
           case 'url_only':
             // In this case, $new_value is an array.
             if (!$new_value['url_only']) {
-              $this->assertContains('<a href="' . Html::escape($url1) . '">' . Html::escape($title1) . '</a>', $output);
-              $this->assertContains('<a href="' . Html::escape($url2) . '">' . Html::escape($title2) . '</a>', $output);
-              $this->assertContains('<a href="' . Html::escape($url3) . '">' . Html::escape($title3) . '</a>', $output);
+              $this->assertStringContainsString('<a href="' . Html::escape($url1) . '">' . Html::escape($title1) . '</a>', $output);
+              $this->assertStringContainsString('<a href="' . Html::escape($url2) . '">' . Html::escape($title2) . '</a>', $output);
+              $this->assertStringContainsString('<a href="' . Html::escape($url3) . '">' . Html::escape($title3) . '</a>', $output);
             }
             else {
               if (empty($new_value['url_plain'])) {
-                $this->assertContains('<a href="' . Html::escape($url1) . '">' . Html::escape($url1) . '</a>', $output);
-                $this->assertContains('<a href="' . Html::escape($url2) . '">' . Html::escape($url2) . '</a>', $output);
-                $this->assertContains('<a href="' . Html::escape($url3) . '">' . Html::escape($url3) . '</a>', $output);
+                $this->assertStringContainsString('<a href="' . Html::escape($url1) . '">' . Html::escape($url1) . '</a>', $output);
+                $this->assertStringContainsString('<a href="' . Html::escape($url2) . '">' . Html::escape($url2) . '</a>', $output);
+                $this->assertStringContainsString('<a href="' . Html::escape($url3) . '">' . Html::escape($url3) . '</a>', $output);
               }
               else {
-                $this->assertNotContains('<a href="' . Html::escape($url1) . '">' . Html::escape($url1) . '</a>', $output);
-                $this->assertNotContains('<a href="' . Html::escape($url2) . '">' . Html::escape($url2) . '</a>', $output);
-                $this->assertNotContains('<a href="' . Html::escape($url3) . '">' . Html::escape($url3) . '</a>', $output);
-                $this->assertContains(Html::escape($url1), $output);
-                $this->assertContains(Html::escape($url2), $output);
-                $this->assertContains(Html::escape($url3), $output);
+                $this->assertStringNotContainsString('<a href="' . Html::escape($url1) . '">' . Html::escape($url1) . '</a>', $output);
+                $this->assertStringNotContainsString('<a href="' . Html::escape($url2) . '">' . Html::escape($url2) . '</a>', $output);
+                $this->assertStringNotContainsString('<a href="' . Html::escape($url3) . '">' . Html::escape($url3) . '</a>', $output);
+                $this->assertStringContainsString(Html::escape($url1), $output);
+                $this->assertStringContainsString(Html::escape($url2), $output);
+                $this->assertStringContainsString(Html::escape($url3), $output);
               }
             }
             break;
@@ -580,10 +580,10 @@ class LinkFieldTest extends BrowserTestBase {
       "{$field_name}[2][uri]" => $url3,
       "{$field_name}[2][title]" => $title3,
     ];
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->submitForm($edit, 'Save');
     preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
     $id = $match[1];
-    $this->assertText(t('entity_test @id has been created.', ['@id' => $id]));
+    $this->assertText('entity_test ' . $id . ' has been created.');
 
     // Verify that the link is output according to the formatter settings.
     $options = [
@@ -607,7 +607,7 @@ class LinkFieldTest extends BrowserTestBase {
             $expected = '<div class="link-item">';
             $expected .= '<div class="link-url"><a href="' . Html::escape($url) . '">' . Html::escape($url_title) . '</a></div>';
             $expected .= '</div>';
-            $this->assertContains($expected, $output);
+            $this->assertStringContainsString($expected, $output);
 
             $url = $url2;
             $url_title = isset($new_value) ? Unicode::truncate($url, $new_value, FALSE, TRUE) : $url;
@@ -616,7 +616,7 @@ class LinkFieldTest extends BrowserTestBase {
             $expected .= '<div class="link-title">' . Html::escape($title) . '</div>';
             $expected .= '<div class="link-url"><a href="' . Html::escape($url) . '">' . Html::escape($url_title) . '</a></div>';
             $expected .= '</div>';
-            $this->assertContains($expected, $output);
+            $this->assertStringContainsString($expected, $output);
 
             $url = $url3;
             $url_title = isset($new_value) ? Unicode::truncate($url, $new_value, FALSE, TRUE) : $url;
@@ -625,21 +625,21 @@ class LinkFieldTest extends BrowserTestBase {
             $expected .= '<div class="link-title">' . Html::escape($title) . '</div>';
             $expected .= '<div class="link-url"><a href="' . Html::escape($url) . '">' . Html::escape($url_title) . '</a></div>';
             $expected .= '</div>';
-            $this->assertContains($expected, $output);
+            $this->assertStringContainsString($expected, $output);
             break;
 
           case 'rel':
             $rel = isset($new_value) ? ' rel="' . $new_value . '"' : '';
-            $this->assertContains('<div class="link-url"><a href="' . Html::escape($url1) . '"' . $rel . '>' . Html::escape($url1) . '</a></div>', $output);
-            $this->assertContains('<div class="link-url"><a href="' . Html::escape($url2) . '"' . $rel . '>' . Html::escape($url2) . '</a></div>', $output);
-            $this->assertContains('<div class="link-url"><a href="' . Html::escape($url3) . '"' . $rel . '>' . Html::escape($url3) . '</a></div>', $output);
+            $this->assertStringContainsString('<div class="link-url"><a href="' . Html::escape($url1) . '"' . $rel . '>' . Html::escape($url1) . '</a></div>', $output);
+            $this->assertStringContainsString('<div class="link-url"><a href="' . Html::escape($url2) . '"' . $rel . '>' . Html::escape($url2) . '</a></div>', $output);
+            $this->assertStringContainsString('<div class="link-url"><a href="' . Html::escape($url3) . '"' . $rel . '>' . Html::escape($url3) . '</a></div>', $output);
             break;
 
           case 'target':
             $target = isset($new_value) ? ' target="' . $new_value . '"' : '';
-            $this->assertContains('<div class="link-url"><a href="' . Html::escape($url1) . '"' . $target . '>' . Html::escape($url1) . '</a></div>', $output);
-            $this->assertContains('<div class="link-url"><a href="' . Html::escape($url2) . '"' . $target . '>' . Html::escape($url2) . '</a></div>', $output);
-            $this->assertContains('<div class="link-url"><a href="' . Html::escape($url3) . '"' . $target . '>' . Html::escape($url3) . '</a></div>', $output);
+            $this->assertStringContainsString('<div class="link-url"><a href="' . Html::escape($url1) . '"' . $target . '>' . Html::escape($url1) . '</a></div>', $output);
+            $this->assertStringContainsString('<div class="link-url"><a href="' . Html::escape($url2) . '"' . $target . '>' . Html::escape($url2) . '</a></div>', $output);
+            $this->assertStringContainsString('<div class="link-url"><a href="' . Html::escape($url3) . '"' . $target . '>' . Html::escape($url3) . '</a></div>', $output);
             break;
         }
       }
@@ -727,7 +727,9 @@ class LinkFieldTest extends BrowserTestBase {
     $entity_test_link = $entity_test_storage->create(['name' => 'correct link target']);
     $entity_test_link->save();
 
-    $node = $this->drupalCreateNode(['wrong link target']);
+    // Create a node with the same ID as the test entity to ensure that the link
+    // doesn't match incorrectly.
+    $this->drupalCreateNode(['title' => 'wrong link target']);
 
     $correct_link = 'entity:entity_test/' . $entity_test_link->id();
     $entity_test = $entity_test_storage->create([
@@ -741,7 +743,7 @@ class LinkFieldTest extends BrowserTestBase {
     // autocomplete and therefore must show the link unaltered.
     $this->drupalGet($entity_test->toUrl('edit-form'));
     $this->assertSession()->fieldValueEquals('field_link[0][uri]', $correct_link);
-    $this->drupalPostForm(NULL, [], 'Save');
+    $this->submitForm([], 'Save');
 
     $entity_test_storage->resetCache();
     $entity_test = $entity_test_storage->load($entity_test->id());
@@ -795,12 +797,12 @@ class LinkFieldTest extends BrowserTestBase {
       "{$field_name}[0][uri]" => '<nolink>',
     ];
 
-    $this->drupalPostForm('/entity_test/add', $edit, t('Save'));
+    $this->drupalPostForm('/entity_test/add', $edit, 'Save');
     preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
     $id = $match[1];
     $output = $this->renderTestEntity($id);
     $expected_link = (string) $this->container->get('link_generator')->generate('Title, no link', Url::fromUri('route:<nolink>'));
-    $this->assertContains($expected_link, $output);
+    $this->assertStringContainsString($expected_link, $output);
 
     // Test a link with <none> uri.
     $edit = [
@@ -808,12 +810,12 @@ class LinkFieldTest extends BrowserTestBase {
       "{$field_name}[0][uri]" => '<none>',
     ];
 
-    $this->drupalPostForm('/entity_test/add', $edit, t('Save'));
+    $this->drupalPostForm('/entity_test/add', $edit, 'Save');
     preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
     $id = $match[1];
     $output = $this->renderTestEntity($id);
     $expected_link = (string) $this->container->get('link_generator')->generate('Title, none', Url::fromUri('route:<none>'));
-    $this->assertContains($expected_link, $output);
+    $this->assertStringContainsString($expected_link, $output);
   }
 
   /**

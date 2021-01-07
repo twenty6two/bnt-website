@@ -28,12 +28,14 @@ class SaveTest extends FileManagedUnitTestBase {
     // Check that the correct hooks were called.
     $this->assertFileHooksCalled(['insert']);
 
-    $this->assertTrue($file->id() > 0, 'A new file ID is set when saving a new file to the database.', 'File');
+    // Verify that a new file ID is set when saving a new file to the database.
+    $this->assertGreaterThan(0, $file->id());
     $loaded_file = File::load($file->id());
     $this->assertNotNull($loaded_file, 'Record exists in the database.');
     $this->assertEqual($loaded_file->isPermanent(), $file->isPermanent(), 'Status was saved correctly.');
     $this->assertEqual($file->getSize(), filesize($file->getFileUri()), 'File size was set correctly.', 'File');
-    $this->assertTrue($file->getChangedTime() > 1, 'File size was set correctly.', 'File');
+    // Verify that the new file size was set correctly.
+    $this->assertGreaterThan(1, $file->getChangedTime());
     $this->assertEqual($loaded_file->langcode->value, 'en', 'Langcode was defaulted correctly.');
 
     // Resave the file, updating the existing record.
@@ -45,8 +47,9 @@ class SaveTest extends FileManagedUnitTestBase {
     $this->assertFileHooksCalled(['load', 'update']);
 
     $this->assertEqual($file->id(), $file->id(), 'The file ID of an existing file is not changed when updating the database.', 'File');
-    $this->assertTrue($file->getChangedTime() >= $file->getChangedTime(), "Timestamp didn't go backwards.", 'File');
     $loaded_file = File::load($file->id());
+    // Verify that the timestamp didn't go backwards.
+    $this->assertGreaterThanOrEqual($file->getChangedTime(), $loaded_file->getChangedTime());
     $this->assertNotNull($loaded_file, 'Record still exists in the database.', 'File');
     $this->assertEqual($loaded_file->isPermanent(), $file->isPermanent(), 'Status was saved correctly.');
     $this->assertEqual($loaded_file->langcode->value, 'en', 'Langcode was saved correctly.');
@@ -63,14 +66,14 @@ class SaveTest extends FileManagedUnitTestBase {
     $uppercase_file = File::create($uppercase_values);
     file_put_contents($uppercase_file->getFileUri(), 'hello world');
     $violations = $uppercase_file->validate();
-    $this->assertEqual(count($violations), 0, 'No violations when adding an URI with an existing filename in upper case.');
+    $this->assertCount(0, $violations, 'No violations when adding an URI with an existing filename in upper case.');
     $uppercase_file->save();
 
     // Ensure the database URI uniqueness constraint is triggered.
     $uppercase_file_duplicate = File::create($uppercase_values);
     file_put_contents($uppercase_file_duplicate->getFileUri(), 'hello world');
     $violations = $uppercase_file_duplicate->validate();
-    $this->assertEqual(count($violations), 1);
+    $this->assertCount(1, $violations);
     $this->assertEqual($violations[0]->getMessage(), t('The file %value already exists. Enter a unique file URI.', [
       '%value' => $uppercase_file_duplicate->getFileUri(),
     ]));
@@ -79,7 +82,7 @@ class SaveTest extends FileManagedUnitTestBase {
       ->condition('uri', $uppercase_file->getFileUri())
       ->execute();
 
-    $this->assertEqual(1, count($fids));
+    $this->assertCount(1, $fids);
     $this->assertEqual([$uppercase_file->id() => $uppercase_file->id()], $fids);
 
     // Save a file with zero bytes.

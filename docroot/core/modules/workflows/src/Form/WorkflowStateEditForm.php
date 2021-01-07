@@ -12,7 +12,7 @@ use Drupal\workflows\StateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class WorkflowStateEditForm.
+ * Entity form variant for editing workflow states.
  *
  * @internal
  */
@@ -125,7 +125,7 @@ class WorkflowStateEditForm extends EntityForm {
         ]),
       ];
       $links['delete'] = [
-        'title' => t('Delete'),
+        'title' => $this->t('Delete'),
         'url' => Url::fromRoute('entity.workflow.delete_transition_form', [
           'workflow' => $workflow->id(),
           'workflow_transition' => $transition->id(),
@@ -149,7 +149,7 @@ class WorkflowStateEditForm extends EntityForm {
   }
 
   /**
-   * Copies top-level form values to entity properties
+   * Copies top-level form values to entity properties.
    *
    * This form can only change values for a state, which is part of workflow.
    *

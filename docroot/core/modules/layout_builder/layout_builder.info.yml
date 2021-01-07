@@ -3,7 +3,6 @@ type: module
 description: 'Allows users to add and arrange blocks and content fields directly on the content.'
 package: Core
 # version: VERSION
-core: 8.x
 dependencies:
   - drupal:layout_discovery
   - drupal:contextual
@@ -12,7 +11,7 @@ dependencies:
   # @todo Discuss removing in https://www.drupal.org/project/drupal/issues/3003610.
   - drupal:block
 
-# Information added by Drupal.org packaging script on 2020-11-26
-version: '8.8.12'
+# Information added by Drupal.org packaging script on 2021-01-07
+version: '9.1.2'
 project: 'drupal'
-datestamp: 1606360921
+datestamp: 1609984457

@@ -25,7 +25,7 @@ class UserRoleAdminTest extends BrowserTestBase {
    *
    * @var string[]
    */
-  public static $modules = ['block'];
+  protected static $modules = ['block'];
 
   /**
    * {@inheritdoc}
@@ -35,9 +35,12 @@ class UserRoleAdminTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
-    $this->adminUser = $this->drupalCreateUser(['administer permissions', 'administer users']);
+    $this->adminUser = $this->drupalCreateUser([
+      'administer permissions',
+      'administer users',
+    ]);
     $this->drupalPlaceBlock('local_tasks_block');
   }
 
@@ -53,29 +56,29 @@ class UserRoleAdminTest extends BrowserTestBase {
       ':classes' => 'tabs primary',
       ':text' => 'Roles',
     ]);
-    $this->assertEqual(count($tabs), 1, 'Found roles tab');
+    $this->assertCount(1, $tabs, 'Found roles tab');
 
     // Test adding a role. (In doing so, we use a role name that happens to
     // correspond to an integer, to test that the role administration pages
     // correctly distinguish between role names and IDs.)
     $role_name = '123';
     $edit = ['label' => $role_name, 'id' => $role_name];
-    $this->drupalPostForm('admin/people/roles/add', $edit, t('Save'));
+    $this->drupalPostForm('admin/people/roles/add', $edit, 'Save');
     $this->assertRaw(t('Role %label has been added.', ['%label' => 123]));
     $role = Role::load($role_name);
-    $this->assertTrue(is_object($role), 'The role was successfully retrieved from the database.');
+    $this->assertIsObject($role);
 
     // Check that the role was created in site default language.
     $this->assertEqual($role->language()->getId(), $default_langcode);
 
     // Try adding a duplicate role.
-    $this->drupalPostForm('admin/people/roles/add', $edit, t('Save'));
-    $this->assertRaw(t('The machine-readable name is already in use. It must be unique.'), 'Duplicate role warning displayed.');
+    $this->drupalPostForm('admin/people/roles/add', $edit, 'Save');
+    $this->assertRaw(t('The machine-readable name is already in use. It must be unique.'));
 
     // Test renaming a role.
     $role_name = '456';
     $edit = ['label' => $role_name];
-    $this->drupalPostForm("admin/people/roles/manage/{$role->id()}", $edit, t('Save'));
+    $this->drupalPostForm("admin/people/roles/manage/{$role->id()}", $edit, 'Save');
     $this->assertRaw(t('Role %label has been updated.', ['%label' => $role_name]));
     \Drupal::entityTypeManager()->getStorage('user_role')->resetCache([$role->id()]);
     $new_role = Role::load($role->id());
@@ -84,20 +87,20 @@ class UserRoleAdminTest extends BrowserTestBase {
     // Test deleting a role.
     $this->drupalGet("admin/people/roles/manage/{$role->id()}");
     $this->clickLink(t('Delete'));
-    $this->drupalPostForm(NULL, [], t('Delete'));
+    $this->submitForm([], 'Delete');
     $this->assertRaw(t('The role %label has been deleted.', ['%label' => $role_name]));
-    $this->assertNoLinkByHref("admin/people/roles/manage/{$role->id()}", 'Role edit link removed.');
+    $this->assertSession()->linkByHrefNotExists("admin/people/roles/manage/{$role->id()}", 'Role edit link removed.');
     \Drupal::entityTypeManager()->getStorage('user_role')->resetCache([$role->id()]);
     $this->assertNull(Role::load($role->id()), 'A deleted role can no longer be loaded.');
 
     // Make sure that the system-defined roles can be edited via the user
     // interface.
     $this->drupalGet('admin/people/roles/manage/' . RoleInterface::ANONYMOUS_ID);
-    $this->assertResponse(200, 'Access granted when trying to edit the built-in anonymous role.');
-    $this->assertNoText(t('Delete role'), 'Delete button for the anonymous role is not present.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertNoText('Delete role', 'Delete button for the anonymous role is not present.');
     $this->drupalGet('admin/people/roles/manage/' . RoleInterface::AUTHENTICATED_ID);
-    $this->assertResponse(200, 'Access granted when trying to edit the built-in authenticated role.');
-    $this->assertNoText(t('Delete role'), 'Delete button for the authenticated role is not present.');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertNoText('Delete role', 'Delete button for the authenticated role is not present.');
   }
 
   /**
@@ -118,8 +121,8 @@ class UserRoleAdminTest extends BrowserTestBase {
       $saved_rids[] = $role->id();
       $weight--;
     }
-    $this->drupalPostForm('admin/people/roles', $edit, t('Save'));
-    $this->assertText(t('The role settings have been updated.'), 'The role settings form submitted successfully.');
+    $this->drupalPostForm('admin/people/roles', $edit, 'Save');
+    $this->assertText('The role settings have been updated.', 'The role settings form submitted successfully.');
 
     // Load up the user roles with the new weights.
     $roles = user_roles();

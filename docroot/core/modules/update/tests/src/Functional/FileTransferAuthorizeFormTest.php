@@ -14,16 +14,20 @@ class FileTransferAuthorizeFormTest extends UpdateTestBase {
    *
    * @var array
    */
-  public static $modules = ['update', 'update_test'];
+  protected static $modules = ['update', 'update_test'];
 
   /**
    * {@inheritdoc}
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
-    $admin_user = $this->drupalCreateUser(['administer modules', 'administer software updates', 'administer site configuration']);
+    $admin_user = $this->drupalCreateUser([
+      'administer modules',
+      'administer software updates',
+      'administer site configuration',
+    ]);
     $this->drupalLogin($admin_user);
 
     // Create a local cache so the module is not downloaded from drupal.org.
@@ -53,13 +57,13 @@ class FileTransferAuthorizeFormTest extends UpdateTestBase {
     $edit = [
       'project_url' => $url,
     ];
-    $this->drupalPostForm('admin/modules/install', $edit, t('Install'));
+    $this->drupalPostForm('admin/modules/install', $edit, 'Install');
     $edit = [
       'connection_settings[authorize_filetransfer_default]' => 'system_test',
       'connection_settings[system_test][update_test_username]' => $this->randomMachineName(),
     ];
-    $this->drupalPostForm(NULL, $edit, t('Continue'));
-    $this->assertText(t('Installation was completed successfully.'));
+    $this->submitForm($edit, 'Continue');
+    $this->assertText('Installation was completed successfully.');
 
     // Ensure the module is available to install.
     $this->drupalGet('admin/modules');

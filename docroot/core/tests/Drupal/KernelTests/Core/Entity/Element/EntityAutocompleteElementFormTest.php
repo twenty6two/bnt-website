@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\entity_test\Entity\EntityTest;
 use Drupal\entity_test\Entity\EntityTestStringId;
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
+use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
 
 /**
@@ -43,16 +44,26 @@ class EntityAutocompleteElementFormTest extends EntityKernelTestBase implements 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
-    $this->installSchema('system', ['key_value_expire']);
     $this->installEntitySchema('entity_test_string_id');
-    \Drupal::service('router.builder')->rebuild();
+
+    // Create user 1 so that the user created later in the test has a different
+    // user ID.
+    // @todo Remove in https://www.drupal.org/node/540008.
+    User::create(['uid' => 1, 'name' => 'user1'])->save();
+
+    Role::create([
+      'id' => 'test_role',
+      'label' => 'Can view test entities',
+      'permissions' => ['view test entity'],
+    ])->save();
 
     $this->testUser = User::create([
       'name' => 'foobar1',
       'mail' => 'foobar1@example.com',
+      'roles' => ['test_role'],
     ]);
     $this->testUser->save();
     \Drupal::service('current_user')->setAccount($this->testUser);
@@ -211,7 +222,7 @@ class EntityAutocompleteElementFormTest extends EntityKernelTestBase implements 
     $form_builder->submitForm($this, $form_state);
 
     // Valid form state.
-    $this->assertEqual(count($form_state->getErrors()), 0);
+    $this->assertCount(0, $form_state->getErrors());
 
     // Test the 'single' element.
     $this->assertEqual($form_state->getValue('single'), $this->referencedEntities[0]->id());
@@ -274,22 +285,22 @@ class EntityAutocompleteElementFormTest extends EntityKernelTestBase implements 
   public function testInvalidEntityAutocompleteElement() {
     $form_builder = $this->container->get('form_builder');
 
-    // Test 'single' with a entity label that doesn't exist
+    // Test 'single' with an entity label that doesn't exist
     $form_state = (new FormState())
       ->setValues([
         'single' => 'single - non-existent label',
       ]);
     $form_builder->submitForm($this, $form_state);
-    $this->assertEqual(count($form_state->getErrors()), 1);
+    $this->assertCount(1, $form_state->getErrors());
     $this->assertEqual($form_state->getErrors()['single'], t('There are no entities matching "%value".', ['%value' => 'single - non-existent label']));
 
-    // Test 'single' with a entity ID that doesn't exist.
+    // Test 'single' with an entity ID that doesn't exist.
     $form_state = (new FormState())
       ->setValues([
         'single' => 'single - non-existent label (42)',
       ]);
     $form_builder->submitForm($this, $form_state);
-    $this->assertEqual(count($form_state->getErrors()), 1);
+    $this->assertCount(1, $form_state->getErrors());
     $this->assertEqual($form_state->getErrors()['single'], t('The referenced entity (%type: %id) does not exist.', ['%type' => 'entity_test', '%id' => 42]));
 
     // Do the same tests as above but on an element with '#validate_reference'
@@ -303,7 +314,7 @@ class EntityAutocompleteElementFormTest extends EntityKernelTestBase implements 
 
     // The element without 'autocreate' support still has to emit a warning when
     // the input doesn't end with an entity ID enclosed in parentheses.
-    $this->assertEqual(count($form_state->getErrors()), 1);
+    $this->assertCount(1, $form_state->getErrors());
     $this->assertEqual($form_state->getErrors()['single_no_validate'], t('There are no entities matching "%value".', ['%value' => 'single - non-existent label']));
 
     $form_state = (new FormState())
@@ -315,7 +326,7 @@ class EntityAutocompleteElementFormTest extends EntityKernelTestBase implements 
 
     // The input is complete (i.e. contains an entity ID at the end), no errors
     // are triggered.
-    $this->assertEqual(count($form_state->getErrors()), 0);
+    $this->assertCount(0, $form_state->getErrors());
   }
 
   /**
@@ -338,11 +349,11 @@ class EntityAutocompleteElementFormTest extends EntityKernelTestBase implements 
     // Rebuild the form.
     $form = $form_builder->getForm($this);
 
-    $expected = t('- Restricted access -') . ' (' . $this->referencedEntities[0]->id() . ')';
-    $this->assertEqual($form['single_access']['#value'], $expected);
+    $expected = '- Restricted access - (' . $this->referencedEntities[0]->id() . ')';
+    $this->assertEquals($expected, $form['single_access']['#value']);
 
-    $expected .= ', ' . t('- Restricted access -') . ' (' . $this->referencedEntities[1]->id() . ')';
-    $this->assertEqual($form['tags_access']['#value'], $expected);
+    $expected .= ', - Restricted access - (' . $this->referencedEntities[1]->id() . ')';
+    $this->assertEquals($expected, $form['tags_access']['#value']);
   }
 
   /**

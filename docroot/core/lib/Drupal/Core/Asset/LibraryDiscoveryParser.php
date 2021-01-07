@@ -47,6 +47,13 @@ class LibraryDiscoveryParser {
   protected $streamWrapperManager;
 
   /**
+   * The libraries directory file finder.
+   *
+   * @var \Drupal\Core\Asset\LibrariesDirectoryFileFinder
+   */
+  protected $librariesDirectoryFileFinder;
+
+  /**
    * Constructs a new LibraryDiscoveryParser instance.
    *
    * @param string $root
@@ -57,16 +64,19 @@ class LibraryDiscoveryParser {
    *   The theme manager.
    * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
    *   The stream wrapper manager.
+   * @param \Drupal\Core\Asset\LibrariesDirectoryFileFinder $libraries_directory_file_finder
+   *   The libraries directory file finder.
    */
-  public function __construct($root, ModuleHandlerInterface $module_handler, ThemeManagerInterface $theme_manager, StreamWrapperManagerInterface $stream_wrapper_manager = NULL) {
+  public function __construct($root, ModuleHandlerInterface $module_handler, ThemeManagerInterface $theme_manager, StreamWrapperManagerInterface $stream_wrapper_manager, LibrariesDirectoryFileFinder $libraries_directory_file_finder = NULL) {
     $this->root = $root;
     $this->moduleHandler = $module_handler;
     $this->themeManager = $theme_manager;
-    if (!$stream_wrapper_manager) {
-      @trigger_error('Calling LibraryDiscoveryParser::__construct() without the $stream_wrapper_manager argument is deprecated in drupal:8.8.0. The $stream_wrapper_manager argument will be required in drupal:9.0.0. See https://www.drupal.org/node/3035273', E_USER_DEPRECATED);
-      $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
-    }
     $this->streamWrapperManager = $stream_wrapper_manager;
+    if (!$libraries_directory_file_finder) {
+      @trigger_error('Calling LibraryDiscoveryParser::__construct() without the $libraries_directory_file_finder argument is deprecated in drupal:8.9.0. The $libraries_directory_file_finder argument will be required in drupal:10.0.0. See https://www.drupal.org/node/3099614', E_USER_DEPRECATED);
+      $libraries_directory_file_finder = \Drupal::service('library.libraries_directory_file_finder');
+    }
+    $this->librariesDirectoryFileFinder = $libraries_directory_file_finder;
   }
 
   /**
@@ -189,7 +199,15 @@ class LibraryDiscoveryParser {
             if ($source[0] === '/') {
               // An absolute path maps to DRUPAL_ROOT / base_path().
               if ($source[1] !== '/') {
-                $options['data'] = substr($source, 1);
+                $source = substr($source, 1);
+                // Non core provided libraries can be in multiple locations.
+                if (strpos($source, 'libraries/') === 0) {
+                  $path_to_source = $this->librariesDirectoryFileFinder->find(substr($source, 10));
+                  if ($path_to_source) {
+                    $source = $path_to_source;
+                  }
+                }
+                $options['data'] = $source;
               }
               // A protocol-free URI (e.g., //cdn.com/example.js) is external.
               else {
@@ -278,6 +296,14 @@ class LibraryDiscoveryParser {
    *   Just like with JavaScript files, each CSS file is the key of an object
    *   that can define specific attributes. The format of the file path is the
    *   same as for the JavaScript files.
+   *   If the JavaScript or CSS file starts with /libraries/ the
+   *   library.libraries_directory_file_finder service is used to find the files
+   *   in the following locations:
+   *   - A libraries directory in the current site directory, for example:
+   *     sites/default/libraries.
+   *   - The root libraries directory.
+   *   - A libraries directory in the selected installation profile, for
+   *     example: profiles/my_install_profile/libraries.
    * - dependencies: A list of libraries this library depends on.
    * - version: The library version. The string "VERSION" can be used to mean
    *   the current Drupal core version.
@@ -315,7 +341,7 @@ class LibraryDiscoveryParser {
     $library_file = $path . '/' . $extension . '.libraries.yml';
     if (file_exists($this->root . '/' . $library_file)) {
       try {
-        $libraries = Yaml::decode(file_get_contents($this->root . '/' . $library_file));
+        $libraries = Yaml::decode(file_get_contents($this->root . '/' . $library_file)) ?? [];
       }
       catch (InvalidDataTypeException $e) {
         // Rethrow a more helpful exception to provide context.
@@ -356,6 +382,11 @@ class LibraryDiscoveryParser {
       foreach ($libraries as $library_name => $library) {
         // Process libraries overrides.
         if (isset($libraries_overrides["$extension/$library_name"])) {
+          if (isset($library['deprecated'])) {
+            $override_message = sprintf('Theme "%s" is overriding a deprecated library.', $extension);
+            $library_deprecation = str_replace('%library_id%', "$extension/$library_name", $library['deprecated']);
+            @trigger_error("$override_message $library_deprecation", E_USER_DEPRECATED);
+          }
           // Active theme defines an override for this library.
           $override_definition = $libraries_overrides["$extension/$library_name"];
           if (is_string($override_definition) || $override_definition === FALSE) {
@@ -405,18 +436,6 @@ class LibraryDiscoveryParser {
    */
   protected function drupalGetPath($type, $name) {
     return drupal_get_path($type, $name);
-  }
-
-  /**
-   * Wraps \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface::isValidUri().
-   *
-   * @deprecated in drupal:8.8.0 and is removed from drupal:9.0.0. Use
-   *   \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface::isValidUri()
-   *   instead.
-   */
-  protected function fileValidUri($source) {
-    @trigger_error('fileValidUri() is deprecated in Drupal 8.8.0 and will be removed before Drupal 9.0.0. Use \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface::isValidUri() instead. See https://www.drupal.org/node/3035273', E_USER_DEPRECATED);
-    return $this->streamWrapperManager->isValidUri($source);
   }
 
   /**

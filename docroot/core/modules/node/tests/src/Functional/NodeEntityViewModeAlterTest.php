@@ -17,7 +17,7 @@ class NodeEntityViewModeAlterTest extends NodeTestBase {
   /**
    * Enable dummy module that implements hook_ENTITY_TYPE_view() for nodes.
    */
-  public static $modules = ['node_test'];
+  protected static $modules = ['node_test'];
 
   /**
    * {@inheritdoc}
@@ -28,7 +28,10 @@ class NodeEntityViewModeAlterTest extends NodeTestBase {
    * Create a "Basic page" node and verify its consistency in the database.
    */
   public function testNodeViewModeChange() {
-    $web_user = $this->drupalCreateUser(['create page content', 'edit own page content']);
+    $web_user = $this->drupalCreateUser([
+      'create page content',
+      'edit own page content',
+    ]);
     $this->drupalLogin($web_user);
 
     // Create a node.
@@ -36,7 +39,7 @@ class NodeEntityViewModeAlterTest extends NodeTestBase {
     $edit['title[0][value]'] = $this->randomMachineName(8);
     $edit['body[0][value]'] = t('Data that should appear only in the body for the node.');
     $edit['body[0][summary]'] = t('Extra data that should appear only in the teaser for the node.');
-    $this->drupalPostForm('node/add/page', $edit, t('Save'));
+    $this->drupalPostForm('node/add/page', $edit, 'Save');
 
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
 

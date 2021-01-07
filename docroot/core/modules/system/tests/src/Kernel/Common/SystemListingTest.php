@@ -34,7 +34,7 @@ class SystemListingTest extends KernelTestBase {
     foreach ($expected_directories as $module => $directories) {
       foreach ($directories as $directory) {
         $filename = "$directory/$module/$module.info.yml";
-        $this->assertTrue(file_exists($this->root . '/' . $filename), new FormattableMarkup('@filename exists.', ['@filename' => $filename]));
+        $this->assertFileExists($this->root . '/' . $filename);
       }
     }
 
@@ -54,7 +54,7 @@ class SystemListingTest extends KernelTestBase {
   }
 
   /**
-   * Tests that directories matching file_scan_ignore_directories are ignored
+   * Tests that directories matching file_scan_ignore_directories are ignored.
    */
   public function testFileScanIgnoreDirectory() {
     $listing = new ExtensionDiscovery($this->root, FALSE);

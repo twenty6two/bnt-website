@@ -3,18 +3,18 @@
  * CKEditor button and group configuration user interface.
  */
 
-(function($, Drupal, drupalSettings, _) {
+(function ($, Drupal, drupalSettings, _) {
   Drupal.ckeditor = Drupal.ckeditor || {};
 
   /**
-   * Sets config behaviour and creates config views for the CKEditor toolbar.
+   * Sets config behavior and creates config views for the CKEditor toolbar.
    *
    * @type {Drupal~behavior}
    *
    * @prop {Drupal~behaviorAttach} attach
-   *   Attaches admin behaviour to the CKEditor buttons.
+   *   Attaches admin behavior to the CKEditor buttons.
    * @prop {Drupal~behaviorDetach} detach
-   *   Detaches admin behaviour from the CKEditor buttons on 'unload'.
+   *   Detaches admin behavior from the CKEditor buttons on 'unload'.
    */
   Drupal.behaviors.ckeditorAdmin = {
     attach(context) {
@@ -166,7 +166,7 @@
       $row
         .parent()
         .children()
-        .each(function() {
+        .each(function () {
           $row = $(this);
           if (
             $row.find('.ckeditor-toolbar-group').not('.placeholder').length ===
@@ -190,7 +190,7 @@
      *   been closed.
      */
     openGroupNameDialog(view, $group, callback) {
-      callback = callback || function() {};
+      callback = callback || function () {};
 
       /**
        * Validates the string provided as a button group title.
@@ -347,7 +347,7 @@
           const $widget = $form.parent();
           $widget.find('.ui-dialog-titlebar-close').remove();
           // Set a click handler on the input and button in the form.
-          $widget.on('keypress.ckeditor', 'input, button', event => {
+          $widget.on('keypress.ckeditor', 'input, button', (event) => {
             // React to enter key press.
             if (event.keyCode === 13) {
               const $target = $(event.currentTarget);
@@ -412,7 +412,7 @@
    * @type {Drupal~behavior}
    *
    * @prop {Drupal~behaviorAttach} attach
-   *   Attaches show/hide behaviour to Plugin Settings buttons.
+   *   Attaches show/hide behavior to Plugin Settings buttons.
    */
   Drupal.behaviors.ckeditorAdminButtonPluginSettings = {
     attach(context) {
@@ -424,7 +424,7 @@
         // Hide all button-dependent plugin settings initially.
         $ckeditorPluginSettings
           .find('[data-ckeditor-buttons]')
-          .each(function() {
+          .each(function () {
             const $this = $(this);
             if ($this.data('verticalTab')) {
               $this.data('verticalTab').tabHide();
@@ -497,7 +497,7 @@
    * @return {string}
    *   A HTML string for a CKEditor row.
    */
-  Drupal.theme.ckeditorRow = function() {
+  Drupal.theme.ckeditorRow = function () {
     return '<li class="ckeditor-row placeholder" role="group"><ul class="ckeditor-toolbar-groups clearfix"></ul></li>';
   };
 
@@ -507,7 +507,7 @@
    * @return {string}
    *   A HTML string for a CKEditor button group.
    */
-  Drupal.theme.ckeditorToolbarGroup = function() {
+  Drupal.theme.ckeditorToolbarGroup = function () {
     let group = '';
     group += `<li class="ckeditor-toolbar-group placeholder" role="presentation" aria-label="${Drupal.t(
       'Place a button to create a new button group.',
@@ -527,7 +527,7 @@
    * @return {string}
    *   A HTML string for the form for the title of a CKEditor button group.
    */
-  Drupal.theme.ckeditorButtonGroupNameForm = function() {
+  Drupal.theme.ckeditorButtonGroupNameForm = function () {
     return '<form><input name="group-name" required="required"></form>';
   };
 
@@ -537,7 +537,7 @@
    * @return {string}
    *   A HTML string for the button to toggle group names.
    */
-  Drupal.theme.ckeditorButtonGroupNamesToggle = function() {
+  Drupal.theme.ckeditorButtonGroupNamesToggle = function () {
     return '<button class="link ckeditor-groupnames-toggle" aria-pressed="false"></button>';
   };
 
@@ -547,7 +547,7 @@
    * @return {string}
    *   A HTML string for the button to create a name for a new button group.
    */
-  Drupal.theme.ckeditorNewButtonGroup = function() {
+  Drupal.theme.ckeditorNewButtonGroup = function () {
     return `<li class="ckeditor-add-new-group"><button aria-label="${Drupal.t(
       'Add a CKEditor button group to the end of this row.',
     )}">${Drupal.t('Add group')}</button></li>`;

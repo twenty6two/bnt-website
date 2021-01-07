@@ -22,7 +22,7 @@ class EntityReferenceFieldDefaultValueTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['field_ui', 'node'];
+  protected static $modules = ['field_ui', 'node'];
 
   /**
    * {@inheritdoc}
@@ -36,7 +36,7 @@ class EntityReferenceFieldDefaultValueTest extends BrowserTestBase {
    */
   protected $adminUser;
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create default content type.
@@ -44,7 +44,13 @@ class EntityReferenceFieldDefaultValueTest extends BrowserTestBase {
     $this->drupalCreateContentType(['type' => 'referenced_content']);
 
     // Create admin user.
-    $this->adminUser = $this->drupalCreateUser(['access content', 'administer content types', 'administer node fields', 'administer node form display', 'bypass node access']);
+    $this->adminUser = $this->drupalCreateUser([
+      'access content',
+      'administer content types',
+      'administer node fields',
+      'administer node form display',
+      'bypass node access',
+    ]);
     $this->drupalLogin($this->adminUser);
   }
 
@@ -80,11 +86,11 @@ class EntityReferenceFieldDefaultValueTest extends BrowserTestBase {
     $field_edit = [
       'default_value_input[' . $field_name . '][0][target_id]' => $referenced_node->getTitle() . ' (' . $referenced_node->id() . ')',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/reference_content/fields/node.reference_content.' . $field_name, $field_edit, t('Save settings'));
+    $this->drupalPostForm('admin/structure/types/manage/reference_content/fields/node.reference_content.' . $field_name, $field_edit, 'Save settings');
 
     // Check that default value is selected in default value form.
     $this->drupalGet('admin/structure/types/manage/reference_content/fields/node.reference_content.' . $field_name);
-    $this->assertRaw('name="default_value_input[' . $field_name . '][0][target_id]" value="' . $referenced_node->getTitle() . ' (' . $referenced_node->id() . ')', 'The default value is selected in instance settings page');
+    $this->assertRaw('name="default_value_input[' . $field_name . '][0][target_id]" value="' . $referenced_node->getTitle() . ' (' . $referenced_node->id() . ')');
 
     // Check if the ID has been converted to UUID in config entity.
     $config_entity = $this->config('field.field.node.reference_content.' . $field_name)->get();
@@ -144,19 +150,19 @@ class EntityReferenceFieldDefaultValueTest extends BrowserTestBase {
       'default_value_input[' . $field_name . '][0][target_id]' => $referenced_node_type->label() . ' (' . $referenced_node_type->id() . ')',
       'default_value_input[' . $field_name . '][1][target_id]' => $referenced_node_type2->label() . ' (' . $referenced_node_type2->id() . ')',
     ];
-    $this->drupalPostForm('admin/structure/types/manage/reference_content/fields/node.reference_content.' . $field_name, $field_edit, t('Save settings'));
+    $this->drupalPostForm('admin/structure/types/manage/reference_content/fields/node.reference_content.' . $field_name, $field_edit, 'Save settings');
 
     // Check that the field has a dependency on the default value.
     $config_entity = $this->config('field.field.node.reference_content.' . $field_name)->get();
-    $this->assertTrue(in_array($referenced_node_type->getConfigDependencyName(), $config_entity['dependencies']['config'], TRUE), 'The node type referenced_config_to_delete is a dependency of the field.');
-    $this->assertTrue(in_array($referenced_node_type2->getConfigDependencyName(), $config_entity['dependencies']['config'], TRUE), 'The node type referenced_config_to_preserve is a dependency of the field.');
+    $this->assertContains($referenced_node_type->getConfigDependencyName(), $config_entity['dependencies']['config'], 'The node type referenced_config_to_delete is a dependency of the field.');
+    $this->assertContains($referenced_node_type2->getConfigDependencyName(), $config_entity['dependencies']['config'], 'The node type referenced_config_to_preserve is a dependency of the field.');
 
     // Check that the field does not have a dependency on the default value
     // after deleting the node type.
     $referenced_node_type->delete();
     $config_entity = $this->config('field.field.node.reference_content.' . $field_name)->get();
-    $this->assertFalse(in_array($referenced_node_type->getConfigDependencyName(), $config_entity['dependencies']['config'], TRUE), 'The node type referenced_config_to_delete not a dependency of the field.');
-    $this->assertTrue(in_array($referenced_node_type2->getConfigDependencyName(), $config_entity['dependencies']['config'], TRUE), 'The node type referenced_config_to_preserve is a dependency of the field.');
+    $this->assertNotContains($referenced_node_type->getConfigDependencyName(), $config_entity['dependencies']['config'], 'The node type referenced_config_to_delete not a dependency of the field.');
+    $this->assertContains($referenced_node_type2->getConfigDependencyName(), $config_entity['dependencies']['config'], 'The node type referenced_config_to_preserve is a dependency of the field.');
   }
 
 }

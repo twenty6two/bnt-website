@@ -29,7 +29,10 @@ class SearchQueryAlterTest extends BrowserTestBase {
     $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
 
     // Log in with sufficient privileges.
-    $this->drupalLogin($this->drupalCreateUser(['create page content', 'search content']));
+    $this->drupalLogin($this->drupalCreateUser([
+      'create page content',
+      'search content',
+    ]));
 
     // Create a node and an article with the same keyword. The query alter
     // test module will alter the query so only articles should be returned.
@@ -48,7 +51,7 @@ class SearchQueryAlterTest extends BrowserTestBase {
     $this->container->get('plugin.manager.search')->createInstance('node_search')->updateIndex();
 
     // Search for the body keyword 'pizza'.
-    $this->drupalPostForm('search/node', ['keys' => 'pizza'], t('Search'));
+    $this->drupalPostForm('search/node', ['keys' => 'pizza'], 'Search');
     // The article should be there but not the page.
     $this->assertText('article', 'Article is in search results');
     $this->assertNoText('page', 'Page is not in search results');

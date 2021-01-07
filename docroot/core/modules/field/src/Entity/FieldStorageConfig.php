@@ -175,12 +175,14 @@ class FieldStorageConfig extends ConfigEntityBase implements FieldStorageConfigI
    * The custom storage indexes for the field data storage.
    *
    * This set of indexes is merged with the "default" indexes specified by the
-   * field type in hook_field_schema() to determine the actual set of indexes
-   * that get created.
+   * field type in the class implementing
+   * \Drupal\Core\Field\FieldItemInterface::schema() method to determine the
+   * actual set of indexes that get created.
    *
    * The indexes are defined using the same definition format as Schema API
    * index specifications. Only columns that are part of the field schema, as
-   * defined by the field type in hook_field_schema(), are allowed.
+   * defined by the field type in the class implementing
+   * \Drupal\Core\Field\FieldItemInterface::schema() method, are allowed.
    *
    * Some storage backends might not support indexes, and discard that
    * information.
@@ -367,19 +369,19 @@ class FieldStorageConfig extends ConfigEntityBase implements FieldStorageConfigI
 
     // Some updates are always disallowed.
     if ($this->getType() != $this->original->getType()) {
-      throw new FieldException("Cannot change the field type for an existing field storage.");
+      throw new FieldException(sprintf('Cannot change the field type for an existing field storage. The field storage %s has the type %s.', $this->id(), $this->original->getType()));
     }
     if ($this->getTargetEntityTypeId() != $this->original->getTargetEntityTypeId()) {
-      throw new FieldException("Cannot change the entity type for an existing field storage.");
+      throw new FieldException(sprintf('Cannot change the entity type for an existing field storage. The field storage %s has the type %s.', $this->id(), $this->original->getTargetEntityTypeId()));
     }
 
     // See if any module forbids the update by throwing an exception. This
     // invokes hook_field_storage_config_update_forbid().
     $module_handler->invokeAll('field_storage_config_update_forbid', [$this, $this->original]);
 
-    // Notify the entity manager. A listener can reject the definition
-    // update as invalid by raising an exception, which stops execution before
-    // the definition is written to config.
+    // Notify the field storage definition listener. A listener can reject the
+    // definition update as invalid by raising an exception, which stops
+    // execution before the definition is written to config.
     \Drupal::service('field_storage_definition.listener')->onFieldStorageDefinitionUpdate($this, $this->original);
   }
 
@@ -630,11 +632,11 @@ class FieldStorageConfig extends ConfigEntityBase implements FieldStorageConfigI
     /** @var \Drupal\Core\Field\FieldTypePluginManager $field_type_manager */
     $field_type_manager = \Drupal::service('plugin.manager.field.field_type');
     $definition = $field_type_manager->getDefinition($this->getType());
-    $enforced_cardinality = isset($definition['cardinality']) ? $definition['cardinality'] : NULL;
+    $enforced_cardinality = isset($definition['cardinality']) ? (int) $definition['cardinality'] : NULL;
 
     // Enforced cardinality is a positive integer or -1.
     if ($enforced_cardinality !== NULL && $enforced_cardinality < 1 && $enforced_cardinality !== FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED) {
-      throw new FieldException("Invalid enforced cardinality '$enforced_cardinality'. Allowed values: a positive integer or -1.");
+      throw new FieldException("Invalid enforced cardinality '{$definition['cardinality']}'. Allowed values: a positive integer or -1.");
     }
 
     return $enforced_cardinality ?: $this->cardinality;
@@ -691,13 +693,6 @@ class FieldStorageConfig extends ConfigEntityBase implements FieldStorageConfigI
    */
   public function getTargetEntityTypeId() {
     return $this->entity_type;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function isQueryable() {
-    return TRUE;
   }
 
   /**
@@ -801,7 +796,7 @@ class FieldStorageConfig extends ConfigEntityBase implements FieldStorageConfigI
    * @param string $field_name
    *   Name of the field.
    *
-   * @return static
+   * @return \Drupal\field\FieldStorageConfigInterface|null
    *   The field config entity if one exists for the provided field name,
    *   otherwise NULL.
    */

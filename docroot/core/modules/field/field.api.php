@@ -17,8 +17,8 @@
  *
  * In the Field API, each field has a type, which determines what kind of data
  * (integer, string, date, etc.) the field can hold, which settings it provides,
- * and so on. The data type(s) accepted by a field are defined in
- * hook_field_schema().
+ * and so on. The data type(s) accepted by a field are defined in the class
+ * implementing \Drupal\Core\Field\FieldItemInterface::schema() method.
  *
  * Field types are plugins annotated with class
  * \Drupal\Core\Field\Annotation\FieldType, and implement plugin interface
@@ -111,7 +111,7 @@ function hook_field_storage_config_update_forbid(\Drupal\field\FieldStorageConfi
     $prior_allowed_values = $prior_field_storage->getSetting('allowed_values');
     $lost_keys = array_keys(array_diff_key($prior_allowed_values, $allowed_values));
     if (_options_values_in_use($field_storage->getTargetEntityTypeId(), $field_storage->getName(), $lost_keys)) {
-      throw new \Drupal\Core\Entity\Exception\FieldStorageDefinitionUpdateForbiddenException(t('A list field (@field_name) with existing data cannot have its keys changed.', ['@field_name' => $field_storage->getName()]));
+      throw new \Drupal\Core\Entity\Exception\FieldStorageDefinitionUpdateForbiddenException("A list field '{$field_storage->getName()}' with existing data cannot have its keys changed.");
     }
   }
 }
@@ -190,11 +190,11 @@ function hook_field_widget_info_alter(array &$info) {
  * @see hook_field_widget_multivalue_form_alter()
  */
 function hook_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
-  // Add a css class to widget form elements for all fields of type mytype.
+  // Add a css class to widget form elements for all fields of type my_type.
   $field_definition = $context['items']->getFieldDefinition();
-  if ($field_definition->getType() == 'mytype') {
+  if ($field_definition->getType() == 'my_type') {
     // Be sure not to overwrite existing attributes.
-    $element['#attributes']['class'][] = 'myclass';
+    $element['#attributes']['class'][] = 'my-class';
   }
 }
 
@@ -257,11 +257,11 @@ function hook_field_widget_WIDGET_TYPE_form_alter(&$element, \Drupal\Core\Form\F
  * @see hook_field_widget_multivalue_WIDGET_TYPE_form_alter()
  */
 function hook_field_widget_multivalue_form_alter(array &$elements, \Drupal\Core\Form\FormStateInterface $form_state, array $context) {
-  // Add a css class to widget form elements for all fields of type mytype.
+  // Add a css class to widget form elements for all fields of type my_type.
   $field_definition = $context['items']->getFieldDefinition();
-  if ($field_definition->getType() == 'mytype') {
+  if ($field_definition->getType() == 'my_type') {
     // Be sure not to overwrite existing attributes.
-    $elements['#attributes']['class'][] = 'myclass';
+    $elements['#attributes']['class'][] = 'my-class';
   }
 }
 

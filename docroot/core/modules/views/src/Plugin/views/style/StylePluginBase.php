@@ -246,7 +246,8 @@ abstract class StylePluginBase extends PluginBase {
   }
 
   /**
-   * Should the output of the style plugin be rendered even if it's a empty view.
+   * Should the output of the style plugin be rendered even if it's an empty
+   * view.
    */
   public function evenEmpty() {
     return !empty($this->definition['even empty']);
@@ -537,6 +538,7 @@ abstract class StylePluginBase extends PluginBase {
    *   Views 7.x-3.0-rc2. After Views 7.x-3.0 this boolean is only used if
    *   $groupings is an old-style string or if the rendered option is missing
    *   for a grouping instruction.
+   *
    * @return
    *   The grouped record set.
    *   A nested set structure is generated if multiple grouping fields are used.

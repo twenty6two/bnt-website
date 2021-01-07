@@ -16,7 +16,7 @@ class NodeFormSaveChangedTimeTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
   ];
 
@@ -26,7 +26,7 @@ class NodeFormSaveChangedTimeTest extends BrowserTestBase {
   protected $defaultTheme = 'stark';
 
   /**
-   * An user with permissions to create and edit articles.
+   * A user with permissions to create and edit articles.
    *
    * @var \Drupal\user\UserInterface
    */
@@ -35,7 +35,7 @@ class NodeFormSaveChangedTimeTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create a node type.
@@ -44,7 +44,11 @@ class NodeFormSaveChangedTimeTest extends BrowserTestBase {
       'name' => 'Article',
     ]);
 
-    $this->authorUser = $this->drupalCreateUser(['access content', 'create article content', 'edit any article content'], 'author');
+    $this->authorUser = $this->drupalCreateUser([
+      'access content',
+      'create article content',
+      'edit any article content',
+    ], 'author');
     $this->drupalLogin($this->authorUser);
 
     // Create one node of the above node type .
@@ -70,7 +74,7 @@ class NodeFormSaveChangedTimeTest extends BrowserTestBase {
     sleep(1);
 
     // Save the node on the regular node edit form.
-    $this->drupalPostForm('node/1/edit', [], t('Save'));
+    $this->drupalPostForm('node/1/edit', [], 'Save');
 
     $storage->resetCache([1]);
     $node = $storage->load(1);

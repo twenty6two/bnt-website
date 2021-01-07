@@ -17,7 +17,7 @@ class FilterDefaultFormatTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['filter'];
+  protected static $modules = ['filter'];
 
   /**
    * {@inheritdoc}
@@ -38,13 +38,16 @@ class FilterDefaultFormatTest extends BrowserTestBase {
         'format' => mb_strtolower($this->randomMachineName()),
         'name' => $this->randomMachineName(),
       ];
-      $this->drupalPostForm('admin/config/content/formats/add', $edit, t('Save configuration'));
+      $this->drupalPostForm('admin/config/content/formats/add', $edit, 'Save configuration');
       $this->resetFilterCaches();
       $formats[] = FilterFormat::load($edit['format']);
     }
     list($first_format, $second_format) = $formats;
     $second_format_permission = $second_format->getPermissionName();
-    $first_user = $this->drupalCreateUser([$first_format->getPermissionName(), $second_format_permission]);
+    $first_user = $this->drupalCreateUser([
+      $first_format->getPermissionName(),
+      $second_format_permission,
+    ]);
     $second_user = $this->drupalCreateUser([$second_format_permission]);
 
     // Adjust the weights so that the first and second formats (in that order)
@@ -52,7 +55,7 @@ class FilterDefaultFormatTest extends BrowserTestBase {
     $edit = [];
     $edit['formats[' . $first_format->id() . '][weight]'] = -2;
     $edit['formats[' . $second_format->id() . '][weight]'] = -1;
-    $this->drupalPostForm('admin/config/content/formats', $edit, t('Save'));
+    $this->drupalPostForm('admin/config/content/formats', $edit, 'Save');
     $this->resetFilterCaches();
 
     // Check that each user's default format is the lowest weighted format that
@@ -68,7 +71,7 @@ class FilterDefaultFormatTest extends BrowserTestBase {
     // default.
     $edit = [];
     $edit['formats[' . $second_format->id() . '][weight]'] = -3;
-    $this->drupalPostForm('admin/config/content/formats', $edit, t('Save'));
+    $this->drupalPostForm('admin/config/content/formats', $edit, 'Save');
     $this->resetFilterCaches();
     $this->assertEqual(filter_default_format($first_user), filter_default_format($second_user), 'After the formats are reordered, both users have the same default format.');
   }

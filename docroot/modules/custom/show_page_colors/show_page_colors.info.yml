@@ -3,7 +3,7 @@ type: module
 description: Defines the custom colors to be used on a Show page
 package: Big Noise Theatre
 version: 1.0
-core: 8.x
+core_version_requirement: ^9
 
 dependencies:
   - field

@@ -42,6 +42,8 @@ libraries-extend:
     - bartik/classy.media_library
   media_library/widget:
     - bartik/classy.media_library
+  tour/tour:
+    - bartik/tour
   user/drupal.user:
     - bartik/user
 
@@ -72,7 +74,7 @@ regions:
   footer_fourth: 'Footer fourth'
   footer_fifth: 'Footer fifth'
 
-# Information added by Drupal.org packaging script on 2021-05-26
-version: '9.1.9'
+# Information added by Drupal.org packaging script on 2022-03-03
+version: '9.3.7'
 project: 'drupal'
-datestamp: 1622056532
+datestamp: 1646300651

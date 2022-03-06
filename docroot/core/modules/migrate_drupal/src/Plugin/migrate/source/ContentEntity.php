@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\migrate\EntityFieldDefinitionTrait;
 use Drupal\migrate\Plugin\migrate\source\SourcePluginBase;
+use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -231,12 +232,17 @@ class ContentEntity extends SourcePluginBase implements ContainerFactoryPluginIn
     if (!empty($this->configuration['bundle'])) {
       $query->condition($this->entityType->getKey('bundle'), $this->configuration['bundle']);
     }
+    // Exclude anonymous user account.
+    if ($this->entityType->id() === 'user' && !empty($this->entityType->getKey('id'))) {
+      $query->condition($this->entityType->getKey('id'), 0, '>');
+    }
     return $query;
   }
 
   /**
    * {@inheritdoc}
    */
+  #[\ReturnTypeWillChange]
   public function count($refresh = FALSE) {
     // If no translations are included, then a simple query is possible.
     if (!$this->configuration['include_translations']) {
@@ -244,7 +250,7 @@ class ContentEntity extends SourcePluginBase implements ContainerFactoryPluginIn
     }
     // @TODO: Determine a better way to retrieve a valid count for translations.
     // https://www.drupal.org/project/drupal/issues/2937166
-    return -1;
+    return MigrateSourceInterface::NOT_COUNTABLE;
   }
 
   /**

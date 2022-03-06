@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Drupal' => $baseDir . '/core/lib/Drupal.php',
     'Drupal\\Component\\DependencyInjection\\Container' => $baseDir . '/core/lib/Drupal/Component/DependencyInjection/Container.php',
     'Drupal\\Component\\DependencyInjection\\PhpArrayContainer' => $baseDir . '/core/lib/Drupal/Component/DependencyInjection/PhpArrayContainer.php',
@@ -30,6 +31,7 @@ return array(
     'Drupal\\Core\\DependencyInjection\\Container' => $baseDir . '/core/lib/Drupal/Core/DependencyInjection/Container.php',
     'Drupal\\Core\\DrupalKernel' => $baseDir . '/core/lib/Drupal/Core/DrupalKernel.php',
     'Drupal\\Core\\DrupalKernelInterface' => $baseDir . '/core/lib/Drupal/Core/DrupalKernelInterface.php',
+    'Drupal\\Core\\Http\\InputBag' => $baseDir . '/core/lib/Drupal/Core/Http/InputBag.php',
     'Drupal\\Core\\Installer\\InstallerRedirectTrait' => $baseDir . '/core/lib/Drupal/Core/Installer/InstallerRedirectTrait.php',
     'Drupal\\Core\\Site\\Settings' => $baseDir . '/core/lib/Drupal/Core/Site/Settings.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',

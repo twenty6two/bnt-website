@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\entity_browser_entity_form\Tests;
+namespace Drupal\Tests\entity_browser_entity_form\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
@@ -16,7 +16,7 @@ class InlineEntityIntegrationTest extends WebDriverTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'entity_browser_entity_form',
     'entity_browser_test',
     'node',
@@ -32,7 +32,7 @@ class InlineEntityIntegrationTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     // Delete unnecessary entity browser.
     $browser = $this->container->get('entity_type.manager')->getStorage('entity_browser')->load('entity_browser_test_entity_form');

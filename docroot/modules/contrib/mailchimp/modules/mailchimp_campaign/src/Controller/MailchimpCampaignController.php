@@ -104,6 +104,11 @@ class MailchimpCampaignController extends ControllerBase {
   public function overview() {
     $content = [];
 
+    $content['description'] = [
+      '#markup' => $this->t('<p>Add a campaign to use entities as campaign content.</p>
+ <p>Importing campaigns from Mailchimp is not possible.</p>'),
+    ];
+
     $content['campaigns_table'] = [
       '#type' => 'table',
       '#header' => [

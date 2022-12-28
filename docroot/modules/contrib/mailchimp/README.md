@@ -8,7 +8,6 @@ CONTENTS OF THIS FILE
  * Installation
  * Configuration
  * Related modules
- * Coding standards
 
 
 INTRODUCTION
@@ -77,23 +76,46 @@ SUB-MODULES
 REQUIREMENTS
 ------------
 
- * Use composer to download mailchimp. Run `composer require drupal/mailchimp`.
-   It will download all the dependencies required by mailchimp.
-
- * In case you have manually downloaded this module, then you will need the
-   following libraries:
-
-   * thinkshout/mailchimp-api-php:
-     (Use composer to download, `composer require thinkshout/mailchimp-api-php`)
+ * You need to have a Mailchimp API Key.
+ * You need to have at least one list created in Mailchimp to use the
+    mailchimp_lists module.
 
 
 INSTALLATION
 ------------
 
- * You need to have a Mailchimp API Key.
- * You need to have at least one list created in Mailchimp to use the
-    mailchimp_lists module.
+ * Use composer to download mailchimp, which will download all the dependencies
+ required by mailchimp: `composer require drupal/mailchimp`
 
+ * In case you have manually downloaded this module, then you will need to
+ install the thinkshout/mailchimp-api-php library manually as well:
+
+   * Use composer: `composer require thinkshout/mailchimp-api-php`
+
+   * Or if you cannot use composer, another option is to install it using the
+   Ludwig module.
+
+
+### Manual install using the Ludwig module
+Composer is the recommended way to install and maintain a site. Site
+administrators using Ludwig need to be careful when combining modules that
+depend on external libraries, since there are no safeguards against incompatible
+library versions or overlapping requirements.
+
+Steps:
+
+  1. Download and install the Ludwig module.
+     https://www.drupal.org/project/ludwig
+
+  2. Download and install the Mailchimp module.
+
+  3. Visit packages status at Reports > Packages (admin/reports/packages) and
+     use "Download and unpack all missing libraries" button.
+
+  4. Rebuild the cache. Done!
+
+For more about using Ludwig:
+https://www.drupal.org/docs/contributed-modules/ludwig/installation-and-usage
 
 CONFIGURATION
 -------------
@@ -125,10 +147,3 @@ RELATED MODULES
     ability to send all site emails through Mandrill with reporting available
     from within Drupal. Please refer to the project page for more details.
 
-
-CODING STANDARDS
-----------------
-
- * To check coding standards on the module, please run:
-    `phpcs --standard=Drupal,phpcs.xml .`
-    Which ignores the lib/* directory.

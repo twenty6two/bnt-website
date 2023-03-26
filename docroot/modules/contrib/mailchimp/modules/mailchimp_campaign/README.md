@@ -5,7 +5,7 @@ Create and send campaigns with entities as content.
 2. Fill out the required fields
   * **Title:** An internal name to identify the campaign
   * **Subject:** Message subject
-  * **List:** The Mailchimp list to use
+  * **Audience:** The Mailchimp audience to use
   * **Segment:** List segment to use (optional, only appears if any exist)
   * **From Email:** Email address for the campaign
   * **From Name:** Name to attach to the 'From Email'
@@ -37,7 +37,7 @@ If your cursor is not inside a content field, the token will be output as text,
 which you can copy/paste manually into the content region.
 
 ## Troubleshooting
-### Campaigns, lists, or templates have not updated from Mailchimp?
+### Campaigns, audiences, or templates have not updated from Mailchimp?
   Try clearing the Drupal cache and reloading the page.
 ### Cannot edit a campaign?
   Check to see if the campaign has already been sent. Sent campaigns cannot be

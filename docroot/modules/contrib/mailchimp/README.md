@@ -63,14 +63,10 @@ SUB-MODULES
     Fields. Add a Mailchimp Subscription field to your User bundle to allow
     Users to control their own subscriptions & subscribe during registration.
 
-  * mailchimp_campaigns: Create and send campaigns directly from Drupal, or
+  * mailchimp_campaign: Create and send campaigns directly from Drupal, or
     just create them and use the Mailchimp UI to send them. Embed content from
     your Drupal site by dropping in any Entity with a title and a View Mode
     configured into any area of your email template.
-
-  * mailchimp_activity: Display a tab on any entity with an email address
-    showing the email, subscribe, and unsubscribe history for that email
-    address on your Mailchimp account.
 
 
 REQUIREMENTS
@@ -120,23 +116,34 @@ https://www.drupal.org/docs/contributed-modules/ludwig/installation-and-usage
 CONFIGURATION
 -------------
 
-    1. Direct your browser to admin/config/services/mailchimp to configure the
-      module.
+### Using OAuth
+1. From the Global Settings tab check the box for “Use OAuth Authentication."
+2. Leave all other fields they are and click “Save Configuration.”
+3. Visit the OAuth Settings Tab.
+4. Enter a domain (or leave the default value).
+5. Click "Authenticate."
+6. This will trigger a new window (or tab) to open where you will be prompted to log in to Mailchimp and grant access to Mailchimp for Drupal.
+7. Follow the prompts to do so and then you will be returned to the OAuth Settings tab. That page will automatically refresh and present a success message stating that you are connected to the Mailchimp API.
+8. That's it! Now that you have granted access to Mailchimp for Drupal. You can configure your Mailchimp audiences, campaigns, forms, and pages.
 
-    2. You will need to put in your Mailchimp API key for your Mailchimp
-       account.
+### Using API Key (Deprecated)
+  1. Direct your browser to admin/config/services/mailchimp to configure the
+    module.
 
-       If you do not have a Mailchimp account, go to
-       [http://www.mailchimp.com]([http://www.mailchimp.com) and sign up for a
-       new account. Once you have set up your account and are logged in, visit:
-       'Account Settings -> Extras -> API Keys' to generate a key.
+  2. You will need to put in your Mailchimp API key for your Mailchimp
+     account.
 
-    3. Copy your newly created API key and go to the
-       [Mailchimp config](http://example.com/admin/config/services/mailchimp)
-       page in your Drupal site and paste it into the Mailchimp API Key field.
+     If you do not have a Mailchimp account, go to
+     [http://www.mailchimp.com]([http://www.mailchimp.com) and sign up for a
+     new account. Once you have set up your account and are logged in, visit:
+     'Account Settings -> Extras -> API Keys' to generate a key.
 
-    4. Batch limit - Maximum number of changes to process in a single cron run.
-       Mailchimp suggests keeping this below 10000.
+  3. Copy your newly created API key and go to the
+     [Mailchimp config](http://example.com/admin/config/services/mailchimp)
+     page in your Drupal site and paste it into the Mailchimp API Key field.
+
+  4. Batch limit - Maximum number of changes to process in a single cron run.
+     Mailchimp suggests keeping this below 10000.
 
 
 RELATED MODULES

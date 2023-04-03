@@ -8,7 +8,7 @@ install:
   - locale_test_translate
   - tour
 
-# Information added by Drupal.org packaging script on 2023-03-01
-version: '9.5.4'
+# Information added by Drupal.org packaging script on 2023-03-24
+version: '9.5.7'
 project: 'drupal'
-datestamp: 1677680891
+datestamp: 1679677517

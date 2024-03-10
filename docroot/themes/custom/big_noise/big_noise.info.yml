@@ -2,7 +2,7 @@ name: 'Big Noise'
 type: theme
 description: 'Big Noise Theatre 2017 website design.'
 version: '1.0'
-core_version_requirement: ^9
+core_version_requirement: ^9 || ^10
 package: 'Big Noise'
 base theme: false
 regions:

@@ -4,6 +4,6 @@ description: Provides a source plugin to test that counts are cached in SQL sour
 package: Testing
 
 # Information added by Drupal.org packaging script on 2023-09-20
-version: '9.5.11'
+version: '10.0.11'
 project: 'drupal'
-datestamp: 1695228127
+datestamp: 1695229013

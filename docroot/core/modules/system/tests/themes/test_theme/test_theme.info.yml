@@ -26,7 +26,6 @@ libraries-override:
     css:
       component:
         css/components/button.css: css/my-button.css
-        css/components/collapse-processed.css: css/my-collapse-processed.css
         css/components/container-inline.css: /themes/my_theme/css/my-container-inline.css
         css/components/details.css: /themes/my_theme/css/my-details.css
   # Remove particular library assets.
@@ -67,6 +66,6 @@ regions:
   right: Right
 
 # Information added by Drupal.org packaging script on 2023-09-20
-version: '9.5.11'
+version: '10.0.11'
 project: 'drupal'
-datestamp: 1695228127
+datestamp: 1695229013

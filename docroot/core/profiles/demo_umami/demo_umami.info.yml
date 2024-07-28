@@ -29,7 +29,6 @@ install:
   - dynamic_page_cache
   - taxonomy
   - dblog
-  - sdc
   - search
   - shortcut
   - toolbar
@@ -51,7 +50,7 @@ themes:
   - umami
 keep_english: true
 
-# Information added by Drupal.org packaging script on 2024-03-06
-version: '10.2.4'
+# Information added by Drupal.org packaging script on 2024-07-04
+version: '10.3.1'
 project: 'drupal'
-datestamp: 1709715468
+datestamp: 1720094222

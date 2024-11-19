@@ -2,14 +2,18 @@
 
 namespace Drupal\mailchimp\Form;
 
+use Drupal\Core\Access\CsrfTokenGenerator;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\MessageCommand;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\State;
 use Drupal\mailchimp\Ajax\MailchimpAuthenticationCommand;
+use Drupal\mailchimp\Controller\MailchimpOAuthController;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Mailchimp\MailchimpAPIException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -26,16 +30,28 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
   protected State $stateService;
 
   /**
+   * CsrfService.
+   *
+   * @var \Drupal\Core\Access\CsrfTokenGenerator
+   */
+  protected CsrfTokenGenerator $csrfService;
+
+  /**
    * Mailchimp OAuth Settings form constructor.
    *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory.
-   * @param \Drupal\Core\State $stateService
-   *   State service
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The typed config manager.
+   * @param \Drupal\Core\State\State $stateService
+   *   State service.
+   * @param \Drupal\Core\Access\CsrfTokenGenerator $csrfService
+   *   CSRF service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, State $stateService) {
-    parent::__construct($config_factory);
+  public function __construct(ConfigFactoryInterface $configFactory, TypedConfigManagerInterface $typedConfigManager, State $stateService, CsrfTokenGenerator $csrfService) {
+    parent::__construct($configFactory, $typedConfigManager);
     $this->stateService = $stateService;
+    $this->csrfService = $csrfService;
   }
 
   /**
@@ -44,7 +60,9 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
+      $container->get('config.typed'),
       $container->get('state'),
+      $container->get('csrf_token'),
     );
   }
 
@@ -95,12 +113,12 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
       }
     }
     if (!$this->config('mailchimp.settings')->get('use_oauth')) {
-      $this->messenger()->addWarning('Your site is still setup to use an API key and that method of authentication is deprecated. Select "Use OAuth Authentication" under General Settings.');
+      $this->messenger()->addWarning('Your site is still set up to use an API key and that method of authentication is deprecated. Select "Use OAuth Authentication" under Global Settings, save, and then return here to set up OAuth.');
     }
 
     $form['status'] = [
       '#type' => 'markup',
-      '#markup' => '<div id="mailchimp-authentication-status"></div>'
+      '#markup' => '<div id="mailchimp-authentication-status"></div>',
     ];
 
     $form['domain'] = [
@@ -113,6 +131,7 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
 
     $form['#attached']['library'][] = 'mailchimp/authentication';
     $form['#attached']['drupalSettings']['mailchimp']['middleware_url'] = $this->getMiddlewareUrl();
+    $form['#attached']['drupalSettings']['mailchimp']['csrf_token'] = $this->csrfService->get("mailchimp_admin_oauth_settings");
 
     $form['actions'] = [
       '#type' => 'button',
@@ -131,15 +150,15 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
    *
    * @param array $form
    *   Form array.
-   * @param FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   FormState object.
    *
-   * @return AjaxResponse
+   * @return \Drupal\Core\Ajax\AjaxResponse
    *   An Ajax response.
    */
   public function authenticate(array $form, FormStateInterface $form_state) {
     $client = $this->client();
-    $domain= $form_state->getValue('domain');
+    $domain = $form_state->getValue('domain');
 
     $post_params = [
       'form_params' => [
@@ -227,7 +246,7 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
         return;
       }
     }
-    catch (\GuzzleHttp\Exception\GuzzleException $e) {
+    catch (GuzzleException $e) {
       $this->messenger()->addError($e->getMessage());
     }
   }
@@ -235,7 +254,7 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
   /**
    * Initialize a new Guzzle client.
    *
-   * @return Client
+   * @return \GuzzleHttp\Client
    *   Guzzle client.
    */
   protected function client() {
@@ -254,9 +273,8 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
    *   Middleware url.
    */
   protected function getMiddlewareUrl() {
-    $config = $this->config('mailchimp.settings');
-    return $config->get('oauth_middleware_url');
+    $url = MailchimpOAuthController::OAUTH_MIDDLEWARE_URL;
+    return $url;
   }
 
 }
-

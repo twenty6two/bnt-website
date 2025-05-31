@@ -1,0 +1,5 @@
+name: Meta Pixel
+type: module
+description: Adds Meta Pixel tracking to entire site
+package: Big Noise Theatre
+core_version_requirement: ^9 || ^10

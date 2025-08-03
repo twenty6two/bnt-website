@@ -133,8 +133,9 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
     $form['#attached']['drupalSettings']['mailchimp']['middleware_url'] = $this->getMiddlewareUrl();
     $form['#attached']['drupalSettings']['mailchimp']['csrf_token'] = $this->csrfService->get("mailchimp_admin_oauth_settings");
 
-    $form['actions'] = [
-      '#type' => 'button',
+    $form['actions']['#type'] = 'actions';
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
       '#value' => $button_action,
       '#ajax' => [
         'callback' => '::authenticate',

@@ -29,7 +29,8 @@
         // Get and convert the responseText into JSON
         let response = JSON.parse(xmlhttp.responseText);
         const formWrapper = document.querySelector('.mailchimp-admin-oauth-settings');
-        const submitButton = formWrapper.querySelector('#edit-actions');
+        const submitButton = formWrapper.querySelector('.form-submit')
+          ?? document.querySelector('.gin-sticky-form-actions [form="mailchimp-admin-oauth-settings"].form-submit');
         switch (response.message) {
           case 'pending':
             formWrapper.classList.add('pending');

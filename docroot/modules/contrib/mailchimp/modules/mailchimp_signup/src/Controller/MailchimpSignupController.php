@@ -5,6 +5,7 @@ namespace Drupal\mailchimp_signup\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\mailchimp\ApiService;
 use Drupal\mailchimp_signup\Form\MailchimpSignupPageForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -12,6 +13,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Mailchimp Signup controller.
  */
 class MailchimpSignupController extends ControllerBase {
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
 
   /**
    * The messenger service.
@@ -35,7 +43,8 @@ class MailchimpSignupController extends ControllerBase {
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The form builder service.
    */
-  public function __construct(MessengerInterface $messenger, FormBuilderInterface $form_builder) {
+  public function __construct(ApiService $api_service, MessengerInterface $messenger, FormBuilderInterface $form_builder) {
+    $this->apiService = $api_service;
     $this->messenger = $messenger;
     $this->formBuilder = $form_builder;
   }
@@ -45,6 +54,7 @@ class MailchimpSignupController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('mailchimp.api'),
       $container->get('messenger'),
       $container->get('form_builder')
     );
@@ -62,15 +72,24 @@ class MailchimpSignupController extends ControllerBase {
   public function page($signup_id) {
     $content = [];
 
+    $content = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'mailchimp-signup-subscribe-form-page',
+        ],
+      ],
+    ];
+
     $signup = mailchimp_signup_load($signup_id);
 
-    $form = new MailchimpSignupPageForm($this->messenger);
+    $form = new MailchimpSignupPageForm($this->apiService, $this->messenger);
 
     $form_id = 'mailchimp_signup_subscribe_page_' . $signup->id . '_form';
     $form->setFormID($form_id);
     $form->setSignup($signup);
 
-    $content = $this->formBuilder->getForm($form);
+    $content['form'] = $this->formBuilder->getForm($form);
 
     return $content;
   }

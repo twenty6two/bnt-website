@@ -4,8 +4,10 @@ namespace Drupal\mailchimp_signup\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceFormatterBase;
+use Drupal\mailchimp\ApiService;
 use Drupal\mailchimp_signup\Entity\MailchimpSignup;
 use Drupal\mailchimp_signup\Form\MailchimpSignupPageForm;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'mailchimp_signup_form' formatter.
@@ -27,6 +29,29 @@ class MailchimpSignupFormFormatter extends EntityReferenceFormatterBase {
   private static $counter = 0;
 
   /**
+   * The mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected ApiService $apiService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->setApiService($container->get(ApiService::class));
+    return $instance;
+  }
+
+  /**
+   * Sets the API service.
+   */
+  public function setApiService(ApiService $apiService): void {
+    $this->apiService = $apiService;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
@@ -42,9 +67,7 @@ class MailchimpSignupFormFormatter extends EntityReferenceFormatterBase {
       /** @var \Drupal\mailchimp_signup\Entity\MailchimpSignup $signup */
       $signup = mailchimp_signup_load($signup_id);
 
-      $messenger = \Drupal::messenger();
-
-      $form = new MailchimpSignupPageForm($messenger);
+      $form = new MailchimpSignupPageForm($this->apiService, $this->messenger());
 
       $form->setFormID($this->getFormId($signup));
       $form->setSignup($signup);

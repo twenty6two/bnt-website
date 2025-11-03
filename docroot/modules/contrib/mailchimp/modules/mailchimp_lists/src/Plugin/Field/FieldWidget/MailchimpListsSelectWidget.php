@@ -18,7 +18,7 @@ use Drupal\mailchimp_lists\Plugin\Field\FieldType\MailchimpListsSubscription;
  *     "mailchimp_lists_subscription"
  *   },
  *   settings = {
- *     "placeholder" = "Select a Mailchimp List."
+ *     "placeholder" = "Select a Mailchimp Audience."
  *   }
  * )
  */
@@ -77,12 +77,12 @@ class MailchimpListsSelectWidget extends WidgetBase {
    *   Parameter instance.
    * @param mixed $email
    *   Parameter email.
-   * @param mixed $hide_subscribe_checkbox
+   * @param bool $hide_subscribe_checkbox
    *   Parameter hide subscribe checkbox.
-   * @param mixed $at_least_one_interest_group
+   * @param bool $at_least_one_interest_group
    *   Parameter at least one interest group.
-   * @param mixed $mailchimp_list_id
-   *   Parameter email chimp list id.
+   * @param string $mailchimp_list_id
+   *   Mailchimp audience ID.
    *
    * @return array
    *   Returns array element.
@@ -132,7 +132,7 @@ class MailchimpListsSelectWidget extends WidgetBase {
    * @param mixed $at_least_one_interest_group
    *   Parameter at least one interest group.
    * @param mixed $mailchimp_list_id
-   *   Parameter email chimp list id.
+   *   Mailchimp audience ID.
    *
    * @return array
    *   Returns array element.
@@ -143,7 +143,7 @@ class MailchimpListsSelectWidget extends WidgetBase {
     $instance_list_id = $instance->getFieldDefinition()->getSetting('mc_list_id');
     $mc_instance_list = mailchimp_get_list($instance_list_id);
 
-    // TRUE if interest groups are enabled for this list.
+    // TRUE if interest groups are enabled for this audience.
     $show_interest_groups = $this->fieldDefinition->getSetting('show_interest_groups');
     // TRUE if widget is being used to set default values via admin form.
     $is_default_value_widget = $this->isDefaultValueWidget($form_state);
@@ -213,12 +213,12 @@ class MailchimpListsSelectWidget extends WidgetBase {
    *   Parameter instance.
    * @param mixed $email
    *   Parameter email.
-   * @param mixed $hide_subscribe_checkbox
+   * @param bool $hide_subscribe_checkbox
    *   Parameter hide subscribe checkbox.
-   * @param mixed $at_least_one_interest_group
+   * @param bool $at_least_one_interest_group
    *   Parameter at least one interest group.
-   * @param mixed $mailchimp_list_id
-   *   Parameter email chimp list id.
+   * @param string $mailchimp_list_id
+   *   Mailchimp audience ID.
    *
    * @return array
    *   Returns array element.
@@ -332,22 +332,22 @@ class MailchimpListsSelectWidget extends WidgetBase {
    * Determines whether to show the subscribe checkbox.
    *
    * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Parameter form state interface.
-   * @param mixed $hide_subscribe_checkbox
-   *   Parameter hide subscribe checkbox.
-   * @param mixed $at_least_one_interest_group
-   *   Parameter at least one interest group.
-   * @param mixed $email
-   *   Parameter email.
-   * @param mixed $mailchimp_list_id
-   *   Parameter email chimp list id.
+   *   The form state.
+   * @param bool $hide_subscribe_checkbox
+   *   Whether the field is configured to hide the Subscribe checkbox.
+   * @param bool $at_least_one_interest_group
+   *   Whether the audience has at least one interest group.
+   * @param string $email
+   *   Member email address.
+   * @param string $mailchimp_list_id
+   *   Mailchimp audience ID.
    *
    * @return bool
    *   Whether to show the subscribe checkbox.
    */
   protected function subscribeCheckboxShown(FormStateInterface $form_state, $hide_subscribe_checkbox, $at_least_one_interest_group, $email, $mailchimp_list_id): bool {
 
-    // TRUE if interest groups are enabled for this list.
+    // TRUE if interest groups are enabled for this audience.
     $show_interest_groups = $this->fieldDefinition->getSetting('show_interest_groups');
     // TRUE if widget is being used to set default values via admin form.
     $is_default_value_widget = $this->isDefaultValueWidget($form_state);
@@ -356,7 +356,7 @@ class MailchimpListsSelectWidget extends WidgetBase {
     // - The form is not being used to configure default values.
     // - The field is configured to show interest groups.
     // - The field is configured to hide the Subscribe checkbox.
-    // - The list has at least one interest group.
+    // - The audience has at least one interest group.
     // This allows users to skip the redundant step of checking the Subscribe
     // checkbox when also checking interest group checkboxes.
     $showSubscribeCheckbox = TRUE;
@@ -369,10 +369,10 @@ class MailchimpListsSelectWidget extends WidgetBase {
   /**
    * Shows whether a member is unsubscribed.
    *
-   * @param mixed $mailchimp_list_id
-   *   Parameter email chimp list id.
-   * @param mixed $email
-   *   Parameter email.
+   * @param string $mailchimp_list_id
+   *   Mailchimp audience ID.
+   * @param string $email
+   *   Member email address.
    *
    * @return bool
    *   TRUE if the member is unsubscribed, otherwise FALSE.
@@ -419,7 +419,8 @@ class MailchimpListsSelectWidget extends WidgetBase {
    *   True if this is a new entity.
    *
    * @return bool
-   *   TRUE if there are interests chosen on a hidden subscribe list checkbox.
+   *   TRUE if there are interests chosen on a hidden subscribe to audience
+   *   checkbox.
    */
   public function getSubscribeFromInterests($choices, $is_new = FALSE) {
     $subscribe_from_interest_groups = $choices['subscribe'];

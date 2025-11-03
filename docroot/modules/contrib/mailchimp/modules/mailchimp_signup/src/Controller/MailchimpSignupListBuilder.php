@@ -4,7 +4,9 @@ namespace Drupal\mailchimp_signup\Controller;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a listing of MailchimpSignups.
@@ -12,6 +14,22 @@ use Drupal\Core\Url;
  * @ingroup mailchimp_signup
  */
 class MailchimpSignupListBuilder extends ConfigEntityListBuilder {
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
+    $instance = parent::createInstance($container, $entity_type);
+    $instance->apiService = $container->get('mailchimp.api');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -46,7 +64,7 @@ class MailchimpSignupListBuilder extends ConfigEntityListBuilder {
     ];
 
     $modes = NULL;
-    $mc_lists = mailchimp_get_lists();
+    $mc_lists = $this->apiService->getAudiences();
 
     switch ($entity->mode) {
       case MAILCHIMP_SIGNUP_BLOCK:

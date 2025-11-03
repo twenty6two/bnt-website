@@ -2,21 +2,12 @@
 
 namespace Drupal\mailchimp_campaign\Form;
 
-use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
-use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\ContentEntityForm;
-use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
-use Drupal\Core\Entity\EntityRepositoryInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
-use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -26,6 +17,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @ingroup mailchimp_campaign
  */
 class MailchimpCampaignForm extends ContentEntityForm {
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
 
   /**
    * Configuration object for this builder.
@@ -70,62 +68,18 @@ class MailchimpCampaignForm extends ContentEntityForm {
   protected $render;
 
   /**
-   * Constructs a MailchimpCampaignForm object.
-   *
-   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
-   *   The entity repository.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The configuration factory.
-   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-   *   The messenger service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   Entity type manager.
-   * @param \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entity_display_repository
-   *   The entity display repository.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
-   *   The Mailchimp cache backend interface.
-   * @param \Drupal\Core\Render\RendererInterface $render
-   *   The render service.
-   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
-   *   The entity type bundle service.
-   * @param \Drupal\Component\Datetime\TimeInterface $time
-   *   The time service.
-   */
-  public function __construct(
-    EntityRepositoryInterface $entity_repository,
-    ConfigFactoryInterface $config_factory,
-    MessengerInterface $messenger,
-    EntityTypeManagerInterface $entityTypeManager,
-    EntityDisplayRepositoryInterface $entity_display_repository,
-    CacheBackendInterface $cache,
-    RendererInterface $render,
-    ?EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL,
-    ?TimeInterface $time = NULL,
-  ) {
-    parent::__construct($entity_repository, $entity_type_bundle_info, $time);
-    $this->config = $config_factory;
-    $this->messenger = $messenger;
-    $this->entityTypeManager = $entityTypeManager;
-    $this->entityDisplayRepository = $entity_display_repository;
-    $this->cache = $cache;
-    $this->render = $render;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('entity.repository'),
-      $container->get('config.factory'),
-      $container->get('messenger'),
-      $container->get('entity_type.manager'),
-      $container->get('entity_display.repository'),
-      $container->get('cache.mailchimp'),
-      $container->get('renderer'),
-      $container->get('entity_type.bundle.info'),
-      $container->get('datetime.time')
-    );
+    $instance = parent::create($container);
+    $instance->apiService = $container->get('mailchimp.api');
+    $instance->config = $container->get('config.factory');
+    $instance->messenger = $container->get('messenger');
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    $instance->entityDisplayRepository = $container->get('entity_display.repository');
+    $instance->cache = $container->get('cache.mailchimp');
+    $instance->render = $container->get('renderer');
+    return $instance;
   }
 
   /**
@@ -161,7 +115,7 @@ class MailchimpCampaignForm extends ContentEntityForm {
       '#required' => FALSE,
       '#default_value' => (!empty($campaign->mc_data->settings->preview_text)) ? $campaign->mc_data->settings->preview_text : '',
     ];
-    $mailchimp_lists = mailchimp_get_lists();
+    $mailchimp_lists = $this->apiService->getAudiences();
     $form['list_id'] = [
       '#type' => 'select',
       '#title' => $this->t('Audience'),
@@ -195,7 +149,7 @@ class MailchimpCampaignForm extends ContentEntityForm {
       '#description' => $this->t('Select the audience tags this campaign should be sent to.'),
     ];
     if (!empty($list_segments)) {
-      $form['list_segment_id']['#options'] = $this->buildOptionList($list_segments, '-- Entire list --');
+      $form['list_segment_id']['#options'] = $this->buildOptionList($list_segments, '-- Entire Audience --');
       $form['list_segment_id']['#default_value'] = (isset($segment_id)) ? $segment_id : '';
     }
 
@@ -278,7 +232,7 @@ class MailchimpCampaignForm extends ContentEntityForm {
     }
 
     if (isset($list_id)) {
-      $merge_vars_list = mailchimp_get_mergevars([$list_id]);
+      $merge_vars_list = $this->apiService->getMergevars([$list_id]);
       $merge_vars = $merge_vars_list[$list_id];
     }
     else {
@@ -469,6 +423,7 @@ class MailchimpCampaignForm extends ContentEntityForm {
         $campaign->setMcCampaignId($campaign_id);
         $campaign->setTemplate($template_content);
       }
+      return $campaign;
     }
   }
 
@@ -478,13 +433,14 @@ class MailchimpCampaignForm extends ContentEntityForm {
   public function save(array $form, FormStateInterface $form_state) {
     /** @var \Drupal\mailchimp_campaign\Entity\MailchimpCampaign $campaign */
     $campaign = $this->getEntity();
-    $campaign->save();
+    $result = $campaign->save();
 
     // Clear campaigns cache.
     $cache = $this->cache;
     $cache->deleteAll();
 
     $form_state->setRedirect('mailchimp_campaign.overview');
+    return $result;
   }
 
   /**
@@ -516,7 +472,7 @@ class MailchimpCampaignForm extends ContentEntityForm {
    *   Form state information.
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
-   *   Ajax response with the rendered list/audience segments element.
+   *   Ajax response with the rendered audience segment element.
    */
   public static function listSegmentCallback(array $form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
@@ -591,7 +547,7 @@ class MailchimpCampaignForm extends ContentEntityForm {
   }
 
   /**
-   * Returns an options list for a given array of items.
+   * Returns an option list for a given array of items.
    *
    * @param array $list
    *   Array of item data containing 'id' and 'name' properties.
@@ -624,7 +580,7 @@ class MailchimpCampaignForm extends ContentEntityForm {
   }
 
   /**
-   * Returns an options list of entities based on data from entity_get_info().
+   * Returns an option list of entities based on data from entity_get_info().
    *
    * Filters out entities that do not contain a title field, as they cannot
    * be used to import content into templates.
@@ -651,7 +607,7 @@ class MailchimpCampaignForm extends ContentEntityForm {
   }
 
   /**
-   * Returns an options list of entity view modes.
+   * Returns an option list of entity view modes.
    *
    * @param string $entity_type
    *   Entity type to build view mode options for.
@@ -798,14 +754,14 @@ class MailchimpCampaignForm extends ContentEntityForm {
    * Gets form elements used in the merge vars feature.
    *
    * @param array $merge_vars
-   *   Array of Mailchimp merge vars for the current list.
+   *   Array of Mailchimp merge vars for the current audience.
    * @param string $list_name
-   *   The name of the current list.
+   *   The name of the current audience.
    *
    * @return array
    *   Array of form elements used to display merge vars.
    *
-   * @see mailchimp_get_mergevars
+   * @see \Drupal\mailchimp\ApiService::getMergevars
    */
   private function getMergeVarsFormElements(array $merge_vars, $list_name) {
     $form = [];

@@ -27,6 +27,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class AddMailchimpEventWebformHandler extends WebformHandlerBase {
 
   /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
+
+  /**
    * The webform token manager.
    *
    * @var \Drupal\webform\WebformTokenManagerInterface
@@ -38,6 +45,7 @@ class AddMailchimpEventWebformHandler extends WebformHandlerBase {
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->apiService = $container->get('mailchimp.api');
     $instance->tokenManager = $container->get('webform.token_manager');
     return $instance;
   }
@@ -77,7 +85,7 @@ class AddMailchimpEventWebformHandler extends WebformHandlerBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $mc_lists = mailchimp_get_lists();
+    $mc_lists = $this->apiService->getAudiences();
     $list_options = [];
 
     foreach ($mc_lists as $key => $value) {

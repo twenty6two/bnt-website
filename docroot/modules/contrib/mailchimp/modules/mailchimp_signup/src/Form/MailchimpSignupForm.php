@@ -13,6 +13,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteBuilderInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
+use Drupal\mailchimp\ApiService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -25,6 +26,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class MailchimpSignupForm extends EntityForm {
 
   use StringTranslationTrait;
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
+
   /**
    * The router builder service.
    *
@@ -35,10 +44,13 @@ class MailchimpSignupForm extends EntityForm {
   /**
    * Constructs a MailchimpSignupForm object.
    *
+   * @param \Drupal\mailchimp\ApiService $mailchimp_api
+   *   The API service.
    * @param \Drupal\Core\Routing\RouteBuilderInterface $router_builder
    *   The router builder service.
    */
-  public function __construct(RouteBuilderInterface $router_builder) {
+  public function __construct(protected ApiService $mailchimp_api, RouteBuilderInterface $router_builder) {
+    $this->apiService = $mailchimp_api;
     $this->routerBuilder = $router_builder;
   }
 
@@ -47,6 +59,7 @@ class MailchimpSignupForm extends EntityForm {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('mailchimp.api'),
       $container->get('router.builder')
     );
   }
@@ -85,8 +98,7 @@ class MailchimpSignupForm extends EntityForm {
       '#title' => 'Description',
       '#default_value' => $signup->settings['description'] ?? '',
       '#rows' => 2,
-      '#maxlength' => 500,
-      '#description' => $this->t('This description will be shown on the signup form below the title. (500 characters or less)'),
+      '#description' => $this->t('This description will be shown on the signup form below the title.'),
     ];
     $mode_defaults = [
       MAILCHIMP_SIGNUP_BLOCK => [MAILCHIMP_SIGNUP_BLOCK],
@@ -193,7 +205,8 @@ class MailchimpSignupForm extends EntityForm {
       $reset = TRUE;
     }
 
-    $lists = mailchimp_get_lists([], $reset);
+    $lists =
+      $this->apiService->getAudiences([], $reset);
     $options = [];
     foreach ($lists as $mc_list) {
       $options[$mc_list->id] = $mc_list->name;
@@ -366,24 +379,24 @@ class MailchimpSignupForm extends EntityForm {
     }
 
     if ($form_state->getValue('configure_groups') || $configure_groups) {
-      // Grab a reference to the selected list - either when an AJAX
+      // Grab a reference to the selected audience - either when an AJAX
       // callback is executed or when we are in "Edit" mode.
       if (!$selected_lists = $form_state->getValue('mc_lists')) {
         $selected_lists = $signup->mc_lists;
       }
 
       if ($selected_lists && is_array($selected_lists)) {
-        // We don't want to query the API for all lists
+        // We don't want to query the API for all audiences
         // besides the one selected, so we filter them out.
         $selected_lists = array_filter($selected_lists);
 
-        // Default value for the list-specific groups.
+        // Default value for the audience-specific groups.
         if (!array_key_exists('group_items', $signup->settings) || !$groups_items = $signup->settings['group_items']) {
           $groups_items = [];
         }
 
-        // Grab a reference to each list using the module built-in function.
-        foreach (mailchimp_get_lists($selected_lists) as $list) {
+        // Grab a reference to each audience using the module built-in function.
+        foreach ($this->apiService->getAudiences($selected_lists) as $list) {
           $default = [];
 
           // If we have some items already selected - add them to the
@@ -393,10 +406,10 @@ class MailchimpSignupForm extends EntityForm {
             $default = $groups_items[$list->id];
           }
 
-          // Merge the lists for each of the selected groups here and return
+          // Merge the audiences for each of the selected groups here and return
           // a renderable array for the form to display.
-          // We need to do this here, in case there is more than 1 list selected
-          // and we need to return the interest groups for all of them.
+          // We need to do this here, in case there is more than 1 audience
+          // selected and we need to return the interest groups for all of them.
           $groups = array_merge(
             $groups,
             [
@@ -443,7 +456,7 @@ class MailchimpSignupForm extends EntityForm {
 
     // This one acts as a replacement for the original return value that
     // was defined here beforehand. Simply replace the merge fields
-    // for each of the selected mailing lists.
+    // for each of the selected audiences.
     $response->addCommand(new HtmlCommand(
       '#mergefields-wrapper',
       $form['mc_lists_config']['mergefields']
@@ -453,9 +466,9 @@ class MailchimpSignupForm extends EntityForm {
     // It's required because of the following scenarion:
     // The Ajax callback mapped to the "configure_groups" checkbox is triggered
     // once the checkbox is selected, thus loading the interest groups for all
-    // of the selected mailing lists. But in case a user tries to select a
-    // mailing list afterwards, the callback will no longer execute. So we
-    // can add a new command to replace the list in that container.
+    // of the selected audiences. But in case a user tries to select an audience
+    // afterwards, the callback will no longer execute. So we can add a new
+    // command to replace the audience in that container.
     if ($form_state->getValue('configure_groups')) {
       $response->addCommand(new HtmlCommand(
         '#interest-groups-container',
@@ -491,7 +504,7 @@ class MailchimpSignupForm extends EntityForm {
 
     // This can occur when the form is submitted without JS enabled.
     if (!isset($signup->mergefields)) {
-      $signup->mergefields['EMAIL'] = TRUE;
+      $signup->set('mergefields', ['EMAIL' => TRUE]);
     }
     if (empty($mergefields)) {
       $mergefields['EMAIL'] = serialize($mergevar_options['EMAIL']);
@@ -508,7 +521,6 @@ class MailchimpSignupForm extends EntityForm {
     $signup->settings['gdpr_consent_required'] = $form_state->getValue('gdpr_consent_required');
     $signup->settings['tags'] = $form_state->getValue('tags');
 
-    $groups_items = [];
     $groups_settings = $form_state->getValue('groups_container');
 
     if (isset($groups_settings['items'])) {
@@ -520,26 +532,27 @@ class MailchimpSignupForm extends EntityForm {
       $signup->settings['path'] = '';
     }
 
-    $signup->save();
+    $result = $signup->save();
 
     mailchimp_signup_invalidate_cache();
 
     $this->routerBuilder->setRebuildNeeded();
 
     $form_state->setRedirect('mailchimp_signup.admin');
+    return $result;
   }
 
   /**
-   * Gets the mergevar options for the given lists.
+   * Gets the mergevar options for the given audiences.
    *
    * @param array $mc_lists
-   *   An array of list names.
+   *   An array of audience names.
    *
    * @return array
-   *   The mergevar options for the given lists.
+   *   The mergevar options for the given audiences.
    */
   private function getMergevarOptions(array $mc_lists) {
-    $mergevar_settings = mailchimp_get_mergevars(array_filter($mc_lists));
+    $mergevar_settings = $this->apiService->getMergevars(array_filter($mc_lists));
     $mergevar_options = [];
     foreach ($mergevar_settings as $list_mergevars) {
       foreach ($list_mergevars as $mergevar) {

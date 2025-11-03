@@ -1,7 +1,7 @@
-api_key:
+api_key: ''
 api_timeout: 10
 domain: ''
-use_oauth: FALSE
+use_oauth: TRUE
 cron: FALSE
 batch_limit: 100
 api_classname: 'Mailchimp\Mailchimp'

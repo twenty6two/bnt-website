@@ -39,10 +39,10 @@ function mailchimp_events_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Gets a list of all events for a given email in a given list.
+ * Gets a list of all events for a given email in a given audience.
  *
  * @param string $list_id
- *   The Mailchimp list ID the member is subscribed to.
+ *   The ID of the Mailchimp audience the member is subscribed to.
  * @param string $email
  *   The Mailchimp user email address to load an event list for.
  * @param int $count
@@ -81,7 +81,7 @@ function mailchimp_events_list_member_events($list_id, $email, $count = 10, $off
   else {
     try {
       /** @var \Mailchimp\MailchimpLists $mcapi */
-      $mcapi = mailchimp_get_api_object('MailchimpLists');
+      $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
       $options = [];
 
       if ($count != 10) {
@@ -121,10 +121,10 @@ function mailchimp_events_list_member_events($list_id, $email, $count = 10, $off
 }
 
 /**
- * Add an event for a Mailchimp list member with the given email address.
+ * Add an event for a Mailchimp audience member with the given email address.
  *
  * @param string $list_id
- *   The Mailchimp list ID the member is subscribed to.
+ *   The ID of the Mailchimp audience the member is subscribed to.
  * @param string $email
  *   The Mailchimp user email address to add an event for.
  * @param string $name
@@ -159,7 +159,7 @@ function mailchimp_events_add_member_event($list_id, $email, $name, array $prope
   if ($lock->acquire('mailchimp_events_add_member_events', 60)) {
     try {
       /** @var \Mailchimp\MailchimpLists $mcapi */
-      $mcapi = mailchimp_get_api_object('MailchimpLists');
+      $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
 
       $options['name'] = $name;
 

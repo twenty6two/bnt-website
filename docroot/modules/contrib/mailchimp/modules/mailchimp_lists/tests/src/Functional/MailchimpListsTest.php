@@ -3,7 +3,7 @@
 namespace Drupal\Tests\mailchimp_lists\Functional;
 
 /**
- * Tests core lists functionality.
+ * Tests core audience functionality.
  *
  * @group mailchimp
  */
@@ -17,7 +17,7 @@ class MailchimpListsTest extends MailchimpListsTestBase {
   protected static $modules = ['mailchimp', 'mailchimp_lists', 'mailchimp_test'];
 
   /**
-   * Tests that a list can be loaded.
+   * Tests that an audience can be loaded.
    */
   public function testGetList() {
     $list_id = '57afe96172';
@@ -29,7 +29,7 @@ class MailchimpListsTest extends MailchimpListsTestBase {
   }
 
   /**
-   * Tests retrieval of a specific set of lists.
+   * Tests retrieval of a specific set of audiences.
    */
   public function testMultiListRetrieval() {
     $list_ids = [
@@ -37,32 +37,15 @@ class MailchimpListsTest extends MailchimpListsTestBase {
       'f4b7b26b2e',
     ];
 
-    $lists = mailchimp_get_lists($list_ids);
+    $lists = \Drupal::service('mailchimp.api')->getAudiences($list_ids);
 
-    $this->assertSame(count($lists), 2, 'Tested correct list count on retrieval.');
+    $this->assertSame(count($lists), 2, 'Tested correct audience count on retrieval.');
 
     $this->assertSame($lists[$list_ids[0]]->id, $list_ids[0]);
     $this->assertSame($lists[$list_ids[0]]->name, 'Test List One');
 
     $this->assertSame($lists[$list_ids[1]]->id, $list_ids[1]);
     $this->assertSame($lists[$list_ids[1]]->name, 'Test List Two');
-  }
-
-  /**
-   * Tests retrieval of mergevars for a set of lists.
-   */
-  public function testGetMergevars() {
-    $list_ids = [
-      '57afe96172',
-    ];
-
-    $mergevars = mailchimp_get_mergevars($list_ids);
-
-    $this->assertCount(3, $mergevars[$list_ids[0]], 'Tested correct mergevar count on retrieval.');
-
-    $this->assertSame($mergevars[$list_ids[0]][0]->tag, 'EMAIL');
-    $this->assertSame($mergevars[$list_ids[0]][1]->tag, 'FNAME');
-    $this->assertSame($mergevars[$list_ids[0]][2]->tag, 'LNAME');
   }
 
 }

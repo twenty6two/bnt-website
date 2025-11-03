@@ -6,6 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\mailchimp\ApiService;
 use Drupal\mailchimp_signup\Entity\MailchimpSignup;
 use Drupal\mailchimp_signup\Form\MailchimpSignupPageForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -29,6 +30,13 @@ class MailchimpSignupSubscribeBlock extends BlockBase implements ContainerFactor
    * @var int
    */
   private static $counter = 0;
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
 
   /**
    * The messenger service.
@@ -58,8 +66,9 @@ class MailchimpSignupSubscribeBlock extends BlockBase implements ContainerFactor
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The form builder service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, MessengerInterface $messenger, FormBuilderInterface $form_builder) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ApiService $api_service, MessengerInterface $messenger, FormBuilderInterface $form_builder) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->apiService = $api_service;
     $this->messenger = $messenger;
     $this->formBuilder = $form_builder;
   }
@@ -72,6 +81,7 @@ class MailchimpSignupSubscribeBlock extends BlockBase implements ContainerFactor
       $configuration,
       $plugin_id,
       $plugin_definition,
+      $container->get('mailchimp.api'),
       $container->get('messenger'),
       $container->get('form_builder')
     );
@@ -86,12 +96,14 @@ class MailchimpSignupSubscribeBlock extends BlockBase implements ContainerFactor
     /** @var \Drupal\mailchimp_signup\Entity\MailchimpSignup $signup */
     $signup = mailchimp_signup_load($signup_id);
 
-    $form = new MailchimpSignupPageForm($this->messenger);
+    $form = new MailchimpSignupPageForm($this->apiService, $this->messenger);
 
     $form->setFormID($this->getFormId($signup));
     $form->setSignup($signup);
 
     $content = $this->formBuilder->getForm($form);
+
+    $content['#attributes']['class'] = ['mailchimp-signup-subscribe-form-block'];
 
     return $content;
   }

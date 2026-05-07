@@ -17,14 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Configure Mailchimp settings for this site.
  */
 class MailchimpAdminSettingsForm extends ConfigFormBase {
-
-  /**
-   * The Mailchimp API service.
-   *
-   * @var \Drupal\mailchimp\ApiService
-   */
-  protected $apiService;
-
   /**
    * The language manager.
    *
@@ -37,18 +29,31 @@ class MailchimpAdminSettingsForm extends ConfigFormBase {
    *
    * @var \Drupal\Core\State\StateInterface
    */
-  protected $stateService;
+  protected StateInterface $stateService;
+
+  /**
+   * Creates a new MailchimpAdminSettingsForm instance.
+   *
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   The language manager.
+   * @param \Drupal\Core\State\StateInterface $stateService
+   *   State service.
+   */
+  public function __construct(LanguageManagerInterface $languageManager, StateInterface $stateService) {
+    $this->languageManager = $languageManager;
+    $this->stateService = $stateService;
+  }
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    $instance = parent::create($container);
-    $instance->apiService = $container->get('mailchimp.api');
-    $instance->languageManager = $container->get('language_manager');
-    $instance->stateService = $container->get('state');
-    return $instance;
+    return new static(
+      $container->get('language_manager'),
+      $container->get('state'),
+    );
   }
+
   /**
    * {@inheritdoc}
    */
@@ -253,7 +258,7 @@ class MailchimpAdminSettingsForm extends ConfigFormBase {
    * AJAX callback handler for refreshing the audiences.
    */
   public function listsRefreshCallback(array &$form, FormStateInterface $form_state) {
-    $this->apiService->getAudiences([], TRUE);
+    mailchimp_get_lists([], TRUE);
     $response = new AjaxResponse();
 
     $response->addCommand(new ReplaceCommand(

@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
@@ -28,7 +29,7 @@ define('MAILCHIMP_STATUS_SENDING', 'sending');
  *   TRUE if the mailchimp api is available and accessible by the user.
  */
 function mailchimp_apikey_ready_access($permission) {
-  if (\Drupal::service('mailchimp.api')->getApiObject() && \Drupal::currentUser()->hasPermission($permission)) {
+  if (mailchimp_get_api_object() && \Drupal::currentUser()->hasPermission($permission)) {
     return TRUE;
   }
   return FALSE;
@@ -39,16 +40,22 @@ function mailchimp_apikey_ready_access($permission) {
  *
  * @return \Mailchimp\Mailchimp
  *   Drupal Mailchimp library object.
- *
- * @deprecated in mailchimp:3.1.0 and is removed from mailchimp:4.0.0.
- *   Instead, you should use \Drupal::service('mailchimp.api')->getApiObject().
- *
- * @see https://www.drupal.org/project/mailchimp/issues/3544504
- * /
  */
 function mailchimp_get_api_object($classname = 'MailchimpApiUser') {
-  @trigger_error("mailchimp_get_api_object() is deprecated in mailchimp:3.1.0 and is removed from mailchimp:4.0.0. Use \Drupal::service('mailchimp.api')->getApiObject() instead. See https://www.drupal.org/project/mailchimp/issues/3544504", E_USER_DEPRECATED);
-  return \Drupal::service('mailchimp.api')->getApiObject($classname);
+  $object = \Drupal::service('mailchimp.client_factory')->getByClassNameOrNull($classname);
+
+  if (!$object) {
+    \Drupal::messenger()->addError('Failed to load Mailchimp PHP library. Please refer to the installation requirements.');
+    return NULL;
+  }
+  $config = \Drupal::config('mailchimp.settings');
+  if (!$config->get('test_mode') && !$object->hasApiAccess()) {
+    $mc_oauth_url = Url::fromRoute('mailchimp.admin.oauth');
+    \Drupal::messenger()->addError(t('Unable to connect to Mailchimp API. Visit @oauth_settings_page to authenticate or uncheck "Use OAuth Authentication" and add an api_key below (deprecated).', ['@oauth_settings_page' => Link::fromTextAndUrl(t('OAuth Settings page'), $mc_oauth_url)->toString()]));
+    return NULL;
+  }
+
+  return $object;
 }
 
 /**
@@ -75,16 +82,16 @@ function _mailchimp_get_user_agent() {
 }
 
 /**
- * Returns a single audience.
+ * Returns a single list.
  *
  * @param string $list_id
- *   The unique ID of the audience provided by Mailchimp.
+ *   The unique ID of the list provided by Mailchimp.
  *
  * @return object
- *   Audience data object.
+ *   List data object.
  */
 function mailchimp_get_list($list_id) {
-  $lists = \Drupal::service('mailchimp.api')->getAudiences([$list_id]);
+  $lists = mailchimp_get_lists([$list_id]);
   if ($lists) {
     return reset($lists);
   }
@@ -92,36 +99,107 @@ function mailchimp_get_list($list_id) {
 }
 
 /**
- * Returns all Mailchimp audiences for a given account.
+ * Returns all Mailchimp lists for a given account.
  *
- * Optionally limit audiences to those with the given IDs. Audiences are stored
- * in a collection.
+ * Optionally limit lists to those with the given IDs. Lists are stored in a
+ * collection.
  *
  * @param array $list_ids
- *   An array of audience IDs to filter the results by.
+ *   An array of list IDs to filter the results by.
  * @param bool $reset
- *   Force a refresh of the audiences from Mailchimp.
+ *   Force a refresh of the lists from Mailchimp.
  *
  * @return array
- *   An array of audience data objects.
- *
- * @deprecated in mailchimp:3.1.0 and is removed from mailchimp:4.0.0.
- *   Instead, you should use \Drupal::service('mailchimp.api')->getAudiences().
- *
- * @see https://www.drupal.org/project/mailchimp/issues/3544504
+ *   An array of list data objects.
  */
 function mailchimp_get_lists(array $list_ids = [], $reset = FALSE) {
-  @trigger_error("mailchimp_get_lists() is deprecated in mailchimp:3.1.0 and is removed from mailchimp:4.0.0. Use \Drupal::service('mailchimp.api')->getAudiences() instead. See https://www.drupal.org/project/mailchimp/issues/3544504", E_USER_DEPRECATED);
-  return \Drupal::service('mailchimp.api')->getAudiences($list_ids, $reset);
+  $collection = \Drupal::keyValue('mailchimp_lists');
+  /** @var array<string, mixed> */
+  $lists = $reset ? [] : $collection->get('lists', []);
+
+  // If we have no stored lists, or we are forcing a refresh, get them from
+  // Mailchimp.
+  if ($lists === []) {
+    try {
+      /** @var \Mailchimp\MailchimpLists $mcapi */
+      $mcapi = mailchimp_get_api_object('MailchimpLists');
+      if ($mcapi != NULL) {
+        $result = $mcapi->getLists(['count' => 500]);
+
+        if ($result->total_items > 0) {
+          foreach ($result->lists as $list) {
+            $int_category_data = $mcapi->getInterestCategories($list->id, ['count' => 500]);
+            if ($int_category_data->total_items > 0) {
+
+              $list->intgroups = [];
+              foreach ($int_category_data->categories as $interest_category) {
+                $interest_data = $mcapi->getInterests($list->id, $interest_category->id, ['count' => 500]);
+
+                if ($interest_data->total_items > 0) {
+                  $interest_category->interests = $interest_data->interests;
+                }
+
+                $list->intgroups[] = $interest_category;
+              }
+            }
+
+            $lists[$list->id] = $list;
+
+            // Append mergefields:
+            $mergefields = $mcapi->getMergeFields($list->id, ['count' => 500]);
+            if ($mergefields->total_items > 0) {
+              $lists[$list->id]->mergevars = $mergefields->merge_fields;
+            }
+          }
+        }
+
+        uasort($lists, '_mailchimp_list_cmp');
+
+        if ($reset) {
+          // Delete entire collection. This will also cause merge vars to be
+          // refreshed when they are requested.
+          // @see mailchimp_get_mergevars()
+          $collection->deleteAll();
+        }
+        $collection->set('lists', $lists);
+      }
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('mailchimp')->error('An error occurred requesting list information from Mailchimp. "{message}"', [
+        'message' => $e->getMessage(),
+      ]);
+    }
+  }
+
+  // There was a problem getting lists, which was probably already logged.
+  if (!isset($lists) || is_null($lists)) {
+    return [];
+  }
+
+  // Filter by given IDs.
+  if (!empty($list_ids)) {
+    $filtered_lists = [];
+
+    foreach ($list_ids as $id) {
+      if (array_key_exists($id, $lists)) {
+        $filtered_lists[$id] = $lists[$id];
+      }
+    }
+
+    return $filtered_lists;
+  }
+  else {
+    return $lists;
+  }
 }
 
 /**
- * Helper function used by uasort() to sort audiences alphabetically by name.
+ * Helper function used by uasort() to sort lists alphabetically by name.
  *
  * @param object $a
- *   An object representing the first audience.
+ *   An object representing the first list.
  * @param object $b
- *   An object representing the second audience.
+ *   An object representing the second list.
  *
  * @return int
  *   One of the values -1, 0, 1
@@ -138,31 +216,86 @@ function _mailchimp_list_cmp($a, $b) {
  * Wrapper around MailchimpLists->getMergeFields().
  *
  * @param array $list_ids
- *   Array of Mailchimp audience IDs.
+ *   Array of Mailchimp list IDs.
  * @param bool $reset
  *   Set to TRUE if mergevars should not be loaded from cache.
  *
  * @return array
- *   Struct describing mergevars for the specified audiences.
- *
- * @deprecated in mailchimp:3.1.0 and is removed from mailchimp:4.0.0.
- *    Instead, you should use \Drupal::service('mailchimp.api')->getMergevars().
- *
- * @see https://www.drupal.org/project/mailchimp/issues/3544504
+ *   Struct describing mergevars for the specified lists.
  */
 function mailchimp_get_mergevars(array $list_ids, $reset = FALSE) {
-  @trigger_error('mailchimp_get_mergevars() is deprecated in mailchimp:3.1.0 and is removed from mailchimp:4.0.0. Use \Drupal::service("mailchimp.api")->getMergevars() instead. See https://www.drupal.org/project/mailchimp/issues/3544504', E_USER_DEPRECATED);
-  return \Drupal::service('mailchimp.api')->getMergevars($list_ids, $reset);
+  $mergevars = [];
+  $collection = \Drupal::keyValue('mailchimp_lists');
+
+  if (!$reset) {
+    foreach ($list_ids as $key => $list_id) {
+
+      $state_data = $collection->get("list_{$list_id}_mergevars");
+      // Get cached data and unset from our remaining lists to query.
+      if ($state_data) {
+        $mergevars[$list_id] = $state_data;
+        unset($list_ids[$key]);
+      }
+    }
+  }
+
+  // Get the uncached merge vars from Mailchimp.
+  if (count($list_ids)) {
+    /** @var \Mailchimp\MailchimpLists $mc_lists */
+    $mc_lists = mailchimp_get_api_object('MailchimpLists');
+    $list_id = NULL;
+
+    try {
+      if (!$mc_lists) {
+        throw new Exception('Cannot get merge vars without Mailchimp API. Check API key has been entered.');
+      }
+
+      foreach ($list_ids as $list_id) {
+        // Add default EMAIL merge var for all lists.
+        $mergevars[$list_id] = [
+          (object) [
+            'tag' => 'EMAIL',
+            'name' => t('Email Address'),
+            'type' => 'email',
+            'required' => TRUE,
+            'default_value' => '',
+            'public' => TRUE,
+            'display_order' => 1,
+            'options' => (object) [
+              'size' => 25,
+            ],
+          ],
+        ];
+
+        $result = $mc_lists->getMergeFields($list_id, ['count' => 500]);
+
+        if ($result->total_items > 0) {
+          $mergevars[$list_id] = array_merge($mergevars[$list_id], $result->merge_fields);
+        }
+
+        $collection->set("list_{$list_id}_mergevars", $mergevars[$list_id]);
+      }
+    }
+
+    catch (\Exception $e) {
+      \Drupal::logger('mailchimp')->error('An error occurred requesting mergevars for list {list}. "{message}"', [
+        'list' => $list_id,
+        'message' => $e->getMessage(),
+      ]);
+    }
+  }
+
+  return $mergevars;
 }
 
 /**
- * Gets the Mailchimp member info for a given email address and audience.
+ * Gets the Mailchimp member info for a given email address and list.
  *
  * Results are cached in the cache_mailchimp bin which is cleared by the
  * Mailchimp web hooks system when needed.
  *
  * @param string $list_id
- *   The Mailchimp audience ID to get member info for.
+ *   The Mailchimp list ID to get member info for.
  * @param string $email
  *   The Mailchimp user email address to load member info for.
  * @param bool $reset
@@ -182,11 +315,11 @@ function mailchimp_get_memberinfo($list_id, $email, $reset = FALSE) {
     }
   }
 
-  // Query audiences from the MCAPI and store in cache:
+  // Query lists from the MCAPI and store in cache:
   $memberinfo = new stdClass();
 
   /** @var \Mailchimp\MailchimpLists $mc_lists */
-  $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+  $mc_lists = mailchimp_get_api_object('MailchimpLists');
   try {
     if (!$mc_lists) {
       throw new Exception('Cannot get member info without Mailchimp API. Check API key has been entered.');
@@ -205,7 +338,7 @@ function mailchimp_get_memberinfo($list_id, $email, $reset = FALSE) {
       $cache->set($list_id . '-' . $email, $memberinfo);
     }
     else {
-      \Drupal::logger('mailchimp')->error('An error occurred requesting memberinfo for {email} in audience {list}. "{message}"', [
+      \Drupal::logger('mailchimp')->error('An error occurred requesting memberinfo for {email} in list {list}. "{message}"', [
         'email' => $email,
         'list' => $list_id,
         'message' => $e->getMessage(),
@@ -222,9 +355,9 @@ function mailchimp_get_memberinfo($list_id, $email, $reset = FALSE) {
  * Simple wrapper around mailchimp_get_memberinfo().
  *
  * @param string $list_id
- *   Unique string identifier for the audience on your MailChimp account.
+ *   Unique string identifier for the list on your MailChimp account.
  * @param string $email
- *   Email address to check for on the identified MailChimp audience.
+ *   Email address to check for on the identified MailChimp List.
  * @param bool $reset
  *   Set to TRUE to ignore the cache. (Used heavily in testing functions.)
  *
@@ -243,14 +376,14 @@ function mailchimp_get_marketing_permissions($list_id, $email, $reset = FALSE) {
 }
 
 /**
- * Checks if the given email is subscribed to the given audience.
+ * Checks if the given email is subscribed to the given list.
  *
  * Simple wrapper around mailchimp_get_memberinfo().
  *
  * @param string $list_id
- *   Unique string identifier for the audience on your Mailchimp account.
+ *   Unique string identifier for the list on your Mailchimp account.
  * @param string $email
- *   Email address to check for on the identified Mailchimp audience.
+ *   Email address to check for on the identified Mailchimp List.
  * @param bool $reset
  *   Set to TRUE to ignore the cache. (Used heavily in testing functions.)
  *
@@ -268,9 +401,7 @@ function mailchimp_is_subscribed($list_id, $email, $reset = FALSE) {
 }
 
 /**
- * Subscribes a user to a Mailchimp audience.
- *
- * Subscription can be added in real time or by adding to the queue.
+ * Subscribes a user to a Mailchimp list in real time or by adding to the queue.
  *
  * @see Mailchimp\MailchimpLists::addOrUpdateMember()
  */
@@ -312,9 +443,9 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
 
   try {
     /** @var \Mailchimp\MailchimpLists $mc_lists */
-    $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+    $mc_lists = mailchimp_get_api_object('MailchimpLists');
     if (!$mc_lists) {
-      throw new Exception('Cannot subscribe to audience without Mailchimp API. Check API key has been entered.');
+      throw new Exception('Cannot subscribe to list without Mailchimp API. Check API key has been entered.');
     }
 
     $parameters = [
@@ -357,8 +488,8 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
 
     // Has GDPR consent been given?
     if ($gdpr_consent) {
-      // If the member is already subscribed get the marketing permission ID(s)
-      // for the audience and enable them.
+      // If the member is already subscribed get the marketing permission id(s)
+      // for the list and enable them.
       $marketing_permissions = mailchimp_get_marketing_permissions($list_id, $email);
       $was_subscribed        = FALSE;
       if ($marketing_permissions) {
@@ -376,7 +507,7 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
       $was_subscribed = FALSE;
     }
 
-    // Add member to audience.
+    // Add member to list.
     $result = $mc_lists->addOrUpdateMember($list_id, $email, $parameters);
 
     if (isset($result->id)) {
@@ -389,7 +520,7 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
       // Clear user cache, just in case there's some cruft leftover:
       mailchimp_cache_clear_member($list_id, $email);
 
-      \Drupal::logger('mailchimp')->notice('{email} was subscribed to audience {list}.', [
+      \Drupal::logger('mailchimp')->notice('{email} was subscribed to list {list}.', [
         'email' => $email,
         'list' => $list_id,
       ]);
@@ -397,7 +528,7 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
       // For newly subscribed members set GDPR consent if it's been given.
       if (!$was_subscribed && $gdpr_consent && !empty($result->marketing_permissions)) {
         // If the member is already subscribed get the marketing permission
-        // ID(s) for the audience and enable them.
+        // id(s) for the list and enable them.
         foreach ($result->marketing_permissions as $marketing_permission) {
           $parameters['marketing_permissions'][] = [
             'marketing_permission_id' => $marketing_permission->marketing_permission_id,
@@ -408,7 +539,7 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
         $result = $mc_lists->addOrUpdateMember($list_id, $email, $parameters);
         if (!isset($result->id)) {
           \Drupal::logger('mailchimp')
-            ->warning('A problem occurred setting marketing permissions for {email} on audience {list}.', [
+            ->warning('A problem occurred setting marketing permissions for {email} on list {list}.', [
               'email' => $email,
               'list'  => $list_id,
             ]);
@@ -445,7 +576,7 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
           $result_segment = $mc_lists->addSegmentMember($list_id, $segment_id, $email, $parameters);
 
           if (!isset($result_segment->id)) {
-            \Drupal::logger('mailchimp')->warning('A problem occurred setting segment {segment_id} for {email} on audience {list}.', [
+            \Drupal::logger('mailchimp')->warning('A problem occurred setting segment {segment_id} for {email} on list {list}.', [
               'segment_id' => $segment_id,
               'email' => $email,
               'list'  => $list_id,
@@ -462,7 +593,7 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
     }
     else {
       if (!$config->get('test_mode')) {
-        \Drupal::logger('mailchimp')->warning('A problem occurred subscribing {email} to audience {list}.', [
+        \Drupal::logger('mailchimp')->warning('A problem occurred subscribing {email} to list {list}.', [
           'email' => $email,
           'list' => $list_id,
         ]);
@@ -471,7 +602,7 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
   }
   catch (\Exception $e) {
     if ($e->getCode() == '400' && strpos($e->getMessage(), 'Member In Compliance State') !== FALSE && !$double_optin) {
-      \Drupal::logger('mailchimp')->notice('Detected "Member In Compliance State" subscribing {email} to audience {list}. Trying again using double-opt in.', [
+      \Drupal::logger('mailchimp')->notice('Detected "Member In Compliance State" subscribing {email} to list {list}. Trying again using double-opt in.', [
         'email' => $email,
         'list' => $list_id,
       ]);
@@ -485,7 +616,7 @@ function mailchimp_subscribe_process($list_id, $email, $merge_vars = NULL, $inte
     if ($e->getCode() == '400' && strpos($e->getMessage(), 'Invalid Resource') !== FALSE) {
       $log_level = RfcLogLevel::NOTICE;
     }
-    \Drupal::logger('mailchimp')->log($log_level, 'An error occurred subscribing {email} to audience {list}. "{message}"', [
+    \Drupal::logger('mailchimp')->log($log_level, 'An error occurred subscribing {email} to list {list}. "{message}"', [
       'email' => $email,
       'list' => $list_id,
       'message' => $e->getMessage(),
@@ -517,7 +648,7 @@ function mailchimp_addto_queue($function, array $args) {
 }
 
 /**
- * Updates a member's subscription in real time or by adding to the queue.
+ * Updates a members list subscription in real time or by adding to the queue.
  *
  * @see Mailchimp\MailchimpLists::updateMember()
  */
@@ -553,7 +684,7 @@ function mailchimp_update_member_process($list_id, $email, $merge_vars, $interes
 
   try {
     /** @var \Mailchimp\MailchimpLists $mc_lists */
-    $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+    $mcapi = mailchimp_get_api_object('MailchimpLists');
 
     $parameters = [
       'status' => ($double_optin) ? MailchimpLists::MEMBER_STATUS_PENDING : MailchimpLists::MEMBER_STATUS_SUBSCRIBED,
@@ -589,8 +720,8 @@ function mailchimp_update_member_process($list_id, $email, $merge_vars, $interes
 
     // Has GDPR consent been given?
     if ($gdpr_consent) {
-      // If the member is already subscribed get the marketing permission ID(s)
-      // for the audience and enable them.
+      // If the member is already subscribed get the marketing permission id(s)
+      // for the list and enable them.
       $marketing_permissions = mailchimp_get_marketing_permissions($list_id, $email);
       if ($marketing_permissions) {
         foreach ($marketing_permissions as $marketing_permission) {
@@ -606,7 +737,7 @@ function mailchimp_update_member_process($list_id, $email, $merge_vars, $interes
     $result = $mcapi->updateMember($list_id, $email, $parameters);
 
     if (isset($result->id)) {
-      \Drupal::logger('mailchimp')->notice('{email} was updated in audience {list_id}.', [
+      \Drupal::logger('mailchimp')->notice('{email} was updated in list {list_id}.', [
         'email' => $email,
         'list' => $list_id,
       ]);
@@ -615,7 +746,7 @@ function mailchimp_update_member_process($list_id, $email, $merge_vars, $interes
       mailchimp_cache_clear_member($list_id, $email);
     }
     else {
-      \Drupal::logger('mailchimp')->warning('A problem occurred updating {email} in audience {list}.', [
+      \Drupal::logger('mailchimp')->warning('A problem occurred updating {email} on list {list}.', [
         'email' => $email,
         'list' => $list_id,
       ]);
@@ -623,7 +754,7 @@ function mailchimp_update_member_process($list_id, $email, $merge_vars, $interes
   }
   catch (\Exception $e) {
     if ($e->getCode() == '400' && strpos($e->getMessage(), 'Member In Compliance State') !== FALSE && !$double_optin) {
-      \Drupal::logger('mailchimp')->notice('Detected "Member In Compliance State" subscribing {email} to audience {list}.  Trying again using double-opt in.', [
+      \Drupal::logger('mailchimp')->notice('Detected "Member In Compliance State" subscribing {email} to list {list}.  Trying again using double-opt in.', [
         'email' => $email,
         'list' => $list_id,
       ]);
@@ -634,7 +765,7 @@ function mailchimp_update_member_process($list_id, $email, $merge_vars, $interes
     // A 404 exception code means mailchimp does not have subscription
     // information for given email address. This is not an error.
     if ($e->getCode() !== 404) {
-      \Drupal::logger('mailchimp')->error('An error occurred updating {email} in audience {list}. "{message}"', [
+      \Drupal::logger('mailchimp')->error('An error occurred updating {email} on list {list}. "{message}"', [
         'email' => $email,
         'list' => $list_id,
         'message' => $e->getMessage(),
@@ -670,13 +801,13 @@ function mailchimp_update_member_process($list_id, $email, $merge_vars, $interes
 }
 
 /**
- * Retrieves all members of a given audience with a given status.
+ * Retrieves all members of a given list with a given status.
  *
  * Note that this function can cause locking and is somewhat slow. It is not
  * recommended unless you know what you are doing! See the MCAPI documentation.
  *
  * @param string $list_id
- *   The Mailchimp audience ID.
+ *   The Mailchimp list/audience ID.
  * @param string $status
  *   The subscription status.
  * @param array $options
@@ -695,7 +826,7 @@ function mailchimp_get_members($list_id, $status = MailchimpLists::MEMBER_STATUS
   if ($lock->acquire('mailchimp_get_members', 60)) {
     try {
       /** @var \Mailchimp\MailchimpLists $mcapi */
-      $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+      $mcapi = mailchimp_get_api_object('MailchimpLists');
 
       $options['status'] = $status;
       if (!isset($options['count'])) {
@@ -705,7 +836,7 @@ function mailchimp_get_members($list_id, $status = MailchimpLists::MEMBER_STATUS
       $results = $mcapi->getMembers($list_id, $options);
     }
     catch (\Exception $e) {
-      \Drupal::logger('mailchimp')->error('An error occurred pulling member info for an audience. "{message}"', [
+      \Drupal::logger('mailchimp')->error('An error occurred pulling member info for a list. "{message}"', [
         'message' => $e->getMessage(),
       ]);
     }
@@ -717,10 +848,10 @@ function mailchimp_get_members($list_id, $status = MailchimpLists::MEMBER_STATUS
 }
 
 /**
- * Batch updates a number of Mailchimp audience members.
+ * Batch updates a number of Mailchimp list members.
  *
  * @param string $list_id
- *   The Mailchimp audience ID.
+ *   The Mailchimp list/audience ID.
  * @param array $batch
  *   A list of data for each member being updated.
  *
@@ -734,9 +865,9 @@ function mailchimp_batch_update_members($list_id, array $batch) {
 
   try {
     /** @var \Mailchimp\MailchimpLists $mc_lists */
-    $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+    $mc_lists = mailchimp_get_api_object('MailchimpLists');
     if (!$mc_lists) {
-      throw new Exception('Cannot batch subscribe to audience without Mailchimp API. Check API key has been entered.');
+      throw new Exception('Cannot batch subscribe to list without Mailchimp API. Check API key has been entered.');
     }
 
     if (!empty($batch)) {
@@ -767,12 +898,12 @@ function mailchimp_batch_update_members($list_id, array $batch) {
 }
 
 /**
- * Unsubscribes a member from a Mailchimp audience.
+ * Unsubscribes a member from a Mailchimp list.
  *
  * Unsubscribes in real time or by adding to the cron queue if so configured.
  *
  * @param string $list_id
- *   The Mailchimp audience ID.
+ *   The Mailchimp list/audience ID.
  * @param string $email
  *   The user email address unsubscribe.
  *
@@ -805,10 +936,10 @@ function mailchimp_unsubscribe($list_id, $email) {
 }
 
 /**
- * Unsubscribes a member from a Mailchimp audience.
+ * Unsubscribes a member from a Mailchimp list.
  *
  * @param string $list_id
- *   The Mailchimp audience ID.
+ *   The Mailchimp list/audience ID.
  * @param string $email
  *   The user email address unsubscribe.
  *
@@ -820,9 +951,9 @@ function mailchimp_unsubscribe($list_id, $email) {
 function mailchimp_unsubscribe_process($list_id, $email) {
   try {
     /** @var \Mailchimp\MailchimpLists $mc_lists */
-    $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+    $mc_lists = mailchimp_get_api_object('MailchimpLists');
     if (!$mc_lists) {
-      throw new Exception('Cannot unsubscribe from audience without Mailchimp API. Check API key has been entered.');
+      throw new Exception('Cannot unsubscribe from list without Mailchimp API. Check API key has been entered.');
     }
 
     $mc_lists->updateMember($list_id, $email, ['status' => MailchimpLists::MEMBER_STATUS_UNSUBSCRIBED]);
@@ -838,7 +969,7 @@ function mailchimp_unsubscribe_process($list_id, $email) {
     return TRUE;
   }
   catch (\Exception $e) {
-    \Drupal::logger('mailchimp')->error('An error occurred unsubscribing {email} from audience {list}. "{message}"', [
+    \Drupal::logger('mailchimp')->error('An error occurred unsubscribing {email} from list {list}. "{message}"', [
       'email' => $email,
       'list' => $list_id,
       'message' => $e->getMessage(),
@@ -876,7 +1007,7 @@ function mailchimp_get_campaign_data($campaign_id, $reset = FALSE) {
 
   try {
     /** @var \Mailchimp\MailchimpCampaigns $mcapi */
-    $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpCampaigns');
+    $mcapi = mailchimp_get_api_object('MailchimpCampaigns');
 
     $response = $mcapi->getCampaign($campaign_id);
 
@@ -896,7 +1027,7 @@ function mailchimp_get_campaign_data($campaign_id, $reset = FALSE) {
 }
 
 /**
- * Returns all audiences a given email address is currently subscribed to.
+ * Returns all lists a given email address is currently subscribed to.
  *
  * @param string $email
  *   Email address to search.
@@ -907,11 +1038,11 @@ function mailchimp_get_campaign_data($campaign_id, $reset = FALSE) {
 function mailchimp_get_lists_for_email($email) {
   try {
     /** @var \Mailchimp\MailchimpLists $mcapi */
-    $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+    $mcapi = mailchimp_get_api_object('MailchimpLists');
     $lists = $mcapi->getListsForEmail($email);
   }
   catch (\Exception $e) {
-    \Drupal::logger('mailchimp')->error('An error occurred retreiving audience data for {email}. "{message}"', [
+    \Drupal::logger('mailchimp')->error('An error occurred retreiving lists data for {email}. "{message}"', [
       'email' => $email,
       'message' => $e->getMessage(),
     ]);
@@ -923,10 +1054,10 @@ function mailchimp_get_lists_for_email($email) {
 }
 
 /**
- * Returns all webhooks for a given Mailchimp audience ID.
+ * Returns all webhooks for a given Mailchimp list ID.
  *
  * @param string $list_id
- *   The Mailchimp audience ID.
+ *   The Mailchimp list/audience ID.
  *
  * @return bool|object
  *   An object containing information about webhooks or FALSE if no webhooks
@@ -937,13 +1068,13 @@ function mailchimp_get_lists_for_email($email) {
 function mailchimp_webhook_get($list_id) {
   try {
     /** @var \Mailchimp\MailchimpLists $mc_lists */
-    $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+    $mc_lists = mailchimp_get_api_object('MailchimpLists');
     $result = $mc_lists->getWebhooks($list_id);
 
     return ($result->total_items > 0) ? $result->webhooks : FALSE;
   }
   catch (\Exception $e) {
-    \Drupal::logger('mailchimp')->error('An error occurred reading webhooks for audience {list}. "{message}"', [
+    \Drupal::logger('mailchimp')->error('An error occurred reading webhooks for list {list}. "{message}"', [
       'list' => $list_id,
       'message' => $e->getMessage(),
     ]);
@@ -953,10 +1084,10 @@ function mailchimp_webhook_get($list_id) {
 }
 
 /**
- * Adds a webhook to a Mailchimp audience.
+ * Adds a webhook to a Mailchimp list.
  *
  * @param string $list_id
- *   The Mailchimp audience ID to add a webhook for.
+ *   The Mailchimp list ID to add a webhook for.
  * @param string $url
  *   The URL of the webhook endpoint.
  * @param array $events
@@ -974,7 +1105,7 @@ function mailchimp_webhook_get($list_id) {
 function mailchimp_webhook_add($list_id, $url, array $events = [], array $sources = []) {
   try {
     /** @var \Mailchimp\MailchimpLists $mc_lists */
-    $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+    $mc_lists = mailchimp_get_api_object('MailchimpLists');
     if (!$mc_lists) {
       throw new Exception('Cannot add webhook without Mailchimp API. Check API key has been entered.');
     }
@@ -989,7 +1120,7 @@ function mailchimp_webhook_add($list_id, $url, array $events = [], array $source
     return $result->id;
   }
   catch (\Exception $e) {
-    \Drupal::logger('mailchimp')->error('An error occurred adding webhook for audience {list}. "{message}"', [
+    \Drupal::logger('mailchimp')->error('An error occurred adding webhook for list {list}. "{message}"', [
       'list' => $list_id,
       'message' => $e->getMessage(),
     ]);
@@ -999,10 +1130,10 @@ function mailchimp_webhook_add($list_id, $url, array $events = [], array $source
 }
 
 /**
- * Deletes a Mailchimp audience webhook.
+ * Deletes a Mailchimp list webhook.
  *
  * @param string $list_id
- *   The ID of the Mailchimp audience to delete the webhook from.
+ *   The ID of the Mailchimp list to delete the webhook from.
  * @param string $url
  *   The URL of the webhook endpoint.
  *
@@ -1014,7 +1145,7 @@ function mailchimp_webhook_add($list_id, $url, array $events = [], array $source
 function mailchimp_webhook_delete($list_id, $url) {
   try {
     /** @var \Mailchimp\MailchimpLists $mc_lists */
-    $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+    $mc_lists = mailchimp_get_api_object('MailchimpLists');
 
     $result = $mc_lists->getWebhooks($list_id);
 
@@ -1030,7 +1161,7 @@ function mailchimp_webhook_delete($list_id, $url) {
     return FALSE;
   }
   catch (\Exception $e) {
-    \Drupal::logger('mailchimp')->error('An error occurred deleting webhook for audience {list}. "{message}"', [
+    \Drupal::logger('mailchimp')->error('An error occurred deleting webhook for list {list}. "{message}"', [
       'list' => $list_id,
       'message' => $e->getMessage(),
     ]);
@@ -1042,7 +1173,7 @@ function mailchimp_webhook_delete($list_id, $url) {
  * Clears locally cached info for a mailchimp user member.
  *
  * @param string $list_id
- *   The audience ID.
+ *   The list ID.
  * @param string $email
  *   The email address.
  */
@@ -1052,10 +1183,10 @@ function mailchimp_cache_clear_member($list_id, $email) {
 }
 
 /**
- * Clears local a mailchimp activity cache for an audience.
+ * Clears local a mailchimp activity cache for an audience/list.
  *
  * @param string $list_id
- *   The audience ID.
+ *   The list ID.
  */
 function mailchimp_cache_clear_list_activity($list_id) {
   $cache = \Drupal::cache('mailchimp');
@@ -1146,10 +1277,10 @@ function mailchimp_webhook_url($hash = NULL, $lang = NULL) {
 }
 
 /**
- * Helper function to generate form elements for a audience's interest groups.
+ * Helper function to generate form elements for a list's interest groups.
  *
  * @param object $list
- *   Mailchimp audience object as returned by mailchimp_get_list().
+ *   Mailchimp list object as returned by mailchimp_get_list().
  * @param array $defaults
  *   Array of default values to use if no group subscription values already
  *   exist at Mailchimp.
@@ -1188,7 +1319,7 @@ function mailchimp_interest_groups_form_elements($list, array $defaults = [], $e
       }
       else {
         /** @var \Mailchimp\MailchimpLists $mc_lists */
-        $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+        $mc_lists = mailchimp_get_api_object('MailchimpLists');
         $interest_data = $mc_lists->getInterests($list->id, $group->id, ['count' => 500]);
         $collection->set("list_{$list->id}_$group->id", $interest_data);
       }
@@ -1397,7 +1528,7 @@ function mailchimp_insert_drupal_form_tag($mergevar) {
       else {
         // Set to standard text type if 'emailfield' isn't defined:
         $input['#type'] = 'textfield';
-      }
+      };
       $input['#attributes']['autocomplete'] = 'email';
       $input['#size'] = $mergevar->options->size;
       if (!empty($mergevar->options->size)) {
@@ -1477,7 +1608,7 @@ function mailchimp_page_bottom(array &$page_bottom) {
       if (!empty($connected_site_id)) {
         try {
           /** @var \Mailchimp\MailchimpConnectedSites $mc_connected */
-          $mc_connected = \Drupal::service('mailchimp.api')->getApiObject('MailchimpConnectedSites');
+          $mc_connected = mailchimp_get_api_object('MailchimpConnectedSites');
 
           // Verify Connected Site exists on the Mailchimp side and insert JS.
           $connected_site = $mc_connected->getConnectedSite($connected_site_id);

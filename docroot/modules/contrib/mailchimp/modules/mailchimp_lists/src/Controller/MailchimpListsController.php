@@ -5,28 +5,12 @@ namespace Drupal\mailchimp_lists\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Mailchimp Audiences controller.
+ * Mailchimp Lists/Audiences controller.
  */
 class MailchimpListsController extends ControllerBase {
 
-  /**
-   * The Mailchimp API service.
-   *
-   * @var \Drupal\mailchimp\ApiService
-   */
-  protected $apiService;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    $instance = parent::create($container);
-    $instance->apiService = $container->get('mailchimp.api');
-    return $instance;
-  }
   /**
    * {@inheritdoc}
    */
@@ -53,7 +37,7 @@ class MailchimpListsController extends ControllerBase {
       '#empty' => $lists_empty_message,
     ];
 
-    $mc_lists = $this->apiService->getAudiences();
+    $mc_lists = mailchimp_get_lists();
     $total_webhook_events = count(mailchimp_lists_default_webhook_events());
 
     foreach ($mc_lists as $mc_list) {

@@ -2,12 +2,11 @@
 
 /**
  * @file
- * Mailchimp Audiences module.
+ * Mailchimp lists/audiences module.
  */
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
@@ -157,7 +156,7 @@ function mailchimp_lists_update_merge_vars(MailchimpListsSubscription $instance,
 }
 
 /**
- * Processor for various audience form submissions.
+ * Processor for various list form submissions.
  *
  * Subscription blocks, user settings, and new user creation.
  *
@@ -258,7 +257,7 @@ function mailchimp_lists_process_subscribe_form_choices(array $choices, Mailchim
  *   TRUE if the subscription has changed, based on interest groups and merge
  *   values.
  */
-function _mailchimp_lists_subscription_has_changed(MailchimpListsSubscription $instance, EntityInterface $entity, $email, array $choices) {
+function _mailchimp_lists_subscription_has_changed(MailchimpListsSubscription $instance, EntityInterface $entity, $email, $choices) {
   $settings = $instance->getFieldDefinition()->getSettings();
 
   if (isset($entity->original)) {
@@ -428,7 +427,7 @@ function _mailchimp_lists_mergevars_populate($merge_fields, EntityInterface $ent
     // as well. For backwards compatibility, that is not done, in that case
     // default to the main property.
     if ($data instanceof FieldItemListInterface || $data instanceof FieldItemInterface) {
-      if ($data instanceof EntityReferenceFieldItemListInterface) {
+      if ($data instanceof \Drupal\Core\Field\EntityReferenceFieldItemListInterface) {
         $values = [];
         foreach ($data as $item) {
           $values[] = $item->entity->label();
@@ -505,7 +504,7 @@ function mailchimp_lists_update_member_merge_values($entity_type, $bundle_name, 
 }
 
 /**
- * Batch processor for pulling in subscriber information for a audience.
+ * Batch processor for pulling in subscriber information for a list/audience.
  */
 function mailchimp_lists_get_subscribers(FieldConfig $field, &$context) {
   if (!isset($context['sandbox']['progress'])) {
@@ -626,7 +625,7 @@ function mailchimp_lists_execute_mergevar_batch_update($list_id, &$context) {
 
     if ($result) {
       /** @var \Mailchimp\MailchimpApiUser $mc */
-      $mc = \Drupal::service('mailchimp.api')->getApiObject();
+      $mc = mailchimp_get_api_object();
       $batch_result = $mc->getBatchOperation($result->id);
 
       $context['results']['updates'] += $batch_size;
@@ -692,7 +691,7 @@ function mailchimp_lists_default_webhook_events() {
  * Returns an array of enabled webhook events.
  *
  * @param string $list_id
- *   The Mailchimp audience ID to return webhook actions for.
+ *   The Mailchimp list/audience ID to return webhook actions for.
  *
  * @return array
  *   An array of enabled webhook event names.

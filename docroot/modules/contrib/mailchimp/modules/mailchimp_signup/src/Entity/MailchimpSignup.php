@@ -40,7 +40,6 @@ use Drupal\mailchimp_signup\MailchimpSignupInterface;
  *   admin_permission = "administer mailchimp signup entities",
  *   entity_keys = {
  *     "id" = "id",
- *     "label" = "title",
  *     "uuid" = "uuid",
  *   },
  *   links = {
@@ -73,7 +72,7 @@ class MailchimpSignup extends ConfigEntityBase implements MailchimpSignupInterfa
   public $title;
 
   /**
-   * The Signup Form Mailchimp Audiences.
+   * The Signup Form Mailchimp Lists.
    *
    * @var array
    */
@@ -99,5 +98,12 @@ class MailchimpSignup extends ConfigEntityBase implements MailchimpSignupInterfa
    * @var bool
    */
   public $status;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function label() {
+    return $this->title;
+  }
 
 }

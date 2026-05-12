@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://git.drupalcode.org/project/flexslider/compare/v3.0.0-alpha1...v3.0.0) (2026-05-04)
+
+
+### Features
+
+* [#3520319](https://git.drupalcode.org/project/flexslider/issues/3520319) Drupal 11 compatibility ([5b9d861](https://git.drupalcode.org/project/flexslider/commit/5b9d861443e906ee2ab6d0bf50f246f62fa3608d))
+
 ## 3.0.0-alpha1 (2023-09-07)
 
 

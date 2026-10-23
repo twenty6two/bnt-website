@@ -5,12 +5,10 @@ namespace Drupal\mailchimp\Controller;
 use Drupal\Core\Access\CsrfTokenGenerator;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
-use Drupal\mailchimp\Event\Authenticate;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Controller for processing access token from OAuth middleware server.
@@ -27,21 +25,13 @@ class MailchimpOAuthController extends ControllerBase {
   protected CsrfTokenGenerator $csrfService;
 
   /**
-   * The CSRF token generator service.
-   *
-   * @var \Symfony\Component\EventDispatcher\EventDispatcher
-   */
-  protected EventDispatcherInterface $eventDispatcher;
-
-  /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
     $instance->configFactory = $container->get('config.factory');
     $instance->stateService = $container->get('state');
     $instance->csrfService = $container->get('csrf_token');
-    $instance->eventDispatcher = $container->get('event_dispatcher');
     return $instance;
   }
 
@@ -52,9 +42,6 @@ class MailchimpOAuthController extends ControllerBase {
    *   The temporary token that was issued from the initial request.
    * @param string $csrf_token
    *   CSRF token.
-   *
-   * @return \Symfony\Component\HttpFoundation\RedirectResponse
-   *   A redirect back to the OAuth settings page.
    */
   public function getAccessToken(string $temp_token, string $csrf_token) {
     $post_params = [
@@ -86,15 +73,6 @@ class MailchimpOAuthController extends ControllerBase {
           // Save authentication values to state.
           $this->stateService->set('mailchimp_access_token', $access_token);
           $this->stateService->set('mailchimp_data_center', $data_center);
-          try {
-            $event = new Authenticate();
-            $this->eventDispatcher->dispatch($event, Authenticate::AUTHENTICATE);
-          }
-          catch (\Exception $e) {
-            // We might want to log something here, but we don't want to crash
-            // successful authentication just because some Event response didn't
-            // work out.
-          }
           return new RedirectResponse($url->toString());
         }
       }

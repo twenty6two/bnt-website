@@ -28,14 +28,14 @@ function mailchimp_campaign_entity_storage_load(array $entities, $entity_type) {
 
   foreach ($entities as $mc_campaign_id => $campaign) {
 
-    // Ensure the associated audience still exists.
+    // Ensure the associated list still exists.
     if (!isset($mc_campaigns[$mc_campaign_id]) || !$mc_campaigns[$mc_campaign_id]) {
       continue;
     }
 
     $campaign->mc_data = $mc_campaigns[$mc_campaign_id];
 
-    // Audiences are cached separately, but we want to load them here.
+    // Lists are cached separately, but we want to load them here.
     if (isset($campaign->mc_data->recipients->list_id) && $campaign->mc_data->recipients->list_id) {
       $campaign->list = mailchimp_get_list($campaign->mc_data->recipients->list_id);
     }
@@ -64,12 +64,12 @@ function mailchimp_campaign_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Saves a campaign to Mailchimp, creating or updating it as needed.
+ * Save a campaign in Mailchimp and as a Drupal entity.
  *
  * @param array $template
  *   Associative array of template content indexed by section IDs.
  * @param object $recipients
- *   Audience settings for the campaign.
+ *   Associative array of template values.
  * @param object $settings
  *   Campaign settings, as decribed in Mailchimp API.
  * @param string $template_id
@@ -77,8 +77,8 @@ function mailchimp_campaign_theme($existing, $type, $theme, $path) {
  * @param string $campaign_id
  *   The ID of the campaign to save, if updating.
  *
- * @return string|null
- *   New or existing campaign ID, or NULL on failure.
+ * @return string
+ *   New or existing campaign ID.
  */
 function mailchimp_campaign_save_campaign(array $template, $recipients, $settings, $template_id, $campaign_id = NULL) {
   // Allow alter of template and options used in campaign.
@@ -97,7 +97,7 @@ function mailchimp_campaign_save_campaign(array $template, $recipients, $setting
   // Allow alter of template and content used in campaign.
   \Drupal::moduleHandler()->alter('mailchimp_campaign_content', $template, $content, $campaign_id);
 
-  // Test for valid audience segment, if selected.
+  // Test for valid list segment, if selected.
   if (isset($recipients->segment_opts)) {
     if (!isset($recipients->segment_opts->saved_segment_id)
       || (mailchimp_campaign_test_list_segment($recipients->list_id, $recipients->segment_opts->saved_segment_id) === NULL
@@ -123,7 +123,7 @@ function mailchimp_campaign_save_campaign(array $template, $recipients, $setting
   }
 
   /** @var \Mailchimp\MailchimpCampaigns $mc_campaigns */
-  $mc_campaigns = \Drupal::service('mailchimp.api')->getApiObject('MailchimpCampaigns');
+  $mc_campaigns = mailchimp_get_api_object('MailchimpCampaigns');
 
   // Save campaign to Mailchimp. (Only regular campaigns are supported).
   $is_new = empty($campaign_id);
@@ -195,7 +195,7 @@ function mailchimp_campaign_save_campaign(array $template, $recipients, $setting
  */
 function mailchimp_campaign_send_campaign(MailchimpCampaign $campaign) {
   /** @var \Mailchimp\MailchimpCampaigns $mc_campaign */
-  $mc_campaign = \Drupal::service('mailchimp.api')->getApiObject('MailchimpCampaigns');
+  $mc_campaign = mailchimp_get_api_object('MailchimpCampaigns');
 
   // Send campaign.
   try {
@@ -238,15 +238,13 @@ function mailchimp_campaign_send_campaign(MailchimpCampaign $campaign) {
  *
  * @param \Drupal\mailchimp_campaign\Entity\MailchimpCampaign $campaign
  *   The Mailchimp campaign to send.
- * @param string $testemail
- *   Comma-separated list of email addresses to send the test to.
  *
  * @return bool
  *   TRUE if campaign is sent successfully.
  */
 function mailchimp_campaign_sendtestmail_campaign(MailchimpCampaign $campaign, $testemail) {
   /** @var \Mailchimp\MailchimpCampaigns $mc_campaign */
-  $mc_campaign = \Drupal::service('mailchimp.api')->getApiObject('MailchimpCampaigns');
+  $mc_campaign = mailchimp_get_api_object('MailchimpCampaigns');
 
   // Send campaign.
   try {
@@ -278,7 +276,7 @@ function mailchimp_campaign_sendtestmail_campaign(MailchimpCampaign $campaign, $
  */
 function mailchimp_campaign_delete_campaign(MailchimpCampaign $campaign) {
   /** @var \Mailchimp\MailchimpCampaigns $mcapi */
-  $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpCampaigns');
+  $mcapi = mailchimp_get_api_object('MailchimpCampaigns');
 
   $result = NULL;
 
@@ -310,7 +308,7 @@ function mailchimp_campaign_delete_campaign(MailchimpCampaign $campaign) {
  * @param int $count
  *   The number of templates to request from the API.
  *
- * @return array
+ * @return mixed
  *   Array listing existing Mailchimp templates by type.
  */
 function mailchimp_campaign_list_templates($reset = FALSE, $count = 30) {
@@ -328,7 +326,7 @@ function mailchimp_campaign_list_templates($reset = FALSE, $count = 30) {
   else {
     try {
       /** @var \Mailchimp\MailchimpTemplates $mc_templates */
-      if ($mc_templates = \Drupal::service('mailchimp.api')->getApiObject('MailchimpTemplates')) {
+      if ($mc_templates = mailchimp_get_api_object('MailchimpTemplates')) {
         $response = $mc_templates->getTemplates($template_parameters);
         if ($response) {
           foreach ($response->templates as $template) {
@@ -354,13 +352,12 @@ function mailchimp_campaign_list_templates($reset = FALSE, $count = 30) {
  * Return full details for a Mailchimp Template.
  *
  * @param string $template_id
- *   Optional template ID.
+ *   Optional template ID. Set to return a single Mailchimp template.
  * @param bool $reset
  *   True if templates should not be loaded from cache.
  *
- * @return object|null
- *   The Mailchimp template object, with an added "info" property containing its
- *   full configuration and content, or NULL if not found.
+ * @return mixed
+ *   An array with all configuration and content for a Mailchimp Template.
  */
 function mailchimp_campaign_get_template($template_id, $reset = FALSE) {
   $all_templates = mailchimp_campaign_list_templates($reset);
@@ -376,7 +373,7 @@ function mailchimp_campaign_get_template($template_id, $reset = FALSE) {
       }
       else {
         /** @var \Mailchimp\MailchimpTemplates $mc_templates */
-        if ($mc_templates = \Drupal::service('mailchimp.api')->getApiObject('MailchimpTemplates')) {
+        if ($mc_templates = mailchimp_get_api_object('MailchimpTemplates')) {
           $template->info = $mc_templates->getTemplateContent($template_id);
           $tags = ['cache_mailchimp'];
           \Drupal::cache()->set('template_' . $template_id, $template->info, CacheBackendInterface::CACHE_PERMANENT, $tags);
@@ -419,9 +416,8 @@ function mailchimp_campaign_render_template(array $template) {
  * @param bool $reset
  *   Set to TRUE if campaigns should not be loaded from cache.
  *
- * @return array|null
- *   Associative array of Mailchimp campaigns indexed by campaign ID, or NULL if
- *   the campaigns could not be retrieved from the Mailchimp API.
+ * @return array
+ *   Associative array of Mailchimp campaigns indexed by campaign ID.
  */
 function mailchimp_campaign_get_campaigns(array $mc_campaign_ids, $reset = FALSE) {
   $cache = \Drupal::cache('mailchimp');
@@ -441,11 +437,11 @@ function mailchimp_campaign_get_campaigns(array $mc_campaign_ids, $reset = FALSE
 
   if (!empty($to_refresh)) {
     /** @var \Mailchimp\MailchimpCampaigns $mcapi */
-    $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpCampaigns');
+    $mcapi = mailchimp_get_api_object('MailchimpCampaigns');
 
     try {
       if (!$mcapi) {
-        throw new Exception('Cannot get audience without Mailchimp API. Check API key has been entered.');
+        throw new Exception('Cannot get list without Mailchimp API. Check API key has been entered.');
       }
     }
     catch (\Exception $e) {
@@ -485,19 +481,19 @@ function mailchimp_campaign_get_campaigns(array $mc_campaign_ids, $reset = FALSE
 }
 
 /**
- * Gets an array of segments for a given audience ID.
+ * Gets an array of list segments for a given list ID.
  *
- * @param string $list_id
- *   The audience ID.
+ * @param int $list_id
+ *   The list ID.
  * @param string $type
  *   The segment type to get. "static" or "saved".
  *
- * @return array|null
- *   Array of Mailchimp audience segments, or NULL on error.
+ * @return array
+ *   Array of Mailchimp list segments.
  */
 function mailchimp_campaign_get_list_segments($list_id, $type) {
   /** @var \Mailchimp\MailchimpLists $mcapi */
-  $mcapi = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+  $mcapi = mailchimp_get_api_object('MailchimpLists');
 
   $parameters = [
     'type' => $type,
@@ -509,7 +505,7 @@ function mailchimp_campaign_get_list_segments($list_id, $type) {
   }
   catch (\Exception $e) {
     \Drupal::messenger()->addError($e->getMessage());
-    \Drupal::logger('mailchimp_campaign')->error('An error occurred getting segments for audience ID {list_id}: {message} ', [
+    \Drupal::logger('mailchimp_campaign')->error('An error occurred getting list segments for list ID {list_id}: {message} ', [
       'list_id' => $list_id,
       'message' => $e->getMessage(),
     ]);
@@ -521,28 +517,28 @@ function mailchimp_campaign_get_list_segments($list_id, $type) {
 }
 
 /**
- * Tests a audience segment, returning the number of subscribers in the segment.
+ * Tests a list segment, returning the number of subscribers in the segment.
  *
  * @param string $list_id
- *   The audience ID.
+ *   The list ID.
  * @param string $list_segment_id
- *   The audience segment ID.
+ *   The list segment ID.
  * @param int $count
  *   How many records to return. Maximum allowed is 1000.
  *
- * @return int|null
- *   The number of subscribers contained in the segment, or NULL on error.
+ * @return int
+ *   The number of subscribers contained in the segment.
  */
 function mailchimp_campaign_test_list_segment($list_id, $list_segment_id, $count = 1) {
   /** @var \Mailchimp\MailchimpLists $mc_lists */
-  $mc_lists = \Drupal::service('mailchimp.api')->getApiObject('MailchimpLists');
+  $mc_lists = mailchimp_get_api_object('MailchimpLists');
 
   try {
     $result = $mc_lists->getSegmentMembers($list_id, $list_segment_id, ['count' => $count]);
   }
   catch (\Exception $e) {
     \Drupal::messenger()->addError($e->getMessage());
-    \Drupal::logger('mailchimp_campaign')->error('An error occurred testing an audience segment: {message}', [
+    \Drupal::logger('mailchimp_campaign')->error('An error occurred testing a list segment: {message}', [
       'message' => $e->getMessage(),
     ]);
 
@@ -554,18 +550,9 @@ function mailchimp_campaign_test_list_segment($list_id, $list_segment_id, $count
 
 /**
  * Loads multiple campaigns.
- *
- * @param array $campaign_ids
- *   An array of campaign entity IDs to load.
- * @param bool $reset
- *   Set to TRUE to reset the entity cache for the loaded campaigns.
- *
- * @return \Drupal\mailchimp_campaign\Entity\MailchimpCampaign[]
- *   An array of MailchimpCampaign entities, keyed by entity ID.
  */
 function mailchimp_campaign_load_multiple($campaign_ids = [], $reset = FALSE) {
   if (empty($campaign_ids)) {
-    // Load all campaign IDs, sorted by creation date descending.
     $campaign_ids = Drupal::entityQuery('mailchimp_campaign')
       ->sort('created', 'DESC')
       ->accessCheck(TRUE)

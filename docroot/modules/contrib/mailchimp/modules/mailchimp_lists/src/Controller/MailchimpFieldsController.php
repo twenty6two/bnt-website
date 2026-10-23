@@ -21,10 +21,10 @@ class MailchimpFieldsController extends ControllerBase {
   protected $entityFieldManager;
 
   /**
-   * Initializes a MailchimpFieldsController.
+   * Initializes a MailchimpCampaignController.
    *
    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
-   *   The entity field manager.
+   *   The entity field manager..
    */
   public function __construct(EntityFieldManagerInterface $entity_field_manager) {
     $this->entityFieldManager = $entity_field_manager;
@@ -40,10 +40,7 @@ class MailchimpFieldsController extends ControllerBase {
   }
 
   /**
-   * Builds a table listing all Mailchimp Audience Subscription fields.
-   *
-   * @return array
-   *   A render array for the overview page.
+   * {@inheritdoc}
    */
   public function overview() {
     $content = [];

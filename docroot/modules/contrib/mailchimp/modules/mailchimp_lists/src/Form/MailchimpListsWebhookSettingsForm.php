@@ -2,23 +2,17 @@
 
 namespace Drupal\mailchimp_lists\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\mailchimp\ApiService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Configure settings for a Mailchimp audience webhook.
+ * Configure settings for a Mailchimp list webhook.
  */
 class MailchimpListsWebhookSettingsForm extends ConfigFormBase {
-
-  /**
-   * The Mailchimp API service.
-   *
-   * @var \Drupal\mailchimp\ApiService
-   */
-  protected $apiService;
 
   /**
    * The messenger service.
@@ -28,13 +22,30 @@ class MailchimpListsWebhookSettingsForm extends ConfigFormBase {
   protected $messenger;
 
   /**
+   * Constructs a MailchimpListsWebhookSettingsForm object.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The factory for configuration objects.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The typed config manager.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, TypedConfigManagerInterface $typedConfigManager, MessengerInterface $messenger) {
+    parent::__construct($config_factory, $typedConfigManager);
+
+    $this->messenger = $messenger;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    $instance = parent::create($container);
-    $instance->apiService = $container->get('mailchimp.api');
-    $instance->messenger = $container->get('messenger');
-    return $instance;
+    return new static(
+      $container->get('config.factory'),
+      $container->get('config.typed'),
+      $container->get('messenger')
+    );
   }
 
   /**
@@ -88,6 +99,8 @@ class MailchimpListsWebhookSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    /** @var \Mailchimp\MailchimpLists $mc_lists */
+    $mc_lists = mailchimp_get_api_object('MailchimpLists');
     $list = $form_state->get('list');
 
     $webhook_events = $form_state->getValue('webhook_events');
@@ -102,13 +115,13 @@ class MailchimpListsWebhookSettingsForm extends ConfigFormBase {
     if (count($events) > 0) {
       $webhook_url = mailchimp_webhook_url();
 
-      $webhooks = $this->apiService->webhookGet($list->id);
+      $webhooks = mailchimp_webhook_get($list->id);
 
       if (!empty($webhooks)) {
         foreach ($webhooks as $webhook) {
           if ($webhook->url == $webhook_url) {
             // Delete current webhook.
-            $this->apiService->webhookDelete($list->id, mailchimp_webhook_url());
+            mailchimp_webhook_delete($list->id, mailchimp_webhook_url());
           }
         }
       }
@@ -119,8 +132,8 @@ class MailchimpListsWebhookSettingsForm extends ConfigFormBase {
         'api' => FALSE,
       ];
 
-      // Add webhook with enabled events.
-      $result = $this->apiService->webhookAdd(
+       // Add webhook with enabled events.
+      $result = mailchimp_webhook_add(
         $list->id,
         mailchimp_webhook_url(),
         $events,

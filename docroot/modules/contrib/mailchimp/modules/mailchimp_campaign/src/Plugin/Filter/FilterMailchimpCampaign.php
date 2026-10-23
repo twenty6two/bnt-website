@@ -36,18 +36,7 @@ class FilterMailchimpCampaign extends FilterBase {
   }
 
   /**
-   * Callback for preg_replace_callback() in process().
-   *
-   * Replaces a matched Mailchimp campaign content token with the rendered
-   * entity it references.
-   *
-   * @param array $matches
-   *   The regular expression matches, where index 1 is the entity type,
-   *   index 2 is the entity ID, and index 3 is the view mode.
-   *
-   * @return string
-   *   The rendered entity markup, or an empty string if the entity could
-   *   not be loaded.
+   * Callback for preg_replace in process()
    */
   public static function processCallback($matches = []) {
     $content = '';
@@ -96,13 +85,6 @@ class FilterMailchimpCampaign extends FilterBase {
 
   /**
    * Change the relative URLs to absolute ones in the message.
-   *
-   * @param string $text
-   *   The text to process.
-   *
-   * @return string
-   *   The text with relative anchor and image URLs converted to absolute
-   *   URLs.
    */
   private function convertUrl($text) {
     global $base_url;

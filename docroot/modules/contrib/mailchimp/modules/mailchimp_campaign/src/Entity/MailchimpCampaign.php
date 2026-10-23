@@ -16,6 +16,7 @@ use Drupal\mailchimp_campaign\MailchimpCampaignInterface;
  * @ContentEntityType(
  *   id = "mailchimp_campaign",
  *   label = @Translation("Mailchimp Campaign"),
+ *   fieldable = FALSE,
  *   handlers = {
  *     "access" = "Drupal\mailchimp_campaign\MailchimpCampaignAccessControlHandler",
  *     "view_builder" = "Drupal\mailchimp_campaign\Entity\MailchimpCampaignViewBuilder",
@@ -44,50 +45,35 @@ use Drupal\mailchimp_campaign\MailchimpCampaignInterface;
 class MailchimpCampaign extends ContentEntityBase implements MailchimpCampaignInterface {
 
   /**
-   * Gets the Mailchimp campaign ID.
-   *
-   * @return string
-   *   The Mailchimp campaign ID.
+   * {@inheritdoc}
    */
   public function getMcCampaignId() {
     return $this->get('mc_campaign_id')->value;
   }
 
   /**
-   * Gets the unserialized campaign body template.
-   *
-   * @return mixed
-   *   The unserialized template value.
+   * {@inheritdoc}
    */
   public function getTemplate() {
     return unserialize((string) $this->get('template')->value);
   }
 
   /**
-   * Gets the timestamp of when the campaign entity was created.
-   *
-   * @return int
-   *   The Unix timestamp when the campaign was created.
+   * {@inheritdoc}
    */
   public function getCreated() {
     return $this->get('created')->value;
   }
 
   /**
-   * Sets the Mailchimp campaign ID.
-   *
-   * @param string $mc_campaign_id
-   *   The Mailchimp campaign ID.
+   * {@inheritdoc}
    */
   public function setMcCampaignId($mc_campaign_id) {
     $this->set('mc_campaign_id', $mc_campaign_id);
   }
 
   /**
-   * Sets the campaign body template.
-   *
-   * @param mixed $template
-   *   The template value, to be serialized before storage.
+   * {@inheritdoc}
    */
   public function setTemplate($template) {
     $this->set('template', serialize($template));

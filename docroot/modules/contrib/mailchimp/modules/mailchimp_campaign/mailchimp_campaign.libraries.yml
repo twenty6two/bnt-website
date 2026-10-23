@@ -16,7 +16,8 @@ campaign-view:
   css:
     component:
       css/mailchimp_campaign.css: {}
-  dependencies: []
+  dependencies:
+
 
 campaign-stats:
   version: 1.x

@@ -15,36 +15,36 @@ class MailchimpTest extends MailchimpKernelTestBase {
   /**
    * Tests trying getting a member that does exist.
    *
-   * @covers ApiService::getMemberInfo
+   * @covers mailchimp_get_memberinfo
    */
   public function testGetExistingMember() {
-    $member_info = \Drupal::service('mailchimp.api')->getMemberInfo('foo', 'foo@example.com');
+    $member_info = mailchimp_get_memberinfo('foo', 'foo@example.com');
     $this->assertTrue(isset($member_info->status), 'Failed asserting that a member does not exist.');
   }
 
   /**
    * Tests trying getting a member that does not exist yet.
    *
-   * @covers ApiServicegetMemberInfo
+   * @covers mailchimp_get_memberinfo
    */
   public function testGetNonExistingMember() {
     $this->setMemberNotExist();
 
     // Assert that the member does not exist yet.
-    $member_info = \Drupal::service('mailchimp.api')->getMemberInfo('foo', 'foo@example.com');
+    $member_info = mailchimp_get_memberinfo('foo', 'foo@example.com');
     $this->assertFalse(isset($member_info->status), 'Failed asserting that a member does not exist.');
   }
 
   /**
    * Tests subscribing a new mail address using double opt-in.
    *
-   * @covers ApiService::subscribeProcess
+   * @covers mailchimp_subscribe_process
    */
   public function testSubscribeProcessNewDoubleOptin() {
     // Make sure that the member does not exist yet.
     $this->setMemberNotExist();
 
-    $result = \Drupal::service('mailchimp.api')->subscribeProcess('foo', 'foo@example.com', NULL, [], TRUE);
+    $result = mailchimp_subscribe_process('foo', 'foo@example.com', NULL, [], TRUE);
     $expected = (object) [
       'id' => 'b48def645758b95537d4424c84d1a9ff',
       'email_address' => 'foo@example.com',
@@ -57,10 +57,10 @@ class MailchimpTest extends MailchimpKernelTestBase {
   /**
    * Tests subscribing an existing mail address using double opt-in.
    *
-   * @covers ApiService::subscribeProcess
+   * @covers mailchimp_subscribe_process
    */
   public function testSubscribeProcessExistingDoubleOptin() {
-    $result = \Drupal::service('mailchimp.api')->subscribeProcess('foo', 'foo@example.com', NULL, [], TRUE);
+    $result = mailchimp_subscribe_process('foo', 'foo@example.com', NULL, [], TRUE);
     $expected = (object) [
       'id' => 'b48def645758b95537d4424c84d1a9ff',
       'email_address' => 'foo@example.com',
@@ -74,7 +74,7 @@ class MailchimpTest extends MailchimpKernelTestBase {
    * Sets a response that means that a member does not exist yet.
    *
    * MailchimpLists::getMemberInfo() is modified to throw an exception,
-   * meaning that the requested member does not exist in the requested audience.
+   * meaning that the requested member does not exist on the requested list.
    */
   protected function setMemberNotExist(): void {
     $api_class = $this->container->get('mailchimp.client_factory')->getApiClass();

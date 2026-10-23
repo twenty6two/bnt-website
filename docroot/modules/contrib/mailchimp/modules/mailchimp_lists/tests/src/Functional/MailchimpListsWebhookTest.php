@@ -3,7 +3,7 @@
 namespace Drupal\Tests\mailchimp_lists\Functional;
 
 /**
- * Tests audience webhook functionality.
+ * Tests list webhook functionality.
  *
  * @group mailchimp
  */
@@ -17,12 +17,12 @@ class MailchimpListsWebhookTest extends MailchimpListsTestBase {
   protected static $modules = ['mailchimp', 'mailchimp_lists', 'mailchimp_test'];
 
   /**
-   * Tests retrieval of webhooks for an audience.
+   * Tests retrieval of webhooks for a list.
    */
   public function testGetWebhook() {
     $list_id = '57afe96172';
 
-    $webhooks = \Drupal::service('mailchimp.api')->webhookGet($list_id);
+    $webhooks = mailchimp_webhook_get($list_id);
 
     $this->assertSame($webhooks[0]->list_id, $list_id);
     $this->assertSame($webhooks[0]->id, '37b9c73a88');
@@ -34,7 +34,7 @@ class MailchimpListsWebhookTest extends MailchimpListsTestBase {
   }
 
   /**
-   * Tests adding a webhook to an audience.
+   * Tests adding a webhook to a list.
    */
   public function testAddWebhook() {
     $list_id = '57afe96172';
@@ -48,7 +48,7 @@ class MailchimpListsWebhookTest extends MailchimpListsTestBase {
       'api' => FALSE,
     ];
 
-    $webhook_id = \Drupal::service('mailchimp.api')->webhookAdd($list_id, $url, $events, $sources);
+    $webhook_id = mailchimp_webhook_add($list_id, $url, $events, $sources);
 
     $this->assertSame($webhook_id, 'ab24521a00');
   }
@@ -60,7 +60,7 @@ class MailchimpListsWebhookTest extends MailchimpListsTestBase {
     $list_id = '57afe96172';
     $url = 'http://example.org';
 
-    $webhook_deleted = \Drupal::service('mailchimp.api')->webhookDelete($list_id, $url);
+    $webhook_deleted = mailchimp_webhook_delete($list_id, $url);
 
     $this->assertTrue($webhook_deleted, 'Tested webhook deletion.');
   }

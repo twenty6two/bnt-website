@@ -4,9 +4,7 @@ namespace Drupal\mailchimp_signup\Controller;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Url;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a listing of MailchimpSignups.
@@ -14,22 +12,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @ingroup mailchimp_signup
  */
 class MailchimpSignupListBuilder extends ConfigEntityListBuilder {
-
-  /**
-   * The Mailchimp API service.
-   *
-   * @var \Drupal\mailchimp\ApiService
-   */
-  protected $apiService;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
-    $instance = parent::createInstance($container, $entity_type);
-    $instance->apiService = $container->get('mailchimp.api');
-    return $instance;
-  }
 
   /**
    * {@inheritdoc}
@@ -64,7 +46,7 @@ class MailchimpSignupListBuilder extends ConfigEntityListBuilder {
     ];
 
     $modes = NULL;
-    $mc_lists = $this->apiService->getAudiences();
+    $mc_lists = mailchimp_get_lists();
 
     switch ($entity->mode) {
       case MAILCHIMP_SIGNUP_BLOCK:
@@ -89,7 +71,7 @@ class MailchimpSignupListBuilder extends ConfigEntityListBuilder {
     $list_labels = [];
     foreach ($entity->mc_lists as $list_id) {
       if (!empty($list_id) && isset($mc_lists[$list_id])) {
-        $list_url = Url::fromUri('https://admin.mailchimp.com/audience/contacts?id=' . $mc_lists[$list_id]->id, ['attributes' => ['target' => '_blank']]);
+        $list_url = Url::fromUri('https://admin.mailchimp.com/lists/dashboard/overview?id=' . $mc_lists[$list_id]->id, ['attributes' => ['target' => '_blank']]);
         $list_link = [
           // phpcs:ignore
           '#title' => $this->t($mc_lists[$list_id]->name),

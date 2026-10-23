@@ -27,13 +27,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class AddMailchimpEventWebformHandler extends WebformHandlerBase {
 
   /**
-   * The Mailchimp API service.
-   *
-   * @var \Drupal\mailchimp\ApiService
-   */
-  protected $apiService;
-
-  /**
    * The webform token manager.
    *
    * @var \Drupal\webform\WebformTokenManagerInterface
@@ -45,7 +38,6 @@ class AddMailchimpEventWebformHandler extends WebformHandlerBase {
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
-    $instance->apiService = $container->get('mailchimp.api');
     $instance->tokenManager = $container->get('webform.token_manager');
     return $instance;
   }
@@ -85,7 +77,7 @@ class AddMailchimpEventWebformHandler extends WebformHandlerBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $mc_lists = $this->apiService->getAudiences();
+    $mc_lists = mailchimp_get_lists();
     $list_options = [];
 
     foreach ($mc_lists as $key => $value) {
@@ -266,14 +258,10 @@ class AddMailchimpEventWebformHandler extends WebformHandlerBase {
   }
 
   /**
-   * Gets the raw email address or token for the configured email type.
+   * Finds the token for the email to send.
    *
-   * @param array $values
-   *   The submitted configuration form values.
-   *
-   * @return string|false
-   *   The email address or token, or FALSE if the configured email type is
-   *   not recognized.
+   * @return string
+   *   The token.
    */
   protected function getEmailToken($values) {
     $type = $values['email_type'];
@@ -300,7 +288,7 @@ class AddMailchimpEventWebformHandler extends WebformHandlerBase {
   }
 
   /**
-   * Finds the email to send.
+   * Finds the the email to send.
    *
    * @return string
    *   The email value.
@@ -350,21 +338,20 @@ class AddMailchimpEventWebformHandler extends WebformHandlerBase {
   }
 
   /**
-   * Determines whether a Mailchimp event entity with the given ID exists.
+   * Gets the MailchimpActon's Name..
    *
    * @param int $id
    *   The Mailchimp Event ID.
    *
-   * @return \Drupal\mailchimp_events\Entity\MailchimpEventInterface|null
-   *   The loaded Mailchimp Event entity, or NULL if none exists with the given
-   *   ID.
+   * @return string
+   *   The name of the event.
    */
   protected function isValidEventId($id) {
     return MailchimpEvent::load($id);
   }
 
   /**
-   * Gets the Mailchimp Event's name.
+   * Gets the MailchimpActon's Name..
    *
    * @param int $id
    *   The Mailchimp Event ID.

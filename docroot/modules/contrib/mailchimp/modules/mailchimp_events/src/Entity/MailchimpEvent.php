@@ -74,23 +74,14 @@ class MailchimpEvent extends ContentEntityBase implements MailchimpEventInterfac
   }
 
   /**
-   * Gets the Mailchimp Event properties.
-   *
-   * @return array
-   *   The properties of the Mailchimp Event.
+   * {@inheritdoc}
    */
   public function getProperties() {
     return $this->get('properties')->getValue();
   }
 
   /**
-   * Sets the Mailchimp Event properties.
-   *
-   * @param array $properties
-   *   The Mailchimp Event properties.
-   *
-   * @return \Drupal\mailchimp_events\Entity\MailchimpEventInterface
-   *   The called Mailchimp Event entity.
+   * {@inheritdoc}
    */
   public function setProperties($properties) {
     $this->set('properties', $properties);

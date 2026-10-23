@@ -5,6 +5,8 @@ namespace Drupal\mailchimp\Form;
 use Drupal\Core\Access\CsrfTokenGenerator;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\MessageCommand;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\State;
@@ -21,13 +23,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
 
   /**
-   * The Mailchimp API service.
-   *
-   * @var \Drupal\mailchimp\ApiService
-   */
-  protected $apiService;
-
-  /**
    * StateService.
    *
    * @var Drupal\Core\State
@@ -42,14 +37,33 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
   protected CsrfTokenGenerator $csrfService;
 
   /**
+   * Mailchimp OAuth Settings form constructor.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   Config factory.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The typed config manager.
+   * @param \Drupal\Core\State\State $stateService
+   *   State service.
+   * @param \Drupal\Core\Access\CsrfTokenGenerator $csrfService
+   *   CSRF service.
+   */
+  public function __construct(ConfigFactoryInterface $configFactory, TypedConfigManagerInterface $typedConfigManager, State $stateService, CsrfTokenGenerator $csrfService) {
+    parent::__construct($configFactory, $typedConfigManager);
+    $this->stateService = $stateService;
+    $this->csrfService = $csrfService;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    $instance = parent::create($container);
-    $instance->apiService = $container->get('mailchimp.api');
-    $instance->stateService = $container->get('state');
-    $instance->csrfService = $container->get('csrf_token');
-    return $instance;
+    return new static(
+      $container->get('config.factory'),
+      $container->get('config.typed'),
+      $container->get('state'),
+      $container->get('csrf_token'),
+    );
   }
 
   /**
@@ -82,7 +96,7 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
     $data_center = $this->stateService->get('mailchimp_data_center');
     if ($access_token && $data_center) {
       try {
-        $mc_api = $this->apiService->getApiObject();
+        $mc_api = mailchimp_get_api_object();
         if ($mc_api !== NULL) {
           $account = $mc_api->getAccount();
         }
@@ -140,9 +154,8 @@ class MailchimpAdminOauthSettingsForm extends ConfigFormBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   FormState object.
    *
-   * @return \Drupal\Core\Ajax\AjaxResponse|null
-   *   An Ajax response, or NULL if the middleware server did not respond with a
-   *   200 status code.
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   An Ajax response.
    */
   public function authenticate(array $form, FormStateInterface $form_state) {
     $client = $this->client();

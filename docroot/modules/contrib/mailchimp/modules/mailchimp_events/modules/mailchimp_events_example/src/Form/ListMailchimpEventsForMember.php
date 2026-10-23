@@ -5,11 +5,28 @@ namespace Drupal\mailchimp_events_example\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * A sample form for listing Mailchimp Events for a member.
  */
 class ListMailchimpEventsForMember extends FormBase {
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $instance = parent::create($container);
+    $instance->apiService = $container->get('mailchimp.api');
+    return $instance;
+  }
 
   /**
    * {@inheritdoc}
@@ -26,7 +43,7 @@ class ListMailchimpEventsForMember extends FormBase {
       'View a list of events for a specific audience member, directly pulled from Mailchimp.'
     );
 
-    $mc_lists = mailchimp_get_lists();
+    $mc_lists = $this->apiService->getAudiences();
     $list_options = [];
 
     if ($events = $form_state->get('events')) {

@@ -5,14 +5,34 @@ namespace Drupal\mailchimp_lists\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Mailchimp Lists/Audiences controller.
+ * Mailchimp Audiences controller.
  */
 class MailchimpListsController extends ControllerBase {
 
   /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
+
+  /**
    * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $instance = parent::create($container);
+    $instance->apiService = $container->get('mailchimp.api');
+    return $instance;
+  }
+
+  /**
+   * Builds a table listing all Mailchimp audiences and their webhook status.
+   *
+   * @return array
+   *   A render array for the overview page.
    */
   public function overview() {
     $content = [];
@@ -37,7 +57,7 @@ class MailchimpListsController extends ControllerBase {
       '#empty' => $lists_empty_message,
     ];
 
-    $mc_lists = mailchimp_get_lists();
+    $mc_lists = $this->apiService->getAudiences();
     $total_webhook_events = count(mailchimp_lists_default_webhook_events());
 
     foreach ($mc_lists as $mc_list) {
@@ -47,7 +67,7 @@ class MailchimpListsController extends ControllerBase {
 
       $webhook_status = $enabled_webhook_events . ' of ' . $total_webhook_events . ' enabled (' . $webhook_link->toString() . ')';
 
-      $list_url = Url::fromUri('https://admin.mailchimp.com/lists/dashboard/overview?id=' . $mc_list->id, ['attributes' => ['target' => '_blank']]);
+      $list_url = Url::fromUri('https://admin.mailchimp.com/audience/contacts?id=' . $mc_list->id, ['attributes' => ['target' => '_blank']]);
 
       $content['lists_table'][$mc_list->id]['name'] = [
         // phpcs:disable

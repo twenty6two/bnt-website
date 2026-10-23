@@ -4,17 +4,13 @@ namespace Drupal\mailchimp_campaign\Controller;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Link;
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Utility\Error;
 use Drupal\mailchimp_campaign\Entity\MailchimpCampaign;
 use Mailchimp\MailchimpAPIException;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Mailchimp Campaign controller.
@@ -64,42 +60,36 @@ class MailchimpCampaignController extends ControllerBase {
   protected $logger;
 
   /**
-   * Initializes a MailchimpCampaignController.
+   * The Mailchimp API service.
    *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The current request.
-   * @param \Drupal\Core\Datetime\DateFormatterInterface $date_formatter
-   *   The date formatter service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   Entity type manager.
-   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-   *   The messenger service.
-   * @param \Psr\Log\LoggerInterface $logger
-   *   A logger instance.
+   * @var \Drupal\mailchimp\ApiService
    */
-  public function __construct(Request $request, DateFormatterInterface $date_formatter, EntityTypeManagerInterface $entityTypeManager, MessengerInterface $messenger, LoggerInterface $logger) {
-    $this->request = $request;
-    $this->dateFormatter = $date_formatter;
-    $this->entityTypeManager = $entityTypeManager;
-    $this->messenger = $messenger;
-    $this->logger = $logger;
-  }
+  protected $mailchimpApi;
 
   /**
-   * {@inheritdoc}
+   * Instantiates a Mailchimp Campaign Controller.
+   *
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   The service container this instance should use.
+   *
+   * @return static
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-          $container->get('request_stack')->getCurrentRequest(),
-          $container->get('date.formatter'),
-          $container->get('entity_type.manager'),
-          $container->get('messenger'),
-          $container->get('logger.factory')->get('mailchimp_campaign')
-        );
+    $instance = parent::create($container);
+    $instance->request = $container->get('request_stack')->getCurrentRequest();
+    $instance->dateFormatter = $container->get('date.formatter');
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    $instance->messenger = $container->get('messenger');
+    $instance->logger = $container->get('logger.factory')->get('mailchimp_campaign');
+    $instance->mailchimpApi = $container->get('mailchimp.api');
+    return $instance;
   }
 
   /**
-   * {@inheritdoc}
+   * Builds a render array listing all Mailchimp campaigns.
+   *
+   * @return array
+   *   Renderable array of page content.
    */
   public function overview() {
     $content = [];
@@ -139,7 +129,7 @@ class MailchimpCampaignController extends ControllerBase {
       if (!$campaign->isInitialized()) {
         continue;
       }
-      // Ensure the associated list/audience still exists.
+      // Ensure the associated audience still exists.
       if (!isset($campaign->list) || !$campaign->list) {
         continue;
       }
@@ -148,7 +138,7 @@ class MailchimpCampaignController extends ControllerBase {
 
       $archive_url = Url::fromUri($campaign->mc_data->archive_url);
       $campaign_url = Url::fromRoute('entity.mailchimp_campaign.view', ['mailchimp_campaign' => $campaign_id]);
-      $list_url = Url::fromUri('https://admin.mailchimp.com/lists/dashboard/overview?id=' . $campaign->list->id, ['attributes' => ['target' => '_blank']]);
+      $list_url = Url::fromUri('https://admin.mailchimp.com/audience/contacts?id=' . $campaign->list->id, ['attributes' => ['target' => '_blank']]);
       $send_url = Url::fromRoute('entity.mailchimp_campaign.send', ['mailchimp_campaign' => $campaign_id]);
       $edit_url = Url::fromRoute('entity.mailchimp_campaign.edit_form', ['mailchimp_campaign' => $campaign_id]);
       $send_test_mail = Url::fromRoute('entity.mailchimp_campaign.sendtestmail', ['mailchimp_campaign' => $campaign_id]);
@@ -279,7 +269,7 @@ class MailchimpCampaignController extends ControllerBase {
     $content = [];
 
     /** @var \Mailchimp\MailchimpReports $mc_reports */
-    $mc_reports = mailchimp_get_api_object('MailchimpReports');
+    $mc_reports = $this->mailchimpApi->getApiObject('MailchimpReports');
 
     try {
       if (!$mc_reports) {
@@ -290,10 +280,7 @@ class MailchimpCampaignController extends ControllerBase {
     }
     catch (\Exception $e) {
       $this->messenger->addError($e->getMessage());
-      $this->logger
-        ->error('An error occurred getting report data from Mailchimp: {message}', [
-          'message' => $e->getMessage(),
-        ]);
+      Error::logException($this->logger, $e, 'An error occurred getting report data from Mailchimp: ' . Error::DEFAULT_ERROR_MESSAGE);
     }
 
     if (!empty($response)) {

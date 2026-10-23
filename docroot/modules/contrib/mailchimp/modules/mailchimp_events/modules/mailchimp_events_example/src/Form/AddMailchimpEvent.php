@@ -8,12 +8,28 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\mailchimp_events\Entity\MailchimpEvent;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * A sample form for adding a Mailchimp Event.
  */
 class AddMailchimpEvent extends FormBase {
 
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    $instance = parent::create($container);
+    $instance->apiService = $container->get('mailchimp.api');
+    return $instance;
+  }
   /**
    * {@inheritdoc}
    */
@@ -36,7 +52,7 @@ class AddMailchimpEvent extends FormBase {
       ['attributes' => ['target' => '_blank']]
     );
 
-    $mc_lists = mailchimp_get_lists();
+    $mc_lists = $this->apiService->getAudiences();
     $list_options = [];
 
     foreach ($mc_lists as $key => $value) {
@@ -52,7 +68,7 @@ class AddMailchimpEvent extends FormBase {
       return $form;
     }
     else {
-      foreach ($events as $key => $event) {
+      foreach ($events as $event) {
         $event_options[$event->getName()] = $event->getName();
       }
     }

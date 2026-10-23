@@ -5,15 +5,25 @@ namespace Drupal\mailchimp_lists\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\mailchimp\ApiService;
 use Drupal\mailchimp_lists\Plugin\Field\FieldFormatter\MailchimpListsFieldSubscribeFormatter;
 use Drupal\mailchimp_lists\Plugin\Field\FieldType\MailchimpListsSubscription;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Subscribe to a Mailchimp list/audience.
+ * Subscribe to a Mailchimp audience.
  */
 class MailchimpListsSubscribeForm extends FormBase {
 
   use StringTranslationTrait;
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
+
   /**
    * The ID for this form.
    *
@@ -38,6 +48,25 @@ class MailchimpListsSubscribeForm extends FormBase {
    * @var \Drupal\mailchimp_lists\Plugin\Field\FieldFormatter\MailchimpListsFieldSubscribeFormatter
    */
   private $fieldFormatter;
+
+  /**
+   * Constructs a MailchimpListsSubscribeForm.
+   *
+   * @param \Drupal\mailchimp\ApiService $api_service
+   *   The Mailchimp API service.
+   */
+  public function __construct(ApiService $api_service) {
+    $this->apiService = $api_service;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('mailchimp.api'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -101,7 +130,7 @@ class MailchimpListsSubscribeForm extends FormBase {
 
     $field_name = $this->fieldInstance->getFieldDefinition()->getName();
 
-    // Determine if a user is subscribed to the list.
+    // Determine if a user is subscribed to the audience.
     $is_subscribed = mailchimp_is_subscribed($mc_list->id, $email);
     $wrapper_key = 'mailchimp_' . $field_name;
     $form['wrapper_key'] = [
@@ -119,7 +148,8 @@ class MailchimpListsSubscribeForm extends FormBase {
         ],
       ],
     ];
-    // Add title and description to lists for anonymous users or if requested:
+    // Add title and description to audiences for anonymous users or if
+    // requested:
     $form[$wrapper_key]['subscribe'] = [
       '#type' => 'checkbox',
       '#title' => 'Subscribe',
@@ -144,7 +174,7 @@ class MailchimpListsSubscribeForm extends FormBase {
 
         $groups_default = $this->fieldInstance->getInterestGroups();
 
-        $form[$wrapper_key]['interest_groups'] += mailchimp_interest_groups_form_elements($mc_list, $groups_default, $email);
+        $form[$wrapper_key]['interest_groups'] += $this->apiService->interestGroupFormElements($mc_list, $groups_default, $email);
       }
     }
 

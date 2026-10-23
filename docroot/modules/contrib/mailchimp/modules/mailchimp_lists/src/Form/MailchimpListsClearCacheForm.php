@@ -9,9 +9,16 @@ use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Clear Mailchimp lists cache.
+ * Clear Mailchimp audience cache.
  */
 class MailchimpListsClearCacheForm extends ConfirmFormBase {
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
 
   /**
    * The messenger service.
@@ -21,22 +28,13 @@ class MailchimpListsClearCacheForm extends ConfirmFormBase {
   protected $messenger;
 
   /**
-   * MailchimpListsClearCacheForm constructor.
-   *
-   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-   *   The messenger service.
-   */
-  public function __construct(MessengerInterface $messenger) {
-    $this->messenger = $messenger;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('messenger')
-    );
+    $instance = parent::create($container);
+    $instance->apiService = $container->get('mailchimp.api');
+    $instance->messenger = $container->get('messenger');
+    return $instance;
   }
 
   /**
@@ -78,7 +76,7 @@ class MailchimpListsClearCacheForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    mailchimp_get_lists([], TRUE);
+    $this->apiService->getAudiences([], TRUE);
     $form_state->setRedirectUrl(Url::fromRoute('mailchimp_lists.overview'));
     $this->messenger->addStatus($this->t('Mailchimp audience cache cleared.'));
   }

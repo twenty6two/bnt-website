@@ -9,31 +9,22 @@ use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Url;
+use Drupal\mailchimp\ApiService;
 use Drupal\mailchimp_signup\Entity\MailchimpSignup;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Subscribe to a Mailchimp list/audience.
+ * Subscribe to a Mailchimp audience.
  */
 class MailchimpSignupPageForm extends FormBase {
 
   /**
-   * The messenger service.
+   * The Mailchimp API service.
    *
-   * @var \Drupal\Core\Messenger\MessengerInterface
+   * @var \Drupal\mailchimp\ApiService
    */
-  protected $messenger;
-
-  /**
-   * MailchimpSignupPageForm constructor.
-   *
-   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-   *   The messenger service.
-   */
-  public function __construct(MessengerInterface $messenger) {
-    $this->messenger = $messenger;
-  }
+  protected $apiService;
 
   /**
    * The ID for this form.
@@ -50,6 +41,25 @@ class MailchimpSignupPageForm extends FormBase {
    * @var \Drupal\mailchimp_signup\Entity\MailchimpSignup
    */
   private $signup = NULL;
+
+  /**
+   * Constructs a signup form page.
+   *
+   * @param \Drupal\mailchimp\ApiService $api_service
+   *   The Mailchimp API service.
+   */
+  public function __construct(ApiService $api_service) {
+    $this->apiService = $api_service;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('mailchimp.api'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -89,7 +99,10 @@ class MailchimpSignupPageForm extends FormBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Gets the configuration names that will be editable.
+   *
+   * @return array
+   *   An array of configuration object names that are editable.
    */
   protected function getEditableConfigNames() {
     return ['mailchimp_signup.page_form'];
@@ -99,7 +112,7 @@ class MailchimpSignupPageForm extends FormBase {
    * Return an ID for the form wrapper.
    *
    * @return string
-   *   A string baaed on the form ID.
+   *   A string based on the form ID.
    */
   protected function getFormWrapperId() {
     return Html::getId("{$this->formId}-wrapper");
@@ -112,6 +125,8 @@ class MailchimpSignupPageForm extends FormBase {
     $form = [];
     $settings = $this->signup->settings;
 
+    $form['#theme'] = 'mailchimp_signup_subscribe_form';
+    $form['#theme_wrappers'] = [];
     $form['#attributes'] = ['class' => ['mailchimp-signup-subscribe-form']];
 
     $form['description'] = [
@@ -130,7 +145,7 @@ class MailchimpSignupPageForm extends FormBase {
 
     $form['mailchimp_lists'] = ['#tree' => TRUE];
 
-    $lists = mailchimp_get_lists($this->signup->mc_lists);
+    $lists = $this->apiService->getAudiences($this->signup->mc_lists);
 
     $lists_count = (!empty($lists)) ? count($lists) : 0;
 
@@ -203,7 +218,7 @@ class MailchimpSignupPageForm extends FormBase {
             $defaults = $groups_items[$list->id];
           }
 
-          $form['mailchimp_lists'][$wrapper_key]['interest_groups'] += mailchimp_interest_groups_form_elements($list, $defaults);
+          $form['mailchimp_lists'][$wrapper_key]['interest_groups'] += $this->apiService->interestGroupFormElements($list, $defaults);
         }
       }
     }
@@ -233,7 +248,7 @@ class MailchimpSignupPageForm extends FormBase {
 
       if (!empty($this->signup->settings['include_interest_groups']) && isset($list->intgroups)) {
         $form['mailchimp_lists']['#weight'] = 9;
-        $form['mailchimp_lists']['interest_groups'] = mailchimp_interest_groups_form_elements($list, $defaults);
+        $form['mailchimp_lists']['interest_groups'] = $this->apiService->interestGroupFormElements($list, $defaults);
         $form['mailchimp_lists']['#access'] = $show_lists_and_groups;
       }
     }
@@ -294,20 +309,20 @@ class MailchimpSignupPageForm extends FormBase {
     $build_info = $form_state->getBuildInfo();
     $signup = $build_info['callback_object']->signup;
 
-    // For forms that allow subscribing to multiple lists/audiences
-    // ensure at least one list/audience has been selected.
-    // Get the enabled lists/audiences for this form.
+    // For forms that allow subscribing to multiple audiences ensure at least
+    // one audience has been selected.
+    // Get the enabled audiences for this form.
     $enabled_lists = array_filter($signup->mc_lists);
     if (count($enabled_lists) > 1) {
 
-      // Filter the selected lists out of the form values.
+      // Filter the selected audiences out of the form values.
       $selected_lists = array_filter($form_state->getValue('mailchimp_lists'),
         function ($list) {
           return $list['subscribe'];
         }
       );
 
-      // If a list has been selected, validation passes.
+      // If an audience has been selected, validation passes.
       if (!empty($selected_lists)) {
         return;
       }
@@ -320,7 +335,7 @@ class MailchimpSignupPageForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $list_details = mailchimp_get_lists($this->signup->mc_lists);
+    $list_details = $this->apiService->getAudiences($this->signup->mc_lists);
 
     $subscribe_lists = [];
 
@@ -331,7 +346,8 @@ class MailchimpSignupPageForm extends FormBase {
     $mailchimp_lists = $form_state->getValue('mailchimp_lists');
     $tags = $this->signup->settings['tags'] ?? NULL;
 
-    // If we only have one list we won't have checkbox values to investigate.
+    // If we only have one audience we won't have checkbox values to
+    // investigate.
     if (count(array_filter($this->signup->mc_lists)) == 1) {
       $subscribe_lists[0] = [
         'subscribe' => reset($this->signup->mc_lists),
@@ -349,13 +365,13 @@ class MailchimpSignupPageForm extends FormBase {
 
     $successes = [];
 
-    // Loop through the selected lists and try to subscribe.
+    // Loop through the selected audiences and try to subscribe.
     foreach ($subscribe_lists as $list_choices) {
       $list_id = $list_choices['subscribe'];
 
       $interests = $list_choices['interest_groups'] ?? [];
       if (isset($this->signup->settings['safe_interest_groups']) && $this->signup->settings['safe_interest_groups']) {
-        $current_status = mailchimp_get_memberinfo($list_id, $email);
+        $current_status = $this->apiService->getMemberInfo($list_id, $email);
         if (isset($current_status->interests)) {
           $current_interests = [];
           foreach ($current_status->interests as $id => $selected) {
@@ -369,7 +385,7 @@ class MailchimpSignupPageForm extends FormBase {
       $result = mailchimp_subscribe($list_id, $email, $mergevars, $interests, $this->signup->settings['doublein'] ?? FALSE, 'html', NULL, $gdpr_consent, $tags);
 
       if (empty($result)) {
-        $this->messenger->addWarning($this->t('There was a problem with your newsletter signup to %list.', [
+        $this->messenger()->addWarning($this->t('There was a problem with your newsletter signup to %list.', [
           '%list' => $list_details[$list_id]->name,
         ]));
       }
@@ -379,7 +395,7 @@ class MailchimpSignupPageForm extends FormBase {
     }
 
     if (count($successes) && isset($this->signup->settings['confirmation_message']) && strlen($this->signup->settings['confirmation_message'])) {
-      $this->messenger->addStatus($this->signup->settings['confirmation_message']);
+      $this->messenger()->addStatus($this->signup->settings['confirmation_message']);
       $form_state->set('mailchimp_success', TRUE);
     }
 
@@ -402,13 +418,14 @@ class MailchimpSignupPageForm extends FormBase {
    *   The current form state.
    *
    * @return \Drupal\Core\Ajax\AjaxResponse
-   *   A ajax response.
+   *   An AJAX response.
    */
   public function ajaxSubmit(array $form, FormStateInterface $form_state) {
+    $triggering_element = $form_state->getTriggeringElement();
     $response = new AjaxResponse();
-    $response_wrapper_id = '#' . $form['actions']['submit']['#ajax']['response_wrapper'];
+    $response_wrapper_id = '#' . $triggering_element['#ajax']['response_wrapper'];
 
-    // Simply return any status messages as a content the the response wrapper.
+    // Simply return any status messages as a content the response wrapper.
     $status_messages = ['#type' => 'status_messages'];
     $content = \Drupal::service('renderer')->renderRoot($status_messages);
     $response->addCommand(new HtmlCommand($response_wrapper_id, $content));

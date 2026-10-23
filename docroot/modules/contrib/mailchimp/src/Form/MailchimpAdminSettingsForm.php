@@ -17,6 +17,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Configure Mailchimp settings for this site.
  */
 class MailchimpAdminSettingsForm extends ConfigFormBase {
+
+  /**
+   * The Mailchimp API service.
+   *
+   * @var \Drupal\mailchimp\ApiService
+   */
+  protected $apiService;
+
   /**
    * The language manager.
    *
@@ -29,29 +37,17 @@ class MailchimpAdminSettingsForm extends ConfigFormBase {
    *
    * @var \Drupal\Core\State\StateInterface
    */
-  protected StateInterface $stateService;
-
-  /**
-   * Creates a new MailchimpAdminSettingsForm instance.
-   *
-   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
-   *   The language manager.
-   * @param \Drupal\Core\State\StateInterface $stateService
-   *   State service.
-   */
-  public function __construct(LanguageManagerInterface $languageManager, StateInterface $stateService) {
-    $this->languageManager = $languageManager;
-    $this->stateService = $stateService;
-  }
+  protected $stateService;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('language_manager'),
-      $container->get('state'),
-    );
+    $instance = parent::create($container);
+    $instance->apiService = $container->get('mailchimp.api');
+    $instance->languageManager = $container->get('language_manager');
+    $instance->stateService = $container->get('state');
+    return $instance;
   }
 
   /**
@@ -140,7 +136,7 @@ class MailchimpAdminSettingsForm extends ConfigFormBase {
 
     /** @var \Mailchimp\MailchimpConnectedSites $mc_connected */
     try {
-      $mc_connected = mailchimp_get_api_object('MailchimpConnectedSites');
+      $mc_connected = $this->apiService->getApiObject('MailchimpConnectedSites');
       if ($mc_connected) {
         $connected_sites = $mc_connected->getConnectedSites();
       }
@@ -206,7 +202,7 @@ class MailchimpAdminSettingsForm extends ConfigFormBase {
     $form['batch']['cron'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Use batch processing.'),
-      '#description' => $this->t('Puts all Mailchimp subscription operations into the cron queue. (Includes subscribe, update, and unsubscribe operations.) <i>Note: May cause confusion if caches are cleared, as requested changes will appear to have failed until cron is run.</i>'),
+      '#description' => $this->t('Puts all Mailchimp subscription operations into the cron queue. (Includes subscribe, update, and unsubscribe operations.) This setting is recommended since it will allow retrying operations when the API is down. <i>Note: May cause confusion if caches are cleared, as requested changes will appear to have failed until cron is run.</i>'),
       '#default_value' => $config->get('cron'),
     ];
     $form['batch']['batch_limit'] = [
@@ -256,9 +252,17 @@ class MailchimpAdminSettingsForm extends ConfigFormBase {
 
   /**
    * AJAX callback handler for refreshing the audiences.
+   *
+   * @param array $form
+   *   Form array.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   FormState object.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   An Ajax response confirming the audiences were refreshed.
    */
   public function listsRefreshCallback(array &$form, FormStateInterface $form_state) {
-    mailchimp_get_lists([], TRUE);
+    $this->apiService->getAudiences([], TRUE);
     $response = new AjaxResponse();
 
     $response->addCommand(new ReplaceCommand(
@@ -288,7 +292,6 @@ class MailchimpAdminSettingsForm extends ConfigFormBase {
       ->save();
 
     // Check for proper OAuth config and report problems.
-    $mc_oauth_url = Url::fromRoute('mailchimp.admin.oauth');
     if (!$config->get('use_oauth')) {
       $this->messenger()->addWarning('Your site is authenticating with an API key and that method of authentication is deprecated. Oauth is now the preferred method of authentication.');
     }

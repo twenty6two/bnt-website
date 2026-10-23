@@ -3,8 +3,9 @@ langcode: en
 status: true
 dependencies:
   module:
-    - media_entity
+    - media
 id: media.token
 label: Token
+description: ''
 targetEntityType: media
 cache: true

@@ -6,7 +6,9 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.news_article.field_article_date
     - field.field.node.news_article.field_associated_show
+    - field.field.node.news_article.field_banner_image
     - field.field.node.news_article.field_banner_image_thumbnail
+    - field.field.node.news_article.field_content
     - field.field.node.news_article.field_content_teaser
     - node.type.news_article
   module:
@@ -21,29 +23,31 @@ mode: teaser
 content:
   field_article_date:
     type: datetime_default
-    weight: 1
-    region: content
     label: above
     settings:
       timezone_override: ''
       format_type: full_date_month_text
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_banner_image_thumbnail:
     type: image
-    weight: 0
-    region: content
     label: above
     settings:
-      image_style: ''
       image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_content_teaser:
     type: text_default
-    weight: 2
-    region: content
     label: above
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   field_associated_show: true
   field_banner_image: true

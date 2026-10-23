@@ -17,8 +17,8 @@ plugin: 'block_content:16b58a2a-d798-4c59-9cbc-14917b93a529'
 settings:
   id: 'block_content:16b58a2a-d798-4c59-9cbc-14917b93a529'
   label: 'Buy Tickets Link'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full

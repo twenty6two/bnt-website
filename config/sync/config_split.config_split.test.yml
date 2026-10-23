@@ -5,6 +5,7 @@ dependencies: {  }
 id: test
 label: Testing
 description: ''
+weight: 0
 folder: ../config/test
 module: {  }
 theme: {  }
@@ -12,4 +13,3 @@ blacklist: {  }
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
-weight: 0

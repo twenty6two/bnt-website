@@ -21,37 +21,37 @@ bundle: slide
 mode: home_page_slideshow_slide
 content:
   field_slide_background_image:
-    weight: 0
+    type: image_url
     label: hidden
     settings:
       image_style: ''
     third_party_settings: {  }
-    type: image_url
+    weight: 0
     region: content
   field_slide_content:
-    weight: 3
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 3
     region: content
   field_slide_heading:
     type: text_default
-    weight: 1
-    region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_slide_highlight_image:
-    weight: 2
+    type: image_url
     label: hidden
     settings:
       image_style: ''
     third_party_settings: {  }
-    type: image_url
+    weight: 2
     region: content
   field_slide_link:
-    weight: 4
+    type: link_separate
     label: hidden
     settings:
       trim_length: null
@@ -60,7 +60,7 @@ content:
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    type: link_separate
+    weight: 4
     region: content
 hidden:
   links: true

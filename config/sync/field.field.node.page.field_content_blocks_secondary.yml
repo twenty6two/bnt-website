@@ -26,7 +26,6 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       content_block: content_block
       content_block_heading_and_icon: content_block_heading_and_icon
@@ -34,25 +33,26 @@ settings:
       call_out_content_block: call_out_content_block
       call_out_content_block_heading: call_out_content_block_heading
       content_block_heading_subheading: content_block_heading_subheading
+    negate: 0
     target_bundles_drag_drop:
-      content_block:
-        enabled: true
-        weight: 4
-      content_block_heading_and_icon:
-        enabled: true
-        weight: 5
-      content_block_with_heading:
-        enabled: true
-        weight: 6
       call_out_content_block:
-        enabled: true
         weight: 11
+        enabled: true
       call_out_content_block_heading:
-        enabled: true
         weight: 12
-      content_block_heading_subheading:
         enabled: true
+      content_block:
+        weight: 4
+        enabled: true
+      content_block_heading_and_icon:
+        weight: 5
+        enabled: true
+      content_block_heading_subheading:
         weight: 15
+        enabled: true
+      content_block_with_heading:
+        weight: 6
+        enabled: true
       image:
         weight: 17
         enabled: false

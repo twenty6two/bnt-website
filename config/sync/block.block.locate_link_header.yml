@@ -17,8 +17,8 @@ plugin: 'block_content:c5230a58-fab3-4f0f-b658-441eff2389dc'
 settings:
   id: 'block_content:c5230a58-fab3-4f0f-b658-441eff2389dc'
   label: 'Locate Link'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full

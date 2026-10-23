@@ -33,10 +33,10 @@ bundle: show
 mode: teaser
 content:
   links:
-    weight: 100
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
   field_billing_credits: true
   field_buy_tickets_url: true

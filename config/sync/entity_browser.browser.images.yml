@@ -5,7 +5,6 @@ dependencies:
   config:
     - views.view.entity_browser
   module:
-    - media_entity_image
     - views
 name: images
 label: Images
@@ -15,29 +14,30 @@ display_configuration:
   height: '500'
   link_text: 'Select Images'
   auto_open: false
+  use_admin_theme: true
 selection_display: no_display
 selection_display_configuration: {  }
 widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   6625144f-5846-4c02-b9c8-40f1ffb767a5:
-    settings:
-      extensions: 'jpg jpeg png gif'
-      media_bundle: image
-      upload_location: 'public://images'
-      multiple: '1'
-      submit_text: 'Add Images'
+    id: media_image_upload
     uuid: 6625144f-5846-4c02-b9c8-40f1ffb767a5
-    weight: 2
     label: 'Add an Image'
-    id: media_entity_image_upload
-  3ed73eb8-ed29-4dff-887f-92b71a2c0d5a:
+    weight: 2
     settings:
-      view: entity_browser
-      view_display: entity_browser_1
+      submit_text: 'Add Images'
+      upload_location: 'public://images'
+      multiple: true
+      extensions: 'jpg jpeg png gif'
+      media_type: image
+  3ed73eb8-ed29-4dff-887f-92b71a2c0d5a:
+    id: view
+    uuid: 3ed73eb8-ed29-4dff-887f-92b71a2c0d5a
+    label: 'Use an Existing Image'
+    weight: 2
+    settings:
       submit_text: 'Select Images'
       auto_select: false
-    uuid: 3ed73eb8-ed29-4dff-887f-92b71a2c0d5a
-    weight: 2
-    label: 'Use an Existing Image'
-    id: view
+      view: entity_browser
+      view_display: entity_browser_1

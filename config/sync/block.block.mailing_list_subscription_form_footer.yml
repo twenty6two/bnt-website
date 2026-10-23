@@ -15,6 +15,6 @@ plugin: 'mailchimp_signup_subscribe_block:general_mailing_list'
 settings:
   id: 'mailchimp_signup_subscribe_block:general_mailing_list'
   label: 'Join Our Email List'
-  provider: mailchimp_signup
   label_display: visible
+  provider: mailchimp_signup
 visibility: {  }

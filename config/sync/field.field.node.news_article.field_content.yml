@@ -24,12 +24,12 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       image: image
       paragraph: paragraph
       paragraph_image: paragraph_image
       pull_quote: pull_quote
+    negate: 0
     target_bundles_drag_drop:
       call_out_content_block:
         weight: 11
@@ -50,15 +50,15 @@ settings:
         weight: 16
         enabled: false
       image:
-        enabled: true
         weight: 17
+        enabled: true
       paragraph:
-        enabled: true
         weight: 18
+        enabled: true
       paragraph_image:
-        enabled: true
         weight: 19
-      pull_quote:
         enabled: true
+      pull_quote:
         weight: 20
+        enabled: true
 field_type: entity_reference_revisions
